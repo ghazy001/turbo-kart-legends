@@ -47,11 +47,11 @@ describe('shared track geometry and constraints', () => {
     const sample = track.samples[0];
     let kart = { ...createKart(track), heading: Math.atan2(sample.tz, -sample.tx), forwardSpeed: 20 };
     for (let i = 0; i < 600; i++) {
-      kart = stepKart(kart, { throttle: 1, brake: 0, steer: 0 }, 1 / 60, track);
+      kart = stepKart(kart, { drift: false, throttle: 1, brake: 0, steer: 0 }, 1 / 60, track);
       expect(nearestRoadPoint(track, kart).distance).toBeLessThanOrEqual(safeWidth + 0.001);
     }
     const contact = { ...kart };
-    for (let i = 0; i < 60; i++) kart = stepKart(kart, { throttle: 0, brake: 1, steer: 0 }, 1 / 60, track);
+    for (let i = 0; i < 60; i++) kart = stepKart(kart, { drift: false, throttle: 0, brake: 1, steer: 0 }, 1 / 60, track);
     expect(Math.hypot(kart.x - contact.x, kart.z - contact.z)).toBeGreaterThan(0.5);
   });
   it('retains tangential velocity so shallow contacts slide along the edge', () => {
@@ -69,7 +69,7 @@ describe('shared track geometry and constraints', () => {
     for (let tick = 0; tick < 7200 && traveled < track.length; tick++) {
       const target = track.samples[(road.index + direction * 8 + track.samples.length) % track.samples.length];
       const error = wrapAngle(Math.atan2(target.x - kart.x, target.z - kart.z) - kart.heading);
-      kart = stepKart(kart, { throttle: kart.forwardSpeed < 15 ? 1 : 0, brake: 0, steer: Math.max(-1, Math.min(1, -error * 1.3)) }, 1 / 60, track);
+      kart = stepKart(kart, { drift: false, throttle: kart.forwardSpeed < 15 ? 1 : 0, brake: 0, steer: Math.max(-1, Math.min(1, -error * 1.3)) }, 1 / 60, track);
       const nextRoad = nearestRoadPoint(track, kart);
       let delta = nextRoad.progress - road.progress;
       if (delta > track.length / 2) delta -= track.length;

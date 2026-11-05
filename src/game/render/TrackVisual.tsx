@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { BufferGeometry, Float32BufferAttribute } from 'three';
 import { sceneConfig } from '../config/kartConfig';
 import type { SampledTrack } from '../core/types';
+import { pointAtDistance } from '../race/trackProgress';
 import { offsetSample } from '../tracks/trackSampling';
 
 /** Closed strips use the exact same offset samples as collision's road corridor. */
@@ -42,6 +43,7 @@ function Band({ track, inner, outer, y, color, alternating = false }: {
 export function TrackVisual({ track }: { track: SampledTrack }) {
   const half = track.definition.roadWidth / 2;
   const spawn = track.spawn;
+  const finish = pointAtDistance(track, track.definition.startDistance ?? 0);
   return <group>
     <Band track={track} inner={-half - 1} outer={half + 1} y={0.01} color="#d5bf88" />
     <Band track={track} inner={-half} outer={half} y={sceneConfig.roadY} color="#536878" />
@@ -51,8 +53,8 @@ export function TrackVisual({ track }: { track: SampledTrack }) {
       <Band track={track} inner={side * (half + 0.36) - 0.14} outer={side * (half + 0.36) + 0.14} y={sceneConfig.railHeight} color="#fff5d5" />
       <RailSide track={track} offset={side * (half + 0.22)} />
     </group>)}
-    <group position={[spawn.x + Math.sin(spawn.heading) * 9.6, 0.07, spawn.z + Math.cos(spawn.heading) * 9.6]} rotation={[0, spawn.heading, 0]}>
-      {Array.from({ length: 20 }, (_, i) => <mesh key={i} position={[(i % 10 - 4.5), 0, Math.floor(i / 10) * 0.7]} rotation={[-Math.PI / 2, 0, 0]}>
+    <group position={[finish.x, 0.07, finish.z]} rotation={[0, Math.atan2(finish.tx, finish.tz), 0]}>
+      {Array.from({ length: 20 }, (_, i) => <mesh key={i} position={[(i % 10 - 4.5), 0, (Math.floor(i / 10) - 0.5) * 0.7]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[1, 0.7]} /><meshStandardMaterial color={(i + Math.floor(i / 10)) % 2 ? '#183e48' : '#fff6db'} />
       </mesh>)}
     </group>

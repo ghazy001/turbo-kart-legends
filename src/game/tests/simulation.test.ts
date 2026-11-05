@@ -9,7 +9,7 @@ describe('fixed stepping and lifecycle', () => {
   it('produces the same pose at 30, 60 and 144 render FPS', () => {
     const run = (fps: number) => {
       const simulation = new Simulation(track);
-      for (let i = 0; i < fps * 8; i++) simulation.advance(1 / fps, { throttle: 1, brake: 0, steer: 0.1 }, true);
+      for (let i = 0; i < fps * 8; i++) simulation.advance(1 / fps, { drift: false, throttle: 1, brake: 0, steer: 0.1 }, true);
       return simulation.current;
     };
     const base = run(60);
@@ -38,16 +38,16 @@ describe('fixed stepping and lifecycle', () => {
   });
   it('freezes while paused and discards paused time', () => {
     const simulation = new Simulation(track);
-    simulation.advance(1 / 60, { throttle: 1, brake: 0, steer: 0 }, true);
+    simulation.advance(1 / 60, { drift: false, throttle: 1, brake: 0, steer: 0 }, true);
     const pose = { ...simulation.current };
-    simulation.advance(100, { throttle: 1, brake: 0, steer: 1 }, false);
+    simulation.advance(100, { drift: false, throttle: 1, brake: 0, steer: 1 }, false);
     expect(simulation.current).toEqual(pose);
     simulation.advance(1 / 60, NEUTRAL_INPUT, true);
     expect(Math.hypot(simulation.current.x - pose.x, simulation.current.z - pose.z)).toBeLessThan(0.01);
   });
   it('restores position, heading, motion, interpolation and clock on reset', () => {
     const simulation = new Simulation(track);
-    for (let i = 0; i < 100; i++) simulation.advance(1 / 60, { throttle: 1, brake: 0, steer: -0.1 }, true);
+    for (let i = 0; i < 100; i++) simulation.advance(1 / 60, { drift: false, throttle: 1, brake: 0, steer: -0.1 }, true);
     expect(simulation.current.forwardSpeed).toBeGreaterThan(0);
     simulation.reset();
     expect(simulation.current).toEqual(createKart(track));

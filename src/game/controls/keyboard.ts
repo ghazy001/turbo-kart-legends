@@ -1,6 +1,6 @@
 import type { KartInput } from '../core/types';
 
-const drivingCodes = new Set(['KeyW', 'KeyS', 'KeyA', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']);
+const drivingCodes = new Set(['KeyW', 'KeyS', 'KeyA', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space']);
 interface KeyboardOptions {
   enabled: () => boolean;
   onReset: () => void;
@@ -17,6 +17,8 @@ export function createKeyboard(
   const keydown = (event: Event) => {
     const key = event as KeyboardEvent;
     if (key.metaKey || key.ctrlKey || key.altKey) return;
+    if (key.code === 'Space' && typeof Element !== 'undefined' && key.target instanceof Element
+      && key.target.closest('button, input, select, textarea')) return;
     if (key.code === 'Escape' && !key.repeat) { key.preventDefault(); clear(); options.onPause(); }
     if (key.code === 'KeyR' && !key.repeat && options.enabled()) { clear(); options.onReset(); }
     if (drivingCodes.has(key.code) && options.enabled()) { key.preventDefault(); pressed.add(key.code); }
@@ -33,7 +35,7 @@ export function createKeyboard(
     clear,
     sample(): KartInput {
       return { throttle: has('KeyW', 'ArrowUp'), brake: has('KeyS', 'ArrowDown'),
-        steer: has('KeyD', 'ArrowRight') - has('KeyA', 'ArrowLeft') };
+        steer: has('KeyD', 'ArrowRight') - has('KeyA', 'ArrowLeft'), drift: pressed.has('Space') };
     },
     dispose() {
       clear();

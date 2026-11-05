@@ -2,7 +2,7 @@ import type { TrackDefinition } from '../core/types';
 import { sampleTrack } from './trackSampling';
 
 export const sunshineDefinition: TrackDefinition = {
-  id: 'sunshine-circuit', name: 'Sunshine Circuit', closed: true, roadWidth: 11,
+  id: 'sunshine-circuit', name: 'Sunshine Circuit', closed: true, roadWidth: 11, startDistance: 10,
   // Original broad, asymmetric ribbon loop. Start straight faces east (+X).
   points: [
     { x: -38, z: -103 }, { x: 28, z: -103 }, { x: 92, z: -76 },

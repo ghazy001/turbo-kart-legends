@@ -14,15 +14,24 @@ function setup() {
 }
 
 describe('keyboard adapter', () => {
+  it('maps Space to drift and clears it on pause, blur and key release', () => {
+    const { key, keyboard, host } = setup();
+    expect(key('Space').defaultPrevented).toBe(true);
+    expect(keyboard.sample().drift).toBe(true);
+    key('Space', 'keyup'); expect(keyboard.sample().drift).toBe(false);
+    key('Space'); key('Escape'); expect(keyboard.sample().drift).toBe(false);
+    key('Space'); host.dispatchEvent(new Event('blur')); expect(keyboard.sample().drift).toBe(false);
+    keyboard.dispose();
+  });
   it('maps WASD/arrows to the same normalized input and cancels opposites', () => {
     const { key, keyboard } = setup();
     expect(key('KeyW').defaultPrevented).toBe(true);
     key('ArrowRight');
-    expect(keyboard.sample()).toEqual({ throttle: 1, brake: 0, steer: 1 });
+    expect(keyboard.sample()).toEqual({ drift: false, throttle: 1, brake: 0, steer: 1 });
     key('KeyA');
     expect(keyboard.sample().steer).toBe(0);
     key('KeyW', 'keyup'); key('ArrowUp'); key('ArrowDown');
-    expect(keyboard.sample()).toEqual({ throttle: 1, brake: 1, steer: 0 });
+    expect(keyboard.sample()).toEqual({ drift: false, throttle: 1, brake: 1, steer: 0 });
     keyboard.dispose();
   });
   it('clears held throttle on blur and visibility loss, and requests pause', () => {

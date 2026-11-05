@@ -5,8 +5,8 @@ import { NEUTRAL_INPUT } from '../core/types';
 import { integrateSpeed, moveKart } from '../kart/kartController';
 import { sunshineCircuit as track } from '../tracks/sunshineCircuit';
 
-const gas = { throttle: 1, brake: 0, steer: 0 };
-const brake = { throttle: 0, brake: 1, steer: 0 };
+const gas = { drift: false, throttle: 1, brake: 0, steer: 0 };
+const brake = { drift: false, throttle: 0, brake: 1, steer: 0 };
 
 describe('arcade controls', () => {
   it('accelerates toward the capped forward speed', () => {
@@ -33,7 +33,7 @@ describe('arcade controls', () => {
     expect(speed).toBeGreaterThan(0);
   });
   it('bounds normalized controls and gives brake priority', () => {
-    expect(integrateSpeed(0, { throttle: 99, brake: 0, steer: 0 }, 1 / 60)).toBe(integrateSpeed(0, gas, 1 / 60));
+    expect(integrateSpeed(0, { drift: false, throttle: 99, brake: 0, steer: 0 }, 1 / 60)).toBe(integrateSpeed(0, gas, 1 / 60));
     expect(integrateSpeed(10, { ...gas, brake: 1 }, 1 / 60)).toBeLessThan(10);
   });
   it('does not pivot at zero speed', () => {

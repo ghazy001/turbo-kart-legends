@@ -32,9 +32,13 @@ Explicitly excluded: drift boosts, bots, items, lap scoring, multiplayer, accoun
 Add hold-to-drift, steer-dependent slide, 3 charge tiers, release mini-turbos, boost VFX/audio, jumps/landing and optional gamepad. Extend automated tuning tests.
 Exit: drift mechanics reward skilled cornering; boosts cannot be spammed at zero speed or chained infinitely.
 
+Implementation status (2026-11-05): drift/turbo, drift-entry hops and landing, effects/audio, and standard gamepad support are implemented. See `docs/MILESTONE_2.md` for verified checks and remaining manual handling, hardware and browser validation. Historical M1 manual checks remain open.
+
 ## Milestone 3 — Real race and AI
 Add checkpoints/laps, countdown, finish line, split times and ranking; 3–5 waypoint-based AI karts; obstacle behavior, catch-up logic with limits, reset/recovery; Quick Race and Time Trial.
 Exit: 3-lap races work; no skipped-checkpoint exploits; AI completes races without chronic wall collisions.
+
+Implementation status (2026-11-05): Quick Race with three AI rivals, Time Trial, retained Free Drive, countdown, 12 ordered gates, three laps, timing/splits/standings/results and checkpoint recovery are implemented. All 78 automated tests and quality gates pass; a full browser Quick Race reached validated results. See `docs/MILESTONE_3.md` for evidence and remaining human, controller and browser tuning.
 
 ## Milestone 4 — Items, combat and balance
 Add 6 original power-ups, item pickup boxes, weighted distributions by race position, projectile/area interactions, cooldowns, shields and VFX.

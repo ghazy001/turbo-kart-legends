@@ -7,7 +7,7 @@ You are the senior gameplay engineer, Three.js/R3F specialist and quality owner 
 Read `GAME_DESIGN.md`, `ARCHITECTURE.md`, `ROADMAP.md`, this file, and the immediate milestone prompt. Inspect the repository and installed versions before modifying code. If some documents are absent, use the supplied milestone prompt as authority and create missing lightweight docs.
 
 ## Current scope
-Only Milestone 1: single player, one kart, one closed track, arcade steering/throttle/brake/reverse, solid boundaries, smooth chase camera, reset, pause/help/speed UI, tests, README. No AI, drift mini-turbo, lap counting, powerups, multiplayer, backend, accounts, purchases or unrelated systems yet.
+Milestone 3 is authorized by the user's explicit “Implement it” request after agreeing to countdown, validated checkpoints/laps, timing/results and AI opponents. Deliver Quick Race (three opponents), Time Trial and retained Free Drive. Preserve M1/M2 handling, drift/boost/hops, pause/focus behavior, the imported kart/driver assembly and camera. The supplied character is explicitly approved for the local prototype; asset provenance and the original-art release requirement remain recorded in docs/ASSET_INTEGRATION.md. No items, multiplayer, backend, accounts, purchases or unrelated systems. Historical browser/controller checks remain documented.
 
 ## Preferred technology
 React + TypeScript + Vite + Three.js + @react-three/fiber; @react-three/drei selectively; Zustand for UI only; Rapier if needed for colliders/queries; Vitest for core tests. Use a stable compatible dependency set; check React and R3F peer dependencies. Do NOT use R3F alpha by default.

@@ -124,3 +124,13 @@ Unit tests: clamp behavior, accelerate/decelerate, reversing, steering, dt depen
 - Target under ~150 draw calls for prototype where practical.
 - Avoid high-poly assets, costly postprocessing, and unnecessary physics bodies on decor.
 - Measure actual frame time before optimizing prematurely.
+
+## Milestone 3 race ownership
+
+`RaceSession` owns the race phase, ordered checkpoint progress, grid, standings and all racer simulations. One fixed 60 Hz clock advances the player and three AI simulations together. `Simulation.step` still calls the existing kart/drift/jump/road-boundary controller; `Simulation.interpolate` renders those snapshots. The original standalone `Simulation.advance` remains available and tested. No second physics engine or rendering-driven movement was introduced.
+
+`trackProgress.ts` interpolates the sampled road, including the closing segment; the track definition's `startDistance` anchors both the painted finish and validation gate. Swept crossings must be forward, within road width, short enough to be a physical tick and in the expected order. `raceProgress.ts` owns lap/split times and validated arc-distance ranking. Recovery rewinds to the last validated gate with zero motion and does not reset the clock or award checkpoints.
+
+`waypointController.ts` produces the same normalized `KartInput` as the player, with look-ahead steering, curvature-aware speeds, traffic lane changes/following and bounded target-speed catch-up. `racerCollision.ts` resolves planar kart contacts after the shared controller step and reapplies the existing road constraint. AI recovery uses the same last-valid-gate path. Finished opponents leave the active track and contact set; their recorded finish times remain in standings. The race freezes when the player finishes, with trailing racers explicitly labeled on track in results.
+
+Race HUD snapshots update at 10 Hz; countdown/results transitions are screen state. Imported player meshes, driver anchor, handling constants and chase camera behavior remain in their existing modules. `/?race-preview` exposes an explicit development-only normal-input autodrive checkbox for browser QA; it is not a production driving assist or state injection API.

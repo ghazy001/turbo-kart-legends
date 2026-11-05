@@ -1,0 +1,6867 @@
+[
+  {
+    "path": "assets/.DS_Store",
+    "category": "ignored",
+    "reason": "Not a GLB",
+    "bytes": 6148
+  },
+  {
+    "path": "assets/characters/crash_bandicoot_cartoon.glb",
+    "category": "racer",
+    "bytes": 1319672,
+    "sha256": "bd0159ad264242b9f6679bf6a53714de43a3be7cbd6643aa6f03d90fe5f2bb43",
+    "asset": {
+      "extras": {
+        "author": "3D Model Dump (https://sketchfab.com/3DModelDump)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/crash-bandicoot-cartoon-008565c5fc104d3caf7ab0f0b1ecfa4e",
+        "title": "CRASH BANDICOOT CARTOON"
+      },
+      "generator": "Sketchfab-16.65.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [
+      "KHR_materials_pbrSpecularGlossiness"
+    ],
+    "min": [
+      -0.868355,
+      -0.005074,
+      -0.435229
+    ],
+    "max": [
+      0.868355,
+      1.39055,
+      0.437083
+    ],
+    "size": [
+      1.736709,
+      1.395624,
+      0.872312
+    ],
+    "triangles": 36672,
+    "meshes": [
+      {
+        "name": "CRASH_Material_0",
+        "skinned": false,
+        "vertices": 10043,
+        "triangles": 18752,
+        "min": [
+          -0.864418,
+          -0.000958,
+          -0.431165
+        ],
+        "max": [
+          0.864418,
+          1.386504,
+          0.433175
+        ],
+        "center": [
+          0,
+          0.692773,
+          0.001005
+        ]
+      },
+      {
+        "name": "CRASH001_Material_0",
+        "skinned": false,
+        "vertices": 9622,
+        "triangles": 17920,
+        "min": [
+          -0.868355,
+          -0.005074,
+          -0.435229
+        ],
+        "max": [
+          0.868355,
+          1.39055,
+          0.437083
+        ],
+        "center": [
+          0,
+          0.692738,
+          0.000927
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/png",
+        "bytes": 246587,
+        "width": 512,
+        "height": 1024,
+        "sha256": "f8e088bca337b4ce53c7fa3302a1a22006cd0b187c141680ece745872dc1868b"
+      }
+    ],
+    "estimatedTextureMiB": 2.6666666666666665,
+    "materials": [
+      {
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 0,
+            "specularFactor": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "name": "Material"
+      }
+    ]
+  },
+  {
+    "path": "assets/characters/my-character.glb",
+    "category": "racer",
+    "bytes": 7604276,
+    "sha256": "08e13ce73db2b220baba8152fe5dd63c1907a951792b6b4b142771cd39037c9d",
+    "asset": {
+      "extras": {
+        "author": "MatiasH290 (https://sketchfab.com/matias029)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/mario-obj-c549d24b60f74d8f85c7a5cbd2f55d0f",
+        "title": "Mario obj"
+      },
+      "generator": "Sketchfab-12.66.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -3.850452,
+      -0.000318,
+      -1.377293
+    ],
+    "max": [
+      3.850446,
+      7.133939,
+      1.914085
+    ],
+    "size": [
+      7.700898,
+      7.134257,
+      3.291378
+    ],
+    "triangles": 36482,
+    "meshes": [
+      {
+        "name": "Object_2",
+        "skinned": false,
+        "vertices": 1801,
+        "triangles": 3322,
+        "min": [
+          -1.304664,
+          5.08929,
+          -1.377293
+        ],
+        "max": [
+          1.304658,
+          7.133939,
+          1.815517
+        ],
+        "center": [
+          -0.000003,
+          6.111614,
+          0.219112
+        ]
+      },
+      {
+        "name": "Object_3",
+        "skinned": false,
+        "vertices": 3496,
+        "triangles": 6616,
+        "min": [
+          -1.123956,
+          4.176642,
+          -1.080275
+        ],
+        "max": [
+          1.12395,
+          6.65172,
+          1.465921
+        ],
+        "center": [
+          -0.000003,
+          5.414181,
+          0.192823
+        ]
+      },
+      {
+        "name": "Object_4",
+        "skinned": false,
+        "vertices": 3738,
+        "triangles": 6380,
+        "min": [
+          -3.850452,
+          3.436296,
+          -0.616655
+        ],
+        "max": [
+          3.850446,
+          4.39662,
+          0.852343
+        ],
+        "center": [
+          -0.000003,
+          3.916458,
+          0.117844
+        ]
+      },
+      {
+        "name": "Object_5",
+        "skinned": false,
+        "vertices": 3204,
+        "triangles": 6144,
+        "min": [
+          -0.680172,
+          4.770546,
+          0.323557
+        ],
+        "max": [
+          0.680172,
+          5.886648,
+          1.076053
+        ],
+        "center": [
+          0,
+          5.328597,
+          0.699805
+        ]
+      },
+      {
+        "name": "Object_6",
+        "skinned": false,
+        "vertices": 2641,
+        "triangles": 4556,
+        "min": [
+          -1.12545,
+          0.401604,
+          -0.688194
+        ],
+        "max": [
+          1.125564,
+          4.30218,
+          1.164552
+        ],
+        "center": [
+          0.000057,
+          2.351892,
+          0.238179
+        ]
+      },
+      {
+        "name": "Object_7",
+        "skinned": false,
+        "vertices": 1079,
+        "triangles": 1924,
+        "min": [
+          -2.227698,
+          2.987159,
+          -0.580523
+        ],
+        "max": [
+          2.227698,
+          4.70088,
+          1.110433
+        ],
+        "center": [
+          0,
+          3.84402,
+          0.264955
+        ]
+      },
+      {
+        "name": "Object_8",
+        "skinned": false,
+        "vertices": 1157,
+        "triangles": 2026,
+        "min": [
+          -1.125216,
+          -0.000318,
+          -0.810239
+        ],
+        "max": [
+          1.12521,
+          6.51354,
+          1.239054
+        ],
+        "center": [
+          -0.000003,
+          3.256611,
+          0.214407
+        ]
+      },
+      {
+        "name": "Object_9",
+        "skinned": false,
+        "vertices": 2987,
+        "triangles": 5514,
+        "min": [
+          -1.42011,
+          4.042374,
+          -0.389849
+        ],
+        "max": [
+          1.42011,
+          6.19938,
+          1.914085
+        ],
+        "center": [
+          0,
+          5.120877,
+          0.762118
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/png",
+        "bytes": 1147653,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "d895d641f8f11c88f4592ec5a4254fa72213d3f9b5d40bb0954dd2ba399dc499"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 410519,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8c050ca510eb21b03d03cb0644ab2dd30a663636ded160f93c051a8cfd465d49"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 1159685,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "545e9a870520cb810518841d6030c29981a791343b7b06f3c39f94aba2ba2a8a"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 17906,
+        "width": 256,
+        "height": 256,
+        "sha256": "a9c87a112b934e62be7d8cd2d2daa7f2b356f96266fd3c3a0ce90b24fde71a5e"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 1381333,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4f5381daf49ada20d6be109354f005918330f5001d7b15ba1b2eaa1b6a118ad8"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 935266,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "da5d0b5d5dc6c2d239a2ffdea5208b1f62e78765995b55c4dd047d3aa6462bc9"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 658408,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "44fe376582e3b6a38cfb05392b7c0ca26f4568042117aef193269022dbd4cb80"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 802263,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "b4ae8e88af8bfc75725ed476c637376742dc2629fc3082001cefde95de779894"
+      }
+    ],
+    "estimatedTextureMiB": 37.666666666666664,
+    "materials": [
+      {
+        "doubleSided": true,
+        "name": "submesh_0",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.5
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "submesh_1",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 1
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.5
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "submesh_2",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 2
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.5
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "submesh_3",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 3
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.5
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "submesh_4",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 4
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.5
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "submesh_5",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 5
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.5
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "submesh_6",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 6
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.5
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "submesh_7",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 7
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.5
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/characters/nickelodeon_kart_racers_3_aang.glb",
+    "category": "racer",
+    "bytes": 2935936,
+    "sha256": "666c71d9486eef18a0db49127835015f77ed26c21a865940943e83b46028d767",
+    "asset": {
+      "extras": {
+        "author": "SMF Friends Fan 2024 YouTube Live (https://sketchfab.com/cherylhill28)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/nickelodeon-kart-racers-3-aang-1e6dc80e72f74437a5604e3fb6ff3b54",
+        "title": "Nickelodeon Kart Racers 3 Aang"
+      },
+      "generator": "Sketchfab-16.32.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -1.218227,
+      0.00048,
+      -0.172506
+    ],
+    "max": [
+      1.218227,
+      2.305219,
+      0.246587
+    ],
+    "size": [
+      2.436454,
+      2.304739,
+      0.419093
+    ],
+    "triangles": 36746,
+    "meshes": [
+      {
+        "name": "Object_2",
+        "skinned": false,
+        "vertices": 20693,
+        "triangles": 36746,
+        "min": [
+          -1.218227,
+          0.00048,
+          -0.172506
+        ],
+        "max": [
+          1.218227,
+          2.305219,
+          0.246587
+        ],
+        "center": [
+          0,
+          1.152849,
+          0.03704
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/png",
+        "bytes": 348577,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c7634ecd0b5ab6bc9a2a1da3b0ea3f12530fbf1c76a553e7788e85323d703ba9"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 244630,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8b93e32ff8e0df9fe71a52e6e6d6b19d150a082a7512dbbbf322a75cb752a3bd"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 16719,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "7bf61c2b90b8c1384a2ce7ab1f2c24f7bfa0c5792d30f8b0acade81dd481fe42"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 888756,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "3196a115bd39437336d1ae0377b62bc7574d81359c40dc62f29cf30562103eb2"
+      }
+    ],
+    "estimatedTextureMiB": 37.333333333333336,
+    "materials": [
+      {
+        "doubleSided": true,
+        "emissiveTexture": {
+          "index": 2
+        },
+        "name": "MI_Aang",
+        "normalTexture": {
+          "index": 3
+        },
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicRoughnessTexture": {
+            "index": 1
+          }
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/characters/nickelodeon_kart_racers_3_arnold.glb",
+    "category": "racer",
+    "bytes": 5055024,
+    "sha256": "dc0eefacf1dff17ffeb4b9289aef36867bb2dffb18a03ed6ed1a1497e1271ddc",
+    "asset": {
+      "extras": {
+        "author": "SMF Friends Fan 2024 YouTube Live (https://sketchfab.com/cherylhill28)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/nickelodeon-kart-racers-3-arnold-9ce1250ece2a4796b6126a574c22cea0",
+        "title": "Nickelodeon Kart Racers 3 Arnold"
+      },
+      "generator": "Sketchfab-16.32.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -0.967573,
+      -0.001611,
+      -0.49216
+    ],
+    "max": [
+      0.967573,
+      2.226009,
+      0.474013
+    ],
+    "size": [
+      1.935146,
+      2.22762,
+      0.966173
+    ],
+    "triangles": 61916,
+    "meshes": [
+      {
+        "name": "Object_2",
+        "skinned": false,
+        "vertices": 408,
+        "triangles": 481,
+        "min": [
+          -0.602742,
+          1.310336,
+          -0.247513
+        ],
+        "max": [
+          0.541852,
+          1.807155,
+          -0.004403
+        ],
+        "center": [
+          -0.030445,
+          1.558746,
+          -0.125958
+        ]
+      },
+      {
+        "name": "Object_3",
+        "skinned": false,
+        "vertices": 36576,
+        "triangles": 61435,
+        "min": [
+          -0.967573,
+          -0.001611,
+          -0.49216
+        ],
+        "max": [
+          0.967573,
+          2.226009,
+          0.474013
+        ],
+        "center": [
+          0,
+          1.112199,
+          -0.009073
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/png",
+        "bytes": 1391339,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "177c4b63de9f5c363b59a1bd32b5be06564b52abd93d8786ac9dac3d05f83c51"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 64543,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "7cfa9da9ac3b5aad935a22110d737c4ef3627e9460fa25e0b618c48ab23b831b"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 1077158,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "1ecf329ae6b54b025dc1cf58996996abea6aca0865418e70c7f5dacbd817c6e3"
+      }
+    ],
+    "estimatedTextureMiB": 31.999999999999996,
+    "materials": [
+      {
+        "doubleSided": true,
+        "name": "MI_Arnold",
+        "normalTexture": {
+          "index": 2
+        },
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicRoughnessTexture": {
+            "index": 1
+          }
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/characters/nickelodeon_kart_racers_3_spongebob.glb",
+    "category": "racer",
+    "bytes": 6570828,
+    "sha256": "027a957aba65b29ffa211d2d19fc827b5587bce2736d4662d911922d882f2591",
+    "asset": {
+      "extras": {
+        "author": "SMF Friends Fan 2024 YouTube Live (https://sketchfab.com/cherylhill28)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/nickelodeon-kart-racers-3-spongebob-ca849339e9bb49bb81ad3a6c870efe74",
+        "title": "Nickelodeon Kart Racers 3 SpongeBob"
+      },
+      "generator": "Sketchfab-16.32.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -1.042452,
+      -0.004442,
+      -0.295343
+    ],
+    "max": [
+      1.042452,
+      1.445064,
+      0.486154
+    ],
+    "size": [
+      2.084904,
+      1.449506,
+      0.781497
+    ],
+    "triangles": 43720,
+    "meshes": [
+      {
+        "name": "Object_2",
+        "skinned": false,
+        "vertices": 815,
+        "triangles": 882,
+        "min": [
+          -0.899117,
+          0.374323,
+          -0.253894
+        ],
+        "max": [
+          0.366533,
+          1.298963,
+          0.423494
+        ],
+        "center": [
+          -0.266292,
+          0.836643,
+          0.0848
+        ]
+      },
+      {
+        "name": "Object_3",
+        "skinned": false,
+        "vertices": 24232,
+        "triangles": 42838,
+        "min": [
+          -1.042452,
+          -0.004442,
+          -0.295343
+        ],
+        "max": [
+          1.042452,
+          1.445064,
+          0.486154
+        ],
+        "center": [
+          0,
+          0.720311,
+          0.095405
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/png",
+        "bytes": 1506468,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "1b5af2fa388e1ba297548d0a93cdf1d55617b92499cbc2996496048daeec1190"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 214377,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "816d2841e381a770c09a4cbf80d78b1f22cee49f7e9e2e82d63d25c756846141"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 3119354,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "4a5ea6c2071cad0ae3ab9681b59027044b059cfd0c4f043d26a7b96150fd2ab9"
+      }
+    ],
+    "estimatedTextureMiB": 48,
+    "materials": [
+      {
+        "doubleSided": true,
+        "name": "MI_SpongeBob",
+        "normalTexture": {
+          "index": 2
+        },
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicRoughnessTexture": {
+            "index": 1
+          }
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/characters/nickelodeon_kart_racers_3_spongebob_boat_kart.glb",
+    "category": "kart",
+    "bytes": 3601820,
+    "sha256": "de1c9904167b2a74ad91b34c88012a8c3ed5896dc0e991ad065305d2b9c17fd0",
+    "asset": {
+      "extras": {
+        "author": "SMF Friends Fan 2024 YouTube Live (https://sketchfab.com/cherylhill28)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/nickelodeon-kart-racers-3-spongebob-boat-kart-8478cb47c8a64cc3bac6733d0e0837c3",
+        "title": "Nickelodeon Kart Racers 3 SpongeBob Boat Kart"
+      },
+      "generator": "Sketchfab-16.33.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -1.893656,
+      -0.630711,
+      -4.076024
+    ],
+    "max": [
+      1.893656,
+      2.276901,
+      1.602877
+    ],
+    "size": [
+      3.787311,
+      2.907612,
+      5.678901
+    ],
+    "triangles": 29964,
+    "meshes": [
+      {
+        "name": "Object_6",
+        "skinned": true,
+        "vertices": 10021,
+        "triangles": 14432,
+        "min": [
+          -1.893656,
+          -0.182464,
+          -4.076024
+        ],
+        "max": [
+          1.893656,
+          2.276901,
+          1.397182
+        ],
+        "center": [
+          0,
+          1.047218,
+          -1.339421
+        ]
+      },
+      {
+        "name": "Object_7",
+        "skinned": true,
+        "vertices": 3171,
+        "triangles": 5040,
+        "min": [
+          -1.83687,
+          -0.211534,
+          -3.997902
+        ],
+        "max": [
+          1.83687,
+          1.584405,
+          1.602877
+        ],
+        "center": [
+          0,
+          0.686435,
+          -1.197513
+        ]
+      },
+      {
+        "name": "Object_8",
+        "skinned": true,
+        "vertices": 222,
+        "triangles": 348,
+        "min": [
+          -0.781206,
+          1.015198,
+          -0.569005
+        ],
+        "max": [
+          0.781206,
+          1.629539,
+          0.222328
+        ],
+        "center": [
+          0,
+          1.322369,
+          -0.173339
+        ]
+      },
+      {
+        "name": "S_Wheel_Standard_L_MI_Wheels_Standard_0",
+        "skinned": false,
+        "vertices": 2239,
+        "triangles": 2576,
+        "min": [
+          -1.814296,
+          -0.630711,
+          -0.735891
+        ],
+        "max": [
+          -1.20827,
+          0.500242,
+          0.395203
+        ],
+        "center": [
+          -1.511283,
+          -0.065235,
+          -0.170344
+        ]
+      },
+      {
+        "name": "S_Wheel_Standard_R_MI_Wheels_Standard_0",
+        "skinned": false,
+        "vertices": 2105,
+        "triangles": 2496,
+        "min": [
+          1.214045,
+          -0.617316,
+          -0.741208
+        ],
+        "max": [
+          1.820072,
+          0.514924,
+          0.390692
+        ],
+        "center": [
+          1.517058,
+          -0.051196,
+          -0.175258
+        ]
+      },
+      {
+        "name": "S_Wheel_Standard_R001_MI_Wheels_Standard_0",
+        "skinned": false,
+        "vertices": 2105,
+        "triangles": 2496,
+        "min": [
+          1.214045,
+          -0.617316,
+          -3.481932
+        ],
+        "max": [
+          1.820072,
+          0.514924,
+          -2.350033
+        ],
+        "center": [
+          1.517058,
+          -0.051196,
+          -2.915983
+        ]
+      },
+      {
+        "name": "S_Wheel_Standard_L001_MI_Wheels_Standard_0",
+        "skinned": false,
+        "vertices": 2239,
+        "triangles": 2576,
+        "min": [
+          -1.814296,
+          -0.630711,
+          -3.44251
+        ],
+        "max": [
+          -1.20827,
+          0.500242,
+          -2.311416
+        ],
+        "center": [
+          -1.511283,
+          -0.065235,
+          -2.876963
+        ]
+      }
+    ],
+    "skins": [
+      {
+        "joints": [
+          "_rootJoint",
+          "Collection_001_proxy_00",
+          "root_01",
+          "Chassis_Top_02",
+          "Antenna_01_03",
+          "Antenna_02_04",
+          "Antenna_03_05",
+          "Antenna_04_06",
+          "Antenna_05_07",
+          "Character_08",
+          "Tube_Up_01_L_09",
+          "Tube_Up_02_L_010",
+          "Tube_Up_01_R_011",
+          "Tube_Up_02_R_012",
+          "Tube_Up_01_L_001_013",
+          "Tube_Up_02_L_001_014",
+          "Tube_Up_01_R_001_015",
+          "Tube_Up_02_R_001_016",
+          "Exhaust_L_017",
+          "Exhaust_R_018"
+        ]
+      }
+    ],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/png",
+        "bytes": 809786,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "c9d8b6a286a830fca2887bf227f40ed4bef8f2b8abffdbb5f5605c634620213d"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 1317038,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "ad2edceecb0ffe810f013b63538fa0c5d1bcbf5e3bcdccf47da2f93cfaf3e471"
+      }
+    ],
+    "estimatedTextureMiB": 42.666666666666664,
+    "materials": [
+      {
+        "doubleSided": true,
+        "name": "MI_Kart_Boat",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.8929713596497552
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "MI_Kart_Boat_Paintjob",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.588,
+            0.588,
+            0.588,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.8929713596497552
+        }
+      },
+      {
+        "alphaMode": "BLEND",
+        "doubleSided": true,
+        "name": "MI_Kart_Glass",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.11109296382116497,
+            0.7852452116239009,
+            0.9461746648583663,
+            0.18163358863620854
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.8929713596497552
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "MI_Wheels_Standard",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 1
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.8929713596497552
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "MI_Wheels_Standard_0",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 1
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.8929713596497552
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/karts/go_kart_64.glb",
+    "category": "kart",
+    "bytes": 5081772,
+    "sha256": "2f13a766be74eea77cd28584e2a322968a4c827c531f68599a5d84a313e5dc71",
+    "asset": {
+      "extras": {
+        "author": "ppesoj (https://sketchfab.com/ppesoj)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/go-kart-64-eaeecb474d444a7898c088135cccfe6c",
+        "title": "Go kart 64"
+      },
+      "generator": "Sketchfab-15.49.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -0.059625,
+      0.015204,
+      -0.083826
+    ],
+    "max": [
+      0.060294,
+      0.10722,
+      0.075029
+    ],
+    "size": [
+      0.119919,
+      0.092016,
+      0.158855
+    ],
+    "triangles": 118786,
+    "meshes": [
+      {
+        "name": "BezierCurve_0",
+        "skinned": false,
+        "vertices": 21120,
+        "triangles": 41600,
+        "min": [
+          -0.058308,
+          0.03631,
+          -0.083826
+        ],
+        "max": [
+          0.058308,
+          0.064765,
+          0.074779
+        ],
+        "center": [
+          0,
+          0.050538,
+          -0.004523
+        ]
+      },
+      {
+        "name": "BezierCurve_1",
+        "skinned": false,
+        "vertices": 238,
+        "triangles": 124,
+        "min": [
+          -0.045201,
+          0.02775,
+          0.045601
+        ],
+        "max": [
+          0.045191,
+          0.034748,
+          0.05246
+        ],
+        "center": [
+          -0.000005,
+          0.031249,
+          0.049031
+        ]
+      },
+      {
+        "name": "BezierCurve_2",
+        "skinned": false,
+        "vertices": 3968,
+        "triangles": 1920,
+        "min": [
+          -0.031938,
+          0.028955,
+          0.045645
+        ],
+        "max": [
+          0.031383,
+          0.04145,
+          0.052259
+        ],
+        "center": [
+          -0.000278,
+          0.035203,
+          0.048952
+        ]
+      },
+      {
+        "name": "Cube_0",
+        "skinned": false,
+        "vertices": 175,
+        "triangles": 192,
+        "min": [
+          -0.025909,
+          0.043319,
+          -0.060128
+        ],
+        "max": [
+          0.02612,
+          0.045488,
+          0.0596
+        ],
+        "center": [
+          0.000105,
+          0.044404,
+          -0.000264
+        ]
+      },
+      {
+        "name": "BezierCurve001_0",
+        "skinned": false,
+        "vertices": 300,
+        "triangles": 576,
+        "min": [
+          -0.015712,
+          0.044695,
+          -0.056015
+        ],
+        "max": [
+          -0.012377,
+          0.057382,
+          -0.044136
+        ],
+        "center": [
+          -0.014044,
+          0.051039,
+          -0.050075
+        ]
+      },
+      {
+        "name": "BezierCurve001_1",
+        "skinned": false,
+        "vertices": 48,
+        "triangles": 24,
+        "min": [
+          -0.018908,
+          0.043472,
+          -0.056348
+        ],
+        "max": [
+          -0.008773,
+          0.062052,
+          -0.039394
+        ],
+        "center": [
+          -0.01384,
+          0.052762,
+          -0.047871
+        ]
+      },
+      {
+        "name": "BezierCurve002_0",
+        "skinned": false,
+        "vertices": 300,
+        "triangles": 576,
+        "min": [
+          0.01117,
+          0.044749,
+          -0.055855
+        ],
+        "max": [
+          0.014415,
+          0.057093,
+          -0.044299
+        ],
+        "center": [
+          0.012793,
+          0.050921,
+          -0.050077
+        ]
+      },
+      {
+        "name": "BezierCurve002_1",
+        "skinned": false,
+        "vertices": 48,
+        "triangles": 24,
+        "min": [
+          0.00806,
+          0.043559,
+          -0.05618
+        ],
+        "max": [
+          0.017922,
+          0.061637,
+          -0.039685
+        ],
+        "center": [
+          0.012991,
+          0.052598,
+          -0.047932
+        ]
+      },
+      {
+        "name": "Torus_0",
+        "skinned": false,
+        "vertices": 768,
+        "triangles": 1524,
+        "min": [
+          -0.016552,
+          0.044727,
+          -0.058502
+        ],
+        "max": [
+          0.015076,
+          0.0894,
+          -0.020143
+        ],
+        "center": [
+          -0.000738,
+          0.067064,
+          -0.039323
+        ]
+      },
+      {
+        "name": "Torus_1",
+        "skinned": false,
+        "vertices": 2080,
+        "triangles": 1008,
+        "min": [
+          -0.006949,
+          0.044146,
+          -0.059976
+        ],
+        "max": [
+          0.005745,
+          0.056169,
+          -0.049847
+        ],
+        "center": [
+          -0.000602,
+          0.050158,
+          -0.054911
+        ]
+      },
+      {
+        "name": "Torus_2",
+        "skinned": false,
+        "vertices": 251,
+        "triangles": 124,
+        "min": [
+          -0.016154,
+          0.045478,
+          -0.055255
+        ],
+        "max": [
+          0.014506,
+          0.04688,
+          -0.050996
+        ],
+        "center": [
+          -0.000824,
+          0.046179,
+          -0.053125
+        ]
+      },
+      {
+        "name": "Torus_3",
+        "skinned": false,
+        "vertices": 546,
+        "triangles": 248,
+        "min": [
+          -0.0452,
+          0.027886,
+          -0.058191
+        ],
+        "max": [
+          0.045191,
+          0.04314,
+          -0.051332
+        ],
+        "center": [
+          -0.000005,
+          0.035513,
+          -0.054761
+        ]
+      },
+      {
+        "name": "Cube007_0",
+        "skinned": false,
+        "vertices": 48,
+        "triangles": 24,
+        "min": [
+          -0.021781,
+          0.045324,
+          -0.032453
+        ],
+        "max": [
+          0.021262,
+          0.104164,
+          0.027863
+        ],
+        "center": [
+          -0.00026,
+          0.074744,
+          -0.002295
+        ]
+      },
+      {
+        "name": "Sphere_0",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          -0.017057,
+          0.062259,
+          0.010607
+        ],
+        "max": [
+          -0.009298,
+          0.070017,
+          0.018365
+        ],
+        "center": [
+          -0.013178,
+          0.066138,
+          0.014486
+        ]
+      },
+      {
+        "name": "Sphere_1",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          0.01029,
+          0.062808,
+          0.010607
+        ],
+        "max": [
+          0.018048,
+          0.070567,
+          0.018365
+        ],
+        "center": [
+          0.014169,
+          0.066688,
+          0.014486
+        ]
+      },
+      {
+        "name": "Sphere_2",
+        "skinned": false,
+        "vertices": 1614,
+        "triangles": 3228,
+        "min": [
+          -0.028111,
+          0.047245,
+          -0.034426
+        ],
+        "max": [
+          0.028542,
+          0.10722,
+          0.022635
+        ],
+        "center": [
+          0.000216,
+          0.077233,
+          -0.005895
+        ]
+      },
+      {
+        "name": "Torus006_0",
+        "skinned": false,
+        "vertices": 9374,
+        "triangles": 4572,
+        "min": [
+          -0.031125,
+          0.048324,
+          0.026455
+        ],
+        "max": [
+          0.024287,
+          0.088012,
+          0.059495
+        ],
+        "center": [
+          -0.003419,
+          0.068168,
+          0.042975
+        ]
+      },
+      {
+        "name": "Torus006_1",
+        "skinned": false,
+        "vertices": 11520,
+        "triangles": 5760,
+        "min": [
+          -0.021312,
+          0.047722,
+          0.047418
+        ],
+        "max": [
+          0.024889,
+          0.07258,
+          0.054334
+        ],
+        "center": [
+          0.001788,
+          0.060151,
+          0.050876
+        ]
+      },
+      {
+        "name": "Torus006_2",
+        "skinned": false,
+        "vertices": 11520,
+        "triangles": 5760,
+        "min": [
+          -0.024144,
+          0.053958,
+          0.023696
+        ],
+        "max": [
+          0.028499,
+          0.081994,
+          0.052144
+        ],
+        "center": [
+          0.002178,
+          0.067976,
+          0.03792
+        ]
+      },
+      {
+        "name": "Torus006_3",
+        "skinned": false,
+        "vertices": 4608,
+        "triangles": 2304,
+        "min": [
+          -0.031596,
+          0.047581,
+          0.025605
+        ],
+        "max": [
+          -0.030301,
+          0.05279,
+          0.049198
+        ],
+        "center": [
+          -0.030948,
+          0.050186,
+          0.037402
+        ]
+      },
+      {
+        "name": "Torus006_4",
+        "skinned": false,
+        "vertices": 29376,
+        "triangles": 14400,
+        "min": [
+          -0.029847,
+          0.046252,
+          0.023696
+        ],
+        "max": [
+          0.028499,
+          0.088512,
+          0.060614
+        ],
+        "center": [
+          -0.000674,
+          0.067382,
+          0.042155
+        ]
+      },
+      {
+        "name": "Torus006_5",
+        "skinned": false,
+        "vertices": 11270,
+        "triangles": 5872,
+        "min": [
+          -0.023139,
+          0.047349,
+          0.024687
+        ],
+        "max": [
+          0.027398,
+          0.085665,
+          0.061547
+        ],
+        "center": [
+          0.00213,
+          0.066507,
+          0.043117
+        ]
+      },
+      {
+        "name": "Torus006_6",
+        "skinned": false,
+        "vertices": 208,
+        "triangles": 140,
+        "min": [
+          -0.025251,
+          0.045328,
+          0.022846
+        ],
+        "max": [
+          0.028449,
+          0.079077,
+          0.052433
+        ],
+        "center": [
+          0.001599,
+          0.062202,
+          0.037639
+        ]
+      },
+      {
+        "name": "Torus006_7",
+        "skinned": false,
+        "vertices": 52,
+        "triangles": 34,
+        "min": [
+          0.028239,
+          0.045325,
+          0.020116
+        ],
+        "max": [
+          0.03631,
+          0.054787,
+          0.055317
+        ],
+        "center": [
+          0.032274,
+          0.050056,
+          0.037717
+        ]
+      },
+      {
+        "name": "Torus006_8",
+        "skinned": false,
+        "vertices": 1344,
+        "triangles": 2032,
+        "min": [
+          -0.02753,
+          0.07671,
+          0.052875
+        ],
+        "max": [
+          0.030139,
+          0.102207,
+          0.075029
+        ],
+        "center": [
+          0.001304,
+          0.089458,
+          0.063952
+        ]
+      },
+      {
+        "name": "Torus025_0",
+        "skinned": false,
+        "vertices": 1152,
+        "triangles": 2304,
+        "min": [
+          0.037135,
+          0.015204,
+          0.032574
+        ],
+        "max": [
+          0.058454,
+          0.049603,
+          0.066963
+        ],
+        "center": [
+          0.047795,
+          0.032403,
+          0.049769
+        ]
+      },
+      {
+        "name": "Torus025_1",
+        "skinned": false,
+        "vertices": 536,
+        "triangles": 248,
+        "min": [
+          0.047644,
+          0.028688,
+          0.04597
+        ],
+        "max": [
+          0.050128,
+          0.035821,
+          0.053223
+        ],
+        "center": [
+          0.048886,
+          0.032254,
+          0.049597
+        ]
+      },
+      {
+        "name": "Torus025_2",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          0.048888,
+          0.029845,
+          0.047188
+        ],
+        "max": [
+          0.050668,
+          0.034663,
+          0.052006
+        ],
+        "center": [
+          0.049778,
+          0.032254,
+          0.049597
+        ]
+      },
+      {
+        "name": "Torus025_3",
+        "skinned": false,
+        "vertices": 5376,
+        "triangles": 2688,
+        "min": [
+          0.045003,
+          0.024188,
+          0.04153
+        ],
+        "max": [
+          0.052769,
+          0.040321,
+          0.057663
+        ],
+        "center": [
+          0.048886,
+          0.032254,
+          0.049597
+        ]
+      },
+      {
+        "name": "Torus001_0",
+        "skinned": false,
+        "vertices": 1152,
+        "triangles": 2304,
+        "min": [
+          -0.055975,
+          0.016308,
+          0.032587
+        ],
+        "max": [
+          -0.033969,
+          0.050707,
+          0.066951
+        ],
+        "center": [
+          -0.044972,
+          0.033508,
+          0.049769
+        ]
+      },
+      {
+        "name": "Torus001_1",
+        "skinned": false,
+        "vertices": 536,
+        "triangles": 248,
+        "min": [
+          -0.047437,
+          0.029793,
+          0.046274
+        ],
+        "max": [
+          -0.044701,
+          0.036925,
+          0.053527
+        ],
+        "center": [
+          -0.046069,
+          0.033359,
+          0.0499
+        ]
+      },
+      {
+        "name": "Torus001_2",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          -0.047849,
+          0.03095,
+          0.04746
+        ],
+        "max": [
+          -0.04607,
+          0.035768,
+          0.052274
+        ],
+        "center": [
+          -0.04696,
+          0.033359,
+          0.049867
+        ]
+      },
+      {
+        "name": "Torus001_3",
+        "skinned": false,
+        "vertices": 5376,
+        "triangles": 2688,
+        "min": [
+          -0.050205,
+          0.025292,
+          0.041849
+        ],
+        "max": [
+          -0.041933,
+          0.041425,
+          0.057952
+        ],
+        "center": [
+          -0.046069,
+          0.033359,
+          0.0499
+        ]
+      },
+      {
+        "name": "Torus002_0",
+        "skinned": false,
+        "vertices": 1152,
+        "triangles": 2304,
+        "min": [
+          -0.059625,
+          0.01594,
+          -0.073801
+        ],
+        "max": [
+          -0.038307,
+          0.050339,
+          -0.039412
+        ],
+        "center": [
+          -0.048966,
+          0.03314,
+          -0.056607
+        ]
+      },
+      {
+        "name": "Torus002_1",
+        "skinned": false,
+        "vertices": 536,
+        "triangles": 248,
+        "min": [
+          -0.051298,
+          0.029424,
+          -0.060061
+        ],
+        "max": [
+          -0.048816,
+          0.036557,
+          -0.052808
+        ],
+        "center": [
+          -0.050057,
+          0.032991,
+          -0.056434
+        ]
+      },
+      {
+        "name": "Torus002_2",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          -0.051838,
+          0.030582,
+          -0.058843
+        ],
+        "max": [
+          -0.050059,
+          0.0354,
+          -0.054025
+        ],
+        "center": [
+          -0.050949,
+          0.032991,
+          -0.056434
+        ]
+      },
+      {
+        "name": "Torus002_3",
+        "skinned": false,
+        "vertices": 5376,
+        "triangles": 2688,
+        "min": [
+          -0.053938,
+          0.024924,
+          -0.064501
+        ],
+        "max": [
+          -0.046176,
+          0.041057,
+          -0.048368
+        ],
+        "center": [
+          -0.050057,
+          0.032991,
+          -0.056434
+        ]
+      },
+      {
+        "name": "Torus003_0",
+        "skinned": false,
+        "vertices": 1152,
+        "triangles": 2304,
+        "min": [
+          0.038976,
+          0.015204,
+          -0.074169
+        ],
+        "max": [
+          0.060294,
+          0.049603,
+          -0.039781
+        ],
+        "center": [
+          0.049635,
+          0.032403,
+          -0.056975
+        ]
+      },
+      {
+        "name": "Torus003_1",
+        "skinned": false,
+        "vertices": 536,
+        "triangles": 248,
+        "min": [
+          0.049485,
+          0.028688,
+          -0.060774
+        ],
+        "max": [
+          0.051969,
+          0.035821,
+          -0.05352
+        ],
+        "center": [
+          0.050727,
+          0.032254,
+          -0.057147
+        ]
+      },
+      {
+        "name": "Torus003_2",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          0.050729,
+          0.029845,
+          -0.059556
+        ],
+        "max": [
+          0.052508,
+          0.034663,
+          -0.054738
+        ],
+        "center": [
+          0.051618,
+          0.032254,
+          -0.057147
+        ]
+      },
+      {
+        "name": "Torus003_3",
+        "skinned": false,
+        "vertices": 5376,
+        "triangles": 2688,
+        "min": [
+          0.046844,
+          0.024188,
+          -0.065214
+        ],
+        "max": [
+          0.05461,
+          0.040321,
+          -0.049081
+        ],
+        "center": [
+          0.050727,
+          0.032254,
+          -0.057147
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [],
+    "estimatedTextureMiB": 0,
+    "materials": [
+      {
+        "doubleSided": true,
+        "name": "Material.019",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.004241111222654581,
+            0.004241111222654581,
+            0.004241111222654581,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.002",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.8000000715255737,
+            0.1077655702829361,
+            0.012561059556901455,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.031",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            0.9520565271377563,
+            0,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "plata",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.17631350457668304,
+            0.17885899543762207,
+            0.17378932237625122,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.038",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.03697733208537102,
+            0.2550888657569885,
+            0.8000000715255737,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.011",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.7169644236564636,
+            0.8000000715255737,
+            0.04967654496431351,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.008",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.03310127556324005,
+            0.03310127556324005,
+            0.03310127556324005,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "volante",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.07657497376203537,
+            0.07657497376203537,
+            0.07657497376203537,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "motor",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.18446007370948792,
+            0.18446007370948792,
+            0.18446007370948792,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "alphaMode": "BLEND",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0.09000000357627869,
+          0.09000000357627869,
+          0.09000000357627869
+        ],
+        "name": "suelo",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.8000000715255737,
+            0.16784027218818665,
+            0,
+            0.678947389125824
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "plata.001",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.17631350457668304,
+            0.17885899543762207,
+            0.17378932237625122,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.004",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.8000000715255737,
+            0.12881359457969666,
+            0.009788716211915016,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "sillon.001",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.04696016013622284,
+            0.04696016013622284,
+            0.04696016013622284,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.027",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "metal",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            0,
+            0.000912449206225574,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "alphaMode": "BLEND",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0.47999998927116394,
+          0.47999998927116394,
+          0.47999998927116394
+        ],
+        "name": "pedal",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.26676806807518005,
+            0.05117865279316902,
+            0.054055046290159225,
+            0.7428571283817291
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "emissiveFactor": [
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552
+        ],
+        "name": "plastico",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            0,
+            0.0025187477003782988,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/karts/kart_2.glb",
+    "category": "kart",
+    "bytes": 5081772,
+    "sha256": "2f13a766be74eea77cd28584e2a322968a4c827c531f68599a5d84a313e5dc71",
+    "asset": {
+      "extras": {
+        "author": "ppesoj (https://sketchfab.com/ppesoj)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/go-kart-64-eaeecb474d444a7898c088135cccfe6c",
+        "title": "Go kart 64"
+      },
+      "generator": "Sketchfab-15.49.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -0.059625,
+      0.015204,
+      -0.083826
+    ],
+    "max": [
+      0.060294,
+      0.10722,
+      0.075029
+    ],
+    "size": [
+      0.119919,
+      0.092016,
+      0.158855
+    ],
+    "triangles": 118786,
+    "meshes": [
+      {
+        "name": "BezierCurve_0",
+        "skinned": false,
+        "vertices": 21120,
+        "triangles": 41600,
+        "min": [
+          -0.058308,
+          0.03631,
+          -0.083826
+        ],
+        "max": [
+          0.058308,
+          0.064765,
+          0.074779
+        ],
+        "center": [
+          0,
+          0.050538,
+          -0.004523
+        ]
+      },
+      {
+        "name": "BezierCurve_1",
+        "skinned": false,
+        "vertices": 238,
+        "triangles": 124,
+        "min": [
+          -0.045201,
+          0.02775,
+          0.045601
+        ],
+        "max": [
+          0.045191,
+          0.034748,
+          0.05246
+        ],
+        "center": [
+          -0.000005,
+          0.031249,
+          0.049031
+        ]
+      },
+      {
+        "name": "BezierCurve_2",
+        "skinned": false,
+        "vertices": 3968,
+        "triangles": 1920,
+        "min": [
+          -0.031938,
+          0.028955,
+          0.045645
+        ],
+        "max": [
+          0.031383,
+          0.04145,
+          0.052259
+        ],
+        "center": [
+          -0.000278,
+          0.035203,
+          0.048952
+        ]
+      },
+      {
+        "name": "Cube_0",
+        "skinned": false,
+        "vertices": 175,
+        "triangles": 192,
+        "min": [
+          -0.025909,
+          0.043319,
+          -0.060128
+        ],
+        "max": [
+          0.02612,
+          0.045488,
+          0.0596
+        ],
+        "center": [
+          0.000105,
+          0.044404,
+          -0.000264
+        ]
+      },
+      {
+        "name": "BezierCurve001_0",
+        "skinned": false,
+        "vertices": 300,
+        "triangles": 576,
+        "min": [
+          -0.015712,
+          0.044695,
+          -0.056015
+        ],
+        "max": [
+          -0.012377,
+          0.057382,
+          -0.044136
+        ],
+        "center": [
+          -0.014044,
+          0.051039,
+          -0.050075
+        ]
+      },
+      {
+        "name": "BezierCurve001_1",
+        "skinned": false,
+        "vertices": 48,
+        "triangles": 24,
+        "min": [
+          -0.018908,
+          0.043472,
+          -0.056348
+        ],
+        "max": [
+          -0.008773,
+          0.062052,
+          -0.039394
+        ],
+        "center": [
+          -0.01384,
+          0.052762,
+          -0.047871
+        ]
+      },
+      {
+        "name": "BezierCurve002_0",
+        "skinned": false,
+        "vertices": 300,
+        "triangles": 576,
+        "min": [
+          0.01117,
+          0.044749,
+          -0.055855
+        ],
+        "max": [
+          0.014415,
+          0.057093,
+          -0.044299
+        ],
+        "center": [
+          0.012793,
+          0.050921,
+          -0.050077
+        ]
+      },
+      {
+        "name": "BezierCurve002_1",
+        "skinned": false,
+        "vertices": 48,
+        "triangles": 24,
+        "min": [
+          0.00806,
+          0.043559,
+          -0.05618
+        ],
+        "max": [
+          0.017922,
+          0.061637,
+          -0.039685
+        ],
+        "center": [
+          0.012991,
+          0.052598,
+          -0.047932
+        ]
+      },
+      {
+        "name": "Torus_0",
+        "skinned": false,
+        "vertices": 768,
+        "triangles": 1524,
+        "min": [
+          -0.016552,
+          0.044727,
+          -0.058502
+        ],
+        "max": [
+          0.015076,
+          0.0894,
+          -0.020143
+        ],
+        "center": [
+          -0.000738,
+          0.067064,
+          -0.039323
+        ]
+      },
+      {
+        "name": "Torus_1",
+        "skinned": false,
+        "vertices": 2080,
+        "triangles": 1008,
+        "min": [
+          -0.006949,
+          0.044146,
+          -0.059976
+        ],
+        "max": [
+          0.005745,
+          0.056169,
+          -0.049847
+        ],
+        "center": [
+          -0.000602,
+          0.050158,
+          -0.054911
+        ]
+      },
+      {
+        "name": "Torus_2",
+        "skinned": false,
+        "vertices": 251,
+        "triangles": 124,
+        "min": [
+          -0.016154,
+          0.045478,
+          -0.055255
+        ],
+        "max": [
+          0.014506,
+          0.04688,
+          -0.050996
+        ],
+        "center": [
+          -0.000824,
+          0.046179,
+          -0.053125
+        ]
+      },
+      {
+        "name": "Torus_3",
+        "skinned": false,
+        "vertices": 546,
+        "triangles": 248,
+        "min": [
+          -0.0452,
+          0.027886,
+          -0.058191
+        ],
+        "max": [
+          0.045191,
+          0.04314,
+          -0.051332
+        ],
+        "center": [
+          -0.000005,
+          0.035513,
+          -0.054761
+        ]
+      },
+      {
+        "name": "Cube007_0",
+        "skinned": false,
+        "vertices": 48,
+        "triangles": 24,
+        "min": [
+          -0.021781,
+          0.045324,
+          -0.032453
+        ],
+        "max": [
+          0.021262,
+          0.104164,
+          0.027863
+        ],
+        "center": [
+          -0.00026,
+          0.074744,
+          -0.002295
+        ]
+      },
+      {
+        "name": "Sphere_0",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          -0.017057,
+          0.062259,
+          0.010607
+        ],
+        "max": [
+          -0.009298,
+          0.070017,
+          0.018365
+        ],
+        "center": [
+          -0.013178,
+          0.066138,
+          0.014486
+        ]
+      },
+      {
+        "name": "Sphere_1",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          0.01029,
+          0.062808,
+          0.010607
+        ],
+        "max": [
+          0.018048,
+          0.070567,
+          0.018365
+        ],
+        "center": [
+          0.014169,
+          0.066688,
+          0.014486
+        ]
+      },
+      {
+        "name": "Sphere_2",
+        "skinned": false,
+        "vertices": 1614,
+        "triangles": 3228,
+        "min": [
+          -0.028111,
+          0.047245,
+          -0.034426
+        ],
+        "max": [
+          0.028542,
+          0.10722,
+          0.022635
+        ],
+        "center": [
+          0.000216,
+          0.077233,
+          -0.005895
+        ]
+      },
+      {
+        "name": "Torus006_0",
+        "skinned": false,
+        "vertices": 9374,
+        "triangles": 4572,
+        "min": [
+          -0.031125,
+          0.048324,
+          0.026455
+        ],
+        "max": [
+          0.024287,
+          0.088012,
+          0.059495
+        ],
+        "center": [
+          -0.003419,
+          0.068168,
+          0.042975
+        ]
+      },
+      {
+        "name": "Torus006_1",
+        "skinned": false,
+        "vertices": 11520,
+        "triangles": 5760,
+        "min": [
+          -0.021312,
+          0.047722,
+          0.047418
+        ],
+        "max": [
+          0.024889,
+          0.07258,
+          0.054334
+        ],
+        "center": [
+          0.001788,
+          0.060151,
+          0.050876
+        ]
+      },
+      {
+        "name": "Torus006_2",
+        "skinned": false,
+        "vertices": 11520,
+        "triangles": 5760,
+        "min": [
+          -0.024144,
+          0.053958,
+          0.023696
+        ],
+        "max": [
+          0.028499,
+          0.081994,
+          0.052144
+        ],
+        "center": [
+          0.002178,
+          0.067976,
+          0.03792
+        ]
+      },
+      {
+        "name": "Torus006_3",
+        "skinned": false,
+        "vertices": 4608,
+        "triangles": 2304,
+        "min": [
+          -0.031596,
+          0.047581,
+          0.025605
+        ],
+        "max": [
+          -0.030301,
+          0.05279,
+          0.049198
+        ],
+        "center": [
+          -0.030948,
+          0.050186,
+          0.037402
+        ]
+      },
+      {
+        "name": "Torus006_4",
+        "skinned": false,
+        "vertices": 29376,
+        "triangles": 14400,
+        "min": [
+          -0.029847,
+          0.046252,
+          0.023696
+        ],
+        "max": [
+          0.028499,
+          0.088512,
+          0.060614
+        ],
+        "center": [
+          -0.000674,
+          0.067382,
+          0.042155
+        ]
+      },
+      {
+        "name": "Torus006_5",
+        "skinned": false,
+        "vertices": 11270,
+        "triangles": 5872,
+        "min": [
+          -0.023139,
+          0.047349,
+          0.024687
+        ],
+        "max": [
+          0.027398,
+          0.085665,
+          0.061547
+        ],
+        "center": [
+          0.00213,
+          0.066507,
+          0.043117
+        ]
+      },
+      {
+        "name": "Torus006_6",
+        "skinned": false,
+        "vertices": 208,
+        "triangles": 140,
+        "min": [
+          -0.025251,
+          0.045328,
+          0.022846
+        ],
+        "max": [
+          0.028449,
+          0.079077,
+          0.052433
+        ],
+        "center": [
+          0.001599,
+          0.062202,
+          0.037639
+        ]
+      },
+      {
+        "name": "Torus006_7",
+        "skinned": false,
+        "vertices": 52,
+        "triangles": 34,
+        "min": [
+          0.028239,
+          0.045325,
+          0.020116
+        ],
+        "max": [
+          0.03631,
+          0.054787,
+          0.055317
+        ],
+        "center": [
+          0.032274,
+          0.050056,
+          0.037717
+        ]
+      },
+      {
+        "name": "Torus006_8",
+        "skinned": false,
+        "vertices": 1344,
+        "triangles": 2032,
+        "min": [
+          -0.02753,
+          0.07671,
+          0.052875
+        ],
+        "max": [
+          0.030139,
+          0.102207,
+          0.075029
+        ],
+        "center": [
+          0.001304,
+          0.089458,
+          0.063952
+        ]
+      },
+      {
+        "name": "Torus025_0",
+        "skinned": false,
+        "vertices": 1152,
+        "triangles": 2304,
+        "min": [
+          0.037135,
+          0.015204,
+          0.032574
+        ],
+        "max": [
+          0.058454,
+          0.049603,
+          0.066963
+        ],
+        "center": [
+          0.047795,
+          0.032403,
+          0.049769
+        ]
+      },
+      {
+        "name": "Torus025_1",
+        "skinned": false,
+        "vertices": 536,
+        "triangles": 248,
+        "min": [
+          0.047644,
+          0.028688,
+          0.04597
+        ],
+        "max": [
+          0.050128,
+          0.035821,
+          0.053223
+        ],
+        "center": [
+          0.048886,
+          0.032254,
+          0.049597
+        ]
+      },
+      {
+        "name": "Torus025_2",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          0.048888,
+          0.029845,
+          0.047188
+        ],
+        "max": [
+          0.050668,
+          0.034663,
+          0.052006
+        ],
+        "center": [
+          0.049778,
+          0.032254,
+          0.049597
+        ]
+      },
+      {
+        "name": "Torus025_3",
+        "skinned": false,
+        "vertices": 5376,
+        "triangles": 2688,
+        "min": [
+          0.045003,
+          0.024188,
+          0.04153
+        ],
+        "max": [
+          0.052769,
+          0.040321,
+          0.057663
+        ],
+        "center": [
+          0.048886,
+          0.032254,
+          0.049597
+        ]
+      },
+      {
+        "name": "Torus001_0",
+        "skinned": false,
+        "vertices": 1152,
+        "triangles": 2304,
+        "min": [
+          -0.055975,
+          0.016308,
+          0.032587
+        ],
+        "max": [
+          -0.033969,
+          0.050707,
+          0.066951
+        ],
+        "center": [
+          -0.044972,
+          0.033508,
+          0.049769
+        ]
+      },
+      {
+        "name": "Torus001_1",
+        "skinned": false,
+        "vertices": 536,
+        "triangles": 248,
+        "min": [
+          -0.047437,
+          0.029793,
+          0.046274
+        ],
+        "max": [
+          -0.044701,
+          0.036925,
+          0.053527
+        ],
+        "center": [
+          -0.046069,
+          0.033359,
+          0.0499
+        ]
+      },
+      {
+        "name": "Torus001_2",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          -0.047849,
+          0.03095,
+          0.04746
+        ],
+        "max": [
+          -0.04607,
+          0.035768,
+          0.052274
+        ],
+        "center": [
+          -0.04696,
+          0.033359,
+          0.049867
+        ]
+      },
+      {
+        "name": "Torus001_3",
+        "skinned": false,
+        "vertices": 5376,
+        "triangles": 2688,
+        "min": [
+          -0.050205,
+          0.025292,
+          0.041849
+        ],
+        "max": [
+          -0.041933,
+          0.041425,
+          0.057952
+        ],
+        "center": [
+          -0.046069,
+          0.033359,
+          0.0499
+        ]
+      },
+      {
+        "name": "Torus002_0",
+        "skinned": false,
+        "vertices": 1152,
+        "triangles": 2304,
+        "min": [
+          -0.059625,
+          0.01594,
+          -0.073801
+        ],
+        "max": [
+          -0.038307,
+          0.050339,
+          -0.039412
+        ],
+        "center": [
+          -0.048966,
+          0.03314,
+          -0.056607
+        ]
+      },
+      {
+        "name": "Torus002_1",
+        "skinned": false,
+        "vertices": 536,
+        "triangles": 248,
+        "min": [
+          -0.051298,
+          0.029424,
+          -0.060061
+        ],
+        "max": [
+          -0.048816,
+          0.036557,
+          -0.052808
+        ],
+        "center": [
+          -0.050057,
+          0.032991,
+          -0.056434
+        ]
+      },
+      {
+        "name": "Torus002_2",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          -0.051838,
+          0.030582,
+          -0.058843
+        ],
+        "max": [
+          -0.050059,
+          0.0354,
+          -0.054025
+        ],
+        "center": [
+          -0.050949,
+          0.032991,
+          -0.056434
+        ]
+      },
+      {
+        "name": "Torus002_3",
+        "skinned": false,
+        "vertices": 5376,
+        "triangles": 2688,
+        "min": [
+          -0.053938,
+          0.024924,
+          -0.064501
+        ],
+        "max": [
+          -0.046176,
+          0.041057,
+          -0.048368
+        ],
+        "center": [
+          -0.050057,
+          0.032991,
+          -0.056434
+        ]
+      },
+      {
+        "name": "Torus003_0",
+        "skinned": false,
+        "vertices": 1152,
+        "triangles": 2304,
+        "min": [
+          0.038976,
+          0.015204,
+          -0.074169
+        ],
+        "max": [
+          0.060294,
+          0.049603,
+          -0.039781
+        ],
+        "center": [
+          0.049635,
+          0.032403,
+          -0.056975
+        ]
+      },
+      {
+        "name": "Torus003_1",
+        "skinned": false,
+        "vertices": 536,
+        "triangles": 248,
+        "min": [
+          0.049485,
+          0.028688,
+          -0.060774
+        ],
+        "max": [
+          0.051969,
+          0.035821,
+          -0.05352
+        ],
+        "center": [
+          0.050727,
+          0.032254,
+          -0.057147
+        ]
+      },
+      {
+        "name": "Torus003_2",
+        "skinned": false,
+        "vertices": 1984,
+        "triangles": 960,
+        "min": [
+          0.050729,
+          0.029845,
+          -0.059556
+        ],
+        "max": [
+          0.052508,
+          0.034663,
+          -0.054738
+        ],
+        "center": [
+          0.051618,
+          0.032254,
+          -0.057147
+        ]
+      },
+      {
+        "name": "Torus003_3",
+        "skinned": false,
+        "vertices": 5376,
+        "triangles": 2688,
+        "min": [
+          0.046844,
+          0.024188,
+          -0.065214
+        ],
+        "max": [
+          0.05461,
+          0.040321,
+          -0.049081
+        ],
+        "center": [
+          0.050727,
+          0.032254,
+          -0.057147
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [],
+    "estimatedTextureMiB": 0,
+    "materials": [
+      {
+        "doubleSided": true,
+        "name": "Material.019",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.004241111222654581,
+            0.004241111222654581,
+            0.004241111222654581,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.002",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.8000000715255737,
+            0.1077655702829361,
+            0.012561059556901455,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.031",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            0.9520565271377563,
+            0,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "plata",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.17631350457668304,
+            0.17885899543762207,
+            0.17378932237625122,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.038",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.03697733208537102,
+            0.2550888657569885,
+            0.8000000715255737,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.011",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.7169644236564636,
+            0.8000000715255737,
+            0.04967654496431351,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.008",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.03310127556324005,
+            0.03310127556324005,
+            0.03310127556324005,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "volante",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.07657497376203537,
+            0.07657497376203537,
+            0.07657497376203537,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "motor",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.18446007370948792,
+            0.18446007370948792,
+            0.18446007370948792,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "alphaMode": "BLEND",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0.09000000357627869,
+          0.09000000357627869,
+          0.09000000357627869
+        ],
+        "name": "suelo",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.8000000715255737,
+            0.16784027218818665,
+            0,
+            0.678947389125824
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "plata.001",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.17631350457668304,
+            0.17885899543762207,
+            0.17378932237625122,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.004",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.8000000715255737,
+            0.12881359457969666,
+            0.009788716211915016,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "sillon.001",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.04696016013622284,
+            0.04696016013622284,
+            0.04696016013622284,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "Material.027",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "metal",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            0,
+            0.000912449206225574,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "alphaMode": "BLEND",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0.47999998927116394,
+          0.47999998927116394,
+          0.47999998927116394
+        ],
+        "name": "pedal",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.26676806807518005,
+            0.05117865279316902,
+            0.054055046290159225,
+            0.7428571283817291
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "emissiveFactor": [
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552
+        ],
+        "name": "plastico",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            0,
+            0.0025187477003782988,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/karts/kart_3d.glb",
+    "category": "kart",
+    "bytes": 3800120,
+    "sha256": "ba9242d74327ddda5c99d38a8afc8ce96a808a7562263bf3a48002320e2d4957",
+    "asset": {
+      "extras": {
+        "author": "renteriajuanramirez (https://sketchfab.com/renteriajuanramirez)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/kart-3d-89f644c7a7124722bfec3845b5dd864d",
+        "title": "kart 3D"
+      },
+      "generator": "Sketchfab-15.37.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [
+      "KHR_materials_pbrSpecularGlossiness"
+    ],
+    "min": [
+      -0.131671,
+      -0.10362,
+      0.065201
+    ],
+    "max": [
+      0.160713,
+      0.052891,
+      0.29993
+    ],
+    "size": [
+      0.292383,
+      0.156511,
+      0.234729
+    ],
+    "triangles": 85668,
+    "meshes": [
+      {
+        "name": "Object_5",
+        "skinned": false,
+        "vertices": 322,
+        "triangles": 320,
+        "min": [
+          0.025348,
+          -0.017919,
+          0.176299
+        ],
+        "max": [
+          0.056623,
+          0.020202,
+          0.189878
+        ],
+        "center": [
+          0.040985,
+          0.001142,
+          0.183088
+        ]
+      },
+      {
+        "name": "Object_7",
+        "skinned": false,
+        "vertices": 322,
+        "triangles": 320,
+        "min": [
+          0.039088,
+          0.002272,
+          0.176762
+        ],
+        "max": [
+          0.06526,
+          0.034643,
+          0.217806
+        ],
+        "center": [
+          0.052174,
+          0.018458,
+          0.197284
+        ]
+      },
+      {
+        "name": "Object_9",
+        "skinned": false,
+        "vertices": 322,
+        "triangles": 320,
+        "min": [
+          0.039086,
+          0.002269,
+          0.14875
+        ],
+        "max": [
+          0.065258,
+          0.03463,
+          0.189798
+        ],
+        "center": [
+          0.052172,
+          0.01845,
+          0.169274
+        ]
+      },
+      {
+        "name": "Object_11",
+        "skinned": false,
+        "vertices": 3442,
+        "triangles": 6560,
+        "min": [
+          0.044458,
+          0.011371,
+          0.140875
+        ],
+        "max": [
+          0.077648,
+          0.052891,
+          0.184167
+        ],
+        "center": [
+          0.061053,
+          0.032131,
+          0.162521
+        ]
+      },
+      {
+        "name": "Object_13",
+        "skinned": false,
+        "vertices": 3442,
+        "triangles": 6560,
+        "min": [
+          0.044457,
+          0.011383,
+          0.184165
+        ],
+        "max": [
+          0.077647,
+          0.05289,
+          0.227468
+        ],
+        "center": [
+          0.061052,
+          0.032136,
+          0.205816
+        ]
+      },
+      {
+        "name": "Object_15",
+        "skinned": false,
+        "vertices": 1538,
+        "triangles": 3072,
+        "min": [
+          0.034464,
+          -0.003642,
+          0.165961
+        ],
+        "max": [
+          0.062006,
+          0.027824,
+          0.201914
+        ],
+        "center": [
+          0.048235,
+          0.012091,
+          0.183938
+        ]
+      },
+      {
+        "name": "Object_17",
+        "skinned": false,
+        "vertices": 24,
+        "triangles": 12,
+        "min": [
+          -0.052334,
+          -0.072067,
+          0.14879
+        ],
+        "max": [
+          0.084037,
+          -0.057175,
+          0.214009
+        ],
+        "center": [
+          0.015852,
+          -0.064621,
+          0.181399
+        ]
+      },
+      {
+        "name": "Object_19",
+        "skinned": false,
+        "vertices": 6402,
+        "triangles": 12800,
+        "min": [
+          -0.051593,
+          -0.0571,
+          0.146276
+        ],
+        "max": [
+          0.042759,
+          -0.0418,
+          0.223041
+        ],
+        "center": [
+          -0.004417,
+          -0.04945,
+          0.184658
+        ]
+      },
+      {
+        "name": "Object_21",
+        "skinned": false,
+        "vertices": 6575,
+        "triangles": 12800,
+        "min": [
+          0.080019,
+          -0.075178,
+          0.100509
+        ],
+        "max": [
+          0.147475,
+          0.03901,
+          0.265525
+        ],
+        "center": [
+          0.113747,
+          -0.018084,
+          0.183017
+        ]
+      },
+      {
+        "name": "Object_23",
+        "skinned": false,
+        "vertices": 6575,
+        "triangles": 12800,
+        "min": [
+          0.126522,
+          -0.096903,
+          0.065201
+        ],
+        "max": [
+          0.160713,
+          -0.042205,
+          0.29993
+        ],
+        "center": [
+          0.143617,
+          -0.069554,
+          0.182565
+        ]
+      },
+      {
+        "name": "Object_25",
+        "skinned": false,
+        "vertices": 322,
+        "triangles": 320,
+        "min": [
+          0.049211,
+          -0.031086,
+          0.176391
+        ],
+        "max": [
+          0.108298,
+          0.014367,
+          0.191257
+        ],
+        "center": [
+          0.078754,
+          -0.008359,
+          0.183824
+        ]
+      },
+      {
+        "name": "Object_27",
+        "skinned": false,
+        "vertices": 338,
+        "triangles": 320,
+        "min": [
+          0.0548,
+          -0.10362,
+          0.091023
+        ],
+        "max": [
+          0.128684,
+          -0.031078,
+          0.134658
+        ],
+        "center": [
+          0.091742,
+          -0.067349,
+          0.112841
+        ]
+      },
+      {
+        "name": "Object_29",
+        "skinned": false,
+        "vertices": 322,
+        "triangles": 320,
+        "min": [
+          0.084728,
+          -0.072602,
+          0.133327
+        ],
+        "max": [
+          0.101417,
+          -0.059308,
+          0.235063
+        ],
+        "center": [
+          0.093073,
+          -0.065955,
+          0.184195
+        ]
+      },
+      {
+        "name": "Object_31",
+        "skinned": false,
+        "vertices": 26,
+        "triangles": 12,
+        "min": [
+          0.066634,
+          -0.079662,
+          0.149851
+        ],
+        "max": [
+          0.126424,
+          -0.010154,
+          0.214808
+        ],
+        "center": [
+          0.096529,
+          -0.044908,
+          0.182329
+        ]
+      },
+      {
+        "name": "Object_33",
+        "skinned": false,
+        "vertices": 338,
+        "triangles": 320,
+        "min": [
+          -0.116391,
+          -0.102239,
+          0.082458
+        ],
+        "max": [
+          -0.021349,
+          -0.008922,
+          0.138589
+        ],
+        "center": [
+          -0.06887,
+          -0.055581,
+          0.110524
+        ]
+      },
+      {
+        "name": "Object_35",
+        "skinned": false,
+        "vertices": 322,
+        "triangles": 320,
+        "min": [
+          -0.126206,
+          -0.042907,
+          0.129812
+        ],
+        "max": [
+          -0.106873,
+          -0.014781,
+          0.161459
+        ],
+        "center": [
+          -0.116539,
+          -0.028844,
+          0.145636
+        ]
+      },
+      {
+        "name": "Object_37",
+        "skinned": false,
+        "vertices": 640,
+        "triangles": 640,
+        "min": [
+          -0.131671,
+          -0.069066,
+          0.128044
+        ],
+        "max": [
+          -0.058073,
+          -0.008715,
+          0.175107
+        ],
+        "center": [
+          -0.094872,
+          -0.03889,
+          0.151575
+        ]
+      },
+      {
+        "name": "Object_39",
+        "skinned": false,
+        "vertices": 322,
+        "triangles": 320,
+        "min": [
+          -0.12397,
+          -0.043513,
+          0.205372
+        ],
+        "max": [
+          -0.102079,
+          -0.015388,
+          0.236295
+        ],
+        "center": [
+          -0.113024,
+          -0.029451,
+          0.220834
+        ]
+      },
+      {
+        "name": "Object_41",
+        "skinned": false,
+        "vertices": 640,
+        "triangles": 640,
+        "min": [
+          -0.128687,
+          -0.069678,
+          0.184489
+        ],
+        "max": [
+          -0.055701,
+          -0.009322,
+          0.240347
+        ],
+        "center": [
+          -0.092194,
+          -0.0395,
+          0.212418
+        ]
+      },
+      {
+        "name": "Object_43",
+        "skinned": false,
+        "vertices": 26,
+        "triangles": 12,
+        "min": [
+          -0.082738,
+          -0.061879,
+          0.150579
+        ],
+        "max": [
+          -0.033624,
+          -0.012752,
+          0.21428
+        ],
+        "center": [
+          -0.058181,
+          -0.037315,
+          0.18243
+        ]
+      },
+      {
+        "name": "Object_45",
+        "skinned": false,
+        "vertices": 6402,
+        "triangles": 12800,
+        "min": [
+          -0.052557,
+          -0.053979,
+          0.1479
+        ],
+        "max": [
+          -0.037257,
+          0.030107,
+          0.223287
+        ],
+        "center": [
+          -0.044907,
+          -0.011936,
+          0.185593
+        ]
+      },
+      {
+        "name": "Object_47",
+        "skinned": false,
+        "vertices": 322,
+        "triangles": 320,
+        "min": [
+          -0.077907,
+          -0.071309,
+          0.133327
+        ],
+        "max": [
+          -0.061555,
+          -0.05802,
+          0.225165
+        ],
+        "center": [
+          -0.069731,
+          -0.064665,
+          0.179246
+        ]
+      },
+      {
+        "name": "Object_49",
+        "skinned": false,
+        "vertices": 338,
+        "triangles": 320,
+        "min": [
+          -0.11935,
+          -0.102115,
+          0.223361
+        ],
+        "max": [
+          -0.024597,
+          -0.008872,
+          0.279363
+        ],
+        "center": [
+          -0.071974,
+          -0.055494,
+          0.251362
+        ]
+      },
+      {
+        "name": "Object_51",
+        "skinned": false,
+        "vertices": 338,
+        "triangles": 320,
+        "min": [
+          0.051775,
+          -0.102564,
+          0.233498
+        ],
+        "max": [
+          0.125313,
+          -0.02945,
+          0.277108
+        ],
+        "center": [
+          0.088544,
+          -0.066007,
+          0.255303
+        ]
+      },
+      {
+        "name": "Object_54",
+        "skinned": false,
+        "vertices": 3442,
+        "triangles": 6560,
+        "min": [
+          0.02363,
+          -0.022147,
+          0.184178
+        ],
+        "max": [
+          0.056821,
+          0.019373,
+          0.22747
+        ],
+        "center": [
+          0.040225,
+          -0.001387,
+          0.205824
+        ]
+      },
+      {
+        "name": "Object_57",
+        "skinned": false,
+        "vertices": 3442,
+        "triangles": 6560,
+        "min": [
+          0.023631,
+          -0.022146,
+          0.140873
+        ],
+        "max": [
+          0.056821,
+          0.019361,
+          0.184176
+        ],
+        "center": [
+          0.040226,
+          -0.001392,
+          0.162524
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/png",
+        "bytes": 68,
+        "width": 8,
+        "height": 8,
+        "sha256": "584f8aa8b6282c1e6217117c140614461486b07f36c77ebaa9a61de927d4030f"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 76,
+        "width": 8,
+        "height": 8,
+        "sha256": "3cb963c70dbc440aebc2d5ee18ec7481783416cfb4e9396242edbdc36dd6b9a3"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 73,
+        "width": 8,
+        "height": 8,
+        "sha256": "1b4d38107dc20b7c6eb6a847b5b75092d90b3c42c2f5ca275b000c2e70e3f0f7"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 74,
+        "width": 8,
+        "height": 8,
+        "sha256": "f71dea58893a93f11767def8aea7d49a2bb9c714bad49fc45446e455ea9d4070"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 68,
+        "width": 8,
+        "height": 8,
+        "sha256": "584f8aa8b6282c1e6217117c140614461486b07f36c77ebaa9a61de927d4030f"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 165429,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "569fa1c90102a041bcf15a263e7fd2c5f5271b510c780240d032a6e88cf2fc00"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 150528,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "67d8a2692dbdc5127ef5e624b571d317a1dbc51ed1462429795c48f5584074d9"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 210013,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "e9cc331bf418118f9c929533fe9a35d910e7e8d320a0d78d6892502a979a5d80"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 131706,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "a6fda2a30a210312cb45dfe74e417b74415e661f03174474c68b1a3fe042b849"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 176149,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "d3b3dad6bd972c00dde5b41c1d3afe010d8914dd541a0f5b13ddf058e1fa4a64"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 73,
+        "width": 8,
+        "height": 8,
+        "sha256": "f29e8e7663629738bb67ae52e68df28e319fd78691d4605a2159233e95fdf7b6"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 100297,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "6e5e783dcca8aee51471c58d1eae96f1cdbc174e65d3f94b699aa3bd8e656744"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 73685,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "6dd19ededc40bfce1b845e156e1f55414a4993d3029bb3152311ad791ecd886a"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 76,
+        "width": 8,
+        "height": 8,
+        "sha256": "7b2bc36f567ccb74808974450846230ed7f39ac7f1f5e3989805ac668e758d4d"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 68,
+        "width": 8,
+        "height": 8,
+        "sha256": "584f8aa8b6282c1e6217117c140614461486b07f36c77ebaa9a61de927d4030f"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 76,
+        "width": 8,
+        "height": 8,
+        "sha256": "7b2bc36f567ccb74808974450846230ed7f39ac7f1f5e3989805ac668e758d4d"
+      }
+    ],
+    "estimatedTextureMiB": 149.33626302083334,
+    "materials": [
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_1"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_2"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_3"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_4"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_5"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 2
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 3,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_6"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_7"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 4
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 5
+            }
+          }
+        },
+        "name": "material_8"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 6
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 7
+            }
+          }
+        },
+        "name": "material_9"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_10"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 8
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 9
+            }
+          }
+        },
+        "name": "material_11"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 10
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_12"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 11
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 12
+            }
+          }
+        },
+        "name": "material_13"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 8
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 9
+            }
+          }
+        },
+        "name": "material_14"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_15"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 13,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_16"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_17"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 13,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_18"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 14
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 15
+            }
+          }
+        },
+        "name": "material_19"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_20"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 8
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 9
+            }
+          }
+        },
+        "name": "material_21"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 8
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 9
+            }
+          }
+        },
+        "name": "material_22"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_23"
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_pbrSpecularGlossiness": {
+            "diffuseFactor": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "diffuseTexture": {
+              "index": 0
+            },
+            "glossinessFactor": 1,
+            "specularFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularGlossinessTexture": {
+              "index": 1,
+              "texCoord": 1
+            }
+          }
+        },
+        "name": "material_24"
+      }
+    ]
+  },
+  {
+    "path": "assets/karts/mario_kart_ds.glb",
+    "category": "kart",
+    "bytes": 1776912,
+    "sha256": "b454ffc47ed062791b227015ae9d91f1dc386e85883344e18cc0a88b778211d4",
+    "asset": {
+      "extras": {
+        "author": "Fail Brain (https://sketchfab.com/fail_brain)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/mario-kart-ds-cbc6d888ebc54f0fa3b28f3d4edd5187",
+        "title": "Mario Kart DS"
+      },
+      "generator": "Sketchfab-16.35.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -0.077271,
+      0.002391,
+      -0.124855
+    ],
+    "max": [
+      0.077271,
+      0.079218,
+      0.114533
+    ],
+    "size": [
+      0.154541,
+      0.076827,
+      0.239388
+    ],
+    "triangles": 42301,
+    "meshes": [
+      {
+        "name": "pTorus1_NEUMATICO_0",
+        "skinned": false,
+        "vertices": 689,
+        "triangles": 936,
+        "min": [
+          -0.009154,
+          0.034363,
+          0.014798
+        ],
+        "max": [
+          0.009154,
+          0.050525,
+          0.030804
+        ],
+        "center": [
+          0,
+          0.042444,
+          0.022801
+        ]
+      },
+      {
+        "name": "pCone1_metal_0",
+        "skinned": false,
+        "vertices": 1172,
+        "triangles": 1432,
+        "min": [
+          -0.03717,
+          0.01256,
+          0.04517
+        ],
+        "max": [
+          0.03717,
+          0.020999,
+          0.053608
+        ],
+        "center": [
+          0,
+          0.01678,
+          0.049389
+        ]
+      },
+      {
+        "name": "polySurface2_NEUMATICO_0",
+        "skinned": false,
+        "vertices": 4508,
+        "triangles": 3860,
+        "min": [
+          -0.077271,
+          0.002861,
+          -0.066451
+        ],
+        "max": [
+          0.077271,
+          0.04127,
+          -0.028292
+        ],
+        "center": [
+          0,
+          0.022066,
+          -0.047372
+        ]
+      },
+      {
+        "name": "pCube9_metal_2_0",
+        "skinned": false,
+        "vertices": 1837,
+        "triangles": 1524,
+        "min": [
+          -0.021829,
+          0.007076,
+          -0.075953
+        ],
+        "max": [
+          0.021829,
+          0.046488,
+          0.045466
+        ],
+        "center": [
+          0,
+          0.026782,
+          -0.015244
+        ]
+      },
+      {
+        "name": "pSphere1_metal_2_0",
+        "skinned": false,
+        "vertices": 182,
+        "triangles": 84,
+        "min": [
+          -0.000448,
+          0.039947,
+          0.030647
+        ],
+        "max": [
+          0.000498,
+          0.040968,
+          0.031617
+        ],
+        "center": [
+          0.000025,
+          0.040458,
+          0.031132
+        ]
+      },
+      {
+        "name": "polySurface8_metal_0",
+        "skinned": false,
+        "vertices": 3796,
+        "triangles": 3604,
+        "min": [
+          -0.042056,
+          0.016583,
+          -0.1221
+        ],
+        "max": [
+          0.042056,
+          0.052417,
+          -0.053302
+        ],
+        "center": [
+          0,
+          0.0345,
+          -0.087701
+        ]
+      },
+      {
+        "name": "pCube8_metal_2_0",
+        "skinned": false,
+        "vertices": 500,
+        "triangles": 329,
+        "min": [
+          -0.021645,
+          0.011444,
+          -0.033032
+        ],
+        "max": [
+          0.021645,
+          0.046488,
+          -0.01808
+        ],
+        "center": [
+          0,
+          0.028966,
+          -0.025556
+        ]
+      },
+      {
+        "name": "pCube2_silla_0",
+        "skinned": false,
+        "vertices": 1346,
+        "triangles": 2448,
+        "min": [
+          -0.021409,
+          0.011587,
+          -0.019239
+        ],
+        "max": [
+          0.021409,
+          0.049729,
+          0.023663
+        ],
+        "center": [
+          0,
+          0.030658,
+          0.002212
+        ]
+      },
+      {
+        "name": "pSphere3_metal_2_0",
+        "skinned": false,
+        "vertices": 364,
+        "triangles": 168,
+        "min": [
+          -0.013776,
+          0.037694,
+          0.029726
+        ],
+        "max": [
+          0.013776,
+          0.038715,
+          0.030696
+        ],
+        "center": [
+          0,
+          0.038204,
+          0.030211
+        ]
+      },
+      {
+        "name": "pCube5_metal_0",
+        "skinned": false,
+        "vertices": 774,
+        "triangles": 768,
+        "min": [
+          -0.013844,
+          0.031656,
+          -0.072366
+        ],
+        "max": [
+          0.013804,
+          0.038686,
+          -0.067673
+        ],
+        "center": [
+          -0.00002,
+          0.035171,
+          -0.07002
+        ]
+      },
+      {
+        "name": "pCube7_cristal_0",
+        "skinned": false,
+        "vertices": 219,
+        "triangles": 128,
+        "min": [
+          -0.017051,
+          0.035855,
+          0.024822
+        ],
+        "max": [
+          0.017051,
+          0.04961,
+          0.033562
+        ],
+        "center": [
+          0,
+          0.042733,
+          0.029192
+        ]
+      },
+      {
+        "name": "pCube12_metal_0",
+        "skinned": false,
+        "vertices": 171,
+        "triangles": 118,
+        "min": [
+          -0.002963,
+          0.043832,
+          -0.068407
+        ],
+        "max": [
+          0.002963,
+          0.046488,
+          -0.066599
+        ],
+        "center": [
+          0,
+          0.04516,
+          -0.067503
+        ]
+      },
+      {
+        "name": "pCone2_metal_0",
+        "skinned": false,
+        "vertices": 1172,
+        "triangles": 1432,
+        "min": [
+          -0.0539,
+          0.017839,
+          -0.051537
+        ],
+        "max": [
+          0.0539,
+          0.02626,
+          -0.043116
+        ],
+        "center": [
+          0,
+          0.02205,
+          -0.047327
+        ]
+      },
+      {
+        "name": "pCube1_metal_0",
+        "skinned": false,
+        "vertices": 405,
+        "triangles": 384,
+        "min": [
+          -0.020947,
+          0.017029,
+          0.090648
+        ],
+        "max": [
+          0.020947,
+          0.028802,
+          0.106251
+        ],
+        "center": [
+          0,
+          0.022916,
+          0.09845
+        ]
+      },
+      {
+        "name": "polySurface4_NEUMATICO_0",
+        "skinned": false,
+        "vertices": 4508,
+        "triangles": 3860,
+        "min": [
+          -0.057649,
+          0.002391,
+          0.034848
+        ],
+        "max": [
+          0.057649,
+          0.031268,
+          0.063944
+        ],
+        "center": [
+          0,
+          0.01683,
+          0.049396
+        ]
+      },
+      {
+        "name": "pCube11_metal_2_0",
+        "skinned": false,
+        "vertices": 1811,
+        "triangles": 1700,
+        "min": [
+          -0.009788,
+          0.045716,
+          -0.065699
+        ],
+        "max": [
+          0.009788,
+          0.051105,
+          -0.049418
+        ],
+        "center": [
+          0,
+          0.04841,
+          -0.057558
+        ]
+      },
+      {
+        "name": "pTorus4_metal_0",
+        "skinned": false,
+        "vertices": 664,
+        "triangles": 880,
+        "min": [
+          -0.029515,
+          0.022857,
+          0.030446
+        ],
+        "max": [
+          0.029515,
+          0.025781,
+          0.064697
+        ],
+        "center": [
+          0,
+          0.024319,
+          0.047572
+        ]
+      },
+      {
+        "name": "polySurface1_metal_0",
+        "skinned": false,
+        "vertices": 4784,
+        "triangles": 7688,
+        "min": [
+          -0.056833,
+          0.023998,
+          -0.124855
+        ],
+        "max": [
+          0.056833,
+          0.079218,
+          -0.0509
+        ],
+        "center": [
+          0,
+          0.051608,
+          -0.087878
+        ]
+      },
+      {
+        "name": "pSphere2_metal_2_0",
+        "skinned": false,
+        "vertices": 364,
+        "triangles": 168,
+        "min": [
+          -0.007295,
+          0.03943,
+          0.030471
+        ],
+        "max": [
+          0.007295,
+          0.040451,
+          0.031441
+        ],
+        "center": [
+          0,
+          0.039941,
+          0.030956
+        ]
+      },
+      {
+        "name": "pCube13_metal_0",
+        "skinned": false,
+        "vertices": 776,
+        "triangles": 722,
+        "min": [
+          -0.033184,
+          0.014668,
+          -0.000292
+        ],
+        "max": [
+          0.033184,
+          0.022564,
+          0.004231
+        ],
+        "center": [
+          0,
+          0.018616,
+          0.00197
+        ]
+      },
+      {
+        "name": "pCube10_metal_0",
+        "skinned": false,
+        "vertices": 788,
+        "triangles": 768,
+        "min": [
+          -0.013745,
+          0.046443,
+          -0.048283
+        ],
+        "max": [
+          0.013745,
+          0.049028,
+          -0.040901
+        ],
+        "center": [
+          0,
+          0.047735,
+          -0.044592
+        ]
+      },
+      {
+        "name": "pCube6_blanco_0",
+        "skinned": false,
+        "vertices": 5383,
+        "triangles": 8916,
+        "min": [
+          -0.039551,
+          0.006548,
+          -0.066768
+        ],
+        "max": [
+          0.039551,
+          0.041266,
+          0.114533
+        ],
+        "center": [
+          0,
+          0.023907,
+          0.023882
+        ]
+      },
+      {
+        "name": "pCube14_standardSurface2_0",
+        "skinned": false,
+        "vertices": 576,
+        "triangles": 384,
+        "min": [
+          -0.026866,
+          0.007377,
+          0.065995
+        ],
+        "max": [
+          0.026866,
+          0.040723,
+          0.081941
+        ],
+        "center": [
+          0,
+          0.02405,
+          0.073968
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [],
+    "estimatedTextureMiB": 0,
+    "materials": [
+      {
+        "doubleSided": true,
+        "name": "NEUMATICO",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.005736015637268643,
+            0.008203582789806948,
+            0.03282970664197667,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "metal",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.15085760261364606,
+            0.15085760261364606,
+            0.15085760261364606,
+            1
+          ],
+          "metallicFactor": 0.7238117297119381,
+          "roughnessFactor": 0.278857992710073
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "metal_2",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.001400208079406709,
+            0.03232751546617721,
+            0.0693571372228666,
+            1
+          ],
+          "metallicFactor": 0.6811449330131292,
+          "roughnessFactor": 0.32152478940888196
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "silla",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.000209121985885418,
+            0.047362176005696206,
+            0.0758955803843573,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "alphaMode": "BLEND",
+        "doubleSided": true,
+        "name": "cristal",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0,
+            0.153097698089812,
+            0.27592356247286554,
+            0.6201923663005449
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_specular": {
+            "specularColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularFactor": 0.565335056259219
+          }
+        },
+        "name": "blanco",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.8640026331508819,
+            0.8640026331508819,
+            0.8640026331508819,
+            1
+          ],
+          "metallicFactor": 0.6994307030269045,
+          "roughnessFactor": 0.278857992710073
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "standardSurface2",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/karts/my-kart.glb",
+    "category": "kart",
+    "bytes": 832164,
+    "sha256": "7e72ec79c51bed540001162a60531cc312bdc11f6dc128e7dc10eece0fab96e0",
+    "asset": {
+      "extras": {
+        "author": "amogusstrikesback2 (https://sketchfab.com/amogusstrikesback2)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/practice-kart-47a59d8980a44d318c489ebd054b11ba",
+        "title": "practice kart"
+      },
+      "generator": "Sketchfab-16.33.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -0.843136,
+      -0.103446,
+      -0.951099
+    ],
+    "max": [
+      0.843136,
+      0.781409,
+      0.994067
+    ],
+    "size": [
+      1.686271,
+      0.884856,
+      1.945167
+    ],
+    "triangles": 7696,
+    "meshes": [
+      {
+        "name": "WIRE_r_0128_Default_OBJ002_0",
+        "skinned": false,
+        "vertices": 6594,
+        "triangles": 5356,
+        "min": [
+          -0.843136,
+          -0.011964,
+          -0.951099
+        ],
+        "max": [
+          0.843136,
+          0.781409,
+          0.994067
+        ],
+        "center": [
+          0,
+          0.384723,
+          0.021484
+        ]
+      },
+      {
+        "name": "WIRE_r_0128_fl_Default_OBJ002_0",
+        "skinned": false,
+        "vertices": 618,
+        "triangles": 585,
+        "min": [
+          0.370846,
+          -0.103446,
+          0.292349
+        ],
+        "max": [
+          0.596243,
+          0.207055,
+          0.60285
+        ],
+        "center": [
+          0.483544,
+          0.051804,
+          0.447599
+        ]
+      },
+      {
+        "name": "WIRE_r_0128_fr_Default_OBJ002_0",
+        "skinned": false,
+        "vertices": 616,
+        "triangles": 585,
+        "min": [
+          -0.598075,
+          -0.103446,
+          0.292349
+        ],
+        "max": [
+          -0.372678,
+          0.207055,
+          0.60285
+        ],
+        "center": [
+          -0.485376,
+          0.051804,
+          0.447599
+        ]
+      },
+      {
+        "name": "WIRE_r_0128_fl001_Default_OBJ002_0",
+        "skinned": false,
+        "vertices": 618,
+        "triangles": 585,
+        "min": [
+          0.370846,
+          -0.103446,
+          -0.644405
+        ],
+        "max": [
+          0.596243,
+          0.207055,
+          -0.333903
+        ],
+        "center": [
+          0.483544,
+          0.051804,
+          -0.489154
+        ]
+      },
+      {
+        "name": "WIRE_r_0128_fr001_Default_OBJ002_0",
+        "skinned": false,
+        "vertices": 616,
+        "triangles": 585,
+        "min": [
+          -0.598075,
+          -0.103446,
+          -0.644405
+        ],
+        "max": [
+          -0.372678,
+          0.207055,
+          -0.333903
+        ],
+        "center": [
+          -0.485376,
+          0.051804,
+          -0.489154
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/png",
+        "bytes": 443072,
+        "width": 1024,
+        "height": 1024,
+        "sha256": "f5c625713f4889be331e3f80508e4fa72b25f1e6cccc8b38edb1b2b3054dd4ed"
+      }
+    ],
+    "estimatedTextureMiB": 5.333333333333333,
+    "materials": [
+      {
+        "doubleSided": true,
+        "name": "Default_OBJ.002",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.8211145618000169
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/karts/standard_kart_from_mario_kart_world.glb",
+    "category": "kart",
+    "bytes": 15114724,
+    "sha256": "c7612155b0b5eee5987f0ebf341ff5ead00863399caa02fd3ff4d7c6efb07807",
+    "asset": {
+      "extras": {
+        "author": "peeyoyo (https://sketchfab.com/peeyoyo)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/standard-kart-from-mario-kart-world-6a589a58f74e4b9f9f4f012d3b8bbf2a",
+        "title": "Standard Kart From Mario Kart World"
+      },
+      "generator": "Sketchfab-17.15.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -0.126405,
+      -0.064541,
+      -0.079648
+    ],
+    "max": [
+      0.074274,
+      0.025988,
+      0.057352
+    ],
+    "size": [
+      0.200679,
+      0.090529,
+      0.137
+    ],
+    "triangles": 560980,
+    "meshes": [
+      {
+        "name": "Object_2",
+        "skinned": false,
+        "vertices": 144,
+        "triangles": 144,
+        "min": [
+          -0.081142,
+          -0.038567,
+          -0.033964
+        ],
+        "max": [
+          0.018645,
+          -0.038567,
+          0.011668
+        ],
+        "center": [
+          -0.031248,
+          -0.038567,
+          -0.011148
+        ]
+      },
+      {
+        "name": "Object_3",
+        "skinned": false,
+        "vertices": 74,
+        "triangles": 72,
+        "min": [
+          -0.111225,
+          -0.038567,
+          -0.031366
+        ],
+        "max": [
+          -0.082668,
+          -0.038567,
+          0.00907
+        ],
+        "center": [
+          -0.096947,
+          -0.038567,
+          -0.011148
+        ]
+      },
+      {
+        "name": "Object_4",
+        "skinned": false,
+        "vertices": 9238,
+        "triangles": 14011,
+        "min": [
+          -0.04785,
+          -0.041667,
+          -0.041837
+        ],
+        "max": [
+          0.02303,
+          0.003136,
+          0.019541
+        ],
+        "center": [
+          -0.01241,
+          -0.019265,
+          -0.011148
+        ]
+      },
+      {
+        "name": "Object_5",
+        "skinned": false,
+        "vertices": 3359,
+        "triangles": 5184,
+        "min": [
+          -0.124405,
+          -0.049567,
+          -0.041139
+        ],
+        "max": [
+          0.044282,
+          -0.009902,
+          0.018843
+        ],
+        "center": [
+          -0.040062,
+          -0.029734,
+          -0.011148
+        ]
+      },
+      {
+        "name": "Object_6",
+        "skinned": false,
+        "vertices": 18859,
+        "triangles": 36403,
+        "min": [
+          -0.094797,
+          -0.036174,
+          -0.045244
+        ],
+        "max": [
+          -0.07805,
+          -0.018121,
+          -0.03052
+        ],
+        "center": [
+          -0.086423,
+          -0.027148,
+          -0.037882
+        ]
+      },
+      {
+        "name": "Object_7",
+        "skinned": false,
+        "vertices": 18642,
+        "triangles": 36113,
+        "min": [
+          -0.094797,
+          -0.036175,
+          0.008224
+        ],
+        "max": [
+          -0.07805,
+          -0.018122,
+          0.022948
+        ],
+        "center": [
+          -0.086423,
+          -0.027148,
+          0.015586
+        ]
+      },
+      {
+        "name": "Object_8",
+        "skinned": false,
+        "vertices": 19852,
+        "triangles": 38394,
+        "min": [
+          0.035662,
+          -0.029965,
+          -0.039987
+        ],
+        "max": [
+          0.051049,
+          -0.009822,
+          -0.02403
+        ],
+        "center": [
+          0.043356,
+          -0.019893,
+          -0.032009
+        ]
+      },
+      {
+        "name": "Object_9",
+        "skinned": false,
+        "vertices": 19821,
+        "triangles": 38363,
+        "min": [
+          0.035662,
+          -0.029965,
+          0.001734
+        ],
+        "max": [
+          0.051049,
+          -0.009822,
+          0.017691
+        ],
+        "center": [
+          0.043356,
+          -0.019893,
+          0.009713
+        ]
+      },
+      {
+        "name": "Object_10",
+        "skinned": false,
+        "vertices": 117,
+        "triangles": 114,
+        "min": [
+          -0.125905,
+          -0.046933,
+          -0.02763
+        ],
+        "max": [
+          -0.123922,
+          -0.037567,
+          0.001352
+        ],
+        "center": [
+          -0.124914,
+          -0.04225,
+          -0.013139
+        ]
+      },
+      {
+        "name": "Object_11",
+        "skinned": false,
+        "vertices": 9274,
+        "triangles": 13379,
+        "min": [
+          -0.114268,
+          -0.041567,
+          -0.046879
+        ],
+        "max": [
+          0.072469,
+          0.022407,
+          0.033421
+        ],
+        "center": [
+          -0.020899,
+          -0.00958,
+          -0.006729
+        ]
+      },
+      {
+        "name": "Object_12",
+        "skinned": false,
+        "vertices": 8514,
+        "triangles": 14384,
+        "min": [
+          -0.087995,
+          -0.041567,
+          -0.054947
+        ],
+        "max": [
+          0.071907,
+          0.023543,
+          0.024852
+        ],
+        "center": [
+          -0.008044,
+          -0.009012,
+          -0.015048
+        ]
+      },
+      {
+        "name": "Object_13",
+        "skinned": false,
+        "vertices": 7839,
+        "triangles": 13046,
+        "min": [
+          -0.096896,
+          -0.059625,
+          -0.077456
+        ],
+        "max": [
+          0.053025,
+          -0.019486,
+          0.027718
+        ],
+        "center": [
+          -0.021936,
+          -0.039556,
+          -0.024869
+        ]
+      },
+      {
+        "name": "Object_14",
+        "skinned": false,
+        "vertices": 9788,
+        "triangles": 17380,
+        "min": [
+          -0.091127,
+          -0.060376,
+          -0.077456
+        ],
+        "max": [
+          0.053985,
+          -0.020007,
+          0.028498
+        ],
+        "center": [
+          -0.018571,
+          -0.040191,
+          -0.024479
+        ]
+      },
+      {
+        "name": "Object_15",
+        "skinned": false,
+        "vertices": 3806,
+        "triangles": 6466,
+        "min": [
+          -0.079683,
+          -0.045061,
+          -0.077456
+        ],
+        "max": [
+          0.043662,
+          -0.031165,
+          -0.066148
+        ],
+        "center": [
+          -0.018011,
+          -0.038113,
+          -0.071802
+        ]
+      },
+      {
+        "name": "Object_16",
+        "skinned": false,
+        "vertices": 9914,
+        "triangles": 12120,
+        "min": [
+          -0.106871,
+          -0.064541,
+          -0.062697
+        ],
+        "max": [
+          0.060482,
+          -0.014572,
+          0.055852
+        ],
+        "center": [
+          -0.023194,
+          -0.039557,
+          -0.003423
+        ]
+      },
+      {
+        "name": "Object_17",
+        "skinned": false,
+        "vertices": 9518,
+        "triangles": 9850,
+        "min": [
+          -0.106842,
+          -0.064541,
+          -0.076589
+        ],
+        "max": [
+          0.060482,
+          -0.014613,
+          0.049594
+        ],
+        "center": [
+          -0.02318,
+          -0.039577,
+          -0.013498
+        ]
+      },
+      {
+        "name": "Object_18",
+        "skinned": false,
+        "vertices": 9201,
+        "triangles": 14544,
+        "min": [
+          -0.105931,
+          -0.064016,
+          0.023852
+        ],
+        "max": [
+          0.056337,
+          -0.018825,
+          0.05516
+        ],
+        "center": [
+          -0.024797,
+          -0.04142,
+          0.039506
+        ]
+      },
+      {
+        "name": "Object_19",
+        "skinned": false,
+        "vertices": 9418,
+        "triangles": 17148,
+        "min": [
+          -0.09063,
+          -0.048718,
+          0.043852
+        ],
+        "max": [
+          0.041832,
+          -0.019574,
+          0.05516
+        ],
+        "center": [
+          -0.024399,
+          -0.034146,
+          0.049506
+        ]
+      },
+      {
+        "name": "Object_20",
+        "skinned": false,
+        "vertices": 4100,
+        "triangles": 6846,
+        "min": [
+          -0.090852,
+          -0.059107,
+          -0.050798
+        ],
+        "max": [
+          0.031872,
+          -0.030395,
+          0.05516
+        ],
+        "center": [
+          -0.02949,
+          -0.044751,
+          0.002181
+        ]
+      },
+      {
+        "name": "Object_21",
+        "skinned": false,
+        "vertices": 9942,
+        "triangles": 12082,
+        "min": [
+          -0.106865,
+          -0.064527,
+          -0.078148
+        ],
+        "max": [
+          0.060459,
+          -0.014587,
+          0.049594
+        ],
+        "center": [
+          -0.023203,
+          -0.039557,
+          -0.014277
+        ]
+      },
+      {
+        "name": "Object_22",
+        "skinned": false,
+        "vertices": 9594,
+        "triangles": 9910,
+        "min": [
+          -0.106647,
+          -0.0645,
+          -0.07189
+        ],
+        "max": [
+          0.060204,
+          -0.014572,
+          0.054287
+        ],
+        "center": [
+          -0.023222,
+          -0.039536,
+          -0.008801
+        ]
+      },
+      {
+        "name": "Object_23",
+        "skinned": false,
+        "vertices": 1596,
+        "triangles": 1640,
+        "min": [
+          -0.101786,
+          -0.063988,
+          -0.07189
+        ],
+        "max": [
+          0.052533,
+          -0.014614,
+          -0.050506
+        ],
+        "center": [
+          -0.024626,
+          -0.039301,
+          -0.061198
+        ]
+      },
+      {
+        "name": "Object_24",
+        "skinned": false,
+        "vertices": 902,
+        "triangles": 1020,
+        "min": [
+          -0.095964,
+          -0.042413,
+          -0.071787
+        ],
+        "max": [
+          -0.008402,
+          -0.008198,
+          0.049691
+        ],
+        "center": [
+          -0.052183,
+          -0.025306,
+          -0.011048
+        ]
+      },
+      {
+        "name": "Object_25",
+        "skinned": false,
+        "vertices": 8842,
+        "triangles": 12442,
+        "min": [
+          -0.117405,
+          -0.048567,
+          -0.040274
+        ],
+        "max": [
+          0.050236,
+          0.004403,
+          0.018021
+        ],
+        "center": [
+          -0.033585,
+          -0.022082,
+          -0.011126
+        ]
+      },
+      {
+        "name": "Object_26",
+        "skinned": false,
+        "vertices": 8980,
+        "triangles": 15050,
+        "min": [
+          -0.124587,
+          -0.045567,
+          -0.043937
+        ],
+        "max": [
+          0.050946,
+          0.005403,
+          0.021641
+        ],
+        "center": [
+          -0.036821,
+          -0.020082,
+          -0.011148
+        ]
+      },
+      {
+        "name": "Object_27",
+        "skinned": false,
+        "vertices": 9649,
+        "triangles": 15085,
+        "min": [
+          -0.118605,
+          -0.045567,
+          -0.040317
+        ],
+        "max": [
+          0.050236,
+          -0.00028,
+          0.024852
+        ],
+        "center": [
+          -0.034185,
+          -0.022924,
+          -0.007732
+        ]
+      },
+      {
+        "name": "Object_28",
+        "skinned": false,
+        "vertices": 9841,
+        "triangles": 13627,
+        "min": [
+          -0.096901,
+          -0.045549,
+          -0.047148
+        ],
+        "max": [
+          0.032627,
+          0.01726,
+          0.024476
+        ],
+        "center": [
+          -0.032137,
+          -0.014145,
+          -0.011336
+        ]
+      },
+      {
+        "name": "Object_29",
+        "skinned": false,
+        "vertices": 8132,
+        "triangles": 13709,
+        "min": [
+          -0.093678,
+          -0.039887,
+          -0.046382
+        ],
+        "max": [
+          0.048163,
+          0.018169,
+          0.003825
+        ],
+        "center": [
+          -0.022758,
+          -0.010859,
+          -0.021279
+        ]
+      },
+      {
+        "name": "Object_30",
+        "skinned": false,
+        "vertices": 702,
+        "triangles": 696,
+        "min": [
+          -0.082905,
+          -0.040557,
+          -0.061148
+        ],
+        "max": [
+          0.036494,
+          -0.010383,
+          0.038852
+        ],
+        "center": [
+          -0.023206,
+          -0.02547,
+          -0.011148
+        ]
+      },
+      {
+        "name": "Object_31",
+        "skinned": false,
+        "vertices": 5153,
+        "triangles": 9322,
+        "min": [
+          0.053559,
+          -0.038817,
+          -0.027444
+        ],
+        "max": [
+          0.065176,
+          -0.019733,
+          -0.001885
+        ],
+        "center": [
+          0.059367,
+          -0.029275,
+          -0.014665
+        ]
+      },
+      {
+        "name": "Object_32",
+        "skinned": false,
+        "vertices": 5529,
+        "triangles": 10212,
+        "min": [
+          0.053523,
+          -0.037786,
+          -0.027444
+        ],
+        "max": [
+          0.058854,
+          -0.028831,
+          -0.025339
+        ],
+        "center": [
+          0.056189,
+          -0.033309,
+          -0.026391
+        ]
+      },
+      {
+        "name": "Object_33",
+        "skinned": false,
+        "vertices": 8502,
+        "triangles": 15670,
+        "min": [
+          0.043285,
+          -0.041567,
+          -0.027148
+        ],
+        "max": [
+          0.063496,
+          -0.019859,
+          0.005148
+        ],
+        "center": [
+          0.05339,
+          -0.030713,
+          -0.011
+        ]
+      },
+      {
+        "name": "Object_34",
+        "skinned": false,
+        "vertices": 9494,
+        "triangles": 15038,
+        "min": [
+          -0.007719,
+          -0.04406,
+          -0.029935
+        ],
+        "max": [
+          0.064431,
+          -0.000496,
+          0.019852
+        ],
+        "center": [
+          0.028356,
+          -0.022278,
+          -0.005042
+        ]
+      },
+      {
+        "name": "Object_35",
+        "skinned": false,
+        "vertices": 9293,
+        "triangles": 15012,
+        "min": [
+          -0.117753,
+          -0.04406,
+          -0.042148
+        ],
+        "max": [
+          0.059075,
+          0.006044,
+          0.010858
+        ],
+        "center": [
+          -0.029339,
+          -0.019008,
+          -0.015645
+        ]
+      },
+      {
+        "name": "Object_36",
+        "skinned": false,
+        "vertices": 9185,
+        "triangles": 14455,
+        "min": [
+          -0.119038,
+          -0.041564,
+          -0.063142
+        ],
+        "max": [
+          -0.00106,
+          0.004981,
+          0.041046
+        ],
+        "center": [
+          -0.060049,
+          -0.018291,
+          -0.011048
+        ]
+      },
+      {
+        "name": "Object_37",
+        "skinned": false,
+        "vertices": 8680,
+        "triangles": 13937,
+        "min": [
+          -0.111225,
+          -0.044067,
+          -0.063132
+        ],
+        "max": [
+          0.054011,
+          -0.003944,
+          0.041036
+        ],
+        "center": [
+          -0.028607,
+          -0.024006,
+          -0.011048
+        ]
+      },
+      {
+        "name": "Object_38",
+        "skinned": false,
+        "vertices": 4527,
+        "triangles": 5817,
+        "min": [
+          -0.110098,
+          -0.04406,
+          -0.058665
+        ],
+        "max": [
+          0.059075,
+          -0.001619,
+          0.036569
+        ],
+        "center": [
+          -0.025511,
+          -0.02284,
+          -0.011048
+        ]
+      },
+      {
+        "name": "Object_39",
+        "skinned": false,
+        "vertices": 9860,
+        "triangles": 11567,
+        "min": [
+          -0.119904,
+          -0.060551,
+          -0.077052
+        ],
+        "max": [
+          0.06075,
+          0.007432,
+          0.054796
+        ],
+        "center": [
+          -0.029577,
+          -0.026559,
+          -0.011128
+        ]
+      },
+      {
+        "name": "Object_40",
+        "skinned": false,
+        "vertices": 1476,
+        "triangles": 1468,
+        "min": [
+          -0.090831,
+          -0.060527,
+          -0.077092
+        ],
+        "max": [
+          0.052317,
+          -0.018672,
+          -0.073352
+        ],
+        "center": [
+          -0.019257,
+          -0.0396,
+          -0.075222
+        ]
+      },
+      {
+        "name": "Object_41",
+        "skinned": false,
+        "vertices": 9625,
+        "triangles": 13688,
+        "min": [
+          -0.119098,
+          -0.043567,
+          -0.071787
+        ],
+        "max": [
+          0.026512,
+          -0.006866,
+          0.049691
+        ],
+        "center": [
+          -0.046293,
+          -0.025216,
+          -0.011048
+        ]
+      },
+      {
+        "name": "Object_42",
+        "skinned": false,
+        "vertices": 5056,
+        "triangles": 8980,
+        "min": [
+          -0.046408,
+          -0.046535,
+          -0.071787
+        ],
+        "max": [
+          -0.002402,
+          -0.002599,
+          0.049691
+        ],
+        "center": [
+          -0.024405,
+          -0.024567,
+          -0.011048
+        ]
+      },
+      {
+        "name": "Object_43",
+        "skinned": false,
+        "vertices": 9664,
+        "triangles": 15660,
+        "min": [
+          -0.0969,
+          -0.054555,
+          -0.079648
+        ],
+        "max": [
+          0.071282,
+          0.02259,
+          0.057352
+        ],
+        "center": [
+          -0.012809,
+          -0.015983,
+          -0.011148
+        ]
+      },
+      {
+        "name": "Object_44",
+        "skinned": false,
+        "vertices": 5918,
+        "triangles": 11136,
+        "min": [
+          0.053656,
+          0.002823,
+          -0.054616
+        ],
+        "max": [
+          0.074274,
+          0.025988,
+          0.033431
+        ],
+        "center": [
+          0.063965,
+          0.014405,
+          -0.010592
+        ]
+      },
+      {
+        "name": "Object_45",
+        "skinned": false,
+        "vertices": 812,
+        "triangles": 812,
+        "min": [
+          0.050946,
+          -0.042504,
+          -0.043937
+        ],
+        "max": [
+          0.058647,
+          -0.02863,
+          0.021641
+        ],
+        "center": [
+          0.054797,
+          -0.035567,
+          -0.011148
+        ]
+      },
+      {
+        "name": "Object_46",
+        "skinned": false,
+        "vertices": 3016,
+        "triangles": 5336,
+        "min": [
+          -0.096725,
+          -0.05438,
+          -0.050331
+        ],
+        "max": [
+          0.050313,
+          -0.024734,
+          0.028035
+        ],
+        "center": [
+          -0.023206,
+          -0.039557,
+          -0.011148
+        ]
+      },
+      {
+        "name": "Object_47",
+        "skinned": false,
+        "vertices": 2390,
+        "triangles": 3648,
+        "min": [
+          -0.126405,
+          -0.047067,
+          -0.038646
+        ],
+        "max": [
+          -0.111905,
+          -0.032067,
+          0.01635
+        ],
+        "center": [
+          -0.119155,
+          -0.039567,
+          -0.011148
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [],
+    "estimatedTextureMiB": 0,
+    "materials": [
+      {
+        "doubleSided": true,
+        "name": "0.000000_0.286275_0.729412_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.023384448326825142,
+            0.10315462809978494,
+            0.43454552404042857,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "0.000000_0.470588_0.917647_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.012736987295232063,
+            0.11108278706976019,
+            0.6277132151206553,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "0.086275_0.317647_0.690196_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.008564033425906153,
+            0.1357872404953991,
+            0.6125328879032428,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "0.101961_0.101961_0.101961_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.06191929397102913,
+            0.06007789727775878,
+            0.06007789727775878,
+            1
+          ],
+          "metallicFactor": 0.6069973032693573,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_specular": {
+            "specularColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularFactor": 0.20617866155871195
+          }
+        },
+        "name": "0.300000_0.300000_0.300000_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.03343546175464817,
+            0.03343546175464817,
+            0.03343546175464817,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.303346817124929
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "0.400000_0.400000_0.400000_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.1387521153929692,
+            0.1387521153929692,
+            0.1387521153929692,
+            1
+          ],
+          "metallicFactor": 0.9592318671968941,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "0.500000_0.500000_0.500000_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "0.501961_0.501961_0.501961_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "0.792157_0.819608_0.933333_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.7485497935921877,
+            0.7485497935921877,
+            0.7485497935921877,
+            1
+          ],
+          "roughnessFactor": 0.10149823003199154
+        }
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_specular": {
+            "specularColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularFactor": 0.5462672060404716
+          }
+        },
+        "name": "0.796078_0.823529_0.937255_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "metallicFactor": 0.5280481768718059,
+          "roughnessFactor": 0.46731807964292027
+        }
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_specular": {
+            "specularColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularFactor": 0.4976831282573631
+          }
+        },
+        "name": "0.905882_0.082353_0.100000_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.8003873211278287,
+            0.005056631883939182,
+            0.005056631883939182,
+            1
+          ],
+          "metallicFactor": 0.4976831282573631,
+          "roughnessFactor": 0.514462891188414
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "0.917647_0.917647_0.917647_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "1.000000_0.000000_0.000000_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.8542606131670218,
+            0.001719337427949655,
+            0.001719337427949655,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_specular": {
+            "specularColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularFactor": 0.46731807964292027
+          }
+        },
+        "name": "1.000000_0.000000_0.000000_0.000000_0.058824",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.38108408883110456,
+            0.04041176075177841,
+            0.04041176075177841,
+            1
+          ],
+          "metallicFactor": 0.5462672060404716,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "extensions": {
+          "KHR_materials_specular": {
+            "specularColorFactor": [
+              1,
+              1,
+              1
+            ],
+            "specularFactor": 0
+          }
+        },
+        "name": "1.000000_0.756863_0.054902_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.7485497935921874,
+            0.5953222503303708,
+            0.012349104139773434,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "1.000000_0.784314_0.000000_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.7656041602732613,
+            0.5962682890957728,
+            0.0038110640591720738,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      },
+      {
+        "doubleSided": true,
+        "name": "1.000000_1.000000_1.000000_0.000000_0.000000",
+        "pbrMetallicRoughness": {
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      }
+    ]
+  }
+]
