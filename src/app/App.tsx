@@ -1,4 +1,5 @@
 import { createRaceSeed } from './createRaceSeed';
+import { previewItemReward } from '../game/dev/itemPreview';
 import { TrialRecords } from '../game/timeTrial/TrialRecords';
 import { difficultyDefinition } from '../game/config/raceOptions';
 import { saveVSOptions } from '../game/config/vsPreferences';
@@ -33,12 +34,14 @@ import { RaceSession, raceKindNames, type RaceKind } from '../game/race/RaceSess
 
 const Diagnostics = import.meta.env.DEV && new URLSearchParams(window.location.search).has('race-preview')
   ? lazy(() => import('../game/dev/RaceDiagnostics').then(module => ({ default: module.RaceDiagnostics }))) : null;
+const fixedReward = import.meta.env.DEV ? previewItemReward(window.location.search) : undefined;
+const previewItems = fixedReward ? { rewardPicker: () => fixedReward } : {};
 
 // Reload rather than retain a stale race/controller instance through Fast Refresh.
 if (import.meta.hot) {
   import.meta.hot.accept([
     '../game/timeTrial/TrialRun', '../game/timeTrial/TrialRecords', '../game/timeTrial/trialRules', '../game/timeTrial/ghostPlayback', '../game/config/timeTrialConfig',
-    '../game/items/ItemSystem', '../game/items/itemAI', '../game/items/itemRewards', '../game/config/itemBalance', '../game/items/itemCollision', '../game/config/itemConfig', '../game/controls/actionInput', '../game/ui/menu/raceFlowStore', '../game/ui/menu/menuCatalog', '../game/kart/kartCollision', '../game/kart/kartFootprint', '../game/race/racerCollision', '../game/config/kartConfig', '../game/config/raceOptions', '../game/config/raceConfig', '../game/core/simulation', '../game/race/RaceSession', '../game/race/raceProgress',
+    '../game/items/ItemSystem', '../game/items/turboCharge', '../game/dev/itemPreview', '../game/items/itemAI', '../game/items/itemRewards', '../game/config/itemBalance', '../game/items/itemCollision', '../game/config/itemConfig', '../game/controls/actionInput', '../game/ui/menu/raceFlowStore', '../game/ui/menu/menuCatalog', '../game/kart/kartCollision', '../game/kart/kartFootprint', '../game/race/racerCollision', '../game/config/kartConfig', '../game/config/raceOptions', '../game/config/raceConfig', '../game/core/simulation', '../game/race/RaceSession', '../game/race/raceProgress',
     '../game/ai/waypointController', '../game/controls/keyboard', '../game/controls/gamepad',
     '../game/render/DrivingAudio', '../game/tracks/sunshineCircuit', '../game/tracks/sugarRushValley', '../game/tracks/frostbitePeak', '../game/tracks/frostbiteScenery', '../game/tracks/volcanoSprint', '../game/tracks/volcanoScenery', '../game/tracks/trackCatalog', '../game/race/CupSession',
     '../phone/RemoteHost', '../phone/RemoteInput', '../game/controls/inputSources',
@@ -47,7 +50,7 @@ if (import.meta.hot) {
 
 export function App() {
   const [runtime] = useState<GameRuntime>(() => {
-    const race = new RaceSession(sunshineCircuit, undefined, { seed: createRaceSeed() });
+    const race = new RaceSession(sunshineCircuit, undefined, { seed: createRaceSeed(), ...previewItems });
     return { records: new TrialRecords(), trialGhostVisible: true, race, simulation: race.player.simulation, mode: 'menu', uiInput: new ActionInput(), keyboard: null, gamepad: null, phone: new RemoteHost(), audio: new DrivingAudio(), demoDriving: false, selection: loadSelection() };
   });
   const [menuStore] = useState(() => createRaceFlowStore(runtime.selection));
@@ -109,7 +112,7 @@ export function App() {
     if (action === 'start') {
       if (launch.mode === 'vs-race' && !saveVSOptions(launch.options)) setStorageFailed(true);
       if (launch.cupId) restartCup();
-      else { const race = new RaceSession(trackDefinition(launch.trackId).track, launch.options, { seed: createRaceSeed() }); race.start(launch.kind); setCup(null); installRace(race); }
+      else { const race = new RaceSession(trackDefinition(launch.trackId).track, launch.options, { seed: createRaceSeed(), ...previewItems }); race.start(launch.kind); setCup(null); installRace(race); }
     }
   };
   const finish = useCallback(() => {

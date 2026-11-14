@@ -33,6 +33,8 @@ The user accepted race-finish presentation and polish after Frostbite Peak: add 
 
 The user accepted Volcano Sprint, the fourth original course and four-race Sunshine Cup, after race-finish polish. Add lava-lit scenic calderas, basalt columns, readable linked bends and catalog-driven preview/cup integration. Preserve all existing handling, flat-road grip/height, collision shapes, camera, AI, item and scoring rules. Lava is decorative beyond the existing rails, not a new damage or surface mechanic. See docs/VOLCANO_SPRINT.md.
 
+The user accepted Turbo Charge as the fourth item: grant the existing short Flare boost through item ownership, prevent stacking, add countdown feedback and conservative AI activation, and extend position weights. Preserve existing movement/drift/boost formulas, contacts, navigation, race/cup rules and camera. Time Trial and Free Drive remain item-free. Commit verified work locally; the user pushes. See docs/TURBO_CHARGE.md.
+
 ## Preferred technology
 React + TypeScript + Vite + Three.js + @react-three/fiber; @react-three/drei selectively; Zustand for UI only; Rapier if needed for colliders/queries; Vitest for core tests. Use a stable compatible dependency set; check React and R3F peer dependencies. Do NOT use R3F alpha by default.
 

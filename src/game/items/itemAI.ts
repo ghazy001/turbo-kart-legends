@@ -4,11 +4,23 @@ import { kartConfig } from '../config/kartConfig';
 import type { KartState, SampledTrack } from '../core/types';
 import type { BananaHazard, ItemRacer, ItemSlot, SparkProjectile } from './ItemSystem';
 import { sweepKart, sweepRail } from './itemCollision';
+import { turboBoost } from './turboCharge';
 
 function projected(state: KartState, seconds: number): KartState {
   const sin = Math.sin(state.heading), cos = Math.cos(state.heading);
   return { ...state, x: state.x + (sin * state.forwardSpeed + cos * state.lateralSpeed) * seconds,
     z: state.z + (cos * state.forwardSpeed - sin * state.lateralSpeed) * seconds };
+}
+/** Conservative item timing only: never supplies steering or changes the navigation target. */
+export function shouldUseTurbo(owner: ItemRacer, racers: readonly ItemRacer[], track: SampledTrack): boolean {
+  const state = owner.simulation.current, horizon = itemBalance.aiTurboLookAhead;
+  if (state.forwardSpeed < itemConfig.turboMinSpeed || state.boostRemaining > 0 || state.driftDirection !== 0
+    || state.y > 0 || Math.abs(state.steering) > itemBalance.aiTurboMaxSteer || Math.abs(state.yawRate) > itemBalance.aiTurboMaxYaw) return false;
+  const future = projected({ ...state, forwardSpeed: turboBoost.maxSpeed }, horizon);
+  if (sweepRail(track, state, future, kartConfig.collisionRadius) !== null) return false;
+  return !racers.some(racer => racer.id !== owner.id && racer.progress.finishTime === null
+    && Math.abs(state.y - racer.simulation.current.y) < itemConfig.kartHitTop
+    && sweepKart(state, future, racer.simulation.current, projected(racer.simulation.current, horizon), kartConfig.collisionRadius) !== null);
 }
 /** Straight shots are evaluated along their actual trajectory; no aim-assist or homing. */
 export function shouldShootBolt(owner: ItemRacer, racers: readonly ItemRacer[], slot: (id: string) => Readonly<ItemSlot> | undefined, track: SampledTrack): boolean {

@@ -27,3 +27,9 @@
 
 .recovery-status { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 7px 9px; margin-top: 7px; border-radius: 10px; color: #6a4d20; background: #ffdf9a85; font-size: 8px; font-weight: 900; letter-spacing: .5px; }
 .recovery-status output { font-variant-numeric: tabular-nums; }
+
+.item-card[data-item=turbo-charge] .item-symbol { background: #ffd4a1; color: #8b3e26; }
+.item-card[data-turbo=true] { border-color: #ffac68; box-shadow: 0 0 0 2px #ff9d5755, 0 8px 30px #1b444a21; }
+.turbo-status { color: #803c25; background: #ffe0b9; }
+.turbo-status .guard-meter { background: #e9bc90; }
+.turbo-status .guard-meter i { background: #d6693c; }

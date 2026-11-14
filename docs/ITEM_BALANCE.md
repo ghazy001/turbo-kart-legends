@@ -1,5 +1,7 @@
 # Three-item balance — 2026-11-08
 
+> Historical three-item tuning. The later [Turbo Charge update](TURBO_CHARGE.md) adds a fourth item and supersedes the probability table below; cooldown, seeded streams and hit-recovery rules remain.
+
 ## Delivered behavior
 
 Every pickup now rolls its reward when collected, using the collector's current validated race position. The nine visible boxes, shared collection query, respawn timing and one-slot inventory remain. Quick Race, VS and cup rounds use this system; Time Trial and Free Drive remain item-free.

@@ -11,11 +11,13 @@ export const itemConfig = {
   trapLife: 18, maxTraps: 12, trapDropSkin: 0.3, trapMaxDropHeight: 0.2,
   aiTrapRange: 26, aiTrapWidth: 1.6,
   shieldSeconds: 5, aiGuardLookAhead: 0.85,
+  turboTier: 3, turboMinSpeed: 4,
 } as const;
 export const sparkBolt = { id: 'spark-bolt', name: 'Spark Bolt', color: '#69edee', description: 'A straight spark. A short slowdown.' } as const;
 export const bananaTrap = { id: 'banana-trap', name: 'Banana Trap', color: '#ffd562', description: 'Drop behind. Catch a pursuer.' } as const;
 export const bubbleGuard = { id: 'bubble-guard', name: 'Bubble Guard', color: '#8be8f5', description: 'Five seconds. One protected hit.' } as const;
-export const itemDefinitions = { 'spark-bolt': sparkBolt, 'banana-trap': bananaTrap, 'bubble-guard': bubbleGuard } as const;
+export const turboCharge = { id: 'turbo-charge', name: 'Turbo Charge', color: '#ffae63', description: 'A short Flare burst. Find a clear line.' } as const;
+export const itemDefinitions = { 'spark-bolt': sparkBolt, 'banana-trap': bananaTrap, 'bubble-guard': bubbleGuard, 'turbo-charge': turboCharge } as const;
 export type ItemId = keyof typeof itemDefinitions;
 export const itemBoxAsset = { url: '/assets/optimized/items/question-mark-item-box.glb', sourceUrl: '/assets/items/question-mark-item-box.glb', width: 1.15 } as const;
 export const combatAssets = {

@@ -107,3 +107,8 @@ Implemented a shared results shell with a cosmetic top-three 3D podium, solo Tim
 ## Volcano Sprint and four-race cup follow-up
 
 Implemented the fourth original circuit: a ~756 m caldera loop with linked bends, lava pools, basalt columns, crater peaks, warm dusk lighting and shared road/rail/map/checkpoint data. Quick Race, VS, Time Trial records/ghost and Sunshine Cup use the existing catalog. The cup now ends at Volcano Sprint with unchanged 10/7/4/1 scoring and a 40-point maximum. No handling, AI, camera, collision, item or surface-rule changes. The original four-course set is present; release art, authored seated/victory animation and human/device/browser quality checks remain before declaring v1.0 complete. See docs/VOLCANO_SPRINT.md.
+
+
+## Turbo Charge and four-item follow-up
+
+Implemented the fourth pickup using the existing 1.5-second Flare boost, with one-slot edge-triggered consumption, no stacking, forward/brake/slowdown guards, normal collision cancellation, Bubble Guard compatibility and a separate HUD countdown. AI waits for a clear predicted straight; position-weighted odds favor Turbo Charge toward the back. No movement, navigation, camera, collider or race-rule formulas change. The four-course/four-item playable set is present; the broader six-item roadmap and human balance/device/release-art QA remain open. See docs/TURBO_CHARGE.md.

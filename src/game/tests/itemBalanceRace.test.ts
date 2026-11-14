@@ -35,7 +35,7 @@ describe('three-lap races with balanced combat', () => {
     expect(race.player.progress.recoveries).toBe(0);
     for (const racer of race.opponents) { expect(racer.progress.completedLaps).toBeGreaterThanOrEqual(2); expect(racer.progress.recoveries).toBeLessThanOrEqual(1); }
     expect(race.items.stats.pickups).toBeGreaterThan(8);
-    expect(race.items.stats.shots + race.items.stats.drops + race.items.stats.guards).toBeGreaterThan(3);
+    expect(race.items.stats.shots + race.items.stats.drops + race.items.stats.guards + race.items.stats.turbos).toBeGreaterThan(3);
     expect(Object.values(race.items.rewards).reduce((sum, count) => sum + count, 0)).toBe(race.items.stats.pickups);
 
   }, course.theme.winter || course.theme.volcanic ? 120000 : 60000);

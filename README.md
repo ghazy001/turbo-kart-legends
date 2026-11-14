@@ -1,6 +1,6 @@
 # Turbo Kart Legends
 
-A desktop-browser arcade kart racer. **Milestone 4** adds track pickups, a held-item HUD, Spark Bolt, Banana Trap and Bubble Guard, alongside VS Race customization (1/3/5 laps and Easy/Normal/Hard CPU pace), alongside four original circuits, the four-race Sunshine Cup and optional wireless phone controller. The fullscreen Home and mode-based racer/kart/track setup flow provides five supplied racers, four supplied karts, live 3D previews and browser-local cosmetic selection. Player and AI use the same independent-instance GLB assembly. Quick Race, Time Trial, Free Drive, drifting, turbo, hops, lap validation, standings, race management, controls and camera behavior remain intact.
+A desktop-browser arcade kart racer. **Milestone 4** adds track pickups, a held-item HUD, Spark Bolt, Banana Trap, Bubble Guard and Turbo Charge, alongside VS Race customization (1/3/5 laps and Easy/Normal/Hard CPU pace), alongside four original circuits, the four-race Sunshine Cup and optional wireless phone controller. The fullscreen Home and mode-based racer/kart/track setup flow provides five supplied racers, four supplied karts, live 3D previews and browser-local cosmetic selection. Player and AI use the same independent-instance GLB assembly. Quick Race, Time Trial, Free Drive, drifting, turbo, hops, lap validation, standings, race management, controls and camera behavior remain intact.
 
 The supplied franchise models are enabled for this **local prototype with the user's confirmed permission**. Embedded uploader credits are preserved in [model credits](public/ASSET_CREDITS.md); public-release rights have not been independently verified. Track, scenery, HUD icons, effects and synthesized audio remain original/procedural; item meshes include the supplied local-use models. No account, database or remote model service is required. The optional phone relay runs inside the local Vite/Node server.
 
@@ -60,6 +60,7 @@ Development tools:
 - `/?asset-preview`: choose any supported combination; adjust seat and driver position, rotation and scale; compare raw/static poses; show anchors; use side/front/top views; copy JSON into the registry. Changes are preview-only.
 - `/?asset-inspect`: recursively audited source inventory, normalized raw models, bounds, skeletons and clip data. The complex legacy kart reports a conversion error instead of displaying incorrect materials.
 - `/?race-preview&collision-preview`: normal-input autodrive with a center or ±4 m near-rail line for collision QA; no position injection.
+- `/?race-preview&item-preview&item-reward=turbo-charge`: labeled development-only fixed pickup rewards in Quick / VS for reproducible item HUD checks. It still requires collecting and using a real box; omit `item-reward` for normal weights.
 - `/?render-stats`: renderer counts and rolling median/p95 frame intervals. Combine with `?race-preview&render-stats` for normal-input race QA.
 - `npm run assets:audit`: regenerate `docs/assets/asset-audit.json` without altering GLBs.
 
@@ -135,7 +136,7 @@ Important entry points: `src/app/App.tsx`, `src/game/config/kartConfig.ts`, `src
 
 See [M3.5 verification](docs/MILESTONE_3_5.md), [M3 verification](docs/MILESTONE_3.md), [GLB integration verification](docs/ASSET_INTEGRATION.md), [M2 verification](docs/MILESTONE_2.md) and the [historical M1 record](docs/MILESTONE_1.md). Tests cover movement, steering direction, drift tiers, boost limits/recovery, hop/landing, pause/reset cancellation, keyboard/gamepad input, audio lifecycle, fixed-step consistency, track continuity/non-intersection, rail impacts/sliding and full-circuit traversal through player inputs.
 
-This is a flat-road racing prototype with drift-entry hops; it has no ramps or terrain jumps. Spark Bolt, Banana Trap and Bubble Guard use position-weighted pickups and repeated-hit recovery. Time Trial personal records and best-run ghosts are now local to this browser. Online racing and reload-resumable championships remain future work. Phone input uses the existing optional local relay. Full three-lap Time Trials, Quick Races with traffic and all three opponents finishing are exercised headlessly. Browser verification and remaining device/manual checks are recorded in the M3 notes. Higher-tier human drift tuning, listening checks and Chrome/Firefox/Safari performance testing remain manual. Real OS focus-loss behavior also needs manual confirmation outside the automation browser. Local render measurements are recorded in the M3.5 notes; they are not a cross-device 60 FPS guarantee.
+This is a flat-road racing prototype with drift-entry hops; it has no ramps or terrain jumps. Spark Bolt, Banana Trap, Bubble Guard and Turbo Charge use position-weighted pickups and repeated-hit recovery. Time Trial personal records and best-run ghosts are now local to this browser. Online racing and reload-resumable championships remain future work. Phone input uses the existing optional local relay. Full three-lap Time Trials, Quick Races with traffic and all three opponents finishing are exercised headlessly. Browser verification and remaining device/manual checks are recorded in the M3 notes. Higher-tier human drift tuning, listening checks and Chrome/Firefox/Safari performance testing remain manual. Real OS focus-loss behavior also needs manual confirmation outside the automation browser. Local render measurements are recorded in the M3.5 notes; they are not a cross-device 60 FPS guarantee.
 
 R3F 9 currently constructs Three.js `Clock`, which Three.js 0.187 warns is deprecated. This is an upstream renderer warning; the kart's fixed-step simulation does not use that clock for integration. It is recorded, not suppressed.
 
@@ -157,7 +158,7 @@ The supplied box is preserved under `public/assets/items/`; the runtime loads a 
 
 ### Banana and Hutt ball follow-up
 
-The supplied banana is the actual **Banana Trap** model; the Hutt ball is now Spark Bolt's projectile mesh. The runtime recenters/scales both, removes the banana's duplicate mesh from the prepared instance and simplifies the ball to 4,174 triangles. No authored animations exist. Both retain independent procedural fallbacks. Details, credits, rules and verification: [item follow-up](docs/MILESTONE_4_ITEMS.md). Controls remain E / Shift, X / square, HUD or phone ITEM. Bubble Guard is now implemented; the current three-item weighted balance is documented in [item balance](docs/ITEM_BALANCE.md).
+The supplied banana is the actual **Banana Trap** model; the Hutt ball is now Spark Bolt's projectile mesh. The runtime recenters/scales both, removes the banana's duplicate mesh from the prepared instance and simplifies the ball to 4,174 triangles. No authored animations exist. Both retain independent procedural fallbacks. Details, credits, rules and verification: [item follow-up](docs/MILESTONE_4_ITEMS.md). Controls remain E / Shift, X / square, HUD or phone ITEM. Bubble Guard is now implemented; the original three-item balance is documented in [item balance](docs/ITEM_BALANCE.md), superseded by the [four-item Turbo Charge update](docs/TURBO_CHARGE.md).
 
 
 ### Bubble Guard
@@ -167,7 +168,7 @@ Collect Bubble Guard and use the same item button to activate a **five-second, o
 
 ### Position-weighted item balance
 
-All nine boxes can grant any implemented item. First place rolls **20% Spark Bolt / 25% Banana Trap / 55% Bubble Guard**; middle places **45 / 25 / 30%**; last place **65 / 10 / 25%**. Rewards use validated standings at collection, with independent seeded streams for each racer. New setup starts get a new seed; restarting keeps it (the same collections and standings reproduce rewards). AI waits 0.3 s before use and predicts straight-shot/pursuer contacts; every consumption has a 1.1 s cooldown. The HUD and a gold ground ring show item-hit protection. See [balance tuning, checks and limits](docs/ITEM_BALANCE.md). Human balance and physical-device playtesting remain required.
+All nine boxes can grant any implemented item. First place rolls **15% Spark Bolt / 25% Banana Trap / 50% Bubble Guard / 10% Turbo Charge**; middle places **35 / 20 / 25 / 20%**; last place **40 / 10 / 20 / 30%**. Rewards use validated standings at collection, with independent seeded streams for each racer. New setup starts get a new seed; restarting keeps it (the same collections and standings reproduce rewards). AI waits 0.3 s before use and predicts straight-shot/pursuer contacts; every consumption has a 1.1 s cooldown. The HUD and a gold ground ring show item-hit protection. See [balance tuning, checks and limits](docs/ITEM_BALANCE.md). Human balance and physical-device playtesting remain required.
 
 
 ### Time Trial records and ghost
@@ -192,3 +193,8 @@ Stage motion and confetti settle after 5.5 seconds, honor system reduced motion,
 ### Volcano Sprint and the four-race cup
 
 The fourth original circuit is an approximately **756 m**, 11 m-wide caldera loop with linked bends, dusk lighting, basalt columns and glowing lava pools/crater seams. Choose **Volcano Sprint** in Quick Race, Time Trial or VS; Sunshine Cup now ends here in round four, with a maximum of **40 points**. The same sampled course generates road, solid rails, gates, starts, minimap, pickups and ghost compatibility. Lava and cliffs are decorative and remain outside the driving corridor. The road stays flat with the same grip, handling and camera as the other tracks. See [files, verification and limits](docs/VOLCANO_SPRINT.md).
+
+
+### Turbo Charge
+
+Collect **Turbo Charge**, drive forward at least **4 m/s** and use the usual **E / Shift**, **X / square**, HUD or phone **ITEM** action. It grants the existing **1.5-second Flare boost** (28 m/s ceiling); keep accelerating to gain speed. Wait out an active boost or item slowdown and release the brake first. A rejected press preserves the item; release and press again. Activation ends charging drift without a second payout, and durations never stack. Normal braking and collision cancellation still apply. Bubble Guard protects it from one item hit. The orange HUD meter counts down independently of inventory. AI uses it on predicted clear road. Pause freezes it; recovery/restart clears it. Time Trial and Free Drive remain item-free. See [implementation, four-item weights and verification](docs/TURBO_CHARGE.md).

@@ -1,9 +1,9 @@
 /** Item-only balance. No kart movement, navigation or race-scoring parameters. */
 export const itemBalance = {
   weights: {
-    leading: { 'spark-bolt': 20, 'banana-trap': 25, 'bubble-guard': 55 },
-    middle: { 'spark-bolt': 45, 'banana-trap': 25, 'bubble-guard': 30 },
-    trailing: { 'spark-bolt': 65, 'banana-trap': 10, 'bubble-guard': 25 },
+    leading: { 'spark-bolt': 15, 'banana-trap': 25, 'bubble-guard': 50, 'turbo-charge': 10 },
+    middle: { 'spark-bolt': 35, 'banana-trap': 20, 'bubble-guard': 25, 'turbo-charge': 20 },
+    trailing: { 'spark-bolt': 40, 'banana-trap': 10, 'bubble-guard': 20, 'turbo-charge': 30 },
   },
   seed: 0x74a91f35,
   useCooldown: 1.1,
@@ -12,6 +12,9 @@ export const itemBalance = {
   aiGuardPackRange: 24,
   aiBoltLookAhead: 1.1,
   aiTrapLookAhead: 1.6,
+  aiTurboLookAhead: 0.75,
+  aiTurboMaxSteer: 0.3,
+  aiTurboMaxYaw: 0.65,
   hitWindowSeconds: 6,
   repeatHitRetention: 0.75,
   repeatSlowSeconds: 0.45,

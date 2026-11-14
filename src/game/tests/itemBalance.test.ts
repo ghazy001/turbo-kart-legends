@@ -8,16 +8,16 @@ import { trackCatalog } from '../tracks/trackCatalog';
 
 const dt = 1 / 60;
 describe('position-weighted item rewards', () => {
-  it('gives leaders more defense and trailing racers more bolts, keeping every item possible', () => {
+  it('gives leaders more defense and trailing racers more turbo, keeping every item possible', () => {
     for (const [position, band] of [[1, 'leading'], [2, 'middle'], [4, 'trailing']] as const) {
-      const context = { position, fieldSize: 4 }, counts: Record<ItemId, number> = { 'spark-bolt': 0, 'banana-trap': 0, 'bubble-guard': 0 };
+      const context = { position, fieldSize: 4 }, counts: Record<ItemId, number> = { 'spark-bolt': 0, 'banana-trap': 0, 'bubble-guard': 0, 'turbo-charge': 0 };
       expect(rewardBand(context)).toBe(band);
       for (let i = 0; i < 1000; i++) counts[pickWeightedItem(context, (i + 0.5) / 1000)]++;
       for (const item of Object.keys(counts) as ItemId[]) expect(counts[item]).toBe(itemBalance.weights[band][item] * 10);
     }
     expect(rewardBand({ position: 1, fieldSize: 1 })).toBe('leading');
     expect(pickWeightedItem({ position: 1, fieldSize: 4 }, 0.5)).toBe('bubble-guard');
-    expect(pickWeightedItem({ position: 4, fieldSize: 4 }, 0.5)).toBe('spark-bolt');
+    expect(pickWeightedItem({ position: 4, fieldSize: 4 }, 0.2)).toBe('spark-bolt');
   });
   it('clamps out-of-range rolls and produces stable, bounded seeded streams', () => {
     let seed = racerItemSeed(123, 'track', 'player'); const original = seed, counts = new Set<number>();
@@ -28,7 +28,7 @@ describe('position-weighted item rewards', () => {
   });
   it('samples the configured frequencies across a seeded stream', () => {
     for (const position of [1, 2, 4]) {
-      let seed = 12345; const counts: Record<ItemId, number> = { 'spark-bolt': 0, 'banana-trap': 0, 'bubble-guard': 0 };
+      let seed = 12345; const counts: Record<ItemId, number> = { 'spark-bolt': 0, 'banana-trap': 0, 'bubble-guard': 0, 'turbo-charge': 0 };
       const context = { position, fieldSize: 4 };
       for (let i = 0; i < 10000; i++) { const next = nextItemRoll(seed); seed = next.seed; counts[pickWeightedItem(context, next.roll)]++; }
       for (const item of Object.keys(counts) as ItemId[]) expect(Math.abs(counts[item] / 100 - itemBalance.weights[rewardBand(context)][item])).toBeLessThan(2);
@@ -40,7 +40,7 @@ describe('position-weighted item rewards', () => {
     expect(world.collect(0)).toBe('bubble-guard');
     world.items.recover('player'); world.step(61); world.items.pickups[1].respawn = 0;
     world.racers[0].progress.distance = -100; world.racers[1].progress.finishTime = 50;
-    expect(world.collect(0)).toBe('spark-bolt'); expect(contexts).toEqual([{ position: 1, fieldSize: 4 }, { position: 4, fieldSize: 4 }]);
+    expect(world.collect(0)).toBe('bubble-guard'); expect(contexts).toEqual([{ position: 1, fieldSize: 4 }, { position: 4, fieldSize: 4 }]);
     expect(world.items.events.at(-1)?.position).toBe(4);
   });
   it('keeps per-racer rolls independent of unrelated pickups and reproduces reset results', () => {

@@ -136,7 +136,7 @@ describe('Spark Bolt combat', () => {
     const { items, racers, step } = setup(); items.disarm(); step({ ...NEUTRAL_INPUT, useItem: true }); expect(items.stats.shots).toBe(0);
     step(); step({ ...NEUTRAL_INPUT, useItem: true }); expect(items.projectiles.length).toBe(1);
     const cooldown = items.pickups[1].respawn; items.recover('player'); expect(items.projectiles).toHaveLength(0); expect(items.slot('player')?.held).toBeNull(); expect(items.pickups[1].respawn).toBe(cooldown);
-    items.reset(true, racers); expect(items.events).toHaveLength(0); expect(items.stats).toEqual({ pickups: 0, shots: 0, drops: 0, hits: 0, guards: 0, blocks: 0 }); expect(items.time).toBe(0);
+    items.reset(true, racers); expect(items.events).toHaveLength(0); expect(items.stats).toEqual({ pickups: 0, shots: 0, drops: 0, hits: 0, guards: 0, turbos: 0, blocks: 0 }); expect(items.time).toBe(0);
   });
   it('gives the same hit/result at 30, 60 and 144 render intervals', () => {
     const states = [30, 60, 144].map(fps => {
@@ -163,7 +163,7 @@ describe('race integration', () => {
     const race = new RaceSession(track, undefined, { rewardPicker: () => 'spark-bolt' }); race.start(kind); race.phase = kind === 'free-drive' ? kind : 'racing';
     const box = race.items.pickups[1]; race.player.simulation.reset({ ...box, heading: 0 });
     for (let i = 0; i < 60; i++) race.advance(dt, { ...NEUTRAL_INPUT, throttle: 1, useItem: true }, true);
-    expect(race.items.enabled).toBe(false); expect(race.items.stats).toEqual({ pickups: 0, shots: 0, drops: 0, hits: 0, guards: 0, blocks: 0 });
+    expect(race.items.enabled).toBe(false); expect(race.items.stats).toEqual({ pickups: 0, shots: 0, drops: 0, hits: 0, guards: 0, turbos: 0, blocks: 0 });
     expect(race.player.simulation.current.forwardSpeed).toBeGreaterThan(3);
   });
   it('uses the sampled rail face on a continuous road', () => {

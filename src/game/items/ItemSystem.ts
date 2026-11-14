@@ -1,5 +1,5 @@
 import { itemBalance } from '../config/itemBalance';
-import { guardThreat, shouldDropTrap, shouldShootBolt } from './itemAI';
+import { guardThreat, shouldDropTrap, shouldShootBolt, shouldUseTurbo } from './itemAI';
 import { nextItemRoll, pickWeightedItem, racerItemSeed, type RewardContext, type RewardPicker } from './itemRewards';
 import { itemConfig, type ItemId } from '../config/itemConfig';
 import { kartConfig } from '../config/kartConfig';
@@ -8,14 +8,15 @@ import { cancelDrift } from '../kart/driftController';
 import { pointAtDistance } from '../race/trackProgress';
 import { offsetSample } from '../tracks/trackSampling';
 import { sweepKart, sweepRail } from './itemCollision';
+import { activateTurbo, canActivateTurbo, turboBoost } from './turboCharge';
 
 export interface ItemRacer { id: string; simulation: { current: KartState; previous: KartState }; progress: { finishTime: number | null; distance?: number } }
-export interface ItemSlot { held: ItemId | null; cooldown: number; slowRemaining: number; immunity: number; shieldRemaining: number; heldSince: number; hitWindow: number; hitChain: number; slowLimit: number; wasUsing: boolean }
+export interface ItemSlot { held: ItemId | null; cooldown: number; slowRemaining: number; immunity: number; shieldRemaining: number; turboRemaining: number; heldSince: number; hitWindow: number; hitChain: number; slowLimit: number; wasUsing: boolean }
 export interface Pickup { id: string; x: number; z: number; respawn: number }
 export interface SparkProjectile { id: number; owner: string; x: number; z: number; previousX: number; previousZ: number; y: number; dx: number; dz: number; life: number }
 export interface BananaHazard { id: number; owner: string; x: number; z: number; heading: number; life: number; armRemaining: number; ownerGrace: number }
-export interface ItemEvent { id: number; kind: 'pickup' | 'fire' | 'drop' | 'hit' | 'wall' | 'blocked' | 'guard' | 'guard-break' | 'guard-expire'; time: number; x: number; z: number; source: string; target?: string; item?: ItemId; position?: number }
-const emptySlot = (): ItemSlot => ({ held: null, cooldown: 0, slowRemaining: 0, immunity: 0, shieldRemaining: 0, heldSince: 0, hitWindow: 0, hitChain: 0, slowLimit: itemConfig.slowSpeed, wasUsing: true });
+export interface ItemEvent { id: number; kind: 'pickup' | 'fire' | 'drop' | 'hit' | 'wall' | 'blocked' | 'guard' | 'guard-break' | 'guard-expire' | 'turbo'; time: number; x: number; z: number; source: string; target?: string; item?: ItemId; position?: number }
+const emptySlot = (): ItemSlot => ({ held: null, cooldown: 0, slowRemaining: 0, immunity: 0, shieldRemaining: 0, turboRemaining: 0, heldSince: 0, hitWindow: 0, hitChain: 0, slowLimit: itemConfig.slowSpeed, wasUsing: true });
 
 export interface ItemSystemOptions { seed?: number; rewardPicker?: RewardPicker }
 
@@ -28,9 +29,9 @@ export class ItemSystem {
   readonly events: ItemEvent[] = [];
   readonly projectiles: SparkProjectile[] = [];
   readonly traps: BananaHazard[] = [];
-  readonly stats = { pickups: 0, shots: 0, drops: 0, hits: 0, guards: 0, blocks: 0 };
+  readonly stats = { pickups: 0, shots: 0, drops: 0, hits: 0, guards: 0, turbos: 0, blocks: 0 };
   private readonly slots = new Map<string, ItemSlot>();
-  readonly rewards: Record<ItemId, number> = { 'spark-bolt': 0, 'banana-trap': 0, 'bubble-guard': 0 };
+  readonly rewards: Record<ItemId, number> = { 'spark-bolt': 0, 'banana-trap': 0, 'bubble-guard': 0, 'turbo-charge': 0 };
   private readonly rolls = new Map<string, number>();
   private readonly seed: number;
   private readonly rewardPicker: RewardPicker;
@@ -50,7 +51,7 @@ export class ItemSystem {
     racers.forEach(racer => { this.slots.set(racer.id, emptySlot()); this.rolls.set(racer.id, racerItemSeed(this.seed, this.track.definition.id, racer.id)); });
     for (const item of Object.keys(this.rewards) as ItemId[]) this.rewards[item] = 0;
     this.projectiles.length = 0; this.traps.length = 0; this.events.length = 0; this.pickups.forEach(pickup => { pickup.respawn = 0; });
-    this.stats.pickups = 0; this.stats.shots = 0; this.stats.drops = 0; this.stats.hits = 0; this.stats.guards = 0; this.stats.blocks = 0;
+    this.stats.pickups = 0; this.stats.shots = 0; this.stats.drops = 0; this.stats.hits = 0; this.stats.guards = 0; this.stats.turbos = 0; this.stats.blocks = 0;
   }
   disarm(): void { this.slots.forEach(slot => { slot.wasUsing = true; }); }
   observe(id: string, input: KartInput): void { const slot = this.slots.get(id); if (slot) slot.wasUsing = !!input.useItem; }
@@ -91,6 +92,7 @@ export class ItemSystem {
     const owner = racers.find(racer => racer.id === id), slot = this.slots.get(id);
     if (!this.enabled || !owner || owner.progress.finishTime !== null || !slot?.held || slot.cooldown > 0 || slot.slowRemaining > 0
       || this.time - slot.heldSince < itemBalance.aiReactionSeconds) return false;
+    if (slot.held === 'turbo-charge') return shouldUseTurbo(owner, racers, this.track);
     if (slot.held === 'bubble-guard') {
       const state = owner.simulation.current;
       // Anticipatory pack defense also prevents an all-guard opening from locking inventory forever.
@@ -131,13 +133,19 @@ export class ItemSystem {
           this.emit('guard-expire', racer.simulation.current.x, racer.simulation.current.z, racer.id, undefined, 'bubble-guard');
         }
       }
+      slot.turboRemaining = Math.max(0, slot.turboRemaining - dt);
       slot.hitWindow = Math.max(0, slot.hitWindow - dt);
       if (slot.hitWindow === 0) slot.hitChain = 0;
       const using = !!inputs.get(racer.id)?.useItem;
       if (racer.progress.finishTime === null && using && !slot.wasUsing && slot.held && slot.cooldown <= 0) {
         const state = racer.simulation.current, dx = Math.sin(state.heading), dz = Math.cos(state.heading);
         let used = false;
-        if (slot.held === 'bubble-guard') {
+        if (slot.held === 'turbo-charge') {
+          if (canActivateTurbo(state, inputs.get(racer.id)!, slot.slowRemaining)) {
+            racer.simulation.current = activateTurbo(state); slot.turboRemaining = turboBoost.duration;
+            this.stats.turbos++; this.emit('turbo', state.x, state.z, racer.id, undefined, slot.held); used = true;
+          }
+        } else if (slot.held === 'bubble-guard') {
           if (slot.shieldRemaining <= 0) {
             slot.shieldRemaining = itemConfig.shieldSeconds; this.stats.guards++;
             this.emit('guard', state.x, state.z, racer.id, undefined, slot.held); used = true;
@@ -217,9 +225,12 @@ export class ItemSystem {
         this.emit('pickup', pickup.x, pickup.z, winner.id, undefined, item, context.position);
       }
     }
-    for (const racer of racers) if ((this.slots.get(racer.id)?.slowRemaining ?? 0) > 0) {
+    for (const racer of racers) {
+      const slot = this.slots.get(racer.id); if (!slot) continue;
       const state = racer.simulation.current;
-      racer.simulation.current = { ...state, forwardSpeed: Math.max(-this.slots.get(racer.id)!.slowLimit, Math.min(this.slots.get(racer.id)!.slowLimit, state.forwardSpeed)) };
+      // Observe the existing boost owner: wall/kart hits, braking and item damage can cancel it.
+      slot.turboRemaining = racer.progress.finishTime !== null ? 0 : Math.min(slot.turboRemaining, state.boostRemaining);
+      if (slot.slowRemaining > 0) racer.simulation.current = { ...state, forwardSpeed: Math.max(-slot.slowLimit, Math.min(slot.slowLimit, state.forwardSpeed)) };
     }
   }
 }
