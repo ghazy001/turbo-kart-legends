@@ -35,6 +35,8 @@ The user accepted Volcano Sprint, the fourth original course and four-race Sunsh
 
 The user accepted Turbo Charge as the fourth item: grant the existing short Flare boost through item ownership, prevent stacking, add countdown feedback and conservative AI activation, and extend position weights. Preserve existing movement/drift/boost formulas, contacts, navigation, race/cup rules and camera. Time Trial and Free Drive remain item-free. Commit verified work locally; the user pushes. See docs/TURBO_CHARGE.md.
 
+The user requested a step-by-step design rollout and chose a dark showroom with warm yellow accents. The first pass updates Home composition, hierarchy and its cosmetic preview only. Preserve all setup flow, gameplay, controls, selected profiles and race/phone systems. Apply future screen passes incrementally after review; do not treat the whole game as visually migrated yet. See docs/DESIGN_ROLLOUT.md.
+
 ## Preferred technology
 React + TypeScript + Vite + Three.js + @react-three/fiber; @react-three/drei selectively; Zustand for UI only; Rapier if needed for colliders/queries; Vitest for core tests. Use a stable compatible dependency set; check React and R3F peer dependencies. Do NOT use R3F alpha by default.
 

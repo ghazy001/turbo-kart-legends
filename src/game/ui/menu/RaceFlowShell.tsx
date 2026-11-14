@@ -11,7 +11,7 @@ export function StepHeader({ title, subtitle, mode, steps, step, tools, home = f
   title: string; subtitle: string; mode: string; steps: readonly FlowStep[]; step: FlowStep; tools: ReactNode; home?: boolean;
 }) {
   const index = steps.indexOf(step);
-  return <header className="selection-header flow-header"><div className="selection-wordmark"><span aria-hidden="true">T↗</span><strong>TURBO KART<small>LEGENDS / YOUR LINE. YOUR LITTLE LEGEND.</small></strong></div>{tools}
+  return <header className="selection-header flow-header"><div className="selection-wordmark"><span aria-hidden="true">T↗</span><strong>TURBO KART<small>{home ? 'LEGENDS' : 'LEGENDS / YOUR LINE. YOUR LITTLE LEGEND.'}</small></strong></div>{tools}
     {!home && <><div className="flow-heading"><span className="flow-mode-tag">{mode}</span><h2 id="flow-title" key={title}>{title}<em>.</em></h2><p>{subtitle}</p></div><ol className="selection-steps" aria-label="Race setup">{steps.map((entry, i) => <li key={entry} aria-current={entry === step ? 'step' : undefined} data-complete={i < index}><span>{i < index ? '✓' : String(i + 1).padStart(2, '0')}</span>{stepNames[entry]}</li>)}</ol></>}
   </header>;
 }

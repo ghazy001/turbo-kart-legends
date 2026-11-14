@@ -19,39 +19,6 @@
 .flow-footer .selection-input-hints kbd { background: #36545e; color: #f5edce; border-color: #8caea7; }
 .flow-footer-context { display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: .6px; }
 .flow-footer .selection-confirm { min-width: 175px; }
-.flow-home .flow-content { grid-template-columns: minmax(330px,.9fr) minmax(0,1.15fr); gap: 6vw; align-items: stretch; padding-bottom: 26px; }
-.flow-home .flow-header { padding-bottom: 0; }
-.home-menu-left { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
-.flow-overline { color: #f0c574; font-size: 9px; font-weight: 750; letter-spacing: 2.5px; }
-.home-menu-left h1 { font-family: 'Avenir Next','Segoe UI',sans-serif; font-size: clamp(38px,4.5vw,65px); display: block; line-height: 1.04; font-style: normal; letter-spacing: -3px; margin: 16px 0 11px; font-weight: 850; color: #faf7e8; }
-.home-menu-left h1 em { font-style: italic; font-weight: 450; white-space: nowrap; }
-.home-menu-left h1 span { color: #ffd172; }
-.home-intro { color: #c2d2ca; font-size: 12px; margin: 0 0 28px; }
-.home-menu-list { display: flex; flex-direction: column; gap: 8px; }
-.home-menu-item { display: flex; align-items: center; gap: 17px; position: relative; width: 100%; min-height: 64px; padding: 12px 18px; border-radius: 15px; border: 1px solid #e6f1df25; color: #ecf3e6; background: linear-gradient(110deg,#d8f3df0f,#e5f4e106); text-align: left; transition: transform .18s,border-color .18s,background .18s; }
-.home-menu-item strong { font-size: 18px; font-weight: 750; display: block; letter-spacing: -.4px; }
-.home-menu-item small { display: block; font-size: 9px; margin-top: 4px; color: #c1d1c5; letter-spacing: .2px; }
-.home-menu-item[data-menu-current=true] { background: linear-gradient(110deg,#ffca66,#f3b956); color: #173b46; border-color: #ffdf94; box-shadow: 0 8px 26px #122d3f33; transform: translateX(6px); }
-.home-menu-item[data-menu-current=true] small { color: #40594e; }
-.home-menu-item[data-menu-current=true]::before { content: ''; position: absolute; width: 3px; height: 26px; background: #ffe6ac; border-radius: 3px; left: -10px; }
-.home-menu-icon { display: grid; place-items: center; width: 34px; flex-shrink: 0; }
-.home-menu-icon svg { width: 26px; height: 26px; }
-.home-menu-arrow { font-size: 24px; margin-left: auto; }
-.home-hero { position: relative; display: flex; flex-direction: column; min-height: 400px; }
-.home-hero-copy { padding: 28px 0 8px; position: relative; z-index: 3; animation: selection-text .25s ease-out; }
-.home-hero-copy > span { font-size: 8px; letter-spacing: 2px; color: #edcb83; }
-.home-hero-copy h3 { font-size: 27px; letter-spacing: -.8px; margin: 10px 0; font-weight: 750; }
-.home-hero-copy h3 em { font-size: 14px; font-weight: 400; color: #ceded1; letter-spacing: -.1px; }
-.home-hero-copy p { font-size: 12px; color: #d2ded0; line-height: 1.6; max-width: 420px; min-height: 38px; margin: 0; }
-.home-hero > .selection-preview { flex: 1; }
-.home-hero .selection-preview-top { display: none; }
-.home-hero .selection-stage-mark { font-size: 270px; }
-.home-hero .selection-nameplate { padding: 13px 18px; border-color: #e5f1d829; }
-.home-hero .selection-nameplate h3 { font-size: 24px; }
-.home-hero .selection-name-arrow { font-size: 28px; }
-.home-hero .selection-description { display: none; }
-.home-hero-note { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 8px; letter-spacing: 1.5px; color: #c2d2be; margin-top: 18px; }
-.home-hero-note i { width: 3px; height: 3px; border-radius: 50%; background: #f1c66c; }
 .track-roster { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
 .track-select-card { position: relative; display: block; width: 100%; text-align: left; padding: 0; overflow: hidden; border: 2px solid #f7ce75; border-radius: 20px; background: #234950a8; color: #f8f6e3; box-shadow: 0 14px 35px #102c3e26; }
 .track-select-card > svg { width: 100%; display: block; height: clamp(150px,24vh,225px); object-fit: cover; background: #78a997; }

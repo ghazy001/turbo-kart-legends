@@ -198,3 +198,8 @@ The fourth original circuit is an approximately **756 m**, 11 m-wide caldera loo
 ### Turbo Charge
 
 Collect **Turbo Charge**, drive forward at least **4 m/s** and use the usual **E / Shift**, **X / square**, HUD or phone **ITEM** action. It grants the existing **1.5-second Flare boost** (28 m/s ceiling); keep accelerating to gain speed. Wait out an active boost or item slowdown and release the brake first. A rejected press preserves the item; release and press again. Activation ends charging drift without a second payout, and durations never stack. Normal braking and collision cancellation still apply. Bubble Guard protects it from one item hit. The orange HUD meter counts down independently of inventory. AI uses it on predicted clear road. Pause freezes it; recovery/restart clears it. Time Trial and Free Drive remain item-free. See [implementation, four-item weights and verification](docs/TURBO_CHARGE.md).
+
+
+### Design rollout: Home Menu
+
+The first design pass introduces a charcoal showroom, warm yellow selection states, a larger live kart preview and clearer mode/profile details on Home. The existing mode setup and racing behavior remain. Keyboard arrows/WASD navigate; Enter/Space confirms; Tab reaches the sound/controller/phone tools. Other screens will receive their own visual passes next. See [design direction, files, QA and next screens](docs/DESIGN_ROLLOUT.md).

@@ -146,3 +146,8 @@ Volcano Sprint completes the first four-course set and extends Sunshine Cup to f
 ## Turbo Charge follow-up
 
 Turbo Charge is the fourth implemented pickup. It grants the existing 1.5 s Flare tier (28 m/s ceiling, normal throttle/brake behavior), without changing movement tuning. Drive forward at least 4 m/s, release the brake and wait out slowdown/any existing boost before activating. A rejected press keeps the item and requires release before retry. Activation cancels charging drift without payout; it does not add boost durations. Brake, damaging items and solid contacts retain their usual cancellation. Bubble Guard can protect the burst from one item hit. The item HUD shows an independent countdown; existing exhaust flares and synthesized boost cues are reused. Leading/middle/trailing odds for Bolt / Trap / Guard / Turbo are 15/25/50/10, 35/20/25/20 and 40/10/20/30 percent. See docs/TURBO_CHARGE.md.
+
+
+## Step-by-step visual redesign
+
+The user chose a dark showroom with warm yellow accents for the menu redesign. The first pass gives Home a clear mode hierarchy, larger live kart display, restrained surfaces and readable keyboard focus. The cheerful track environments and gameplay presentation remain in place. Racer/kart setup, track/review, HUD/pause/settings, results and environment polish follow as separate reviewed passes. See docs/DESIGN_ROLLOUT.md.

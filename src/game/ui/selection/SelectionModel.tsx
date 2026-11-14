@@ -24,8 +24,8 @@ function KartModel({ kart }: { kart: KartAssetDefinition }) {
   const model = useMemo(() => instantiateModel(gltf.scene, kart.id, { wheels: kart.wheels }), [gltf.scene, kart.id, kart.wheels]);
   return <group {...kart.transform}><primitive object={model.root} dispose={null} /></group>;
 }
-export function SelectionModel({ driver, kart, kind, thumbnail = false, animate = false, onReady }: {
-  driver: DriverAssetDefinition; kart: KartAssetDefinition; kind: 'racer' | 'kart'; thumbnail?: boolean; animate?: boolean; onReady: () => void;
+export function SelectionModel({ driver, kart, kind, thumbnail = false, animate = false, presentation = 'selection', onReady }: {
+  driver: DriverAssetDefinition; kart: KartAssetDefinition; kind: 'racer' | 'kart'; thumbnail?: boolean; animate?: boolean; presentation?: 'selection' | 'showroom'; onReady: () => void;
 }) {
   const turntable = useRef<Group>(null), elapsed = useRef(0);
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -36,13 +36,13 @@ export function SelectionModel({ driver, kart, kind, thumbnail = false, animate 
     invalidate();
   });
   useEffect(() => { onReady(); }, [onReady]);
-  const racer = kind === 'racer';
+  const racer = kind === 'racer', showroom = presentation === 'showroom';
   const distance = (kart.id === 'ds' ? 0.8 : 1) * (animate ? 0.9 : 1);
   return <>
-    <PerspectiveCamera makeDefault fov={thumbnail ? 32 : 33} position={racer ? [0.5, 1.55, thumbnail ? 5.6 : 5.3] : [3.5 * distance, 0.8 + 1.45 * distance, 4.8 * distance]} onUpdate={camera => camera.lookAt(0, racer ? 1.12 : 0.8, 0)} near={0.1} far={30} />
-    <hemisphereLight args={['#fff4dd', '#5f9799', 2.2]} />
-    <directionalLight position={[-3, 5, 5]} intensity={2.7} />
-    <directionalLight position={[4, 3, -3]} color="#b8f1ff" intensity={1.8} />
+    <PerspectiveCamera makeDefault fov={showroom ? 30 : thumbnail ? 32 : 33} position={racer ? [0.5, 1.55, thumbnail ? 5.6 : 5.3] : [3.5 * distance, 0.8 + 1.45 * distance, 4.8 * distance]} onUpdate={camera => camera.lookAt(0, racer ? 1.12 : 0.8, 0)} near={0.1} far={30} />
+    <hemisphereLight args={[showroom ? '#f5eee3' : '#fff4dd', showroom ? '#354354' : '#5f9799', showroom ? 1.7 : 2.2]} />
+    <directionalLight position={[-3, 5, 5]} intensity={showroom ? 3.1 : 2.7} />
+    <directionalLight position={[4, 3, -3]} color={showroom ? '#d4deff' : '#b8f1ff'} intensity={showroom ? 2.1 : 1.8} />
     <group ref={turntable} rotation={[0, thumbnail ? (racer ? driver : kart).thumbnail.yaw : -0.25, 0]}>
       {racer ? <RacerModel driver={driver} /> : thumbnail ? <KartModel kart={kart} /> : <KartAssembly kart={kart} driver={driver} />}
     </group>

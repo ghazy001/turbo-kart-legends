@@ -57,7 +57,9 @@ describe('real Socket.IO pairing relay', () => {
   it('pairs once, validates inputs and sequences, and measures phone→host acknowledgement latency', async () => {
     const { connect } = await setup(), host = await connect(), phone = await connect(), stranger = await connect();
     const offer = await host.timeout(1500).emitWithAck('host:create'); if (!offer.ok) throw new Error(offer.error);
-    expect(offer.token).toMatch(/^[\w-]{32}$/); const connected = link(host);
+    expect(offer.token).toMatch(/^[\w-]{32}$/);
+    // An older host:create status can arrive after its acknowledgement.
+    const connected = link(host, 'connected');
     const joined = await phone.timeout(1500).emitWithAck('phone:join', { token: offer.token }); expect(joined.ok).toBe(true); expect((await connected).state).toBe('connected');
     expect((await stranger.timeout(1500).emitWithAck('phone:join', { token: offer.token })).ok).toBe(false);
     let count = 0; host.on('host:input', () => count++);

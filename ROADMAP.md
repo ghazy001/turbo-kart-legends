@@ -112,3 +112,8 @@ Implemented the fourth original circuit: a ~756 m caldera loop with linked bends
 ## Turbo Charge and four-item follow-up
 
 Implemented the fourth pickup using the existing 1.5-second Flare boost, with one-slot edge-triggered consumption, no stacking, forward/brake/slowdown guards, normal collision cancellation, Bubble Guard compatibility and a separate HUD countdown. AI waits for a clear predicted straight; position-weighted odds favor Turbo Charge toward the back. No movement, navigation, camera, collider or race-rule formulas change. The four-course/four-item playable set is present; the broader six-item roadmap and human balance/device/release-art QA remain open. See docs/TURBO_CHARGE.md.
+
+
+## Step-by-step design rollout
+
+The user selected a dark showroom / warm yellow direction. Pass 1 implements a cleaner Home Menu and cosmetic showroom while preserving mode/state/input/race ownership. Next: Racer and Kart Select, then track/review, HUD/pause/settings, results/loading and environment polish. The remaining screens retain their existing styling until reviewed individually. See docs/DESIGN_ROLLOUT.md.
