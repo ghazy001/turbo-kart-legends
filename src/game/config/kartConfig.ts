@@ -12,9 +12,11 @@ export const kartConfig = {
   steeringResponse: 14,
   lateralGrip: 12,
   slipFactor: 0.09,
+  // Conservative broad phase / asset envelope; actual contact uses the capsule below.
   collisionRadius: 1.8,
+  collisionHalfWidth: 1.2,
+  collisionHalfLength: 1.55,
   collisionSkin: 0.04,
-  impactRetention: 0.82,
   recoveryDistance: 18,
   wheelRadius: 0.39,
 } as const;
@@ -26,6 +28,6 @@ export const cameraConfig = {
 } as const;
 
 export const sceneConfig = {
-  roadY: 0.035, curbWidth: 0.65, railWidth: 0.28, railHeight: 0.62,
+  roadY: 0.035, curbWidth: 0.65, railWidth: 0.28, railCenterOffset: 0.36, railHeight: 0.62,
   dprMax: 1.5, shadowSize: 1024,
 } as const;

@@ -1,0 +1,45 @@
+.cup-results-scrim { z-index: 12; background: #132c3bd9; backdrop-filter: blur(16px); }
+.cup-results { width: min(960px,100%); border: 1px solid #e6edcd42; border-radius: 28px; padding: 30px 34px; color: #f3f1dc; background: linear-gradient(135deg,#34585eec,#203e4bf5); box-shadow: 0 25px 100px #071c2e66; animation: cup-arrive .35s ease-out; }
+.cup-results-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.cup-results h2 { font-size: clamp(28px,3vw,42px); letter-spacing: -1.4px; line-height: 1.1; margin: 10px 0; }
+.cup-results-heading p { color: #c7d7c7; font-size: 12px; line-height: 1.7; margin: 0; }
+.cup-trophy { width: 85px; height: 95px; flex-shrink: 0; filter: drop-shadow(0 8px 20px #e9b94724); }
+.cup-round-progress { display: flex; gap: 30px; list-style: none; padding: 22px 0; margin: 20px 0; border-block: 1px solid #dae8cf26; }
+.cup-round-progress li { display: flex; align-items: center; gap: 12px; opacity: .6; }
+.cup-round-progress li[data-complete=true] { opacity: 1; }
+.cup-round-progress li > span { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid #e8edcc40; border-radius: 50%; font-size: 13px; }
+.cup-round-progress li[data-complete=true] > span { background: #f6c969; color: #21404c; }
+.cup-round-progress small { display: block; font-size: 7px; letter-spacing: 1px; color: #f6d287; margin-bottom: 4px; }
+.cup-round-progress strong { font-size: 12px; }
+.cup-results-body { display: grid; grid-template-columns: 1.4fr 1fr; gap: 30px; }
+.cup-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; font-variant-numeric: tabular-nums; }
+.cup-table caption { text-align: left; font-size: 10px; letter-spacing: 1px; margin-bottom: 14px; color: #e5e7ce; }
+.cup-table thead th { font-size: 8px; color: #c3d5c6; font-weight: 500; padding: 8px 6px; }
+.cup-table td,.cup-table tbody th { padding: 14px 6px; border-bottom: 1px solid #e1e9cf18; }
+.cup-table td:last-child { font-size: 20px; text-align: right; color: #f8d17d; }
+.cup-table thead th:last-child { text-align: right; }
+.cup-table tbody tr[data-player=true] { background: #f4cf7315; }
+.cup-table tbody th { font-weight: 650; white-space: nowrap; }
+.cup-table i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 8px; }
+.cup-table small { font-size: 7px; color: #f5d083; }
+.cup-scoring-note { font-size: 8px; line-height: 1.8; color: #c7d7c7; }
+.cup-round-recap { border: 1px solid #edf0d228; border-radius: 18px; padding: 20px; background: #0c2b3a25; }
+.cup-round-recap h3 { font-size: 42px; margin: 12px 0; font-variant-numeric: tabular-nums; }
+.cup-round-recap h3 small { font-size: 14px; font-weight: 500; color: #c4d5c6; }
+.cup-round-recap h3 em { float: right; color: #f4cf7b; font-size: 16px; font-style: normal; padding-top: 15px; }
+.cup-round-recap dl { margin: 0; font-size: 11px; }
+.cup-round-recap dl > div { display: flex; justify-content: space-between; margin: 10px 0; gap: 8px; }
+.cup-round-recap dt { color: #c4d5c6; }
+.cup-round-recap dd { margin: 0; font-variant-numeric: tabular-nums; }
+.cup-round-recap p { font-size: 8px; color: #bacec0; line-height: 1.7; }
+.cup-round-recap summary { font-size: 10px; cursor: pointer; margin: 18px 0 12px; color: #f3d38c; }
+.cup-round-recap ol { font-size: 9px; padding-left: 16px; }
+.cup-round-recap li { padding: 5px 0; }
+.cup-round-recap li strong { float: right; font-size: 8px; }
+.cup-results-actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid #dce6cd26; margin-top: 24px; padding-top: 20px; }
+.cup-results-actions > span { font-size: 8px; color: #c2d4c6; }
+.cup-results-actions > div { display: flex; align-items: center; gap: 15px; }
+.cup-results :focus-visible { outline: 3px solid #ffe09a; outline-offset: 4px; }
+@keyframes cup-arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media(max-width:760px) { .cup-results { padding: 22px; } .cup-results-body { grid-template-columns: 1fr; gap: 14px; } .cup-round-progress { gap: 15px; } .cup-round-progress strong { font-size: 10px; } .cup-round-progress li { gap: 7px; } .cup-trophy { width: 55px; height: 65px; } .cup-results-actions { flex-wrap: wrap; } .cup-results-actions > div { width: 100%; justify-content: space-between; gap: 10px; } .cup-results-actions .selection-confirm { min-width: 0; font-size: 11px; gap: 20px; } }
+@media(prefers-reduced-motion:reduce) { .cup-results { animation: none; } }

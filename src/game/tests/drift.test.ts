@@ -1,3 +1,5 @@
+import { sceneConfig } from '../config/kartConfig';
+import { expectInsideRails } from './helpers/roadBounds';
 import { describe, expect, it } from 'vitest';
 import { boostTiers, driftConfig } from '../config/driftConfig';
 import { kartConfig } from '../config/kartConfig';
@@ -7,7 +9,7 @@ import { NEUTRAL_INPUT, type KartInput, type KartState } from '../core/types';
 import { chargeTier } from '../kart/driftController';
 import { moveKart } from '../kart/kartController';
 import { sunshineCircuit as track } from '../tracks/sunshineCircuit';
-import { nearestRoadPoint, offsetSample } from '../tracks/trackSampling';
+import { offsetSample } from '../tracks/trackSampling';
 
 const dt = 1 / 60;
 const drifting: KartInput = { throttle: 1, brake: 0, steer: 1, drift: true };
@@ -136,11 +138,11 @@ describe('drift, hop and mini-turbo', () => {
   });
   it('maintains road constraints in the air at boosted speed and cancels impact charge', () => {
     const sample = track.samples[0];
-    const edge = offsetSample(sample, track.definition.roadWidth / 2 - kartConfig.collisionRadius - 0.02);
+    const edge = offsetSample(sample, track.definition.roadWidth / 2 + sceneConfig.railCenterOffset - sceneConfig.railWidth / 2 - kartConfig.collisionRadius - 0.02);
     const state = stepKart({ ...charged(boostTiers[2].charge), ...edge, y: 0.2,
       heading: Math.atan2(sample.tz, -sample.tx), forwardSpeed: 28,
     }, gas, dt, track);
-    expect(nearestRoadPoint(track, state).distance).toBeLessThanOrEqual(track.definition.roadWidth / 2 - kartConfig.collisionRadius);
+    expectInsideRails(track, state);
     expect(state.driftCharge).toBe(0);
     expect(state.boostTier).toBe(0);
   });

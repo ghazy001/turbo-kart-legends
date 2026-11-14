@@ -20,3 +20,7 @@
 .asset-preview .pose-note { padding: 12px; background: #fff1ca; border-radius: 7px; }
 .asset-preview pre { font-size: 11px; white-space: pre-wrap; }
 @media(max-width:700px) { .asset-preview { grid-template-columns: 260px minmax(0,1fr); } .asset-preview aside { padding: 14px; } }
+
+.fitting-selectors { position: absolute; right: 18px; top: 18px; z-index: 3; display: flex; gap: 14px; padding: 12px 16px; background: #fffdf4e8; border-radius: 12px; color: #173c48; font: 13px system-ui; box-shadow: 0 4px 15px #173c4820; }
+.fitting-selectors label { display: flex; align-items: center; gap: 8px; }
+.fitting-selectors select,.asset-preview input[type=number],.asset-preview select { font-size: 16px; }

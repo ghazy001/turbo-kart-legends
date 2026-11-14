@@ -54,6 +54,6 @@ describe('standard gamepad input', () => {
   });
   it('keeps keyboard steering priority while allowing analog throttle and drift', () => {
     expect(combineInputs({ ...NEUTRAL_INPUT, steer: -1 }, { throttle: 0.7, brake: 0, steer: 1, drift: true }))
-      .toEqual({ throttle: 0.7, brake: 0, steer: -1, drift: true });
+      .toEqual({ throttle: 0.7, brake: 0, steer: -1, drift: true, useItem: false });
   });
 });

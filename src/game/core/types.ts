@@ -1,8 +1,8 @@
 export interface Vec2 { x: number; z: number }
 
 /** Positive steer turns right. Forward is +Z at heading zero. */
-export interface KartInput { throttle: number; brake: number; steer: number; drift: boolean }
-export const NEUTRAL_INPUT: Readonly<KartInput> = { throttle: 0, brake: 0, steer: 0, drift: false };
+export interface KartInput { throttle: number; brake: number; steer: number; drift: boolean; useItem?: boolean }
+export const NEUTRAL_INPUT: Readonly<KartInput> = { throttle: 0, brake: 0, steer: 0, drift: false, useItem: false };
 export type ChargeTier = 0 | 1 | 2 | 3;
 export type DriftDirection = -1 | 0 | 1;
 

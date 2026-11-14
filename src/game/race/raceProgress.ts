@@ -26,7 +26,7 @@ export function bestLap(progress: RaceProgress): number | null {
 
 /** Mutates race bookkeeping only. Simulation positions never come from lap progress. */
 export function advanceRaceProgress(progress: RaceProgress, before: Vec2, after: Vec2, elapsed: number,
-  dt: number, track: SampledTrack, checkpoints: readonly Checkpoint[], laps = raceConfig.laps): void {
+  dt: number, track: SampledTrack, checkpoints: readonly Checkpoint[], laps: number = raceConfig.laps): void {
   if (progress.finishTime !== null) return;
   const road = nearestRoadPoint(track, after);
   const velocityAlong = ((after.x - before.x) * road.tx + (after.z - before.z) * road.tz) / dt;

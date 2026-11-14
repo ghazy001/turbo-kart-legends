@@ -1,3 +1,4 @@
+import { kartContact } from '../kart/kartFootprint';
 import { raceConfig } from '../config/raceConfig';
 import type { KartState, SampledTrack } from '../core/types';
 import { constrainKart } from '../kart/kartCollision';
@@ -11,14 +12,12 @@ function constrainContact(state: KartState, track: SampledTrack): KartState {
 
 /** Equal-mass planar contacts layered on the existing movement owner. */
 export function resolveRacerContacts(states: KartState[], track: SampledTrack): void {
-  const diameter = raceConfig.racerRadius * 2;
   for (let pass = 0; pass < raceConfig.contactIterations; pass++) for (let i = 0; i < states.length; i++) for (let j = i + 1; j < states.length; j++) {
     let a = states[i]; let b = states[j];
-    const dx = b.x - a.x; const dz = b.z - a.z;
-    const distance = Math.hypot(dx, dz);
-    if (distance >= diameter) continue;
-    const nx = distance > 0.0001 ? dx / distance : 1; const nz = distance > 0.0001 ? dz / distance : 0;
-    const shift = (diameter - distance + 0.002) / 2;
+    const contact = kartContact(a, b);
+    if (!contact) continue;
+    const { nx, nz, depth } = contact;
+    const shift = (depth + raceConfig.contactSeparation) / 2;
     a = { ...a, x: a.x - nx * shift, z: a.z - nz * shift };
     b = { ...b, x: b.x + nx * shift, z: b.z + nz * shift };
     let ax = Math.sin(a.heading) * a.forwardSpeed + Math.cos(a.heading) * a.lateralSpeed;

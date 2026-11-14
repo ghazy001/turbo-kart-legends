@@ -4,6 +4,7 @@ export function Controls({ compact = false }: { compact?: boolean }) {
     <div><span className="key-pair"><kbd>S</kbd><kbd>↓</kbd></span><span>Brake / reverse</span></div>
     <div><span className="key-pair"><kbd>A</kbd><kbd>D</kbd></span><span>Steer <small>or ← →</small></span></div>
     <div><span className="key-pair"><kbd>space</kbd></span><span>Hold to drift / hop</span></div>
+    {!compact && <div><span className="key-pair"><kbd>E</kbd><kbd>shift</kbd></span><span>Use held item <small>CPU races</small></span></div>}
     {!compact && <div><span className="key-pair"><kbd>R</kbd><kbd>esc</kbd></span><span>Reset / pause</span></div>}
   </div>;
 }

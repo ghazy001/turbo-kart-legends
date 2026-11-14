@@ -134,3 +134,128 @@ Unit tests: clamp behavior, accelerate/decelerate, reversing, steering, dt depen
 `waypointController.ts` produces the same normalized `KartInput` as the player, with look-ahead steering, curvature-aware speeds, traffic lane changes/following and bounded target-speed catch-up. `racerCollision.ts` resolves planar kart contacts after the shared controller step and reapplies the existing road constraint. AI recovery uses the same last-valid-gate path. Finished opponents leave the active track and contact set; their recorded finish times remain in standings. The race freezes when the player finishes, with trailing racers explicitly labeled on track in results.
 
 Race HUD snapshots update at 10 Hz; countdown/results transitions are screen state. Imported player meshes, driver anchor, handling constants and chase camera behavior remain in their existing modules. `/?race-preview` exposes an explicit development-only normal-input autodrive checkbox for browser QA; it is not a production driving assist or state injection API.
+
+
+## Milestone 3.5 — Cosmetic asset layer
+
+`config/visualAssets.ts` owns racer/kart IDs, visual transforms, seat mounts, wheel definitions, static fitting and optional explicit animation maps. `visualSelection.ts` validates/persists cosmetics and allocates distinct AI appearances. Selection has no speed/handling/collider fields and never enters the core, AI or race modules.
+
+`KartVisual` reads the existing interpolated simulation pose; its body parent holds `KartAssembly` (kart + seat + driver). `prepareModel` clones scenes, preserves skins and bakes only static fitting/wheel geometry. `modelInstances` caches bounded immutable templates, caps textures and merges static siblings, then clones independent object/bone/pivot instances. `driverAnimation` owns one mixer per authored instance and only plays configured clips. Empty clip lists remain static fits.
+
+`CharacterKartSelectScreen` uses a typed menu-only external store for the racer → kart draft, per-step indices and keyboard/gamepad navigation; App applies the final selection to the render runtime and localStorage without recreating RaceSession or Simulation. The start/pause menus open the same garage. While the garage is open the paused/menu scene renders no frames; its separate preview canvas renders on demand. DOM loading/error UI stays outside Canvas; gameplay keeps the original procedural fallback. Dev-only fitting, raw inventory and renderer counters do not change simulation ownership. Source assets and all M1–M3 gameplay/camera files remain intact.
+
+
+## Milestone 3.6 — Remote human input
+
+`src/phone/protocol.ts` defines bounded normalized inputs and pairing/link/game-state messages. `server/phoneRelay.ts` owns ephemeral credentials, single-phone ownership, origin/rate/sequence validation, revocation and stale-stream checks; `phonePlugin.ts` attaches it to the existing Vite HTTP(S)/preview server and cleans it up on shutdown. The relay never owns simulation or race logic.
+
+`RemoteHost` is a lazy desktop Socket.IO connection; `RemoteInput` owns receipt-time staleness and neutral arming. `game/controls/inputSources.ts` composes keyboard → gamepad → phone steering priority using the existing normalized input behavior. `GameLoop` reads that composed input once per render; the existing fixed-step RaceSession remains authoritative. App clears/disarms phone input with existing pause/reset transitions and broadcasts input availability. Connection loss requests the existing pause action. Pairing opens from an active race by pausing it.
+
+`/controller` lazy-loads the mobile UI without mounting the Three.js game. `PhoneConnection` transmits the latest normalized state at a chosen bounded rate, with session-scoped reconnect credentials and end-to-end acknowledgement RTT. `TouchInput` tracks independent pointer holds; `TiltSteering` reads screen-relative gravity, explicit neutral calibration and delta-aware damping. Sensor listeners do not transmit. Phone blur/visibility/orientation changes neutralize input. Motion permission occurs only in the button gesture. `.certs` is ignored and explicitly denied by the development file server; no trust-store changes are automated.
+
+## Two-step pre-race selection
+
+Play retains the requested RaceKind while Racer Select and Kart Select share one fullscreen shell. Final confirm commits the existing VisualSelection profile and invokes the existing race start callback; pause-menu customization only changes visuals. Source-pose portraits, isolated kart thumbnails and the seated assembly use independent GLB clones in a single scissored, demand-rendered Drei View canvas. The underlying scene is suspended and background UI is inert. See docs/SELECTION_FLOW.md for state, components, navigation and verified integration checks.
+
+## Home and integrated mode setup
+
+`ui/menu/raceFlowStore` owns frontend screen/mode/step, draft cosmetics and track, audio and nested panels. `RaceFlowShell` shares header/footer and one preview renderer across Home and all setup stages. Mode descriptors map to existing RaceKind values: VS is CPU racing; Grand Prix now wraps the same race kind in a catalog-driven four-round CupSession (M3.7 plus Frostbite Peak and Volcano Sprint). Final review commits the existing cosmetic profile and calls the existing race start; pause cosmetic editing has a two-step save-only intent. Track artwork derives from the sampled road. An additive authenticated host-to-phone configuration event forwards bounded steering preferences/calibration requests; sensor permission stays on the handset. See docs/FRONTEND_FLOW.md for the complete state and verification.
+
+
+## Milestone 3.7 — Track registry and championship
+
+`tracks/trackCatalog.ts` owns typed course IDs, sampled circuits, lightweight scene palettes and the ordered Sunshine Cup definition. Sugar Rush Valley is a new original, flat 11 m ribbon with a flowing chicane. The existing sampler, boundary controller, 12 gates and pursuit AI consume it unchanged. Rendering, course-selection SVGs, minimap bounds, finish sign and HUD labels derive from the active course. Decorative candy groves share the same instanced scene layout and stay clear of the road.
+
+`race/CupSession.ts` owns only round index, the active RaceSession and immutable-by-contract result snapshots. It does not tick physics. A valid finish is accepted once only for its current race; `nextRound()` is guarded until results exist. New rounds create independent RaceSession/Simulation instances with the same stable racer identities and clear timing/abilities. Restart is allowed only before scoring the active round and preserves previous rounds. Totals sort by points, finishing-place countback and last-race place. As in Quick Race, trailing AI is classified by validated distance when the player finishes; no finish time is invented.
+
+`App` installs the selected race at final review and keys the Canvas scene fragment and HUD by a scene generation while keeping the WebGL renderer alive. This disposes course geometry/textures/camera/opponent bindings at a track transition. Sky and fog attach directly to the scene, not a group. Keyboard, gamepad, audio and the existing phone host remain owned by App; held inputs are cleared/disarmed through the existing mode transition. Pause customization only swaps cosmetics; it never creates a race. Cup progress is session-only, while the existing versioned cosmetic/sound/mode/last-track preferences remain persistent. `CupResultsMenu` uses the existing keyboard/gamepad/focus lifecycle and displays per-round awards and championship totals.
+
+
+## Milestone 3.8 — VS session options
+
+`config/raceOptions.ts` owns `RaceOptions { laps: 1 | 3 | 5; difficulty: 'easy' | 'normal' | 'hard' }`, validation, labels and difficulty data. RaceSession copies/freezes an options snapshot at construction. It supplies the lap target to the existing `advanceRaceProgress` parameter and creates independent opponent profiles with target-speed offsets (Easy −3 m/s, Normal 0, Hard +1.5 m/s). The pursuit controller's curvature/traffic caps, catch-up limits, simulation and collider rules are untouched. Default construction has exactly the original Normal target speeds and three-lap finish rule; CupSession continues to use that default on every round.
+
+VS setup adds `options` between track and ready. `raceFlowStore` owns draft `vsOptions`, the active options row and committed VS defaults; other mode launches always use default options. Arrow/WASD/controller directions switch rows vertically and values horizontally; Enter confirms to review. Native radio buttons expose both groups and selected values. Final review passes an independent options snapshot in RaceLaunch to the new RaceSession. Cosmetic-only pause editing cannot configure or replace an active race.
+
+`config/vsPreferences.ts` stores only validated version-1 values under `turbo-kart-legends.vs-options.v1`, separate from existing menu/cosmetic schemas. App persists on VS start, never on draft navigation; storage denial retains committed defaults for the session with the existing notice. HUD/results use `race.options`, not editable menu values. Restart resets race progress while retaining options. Development HMR reloads on race-option/menu-store changes so stale store/runtime instances cannot survive a schema update.
+
+
+## Wall/opponent collision maintenance
+
+The wall scrape bug had two causes: a circular side clearance substantially wider than the kart, and a multiplicative 0.82 speed retention on every contact tick. Opponent circles also applied diagonal closing impulses during visibly clear side overtakes.
+
+`kart/kartFootprint.ts` now defines one longitudinal capsule (1.2 m radius, 0.35 m center-segment half-length; total 2.4 × 3.1 m) for every kart, independent of cosmetic selections. The 1.8 m outer radius remains a conservative broad-phase/art envelope. Exact closest points between capsule segments supply opponent normals/depths, including parallel/crossing/coincident cases. The existing equal-mass impulse, hard-hit ability cancellation and bounded contact iterations remain.
+
+`constrainKart` uses capsule support along the nearest road normal and resolves against the visible inner rail face. `sceneConfig.railCenterOffset` and `railWidth` generate both visual rail surfaces and the collision limit, including the existing 4 cm skin. Outward normal velocity is removed; tangential velocity is preserved. It no longer multiplies the whole velocity by a retention factor each scrape. Real wall projection still cancels charge/boost, and the planar constraint still applies during hops. Source road sampling, handling, AI pursuit, race/checkpoint rules and camera remain unchanged.
+
+Regression tests independently sample disks along the complete capsule to verify rail containment on both tracks. A development-only collision-preview line selector feeds offsets into the existing pursuit-input QA fixture; it never changes positions or race state directly. HMR reloads collision/config modules to avoid retaining older controllers during development.
+
+## Model performance and per-cockpit fitting
+
+The registry distinguishes generated runtime `url` from preserved `sourceUrl`. `scripts/optimize-assets.mjs` performs bounded topology reduction/vertex compaction offline and records source hashes plus triangle/error budgets. Runtime still uses the same cached GLB loader and independent scene/skeleton clones. `paletteBatch` converts only compatible opaque untextured static parts to shared PBR materials with linear vertex colors; template preparation releases replaced intermediate geometry after merging. Skins, maps, morphs and transparent parts remain outside that batching path.
+
+`driverFitOptions` converts each kart's decorative steering-grip target into the driver's existing seat coordinates and configures its static fitting. `poseRegions` can protect complete connected islands (welded across position-identical UV seams) from deformation, preventing Arnold's head/neck/headphone parts from being stretched by an arm-region mask. No high-frequency geometry changes, simulation ownership, new animation clips, physics shapes or camera changes are involved. See docs/PERFORMANCE_AND_DRIVER_POLISH.md.
+
+
+## First Milestone 4 item slice
+
+`config/itemConfig.ts` centralizes pickup rows/lanes, respawn, bolt, stun/immunity and pool budgets. `items/ItemSystem.ts` owns pure fixed-step inventory, timers, projectiles, bounded events and AI firing decisions. `items/itemCollision.ts` performs swept circle/capsule and sampled-rail queries against existing track/collider data. RaceSession owns one ItemSystem, buffers human item edges until a fixed tick, passes the same normalized action for AI, and ticks items after existing movement, contact and progress processing. Hits change speed and cancel abilities at this orchestration layer; kart movement, AI navigation, lap gates, camera and collider sizes remain unchanged. Finished racers cannot collect or be hit. Pause disarms held use and freezes item time. Reset/recovery clears the appropriate scope.
+
+`KartInput.useItem` is optional for older fixtures/phone clients; current adapters emit booleans. Keyboard and phone touch taps latch until sampled, the HUD uses ActionInput, and RaceSession retains sub-tick pulses. One rising edge consumes one item. Phone protocol v1 accepts an omitted legacy field, validates supplied booleans, whitelists the new action through the relay and includes it in neutral arming/watchdog behavior. Host game state advertises itemsEnabled so the phone enables ITEM only in an active CPU race.
+
+`render/ItemVisuals.tsx` loads the preserved-credit optimized GLB through the existing loader/cache. Seven instanced parts share immutable template buffers across nine boxes, normalized around the core to 1.15 m. Frustum checks skip off-camera pickups; no pickup shadows or per-frame geometry/material allocation. Suspense/error fallback remains a procedural pickup. Bolt/trail/ring/slowdown effects use bounded instanced pools. ItemHUD takes small snapshots at 10 Hz and synthesized audio consumes bounded events once, respecting mute/pause. Simulation never depends on imported model bounds or renderer state. See docs/MILESTONE_4.md.
+
+
+## Banana Trap and supplied projectile visuals
+
+The two-item registry configures per-box rewards and decorative models separately from simulation shapes. ItemSystem adds bounded ground traps, safe backward placement, arming, owner grace, expiration, swept capsule contact and shared slowdown/immunity. Its existing shouldFire action chooses forward targets for bolts and trailing targets for traps; RaceSession and AI navigation do not need another input path. Three boxes give traps and six give bolts per course, using deterministic row/column data.
+
+CombatModels batches each supplied model with the existing loader/material cache; combatModelParts derives normalization and exporter transforms into per-part matrices. Independent matrices share immutable buffers/materials. Banana removes one exact duplicate node only from the prepared clone and aligns its bottom at ground level. Hutt ball centers at the unchanged 0.44 m projectile envelope. Each has a separate Suspense/error fallback. Trap rings and existing trails/effects remain bounded instance pools; item timers freeze with the existing fixed race clock. See docs/MILESTONE_4_ITEMS.md.
+
+
+## Bubble Guard
+
+ItemSlot adds shieldRemaining on the same fixed item clock. Activation consumes the held item, sets five seconds and emits a bounded guard event. Existing immunity is checked first in the shared hit path; otherwise an active guard absorbs exactly one bolt/trap and emits guard-break without mutating kart state or granting extra immunity. Expiry emits once. Recovery/reset creates an empty slot, and pause uses existing disarming/clock behavior. Guard protection and held inventory are independent; an active guard cannot be refreshed by a second held guard. At the guard milestone pickups provided three rewards of each type; the balance follow-up below supersedes that assignment.
+
+ItemSystem's defensive AI query predicts a short relative projectile sweep or a ground trap contact along current kart velocity. It submits the same useItem action as before, without steering or changing speed targets. CombatModelId now distinguishes supplied model IDs from all ItemIds; Bubble Guard is original procedural geometry, not an invented GLB. BubbleGuardVisuals reads interpolated poses into bounded instanced bubble/rim/pop pools. HUD snapshots show protection/countdown separately from the held item. Audio consumes guard activation/break/expiry events through the existing mute/pause cursor. No protocol, physics/collider, camera or race rule changes. See docs/BUBBLE_GUARD.md.
+
+
+## Position-weighted items and recovery balance
+
+`config/itemBalance.ts` centralizes item-only weights, use/reaction delays and repeat-hit tuning. `items/itemRewards.ts` chooses from validated standings at the instant of collection using independent seeded per-racer xorshift streams. Boxes own location/respawn only; they no longer have assigned rewards. New browser setup creates a crypto seed outside simulation; RaceSession accepts optional ItemSystemOptions, and CupSession derives each round from one seed. Restart reinitializes the same seed; individual recovery clears inventory/history without rewinding its reward stream.
+
+`items/itemAI.ts` evaluates the actual straight bolt trajectory against projected moving capsules and rails, predicts trap contact after arming, and predicts defensive threats. Delayed moving-pack guard preparation prevents an all-guard opening from keeping every inventory occupied. It produces only the existing useItem boolean. No navigation, steering, pace or homing changes are involved.
+
+ItemSlot tracks a six-second damaging-hit window, mild repeat slowdown limits, inventory cooldown and heldSince. Immunity is checked before guard/damage; ignored attacks never refresh protection. HUD snapshots expose the recovery countdown at 10 Hz; four pooled gold ground rings follow interpolated poses with no new collider, shadow or light. See docs/ITEM_BALANCE.md.
+
+
+## Time Trial records and visual replay
+
+`timeTrial/TrialRun` is a pure observer owned by RaceSession. Start initializes a sample at GO time zero; fixed ticks observe existing poses and validated progress after race bookkeeping. It stores 10 Hz quantized poses and an exact fractional-finish sample, bounded to 15 minutes. Recovery, non-finite/teleported observations and recording overflow invalidate record eligibility without altering race behavior. It never writes movement/progress. Existing timing includes the grid-to-start interval in the first lap and remains unchanged.
+
+`trialRules` fingerprints sampled track/width/start, lap count, current handling/drift/boost settings, fixed step, checkpoint/sweep/grid and rail-face tuning plus a policy version. `TrialRecords` is a browser adapter outside the fixed loop, with one versioned localStorage record per track. It validates timing metadata and bounded finite monotonic samples, discards incompatible records, salvages valid times if a replay is corrupt and falls back to timing-only or session memory on quota/denial. Best lap and full-race records update independently on a clean completed attempt; only a new race best replaces the ghost. Setup freezes the previous reference for that attempt; finish commits once; retry uses the latest record.
+
+`ghostPlayback` binary-searches time for pose interpolation, wrapping heading across its seam. It compares validated multi-lap distance to the ghost's first arrival at matching progress; delta is player time minus reference time, so negative is ahead. Reverse/stationary segments keep monotonic furthest-progress samples. `TimeTrialGhost` reads interpolated render time and owns only a small original cyan hologram with one shared translucent material, no collider, simulation, GLB clone, shadow, audio or item effects. Near-player opacity is reduced. The HUD updates at 10 Hz and its ghost visibility checkbox does not disable comparison or recording. Records appear in Time Trial track/review screens and the existing results/retry flow. See docs/TIME_TRIAL_RECORDS.md.
+
+
+## Frostbite Peak content extension
+
+`tracks/frostbitePeak.ts` supplies the third original loop to the existing sampler. Its catalog theme selects winter rendering; no simulation or camera changes are required. `frostbiteScenery.ts` centralizes tunnel outlines/locations, mountain clearance and snowbank layout. `render/alpineGeometry.ts` builds open, closed-shell tunnel meshes from the same road samples. `AlpineScenery.tsx` renders those meshes, signs and instanced mountains/snowbanks. Forest prop exclusion prevents trees intersecting the tunnels. These meshes are cosmetic; the existing shared road rail boundaries remain the collision authority.
+
+Menu course/round counts and cup maximum points derive from `trackCatalog`, `sunshineCup.tracks` and `cupPoints`. CupSession still wraps the same RaceSession instances; its definition now lists Sunshine → Sugar → Frostbite. The existing parameterized track/collision/race/options/item/Time Trial tests automatically exercise the added course. Frostbite-specific tests cover menu selection, geometry budgets and tunnel camera/rail clearance. See docs/FROSTBITE_PEAK.md.
+
+
+## Race-finish presentation
+
+`ui/results/resultsPresentation.ts` projects existing RaceSession standings or CupSession snapshots/totals into immutable cosmetic podium entries. AI appearance uses the same opponentSelections mapping as gameplay. Unfinished AI retains null finish time; fourth-place players do not displace a rival on the podium. Time Trial record badges/cues use the already committed eligible TrialOutcome. No simulation, classification, scoring or persistence rules change.
+
+`ResultsShell` shares the dialog, responsive two-column layout, podium labels and replay/next-round/Home controls across ResultsMenu and CupResultsMenu. It reuses keyboard/gamepad navigation and focus trapping and disables navigation while another panel is open. PodiumScene is lazy-loaded, independently clones the existing assemblies and never receives a Simulation. The background game renderer is suspended during results. Podium rise/turntable/confetti settle after 5.5 seconds in a demand-rendered canvas (DPR ≤1.25, no shadow pass). Reduced-motion users get a static stage and hidden tabs stop invalidation. Source drivers remain static/unrigged; only explicitly mapped compatible future victory clips may play. Per-model and canvas fallbacks keep the result actions usable.
+
+DrivingAudio owns a separate quiet celebration bus with short original scheduled motifs. App triggers it once after records/scores commit and the existing results transition silences driving audio. Natural completion, mute, blur/visibility loss, restart/Home and dispose disconnect celebration nodes; unmute never replays a cue. Development-only results-preview uses explicitly marked fixtures and writes no records. See docs/RACE_FINISH_POLISH.md.
+
+
+## Volcano Sprint content extension
+
+`tracks/volcanoSprint.ts` feeds a fourth original loop into the unchanged sampler. Its catalog theme enables the volcanic environment. `volcanoScenery.ts` owns deterministic, bounded lava-pool, crater-peak and basalt-column layouts, using conservative envelopes against nearest sampled road segments. `VolcanicScenery.tsx` renders those layouts in instanced batches; `volcanoGeometry.ts` builds slender lava seams on the actual nine-sided cliff faces. There is no new scenery collider, light, downloaded texture or surface/damage simulation. The original road rails remain authoritative. Course-map ellipses reuse the same lava-pool positions.
+
+The cup definition now appends Volcano Sprint. Existing CupSession scoring, round transitions and results/podium countback are unchanged; maximum points and all four-course menu labels derive from the registry. Catalog-parameterized geometry, collision, CPU/VS, combat, Time Trial ghost and full-cup integrations cover the added course. Content-specific tests verify selection/persistence, visible lava/cliff clearance, finite geometry and fixed rendering budgets. See docs/VOLCANO_SPRINT.md.

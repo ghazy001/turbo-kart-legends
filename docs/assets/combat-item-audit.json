@@ -1,0 +1,24 @@
+{
+  "source": "items/hutt-ball.glb",
+  "output": "optimized/items/hutt-ball.glb",
+  "sourceSha256": "1b0fb1c8dc799d6358ed114ae3d04fc880dee6329f09f15e7111f0fbac937343",
+  "sourceBytes": 7581860,
+  "outputBytes": 7360676,
+  "asset": {
+    "extras": {
+      "author": "VikoizBeast (https://sketchfab.com/VikoizBeast)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/star-wars-hutt-ball-bf9056ccb2e74e8dac151eb005cb3399",
+      "title": "Star Wars Hutt Ball"
+    },
+    "generator": "Sketchfab-16.60.0",
+    "version": "2.0"
+  },
+  "skins": 0,
+  "clips": 0,
+  "errorLimit": 0.00601,
+  "beforeTriangles": 10106,
+  "afterTriangles": 4174,
+  "simplifiedPrimitives": 1,
+  "maxRelativeError": 0.005991065409034491
+}

@@ -3,3 +3,6 @@ dist/
 coverage/
 *.local
 .DS_Store
+
+# Local-only development certificates and signing keys
+.certs/

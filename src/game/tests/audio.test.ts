@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createKart } from '../core/simulation';
 import { DrivingAudio } from '../render/DrivingAudio';
 import { sunshineCircuit } from '../tracks/sunshineCircuit';
+import { ItemSystem } from '../items/ItemSystem';
 
 function audioHarness() {
   const parameter = () => ({ value: 0, setTargetAtTime: vi.fn(), setValueAtTime: vi.fn(),
@@ -23,6 +24,46 @@ function audioHarness() {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('procedural driving audio lifecycle', () => {
+  it('keeps finish cues audible after driving stops and releases every scheduled voice naturally', () => {
+    const { audio, context } = audioHarness(); audio.unlock(); audio.silence();
+    audio.celebrate('cup-champion'); audio.update(createKart(sunshineCircuit), false);
+    expect(context.createOscillator).toHaveBeenCalledTimes(6);
+    expect(context.createOscillator.mock.results[5].value.start).toHaveBeenCalledWith(1.04);
+    const output = context.createGain.mock.results[2].value;
+    expect(output.gain.value).toBe(0.2);
+    for (const voice of context.createOscillator.mock.results) voice.value.onended?.();
+    expect(output.disconnect).toHaveBeenCalledTimes(1);
+    audio.dispose();
+    for (const voice of context.createOscillator.mock.results) expect(voice.value.disconnect).toHaveBeenCalledTimes(1);
+  });
+  it('cancels scheduled celebrations on mute, transition/focus silence and dispose without replay on unmute', () => {
+    const { audio, context } = audioHarness();
+    audio.celebrate('victory'); expect(context.createOscillator).not.toHaveBeenCalled();
+    audio.unlock(); audio.celebrate('victory'); audio.setMuted(true);
+    const first = context.createOscillator.mock.results.slice();
+    for (const voice of first) { expect(voice.value.stop).toHaveBeenLastCalledWith(); expect(voice.value.disconnect).toHaveBeenCalledTimes(1); }
+    audio.setMuted(false); expect(context.createOscillator).toHaveBeenCalledTimes(4);
+    audio.celebrate('personal-best'); audio.silence(); audio.celebrate('finish'); audio.dispose();
+    for (const voice of context.createOscillator.mock.results) expect(voice.value.disconnect).toHaveBeenCalledTimes(1);
+  });
+  it('plays each player item event once and discards paused or muted events', () => {
+    const { audio, context } = audioHarness(), items = new ItemSystem(sunshineCircuit);
+    audio.unlock(); audio.updateItems(items, true);
+    const emit = (kind: 'pickup' | 'fire' | 'drop' | 'hit' | 'guard' | 'guard-expire' | 'guard-break') => {
+      items.events.push({ id: ++items.eventSerial, kind, time: items.time, x: 0, z: 0, source: 'player', ...(kind === 'guard-break' ? { target: 'player' } : {}) });
+    };
+    emit('pickup'); audio.updateItems(items, true); audio.updateItems(items, true);
+    emit('fire'); audio.updateItems(items, true);
+    emit('drop'); audio.updateItems(items, true);
+    emit('hit'); audio.updateItems(items, true);
+    for (const event of ['guard', 'guard-break', 'guard-expire'] as const) { emit(event); audio.updateItems(items, true); }
+    expect(context.createOscillator).toHaveBeenCalledTimes(7);
+    emit('fire'); audio.updateItems(items, false); audio.updateItems(items, true);
+    audio.setMuted(true); emit('pickup'); audio.updateItems(items, true);
+    audio.setMuted(false); audio.updateItems(items, true);
+    expect(context.createOscillator).toHaveBeenCalledTimes(7);
+    audio.dispose();
+  });
   it('creates no audio context until explicitly unlocked by the UI', () => {
     const { audio, constructor } = audioHarness();
     audio.update(createKart(sunshineCircuit), true);

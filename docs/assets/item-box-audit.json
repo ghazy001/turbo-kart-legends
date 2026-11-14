@@ -1,0 +1,23 @@
+{
+  "source": "assets/items/question-mark-item-box.glb",
+  "runtime": "assets/optimized/items/question-mark-item-box.glb",
+  "sourceSha256": "8e3f0559cf95d7f634fad3bb8a9d5213c8e332160c6e12b2efbcbf3172cdc75d",
+  "sourceBytes": 2542908,
+  "runtimeBytes": 912060,
+  "asset": {
+    "extras": {
+      "author": "aeti2016 (https://sketchfab.com/aeti2016)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/question-mark-item-box-b73d472cb34f45dca9c9f883220e6514",
+      "title": "Question_mark_item_box"
+    },
+    "generator": "Sketchfab-17.15.0",
+    "version": "2.0"
+  },
+  "skins": 0,
+  "clips": 0,
+  "beforeTriangles": 83288,
+  "afterTriangles": 25156,
+  "simplifiedPrimitives": 3,
+  "maxRelativeError": 0.004988059867173433
+}

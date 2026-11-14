@@ -15,12 +15,12 @@ export function sampleGamepad(pad: PadSnapshot | null): KartInput {
   const steer = Math.abs(axis) <= deadzone ? 0 : Math.sign(axis) * (Math.abs(axis) - deadzone) / (1 - deadzone);
   return { throttle: button(pad, 7), brake: button(pad, 6),
     steer: steer || Number(down(pad, 15)) - Number(down(pad, 14)),
-    drift: down(pad, 0) || down(pad, 5) };
+    useItem: down(pad, 2), drift: down(pad, 0) || down(pad, 5) };
 }
 
 export function combineInputs(keyboard: KartInput, gamepad: KartInput): KartInput {
   return { throttle: Math.max(keyboard.throttle, gamepad.throttle), brake: Math.max(keyboard.brake, gamepad.brake),
-    steer: keyboard.steer || gamepad.steer, drift: keyboard.drift || gamepad.drift };
+    steer: keyboard.steer || gamepad.steer, drift: keyboard.drift || gamepad.drift, useItem: !!(keyboard.useItem || gamepad.useItem) };
 }
 
 /** Only standard-mapped controllers are accepted. Held inputs must go neutral after pause/reset. */
@@ -66,7 +66,7 @@ export class GamepadController {
     if (newReset && this.options.enabled()) this.options.onReset();
     const input = sampleGamepad(pad);
     if (this.requireNeutral) {
-      if (input.throttle < 0.05 && input.brake < 0.05 && input.steer === 0 && !input.drift && !pause && !reset) this.requireNeutral = false;
+      if (input.throttle < 0.05 && input.brake < 0.05 && input.steer === 0 && !input.drift && !input.useItem && !pause && !reset) this.requireNeutral = false;
       return { ...NEUTRAL_INPUT };
     }
     return this.options.enabled() ? input : { ...NEUTRAL_INPUT };

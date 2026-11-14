@@ -9,6 +9,8 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 async function walk(folder) {
   const files = [];
   for (const entry of await readdir(folder, { withFileTypes: true })) {
+    // Generated derivatives have their own optimization report; audit supplied sources once.
+    if (entry.isDirectory() && entry.name === 'optimized') continue;
     const name = path.join(folder, entry.name);
     files.push(...entry.isDirectory() ? await walk(name) : [name]);
   }
@@ -60,7 +62,7 @@ for (const file of await walk(path.join(root, 'public/assets'))) {
   });
   const clips = (document.animations ?? []).map((clip, index) => ({ name: clip.name ?? `clip-${index}`, tracks: clip.channels.length,
     duration: Math.max(0, ...clip.samplers.map(sampler => document.accessors[sampler.input].max?.[0] ?? 0)) }));
-  reports.push({ path: relative, category: /boat_kart|\/karts\//.test(relative) ? 'kart' : 'racer', bytes: bytes.length, sha256: hash(bytes),
+  reports.push({ path: relative, category: relative.includes('/items/') ? 'item' : /boat_kart|\/karts\//.test(relative) ? 'kart' : 'racer', bytes: bytes.length, sha256: hash(bytes),
     asset: document.asset, requiredExtensions: document.extensionsRequired ?? [],
     min: round(box.min.toArray()), max: round(box.max.toArray()), size: round(box.getSize(new Vector3()).toArray()),
     triangles: meshes.reduce((sum, mesh) => sum + mesh.triangles, 0), meshes, skins: (document.skins ?? []).map(skin => ({ name: skin.name, joints: skin.joints.map(index => document.nodes[index].name) })),

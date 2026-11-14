@@ -3,7 +3,7 @@
     "path": "assets/.DS_Store",
     "category": "ignored",
     "reason": "Not a GLB",
-    "bytes": 6148
+    "bytes": 8196
   },
   {
     "path": "assets/characters/crash_bandicoot_cartoon.glb",
@@ -1109,6 +1109,535 @@
           },
           "metallicFactor": 0,
           "roughnessFactor": 0.8929713596497552
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/items/banana-trap.glb",
+    "category": "item",
+    "bytes": 14268,
+    "sha256": "bc1a2c435c8a9959185326a0b2d3d73db7bf6eecaf8645e387c50b8e368fb4f1",
+    "asset": {
+      "extras": {
+        "author": "StarlightLambda64 (https://sketchfab.com/Starlight_lambda64)",
+        "license": "SKETCHFAB Standard (https://sketchfab.com/licenses)",
+        "source": "https://sketchfab.com/3d-models/mario-kart-double-dash-banana-df231cb326d94060af0a1cff5422f056",
+        "title": "[Mario Kart: Double Dash] Banana"
+      },
+      "generator": "Sketchfab-16.72.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -33.331524,
+      0.029301,
+      -37.169754
+    ],
+    "max": [
+      33.330532,
+      46.440856,
+      19.624272
+    ],
+    "size": [
+      66.662056,
+      46.411555,
+      56.794025
+    ],
+    "triangles": 164,
+    "meshes": [
+      {
+        "name": "Object_3",
+        "skinned": false,
+        "vertices": 111,
+        "triangles": 82,
+        "min": [
+          -33.331524,
+          0.029301,
+          -37.169754
+        ],
+        "max": [
+          33.330532,
+          46.440856,
+          19.624272
+        ],
+        "center": [
+          -0.000496,
+          23.235079,
+          -8.772741
+        ]
+      },
+      {
+        "name": "Object_4",
+        "skinned": false,
+        "vertices": 111,
+        "triangles": 82,
+        "min": [
+          -33.331524,
+          0.029301,
+          -37.169754
+        ],
+        "max": [
+          33.330532,
+          46.440856,
+          19.624272
+        ],
+        "center": [
+          -0.000496,
+          23.235079,
+          -8.772741
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/png",
+        "bytes": 1989,
+        "width": 64,
+        "height": 128,
+        "sha256": "daa8bd7df0c1526f83b7b97687d677837ed1f42d41930452acc967ec6e6b9ad0"
+      }
+    ],
+    "estimatedTextureMiB": 0.041666666666666664,
+    "materials": [
+      {
+        "doubleSided": true,
+        "name": "banana_face",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/items/hutt-ball.glb",
+    "category": "item",
+    "bytes": 7581860,
+    "sha256": "1b0fb1c8dc799d6358ed114ae3d04fc880dee6329f09f15e7111f0fbac937343",
+    "asset": {
+      "extras": {
+        "author": "VikoizBeast (https://sketchfab.com/VikoizBeast)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/star-wars-hutt-ball-bf9056ccb2e74e8dac151eb005cb3399",
+        "title": "Star Wars Hutt Ball"
+      },
+      "generator": "Sketchfab-16.60.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -98.169202,
+      -99.613798,
+      -98.169202
+    ],
+    "max": [
+      98.169202,
+      99.613798,
+      98.169202
+    ],
+    "size": [
+      196.338403,
+      199.227595,
+      196.338404
+    ],
+    "triangles": 10106,
+    "meshes": [
+      {
+        "name": "defaultMaterial",
+        "skinned": false,
+        "vertices": 7744,
+        "triangles": 10106,
+        "min": [
+          -98.169202,
+          -99.613798,
+          -98.169202
+        ],
+        "max": [
+          98.169202,
+          99.613798,
+          98.169202
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/jpeg",
+        "bytes": 717294,
+        "width": null,
+        "height": null,
+        "sha256": "e11546813e82da8bbbdd9f015e25a2d6063870ecd07a7584962aab3e82bdd77a"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 2128142,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "e00913c90c197064643afb31b28ae0224a3a99033e2ec5e13f1e8a207c2daa07"
+      },
+      {
+        "mimeType": "image/jpeg",
+        "bytes": 377716,
+        "width": null,
+        "height": null,
+        "sha256": "f37ec296da0b0e6ef2435890d9c2828675d88a91cc0049a2b480119a5127c61f"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 3862456,
+        "width": 2048,
+        "height": 2048,
+        "sha256": "eed9e89a63189bd2a6f7ded89001a62edef4b1b479a242376817e4cd8bb098ac"
+      }
+    ],
+    "estimatedTextureMiB": 42.666666666666664,
+    "materials": [
+      {
+        "doubleSided": true,
+        "emissiveFactor": [
+          1,
+          1,
+          1
+        ],
+        "emissiveTexture": {
+          "index": 2
+        },
+        "name": "DefaultMaterial_1001",
+        "normalTexture": {
+          "index": 3
+        },
+        "occlusionTexture": {
+          "index": 1
+        },
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicRoughnessTexture": {
+            "index": 1
+          }
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/items/question-mark-item-box.glb",
+    "category": "item",
+    "bytes": 2542908,
+    "sha256": "8e3f0559cf95d7f634fad3bb8a9d5213c8e332160c6e12b2efbcbf3172cdc75d",
+    "asset": {
+      "extras": {
+        "author": "aeti2016 (https://sketchfab.com/aeti2016)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/question-mark-item-box-b73d472cb34f45dca9c9f883220e6514",
+        "title": "Question_mark_item_box"
+      },
+      "generator": "Sketchfab-17.15.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -1.43,
+      -1.198425,
+      -1.225
+    ],
+    "max": [
+      1.365,
+      1.198425,
+      1.295
+    ],
+    "size": [
+      2.795,
+      2.39685,
+      2.52
+    ],
+    "triangles": 83288,
+    "meshes": [
+      {
+        "name": "Object_5",
+        "skinned": false,
+        "vertices": 24,
+        "triangles": 12,
+        "min": [
+          -1,
+          -1,
+          -1
+        ],
+        "max": [
+          1,
+          1,
+          1
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Object_7",
+        "skinned": false,
+        "vertices": 24,
+        "triangles": 12,
+        "min": [
+          -1.021,
+          -1.021,
+          -1.021
+        ],
+        "max": [
+          1.021,
+          1.021,
+          1.021
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Object_9",
+        "skinned": false,
+        "vertices": 2728,
+        "triangles": 4224,
+        "min": [
+          -1.112531,
+          -1.112531,
+          -1.1131
+        ],
+        "max": [
+          1.112531,
+          1.112531,
+          1.1131
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Object_11",
+        "skinned": false,
+        "vertices": 1200,
+        "triangles": 1152,
+        "min": [
+          -1.12,
+          -1.12,
+          -1.12
+        ],
+        "max": [
+          1.12,
+          1.12,
+          1.12
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Object_13",
+        "skinned": false,
+        "vertices": 26964,
+        "triangles": 38112,
+        "min": [
+          -1.198425,
+          -1.198425,
+          -1.199
+        ],
+        "max": [
+          1.198425,
+          1.198425,
+          1.199
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Object_15",
+        "skinned": false,
+        "vertices": 28668,
+        "triangles": 39744,
+        "min": [
+          -1.196627,
+          -1.196627,
+          -1.197
+        ],
+        "max": [
+          1.196627,
+          1.196627,
+          1.197
+        ],
+        "center": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Object_17",
+        "skinned": false,
+        "vertices": 96,
+        "triangles": 32,
+        "min": [
+          -1.43,
+          -0.83,
+          -1.225
+        ],
+        "max": [
+          1.365,
+          0.875,
+          1.295
+        ],
+        "center": [
+          -0.0325,
+          0.0225,
+          0.035
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/png",
+        "bytes": 103132,
+        "width": 512,
+        "height": 512,
+        "sha256": "8c0135abe1fe4a633dbe44b8e32da8ceb0cac5901084177646a32c8e88aaabc1"
+      }
+    ],
+    "estimatedTextureMiB": 1.3333333333333333,
+    "materials": [
+      {
+        "alphaMode": "BLEND",
+        "doubleSided": true,
+        "emissiveFactor": [
+          0,
+          0.08,
+          0.1
+        ],
+        "name": "translucent_aqua_cube_body",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.0196078,
+            0.819608,
+            1,
+            0.341176
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.08
+        }
+      },
+      {
+        "name": "material_0",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "roughnessFactor": 0.903602
+        }
+      },
+      {
+        "emissiveFactor": [
+          0,
+          0.3,
+          0.35
+        ],
+        "name": "electric_cyan_rounded_edges",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.0509804,
+            0.94902,
+            1,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.18
+        }
+      },
+      {
+        "emissiveFactor": [
+          0.18,
+          0.55,
+          0.6
+        ],
+        "name": "soft_cyan_face_rims",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.658824,
+            1,
+            1,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.12
+        }
+      },
+      {
+        "name": "deep_blue_question_mark_outline",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.0156863,
+            0.0784314,
+            0.258824,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.28
+        }
+      },
+      {
+        "emissiveFactor": [
+          0.5,
+          0.3,
+          0
+        ],
+        "name": "golden_question_mark_raised_fill",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            1,
+            0.780392,
+            0.0509804,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.16
+        }
+      },
+      {
+        "emissiveFactor": [
+          0.65,
+          0.85,
+          0.9
+        ],
+        "name": "small_white_cyan_sparkles",
+        "pbrMetallicRoughness": {
+          "baseColorFactor": [
+            0.901961,
+            1,
+            1,
+            1
+          ],
+          "metallicFactor": 0,
+          "roughnessFactor": 0.1
         }
       }
     ]
@@ -6863,5 +7392,11 @@
         }
       }
     ]
+  },
+  {
+    "path": "assets/ui/sunshine-backdrop.svg",
+    "category": "ignored",
+    "reason": "Not a GLB",
+    "bytes": 1613
   }
 ]

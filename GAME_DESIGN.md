@@ -50,14 +50,14 @@ Initial tuning targets (starting points, not final balancing):
 Press/hold drift while steering and moving above a minimum speed. Kart slides more, yaw tightens, and a drift charge meter accumulates while the player maintains controlled steering. Releasing after charge triggers a timed mini-turbo. Three tiers have increasing charge thresholds and boost durations; values are data-driven. No drift reward if stationary or repeatedly spamming input.
 
 ### Race rules (Milestone 3)
-Countdown 3-2-1-GO, three-lap default, ordered checkpoint gates, correct lap validation, live position ranking, best lap, race results and reset-on-stuck logic. Progress is checkpoint-based and tracks arc-length distance, preventing skipped checkpoints or reverse-driving exploits. AI competitors begin with fair spacing and distinct skill profiles.
+Countdown 3-2-1-GO, three-lap default (VS optionally 1/3/5 laps with Easy/Normal/Hard CPU pace), ordered checkpoint gates, correct lap validation, live position ranking, best lap, race results and reset-on-stuck logic. Progress is checkpoint-based and tracks arc-length distance, preventing skipped checkpoints or reverse-driving exploits. AI competitors begin with fair spacing and distinct skill profiles.
 
 ### Power-ups (Milestone 4)
 Six original examples: Spark Bolt (straight projectile), Bubble Guard (temporary shield), Sticky Blob (track trap), Turbo Canister (speed burst), Magnet Pulse (short-range slowdown), Cloud Puff (temporary obscuring visual effect). Each item has duration, cooldown, hit rules and counterplay. Avoid directly copying another franchise's distinctive iconography or behavior tuning.
 
 ### Race modes
 - Free Drive: Untimed learning environment.
-- Time Trial: Solo, no random items, personal best and optional ghost later.
+- Time Trial: Solo, no items; local personal-best lap/race and optional best-run ghost.
 - Quick Race: One race versus AI.
 - Grand Prix: Multi-track championship with standings.
 - Online Rooms: Post-v1.0 update.
@@ -65,8 +65,8 @@ Six original examples: Spark Bolt (straight projectile), Bubble Guard (temporary
 ## 5. Tracks
 1. **Sunshine Circuit** — tropical beginner track, wide curves, clear grass/road contrast, one tunnel and a short bridge. Prototype track in Milestone 1 is a simplified Sunshine Circuit.
 2. **Sugar Rush Valley** — dessert-colored hills, giant sweets, gentle jumps and colorful shortcuts.
-3. **Frostbite Peak** — snow banks, icy corners with lower grip and looping mountain roads.
-4. **Volcano Sprint** — lava-lit hazards, tighter turns and dramatic set pieces.
+3. **Frostbite Peak** — implemented as a flat alpine loop with snowbanks, snow pines, distant peaks, two open glacier tunnels and flowing bends. It uses the same grip/handling as the other courses; lower-grip ice and elevated roads remain future ideas.
+4. **Volcano Sprint** — implemented as a flat caldera loop with linked bends, basalt columns, dusk lighting and glowing scenic lava pools/crater seams. Lava stays beyond the solid rails and does not apply damage; no new surface or hazard rules.
 Every course uses the same centerline + width + checkpoints + spawn markers track schema; no hard-coded scene-specific race rules.
 
 ## 6. Characters and karts
@@ -101,3 +101,43 @@ LocalStorage for player settings and best laps initially; explicit versioned sch
 
 ## 13. IP and asset guidelines
 Create original world/characters/sounds. Do not ship ripped Mario Kart assets, replicated recognizable tracks, Nintendo characters, logos or soundtrack. Track author/license info for third-party assets and fonts.
+
+
+## Implemented M4 slice
+
+The user authorized supplied item meshes as local prototype visuals. Spark Bolt is a straight projectile and Banana Trap is a dropped ground hazard. Hits briefly slow and cancel abilities, and immunity prevents repeated stacking. Bubble Guard now provides five seconds of one-hit item protection. Position-weighted rewards are now implemented for these three items; no homing is implemented. Only CPU race modes use items. See docs/MILESTONE_4.md for exact tuning, asset provenance and validation.
+
+
+## M4 supplied-model follow-up
+
+Banana Trap is now implemented as a ground hazard using the user's supplied mesh. All nine boxes now roll Spark Bolt (rendered with the supplied Hutt ball), Banana Trap or Bubble Guard from position weights at collection. Arming, owner grace, expiry, shared brief slowdown/immunity and hop counterplay keep combat inside the existing fixed-step item subsystem. This local prototype uses supplied franchise art with recorded metadata/permission; original release artwork remains future work. See docs/MILESTONE_4_ITEMS.md.
+
+
+## Bubble Guard follow-up
+
+The user's accepted defense item is now a five-second, one-hit guard. It absorbs one bolt or trap without canceling driving abilities and has a visible bubble/countdown. It is a consumable defense, not wall/contact immunity or a healing effect. Pickups now use the three-item position weights in docs/ITEM_BALANCE.md; human balance tuning remains open. See docs/BUBBLE_GUARD.md.
+
+
+## Three-item balance follow-up
+
+First-place rewards favor defense, last-place rewards favor straight bolts, and middle places retain a balanced mix. Every implemented item remains possible in every position. A 0.3 s AI reaction delay, predictive attacks and delayed pack defense improve timing without changing navigation. Standard item-hit immunity is 2.2 s; damaging hits within six seconds have milder slowdown and 3 s immunity. Ignored contacts do not extend protection. Gold rings and a HUD countdown make recovery readable. See docs/ITEM_BALANCE.md for exact weights, seed behavior and validation. This completes the accepted three-item balance slice, not the planned six-item set.
+
+
+## Time Trial personal records
+
+Clean completed Time Trials save per-track best race and best lap in this browser. The fastest complete run supplies a translucent original kart ghost on the next attempt. A signed live time comparison uses matching validated course progress: negative means ahead, positive means behind. The ghost has no contact or gameplay effects and can be hidden while comparison continues. Pause freezes replay; recovery makes the attempt practice-only and hides its ghost/comparison until restart. A full run must finish without recovery or recording interruption to replace records. The recorder caps at 15 minutes; longer races still finish as practice. No backend or online authority is implied. See docs/TIME_TRIAL_RECORDS.md.
+
+
+## Third-course follow-up
+
+Frostbite Peak introduced the third cup round (coast → candy valley → snowcap summit), and remains selectable for Quick Race, Time Trial and VS. The same 12 ordered checkpoints, boundaries, item pickups, AI and local Time Trial records work on its sampled road. Scenery stays outside the driving corridor and both tunnels leave room for the unchanged chase camera. No new surface physics, ramps or track-specific race rules were introduced. See docs/FROSTBITE_PEAK.md.
+
+
+## Race-finish polish
+
+Results now show the classified top three with their actual cosmetic kart/driver choices, a short stage reveal and original trophy/confetti for victories and championship finals. Time Trial has a solo finish stage and badges/cues for eligible personal bests; recovered attempts stay practice-only. Cup round results show the existing cumulative points and next-race action; the final podium uses championship totals/countback, even when the champion did not win the last round. Animation is procedural stage motion, not an authored character victory pose. Enter/Space confirms the focused action, arrows/WASD or gamepad navigate and Escape/Backspace returns Home. Reduced motion removes stage/confetti animation.
+
+
+## Fourth-course follow-up
+
+Volcano Sprint completes the first four-course set and extends Sunshine Cup to four races (coast → candy valley → snowcap summit → ember caldera). All courses share the same handling, grip, camera, ordered gates, CPU/item rules and Time Trial record system. Scenery envelopes keep lava, basalt and crater peaks clear of the driving corridor. See docs/VOLCANO_SPRINT.md.

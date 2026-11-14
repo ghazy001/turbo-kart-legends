@@ -1,0 +1,110 @@
+[
+  {
+    "source": "karts/my-kart.glb",
+    "output": "optimized/karts/my-kart.glb",
+    "sourceSha256": "7e72ec79c51bed540001162a60531cc312bdc11f6dc128e7dc10eece0fab96e0",
+    "sourceBytes": 832164,
+    "outputBytes": 817944,
+    "ratio": 0.6,
+    "beforeTriangles": 7696,
+    "afterTriangles": 7320,
+    "simplifiedPrimitives": 1,
+    "maxRelativeError": 0.0014983065193518996
+  },
+  {
+    "source": "karts/go_kart_64.glb",
+    "output": "optimized/karts/go_kart_64.glb",
+    "sourceSha256": "2f13a766be74eea77cd28584e2a322968a4c827c531f68599a5d84a313e5dc71",
+    "sourceBytes": 5081772,
+    "outputBytes": 4463644,
+    "ratio": 0.4,
+    "beforeTriangles": 118786,
+    "afterTriangles": 92862,
+    "simplifiedPrimitives": 4,
+    "maxRelativeError": 0.001496866112574935
+  },
+  {
+    "source": "karts/mario_kart_ds.glb",
+    "output": "optimized/karts/mario_kart_ds.glb",
+    "sourceSha256": "b454ffc47ed062791b227015ae9d91f1dc386e85883344e18cc0a88b778211d4",
+    "sourceBytes": 1776912,
+    "outputBytes": 1401632,
+    "ratio": 0.6,
+    "beforeTriangles": 42301,
+    "afterTriangles": 30323,
+    "simplifiedPrimitives": 10,
+    "maxRelativeError": 0.0014942035777494311
+  },
+  {
+    "source": "characters/nickelodeon_kart_racers_3_spongebob_boat_kart.glb",
+    "output": "optimized/characters/nickelodeon_kart_racers_3_spongebob_boat_kart.glb",
+    "sourceSha256": "de1c9904167b2a74ad91b34c88012a8c3ed5896dc0e991ad065305d2b9c17fd0",
+    "sourceBytes": 3601820,
+    "outputBytes": 3602356,
+    "ratio": 0.6,
+    "beforeTriangles": 29964,
+    "afterTriangles": 29948,
+    "simplifiedPrimitives": 4,
+    "maxRelativeError": 0.000265613867668435
+  },
+  {
+    "source": "characters/my-character.glb",
+    "output": "optimized/characters/my-character.glb",
+    "sourceSha256": "08e13ce73db2b220baba8152fe5dd63c1907a951792b6b4b142771cd39037c9d",
+    "sourceBytes": 7604276,
+    "outputBytes": 7294260,
+    "ratio": 0.65,
+    "beforeTriangles": 36482,
+    "afterTriangles": 25736,
+    "simplifiedPrimitives": 8,
+    "maxRelativeError": 0.0014997620601207018
+  },
+  {
+    "source": "characters/nickelodeon_kart_racers_3_aang.glb",
+    "output": "optimized/characters/nickelodeon_kart_racers_3_aang.glb",
+    "sourceSha256": "666c71d9486eef18a0db49127835015f77ed26c21a865940943e83b46028d767",
+    "sourceBytes": 2935936,
+    "outputBytes": 2450188,
+    "ratio": 0.65,
+    "beforeTriangles": 36746,
+    "afterTriangles": 23884,
+    "simplifiedPrimitives": 1,
+    "maxRelativeError": 0.0003657840716186911
+  },
+  {
+    "source": "characters/nickelodeon_kart_racers_3_arnold.glb",
+    "output": "optimized/characters/nickelodeon_kart_racers_3_arnold.glb",
+    "sourceSha256": "dc0eefacf1dff17ffeb4b9289aef36867bb2dffb18a03ed6ed1a1497e1271ddc",
+    "sourceBytes": 5055024,
+    "outputBytes": 4224216,
+    "ratio": 0.65,
+    "beforeTriangles": 61916,
+    "afterTriangles": 40412,
+    "simplifiedPrimitives": 1,
+    "maxRelativeError": 0.00025153416208922863
+  },
+  {
+    "source": "characters/nickelodeon_kart_racers_3_spongebob.glb",
+    "output": "optimized/characters/nickelodeon_kart_racers_3_spongebob.glb",
+    "sourceSha256": "027a957aba65b29ffa211d2d19fc827b5587bce2736d4662d911922d882f2591",
+    "sourceBytes": 6570828,
+    "outputBytes": 6016360,
+    "ratio": 0.65,
+    "beforeTriangles": 43720,
+    "afterTriangles": 28726,
+    "simplifiedPrimitives": 1,
+    "maxRelativeError": 0.0002199961309088394
+  },
+  {
+    "source": "characters/crash_bandicoot_cartoon.glb",
+    "output": "optimized/characters/crash_bandicoot_cartoon.glb",
+    "sourceSha256": "bd0159ad264242b9f6679bf6a53714de43a3be7cbd6643aa6f03d90fe5f2bb43",
+    "sourceBytes": 1319672,
+    "outputBytes": 954936,
+    "ratio": 0.65,
+    "beforeTriangles": 36672,
+    "afterTriangles": 23836,
+    "simplifiedPrimitives": 2,
+    "maxRelativeError": 0.0009294507326558232
+  }
+]

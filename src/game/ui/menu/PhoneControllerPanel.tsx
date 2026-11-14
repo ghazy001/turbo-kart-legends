@@ -1,0 +1,10 @@
+import { useSyncExternalStore } from 'react';
+import { PairingPanel } from '../../../phone/PairingPanel';
+import type { RemoteHost } from '../../../phone/RemoteHost';
+import { panelCommand, useMenuNavigation } from './useMenuNavigation';
+
+export function PhoneControllerPanel({ host, onClose, returnFocusElement }: { host: RemoteHost; onClose: () => void; returnFocusElement?: HTMLElement | null }) {
+  const state = useSyncExternalStore(host.subscribe, host.getSnapshot), preferences = state.preferences;
+  const navigation = useMenuNavigation(action => panelCommand(navigation.ref.current, action, onClose), 'Phone controller', true, returnFocusElement);
+  return <div {...navigation} className="phone-settings-host"><PairingPanel host={host} onClose={onClose}><section className="phone-desktop-settings" aria-label="Phone steering preferences"><div><span className="flow-overline">YOUR POCKET WHEEL</span><h3>A little fine tuning.</h3><p>Settings are sent to the paired phone. Motion permission must be granted on the phone itself.</p></div><div className="phone-desktop-tuning"><label className="phone-touch-toggle"><span><strong>Touch steering</strong><small>Turn off to request motion steering</small></span><input type="checkbox" checked={preferences.touch} onChange={event => host.configure({ ...preferences, touch: event.currentTarget.checked })} /></label><label>Tilt sensitivity <output>Full lock at {preferences.fullLockDegrees}°</output><input type="range" min="10" max="50" value={preferences.fullLockDegrees} onChange={event => host.configure({ ...preferences, fullLockDegrees: Number(event.currentTarget.value) })} /></label><button data-selection-action disabled={state.link.state !== 'connected' || preferences.touch} onClick={() => host.configure(preferences, true)}>Calibrate neutral on phone <span>↗</span></button><small>Hold the phone at your comfortable neutral angle, then calibrate. If motion is not enabled, the phone will ask you to enable it there.</small></div></section></PairingPanel></div>;
+}

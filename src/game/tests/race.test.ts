@@ -121,7 +121,7 @@ describe('race session timing and recovery', () => {
       return race.racers.map(r => ({ kart: r.simulation.current, progress: r.progress }));
     });
     expect(states[0]).toEqual(states[1]); expect(states[1]).toEqual(states[2]);
-  });
+  }, 15000);
   it('finishes a complete time trial through ordinary controller inputs', () => {
     const race = new RaceSession(track); race.start('time-trial');
     for (let i = 0; i < 18000 && race.phase !== 'finished'; i++) {

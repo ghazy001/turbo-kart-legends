@@ -1,15 +1,13 @@
+import { expectInsideRails } from './helpers/roadBounds';
 import { describe, expect, it } from 'vitest';
-import { kartConfig } from '../config/kartConfig';
 import { createKart, stepKart } from '../core/simulation';
 import { constrainKart } from '../kart/kartCollision';
 import { wrapAngle } from '../kart/kartController';
-import { sunshineCircuit as track } from '../tracks/sunshineCircuit';
+import { trackCatalog } from '../tracks/trackCatalog';
 import { nearestRoadPoint, offsetSample } from '../tracks/trackSampling';
 import type { Vec2 } from '../core/types';
 
-const safeWidth = track.definition.roadWidth / 2 - kartConfig.collisionRadius - kartConfig.collisionSkin;
-
-describe('shared track geometry and constraints', () => {
+describe.each(trackCatalog)('$name: shared track geometry and constraints', ({ track }) => {
   it('is a continuous, uniformly sampled closed loop with tangent-aligned spawn', () => {
     track.samples.forEach((sample, i) => {
       const next = track.samples[(i + 1) % track.samples.length];
@@ -39,7 +37,7 @@ describe('shared track geometry and constraints', () => {
       const sample = track.samples[i];
       const outside = offsetSample(sample, side * 6);
       const result = constrainKart({ ...createKart(track), ...outside, heading: Math.atan2(sample.tz * side, -sample.tx * side), forwardSpeed: 20 }, track);
-      expect(nearestRoadPoint(track, result).distance).toBeLessThanOrEqual(safeWidth + 0.0001);
+      expectInsideRails(track, result);
       expect(Math.abs(result.forwardSpeed)).toBeLessThan(20);
     }
   });
@@ -48,7 +46,7 @@ describe('shared track geometry and constraints', () => {
     let kart = { ...createKart(track), heading: Math.atan2(sample.tz, -sample.tx), forwardSpeed: 20 };
     for (let i = 0; i < 600; i++) {
       kart = stepKart(kart, { drift: false, throttle: 1, brake: 0, steer: 0 }, 1 / 60, track);
-      expect(nearestRoadPoint(track, kart).distance).toBeLessThanOrEqual(safeWidth + 0.001);
+      expectInsideRails(track, kart);
     }
     const contact = { ...kart };
     for (let i = 0; i < 60; i++) kart = stepKart(kart, { drift: false, throttle: 0, brake: 1, steer: 0 }, 1 / 60, track);
@@ -61,11 +59,10 @@ describe('shared track geometry and constraints', () => {
     expect(Math.abs(result.lateralSpeed)).toBeLessThan(0.1);
   });
   it.each([1, -1])('can traverse a full circuit in direction %i with ordinary normalized inputs', direction => {
-    // Test-only steering fixture exercises the public player input API; no AI ships in the game.
+    // Steering fixture exercises the public player input API in both directions.
     let kart = { ...createKart(track), heading: wrapAngle(track.spawn.heading + (direction < 0 ? Math.PI : 0)) };
     let traveled = 0;
     let road = nearestRoadPoint(track, kart);
-    let maxDistance = 0;
     for (let tick = 0; tick < 7200 && traveled < track.length; tick++) {
       const target = track.samples[(road.index + direction * 8 + track.samples.length) % track.samples.length];
       const error = wrapAngle(Math.atan2(target.x - kart.x, target.z - kart.z) - kart.heading);
@@ -76,9 +73,9 @@ describe('shared track geometry and constraints', () => {
       if (delta < -track.length / 2) delta += track.length;
       traveled += delta * direction;
       road = nextRoad;
-      maxDistance = Math.max(maxDistance, road.distance);
+      if (tick % 30 === 0) expectInsideRails(track, kart);
     }
     expect(traveled).toBeGreaterThanOrEqual(track.length);
-    expect(maxDistance).toBeLessThanOrEqual(safeWidth + 0.001);
+    expectInsideRails(track, kart);
   }, 15000);
 });

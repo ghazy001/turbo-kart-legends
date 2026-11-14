@@ -59,3 +59,8 @@ These credits reproduce the supplied files' metadata; they are not a claim that 
 ## Remaining asset work
 
 For a production seated driver, use Blender to add an armature, weight the mesh, author a proper seated bind/idle pose with pelvis/spine/hips/knees/ankles, and animate shoulder/elbow/wrist/finger placement against the kart's steering wheel. Export an appropriately named driving clip and hip/root mounting origin; test skin deformation through steering and landing. The current material-split OBJ export has no rig to retarget. Optimize/repack the eight character textures and consider a compressed export with local decoders before adding a fleet. Performance/device coverage has not been benchmarked.
+
+
+## Milestone 3.5 update
+
+The single-pair implementation described above is now extended by the typed multi-asset registry and garage. See [M3.5](MILESTONE_3_5.md) for the current nine selectable sources, three excluded/duplicate files, complete audit, renderer sharing rules, static-pose limitations, credits and verification. Historical verification statements above apply to their original milestone only.

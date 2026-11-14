@@ -27,11 +27,11 @@ describe('keyboard adapter', () => {
     const { key, keyboard } = setup();
     expect(key('KeyW').defaultPrevented).toBe(true);
     key('ArrowRight');
-    expect(keyboard.sample()).toEqual({ drift: false, throttle: 1, brake: 0, steer: 1 });
+    expect(keyboard.sample()).toEqual({ drift: false, throttle: 1, brake: 0, steer: 1, useItem: false });
     key('KeyA');
     expect(keyboard.sample().steer).toBe(0);
     key('KeyW', 'keyup'); key('ArrowUp'); key('ArrowDown');
-    expect(keyboard.sample()).toEqual({ drift: false, throttle: 1, brake: 1, steer: 0 });
+    expect(keyboard.sample()).toEqual({ drift: false, throttle: 1, brake: 1, steer: 0, useItem: false });
     keyboard.dispose();
   });
   it('clears held throttle on blur and visibility loss, and requests pause', () => {

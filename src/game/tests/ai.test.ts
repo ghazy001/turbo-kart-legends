@@ -1,3 +1,5 @@
+import { expectInsideRails } from './helpers/roadBounds';
+import { kartContact } from '../kart/kartFootprint';
 import { describe, expect, it } from 'vitest';
 import { waypointInput } from '../ai/waypointController';
 import { aiProfiles, raceConfig } from '../config/raceConfig';
@@ -6,6 +8,7 @@ import { NEUTRAL_INPUT } from '../core/types';
 import { RaceSession } from '../race/RaceSession';
 import { pointAtDistance } from '../race/trackProgress';
 import { resolveRacerContacts } from '../race/racerCollision';
+import { trackCatalog } from '../tracks/trackCatalog';
 import { sunshineCircuit as track } from '../tracks/sunshineCircuit';
 import { nearestRoadPoint, offsetSample } from '../tracks/trackSampling';
 
@@ -22,9 +25,9 @@ describe('AI and kart traffic', () => {
     const a = { ...createKart(track), forwardSpeed: 15 };
     const b = { ...a, x: a.x + Math.sin(a.heading) * 2, z: a.z + Math.cos(a.heading) * 2, forwardSpeed: 3 };
     const states = [a, b]; resolveRacerContacts(states, track);
-    expect(Math.hypot(states[0].x - states[1].x, states[0].z - states[1].z)).toBeGreaterThanOrEqual(raceConfig.racerRadius * 2 - 0.01);
+    expect(kartContact(states[0], states[1])).toBeNull();
     expect(states[0].forwardSpeed).toBeLessThan(a.forwardSpeed);
-    for (const state of states) expect(nearestRoadPoint(track, state).distance).toBeLessThan(3.67);
+    for (const state of states) expectInsideRails(track, state);
   });
   it('does not treat invisible finished rivals as traffic obstacles', () => {
     const states = [5, 100].map(offset => {
@@ -42,12 +45,12 @@ describe('AI and kart traffic', () => {
   it('resolves rail-side squeezing without escape and cancels abilities on rail projection', () => {
     const start = createKart(track); const sample = track.samples[0];
     const states = [
-      { ...start, ...offsetSample(sample, 3.4), driftDirection: 1 as const, driftCharge: 1, boostRemaining: 1, boostTier: 1 as const },
-      { ...start, ...offsetSample(sample, 1.4) },
+      { ...start, ...offsetSample(sample, 4.45), driftDirection: 1 as const, driftCharge: 1, boostRemaining: 1, boostTier: 1 as const },
+      { ...start, ...offsetSample(sample, 2.65) },
     ];
     resolveRacerContacts(states, track);
-    for (const state of states) expect(nearestRoadPoint(track, state).distance).toBeLessThan(3.661);
-    expect(Math.hypot(states[0].x - states[1].x, states[0].z - states[1].z)).toBeGreaterThan(raceConfig.racerRadius * 2 - 0.02);
+    for (const state of states) expectInsideRails(track, state);
+    expect(kartContact(states[0], states[1])?.depth ?? 0).toBeLessThan(0.02);
     expect(states[0].boostRemaining).toBe(0); expect(states[0].driftCharge).toBe(0);
   });
   it('recovers a stalled bot at its last valid gate without awarding a lap', () => {
@@ -70,7 +73,7 @@ describe('AI and kart traffic', () => {
     expect(race.player.progress.finishTime).toBeLessThan(210);
     expect(race.standings()[0].progress.finishTime).not.toBeNull();
   }, 60000);
-  it('all three opponents finish three validated laps with bounded wall contacts and no chronic recovery', () => {
+  it.each(trackCatalog)('$name: all three opponents finish three validated laps with bounded wall contacts and no chronic recovery', ({ track }) => {
     const race = new RaceSession(track); race.start('quick-race');
     let maximumRoadDistance = 0; let contactTicks = 0;
     for (let i = 0; i < 18000 && race.opponents.some(r => r.progress.finishTime === null); i++) {

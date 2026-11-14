@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { GameRuntime } from '../render/runtime';
 import { boostTiers } from '../config/driftConfig';
+import { ItemHUD } from './ItemHUD';
 import { RaceHUD } from './RaceHUD';
 import { raceKindNames } from '../race/RaceSession';
 import { chargeTier } from '../kart/driftController';
@@ -52,6 +53,8 @@ function CircuitMap({ runtime }: { runtime: GameRuntime }) {
   const marker = useRef<SVGCircleElement>(null);
   const opponents = useRef<(SVGCircleElement | null)[]>([]);
   const samples = runtime.simulation.track.samples;
+  const minX = Math.min(...samples.map(p => p.x)) - 18, minZ = Math.min(...samples.map(p => p.z)) - 18;
+  const width = Math.max(...samples.map(p => p.x)) - minX + 18, height = Math.max(...samples.map(p => p.z)) - minZ + 18;
   const path = samples.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)},${p.z.toFixed(1)}`).join(' ') + 'Z';
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -66,15 +69,15 @@ function CircuitMap({ runtime }: { runtime: GameRuntime }) {
     }, 100);
     return () => window.clearInterval(timer);
   }, [runtime]);
-  return <div className="map-card" aria-label="Sunshine Circuit course map">
+  return <div className="map-card" aria-label={`${runtime.race.track.definition.name} course map`}>
     <span className="micro-label">FIND YOUR FLOW</span>
-    <svg viewBox="-140 -125 280 270" aria-hidden="true">
+    <svg viewBox={`${minX} ${minZ} ${width} ${height}`} aria-hidden="true">
       <path d={path} fill="none" stroke="currentColor" strokeWidth="10" strokeLinejoin="round" />
       <circle cx={runtime.simulation.track.spawn.x} cy={runtime.simulation.track.spawn.z} r="8" fill="#b9ccc5" />
       {runtime.race.opponents.map((racer, index) => <circle key={racer.id} ref={node => { opponents.current[index] = node; }} r="8" fill={racer.color} stroke="#fff7df" strokeWidth="3" />)}
       <circle ref={marker} cx={runtime.simulation.current.x} cy={runtime.simulation.current.z} r="10" fill="#ff7654" stroke="#fff7df" strokeWidth="4" />
     </svg>
-    <span className="map-caption">SUNSHINE CIRCUIT</span>
+    <span className="map-caption">{runtime.race.track.definition.name.toUpperCase()}</span>
   </div>;
 }
 
@@ -94,6 +97,7 @@ export function HUD({ runtime, onPause, onReset }: { runtime: GameRuntime; onPau
   return <>
     <CircuitMap runtime={runtime} />
     <RaceHUD runtime={runtime} />
+    <ItemHUD runtime={runtime} />
     <DriftMeter runtime={runtime} />
     <div className="speed-card"><span ref={gear} className="micro-label">FREE DRIVE</span>
       <div className="speed-value"><output ref={speed} aria-label="Speed in kilometers per hour">00</output><span>km/h</span></div>

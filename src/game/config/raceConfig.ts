@@ -11,7 +11,7 @@ export const raceConfig = {
   recoveryOffset: 2,
   botStuckTime: 4,
   botStuckSpeed: 1.5,
-  racerRadius: 1.55,
+  contactSeparation: 0.002,
   contactIterations: 6,
   maxCatchUpSpeed: 1.2,
   maxSlowdownSpeed: 0.6,
@@ -21,4 +21,4 @@ export const aiProfiles = [
   { id: 'nova', name: 'Nova', color: '#ffb84d', targetSpeed: 16.4, lane: -1.75 },
   { id: 'moss', name: 'Moss', color: '#b1d765', targetSpeed: 17.1, lane: 1.75 },
 ] as const;
-export type AIProfile = typeof aiProfiles[number];
+export type AIProfile = Omit<typeof aiProfiles[number], 'targetSpeed'> & { readonly targetSpeed: number };

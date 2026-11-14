@@ -1,0 +1,7 @@
+.garage-entry:focus-visible { outline: 3px solid #ee8a43; outline-offset: 4px; }
+.garage-entry { display: flex; align-items: center; text-align: left; gap: 14px; padding: 10px 15px; margin: 0 0 18px; border: 1px solid #315f6140; border-radius: 12px; background: #fff9eacc; color: #173c48; cursor: pointer; box-shadow: 0 4px 10px #234c4510; }
+.garage-entry > span:first-child { font-size: 21px; }
+.garage-entry strong { display: block; font-size: 12px; }
+.garage-entry small { display: block; font-size: 9px; margin-top: 3px; letter-spacing: .7px; }
+.selection-notice { position: absolute; z-index: 45; bottom: 18px; left: 50%; transform: translateX(-50%); background: #fff4d9; padding: 12px 18px; color: #173c48; border-radius: 10px; font-size: 12px; }
+.render-stats { position: absolute; bottom: 7px; right: 10px; z-index: 32; pointer-events: none; font: 10px monospace; padding: 5px 8px; border-radius: 5px; color: #fff; background: #173c48d9; }

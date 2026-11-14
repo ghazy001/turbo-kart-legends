@@ -1,15 +1,20 @@
-import { Suspense, useLayoutEffect, useMemo, useState } from 'react';
+import { Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import { Mesh, PCFShadowMap } from 'three';
-import { defaultDriver, defaultKart, type Triple, type VisualTransform } from '../config/visualAssets';
+import { clone } from 'three/addons/utils/SkeletonUtils.js';
+import { configureAssetLoader } from '../render/models/assetLoader';
+import { driverAssets, kartAssets, type KartId, type RacerId, type KartAssetDefinition, type DriverAssetDefinition, type Triple, type VisualTransform } from '../config/visualAssets';
+import { driverFitOptions } from '../render/models/driverFit';
 import { KartAssembly } from '../render/KartAssembly';
 import './assetPreview.css';
+import { PreviewBoundary } from '../ui/GaragePreview';
+import type { AssetStatus } from '../render/KartVisual';
 
 function RawModel({ url, scale, position }: { url: string; scale: number; position: Triple }) {
-  const gltf = useGLTF(url, false, false);
+  const gltf = useGLTF(url, false, false, configureAssetLoader);
   const instance = useMemo(() => {
-    const scene = gltf.scene.clone(true);
+    const scene = clone(gltf.scene);
     scene.traverse(node => { if (node instanceof Mesh) { node.castShadow = true; node.receiveShadow = true; } });
     return scene;
   }, [gltf.scene]);
@@ -37,31 +42,43 @@ function PreviewCamera({ position }: { position: Triple }) {
   return null;
 }
 const positions: Triple[] = [[4, 2.8, 5], [5, 1.7, 0], [0, 1.7, 5], [0, 7, 0.01]];
-export function AssetPreview() {
-  const [seat, setSeat] = useState<VisualTransform>(defaultKart.seat);
-  const [driver, setDriver] = useState<VisualTransform>(defaultDriver.transform);
+function Ready({ onStatus }: { onStatus: (status: AssetStatus) => void }) { useEffect(() => { onStatus('ready'); }, [onStatus]); return null; }
+function FittingSession({ kart, racer }: { kart: KartAssetDefinition; racer: DriverAssetDefinition }) {
+  const fit = useMemo(() => driverFitOptions(kart, racer), [kart, racer]);
+  const [status, setStatus] = useState<AssetStatus>('loading');
+  const [seat, setSeat] = useState<VisualTransform>(kart.seat);
+  const [driver, setDriver] = useState<VisualTransform>(racer.transform);
   const [raw, setRaw] = useState(false);
   const [anchors, setAnchors] = useState(false);
+  const [fitted, setFitted] = useState(true);
   const [view, setView] = useState(0);
 
   return <main className="asset-preview"><aside>
-    <a href="/">← Back to driving</a><p className="eyebrow">DEVELOPMENT • VISUAL FITTING</p><h1>Kart & driver workshop</h1>
+    <a href="/">← Back to driving</a> · <a href="/?asset-inspect">Raw file inventory</a><p className="eyebrow">DEVELOPMENT • VISUAL FITTING</p><h1>Kart & driver workshop</h1>
     <p>Drag to orbit, scroll to zoom. Green = up; blue = forward. Changes stay in this preview until copied into visualAssets.ts.</p>
     <label><input type="checkbox" checked={raw} onChange={event => setRaw(event.currentTarget.checked)} /> Inspect original models side by side</label>
-    <label><input type="checkbox" checked={anchors} onChange={event => setAnchors(event.currentTarget.checked)} /> Show seat anchor</label>
+    <label><input type="checkbox" checked={anchors} onChange={event => setAnchors(event.currentTarget.checked)} /> Show seat and hand targets</label>
     <div className="preview-buttons">{['Three-quarter', 'Side', 'Front', 'Top'].map((name, index) => <button key={name} onClick={() => setView(index)}>{name}</button>)}</div>
+    <label><input type="checkbox" checked={fitted} onChange={event => setFitted(event.currentTarget.checked)} /> Apply approximate static driving fit</label>
     <TransformEditor title="Seat" value={seat} onChange={setSeat} /><TransformEditor title="Driver" value={driver} onChange={setDriver} />
-    <button onClick={() => { setSeat(defaultKart.seat); setDriver(defaultDriver.transform); }}>Restore defaults</button>
+    <button onClick={() => { setSeat(kart.seat); setDriver(racer.transform); }}>Restore defaults</button>
+    <p role="status">{status === 'ready' ? 'Models ready' : status === 'error' ? 'Model failed to load' : 'Loading models…'}</p>
     <p className="pose-note">Unrigged character • 0 animation clips. The assembly uses an approximate static mesh pose, not a seated driving animation.</p>
-    <details><summary>Copy fitting settings</summary><pre>{JSON.stringify({ seat, driver }, null, 2)}</pre></details>
+    <details><summary>Copy fitting settings</summary><pre>{JSON.stringify({ kartId: kart.id, racerId: racer.id, seat, driver, steeringGrip: kart.steeringGrip }, null, 2)}</pre></details>
   </aside><section aria-label="3D asset fitting preview">
-    <Canvas shadows={{ type: PCFShadowMap }} camera={{ position: positions[0], fov: 42, near: 0.05, far: 100 }} dpr={[1, 1.5]}>
+    <Canvas frameloop="demand" shadows={{ type: PCFShadowMap }} camera={{ position: positions[0], fov: 42, near: 0.05, far: 100 }} dpr={[1, 1.5]}>
       <color attach="background" args={['#d7e8e5']} /><hemisphereLight args={['#fff9e8', '#6c897d', 2.1]} />
       <directionalLight position={[-3, 7, 5]} intensity={2.6} castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.0003} />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow><planeGeometry args={[30, 30]} /><meshStandardMaterial color="#b2c7b4" roughness={0.9} /></mesh>
       <gridHelper args={[12, 24, '#7e9c91', '#a2b7a8']} />
-      <Suspense fallback={null}>{raw ? <><RawModel url={defaultKart.url} scale={1.5} position={[-1.8, 0.16, 0]} /><RawModel url={defaultDriver.url} scale={0.3} position={[1.5, 0, 0]} /></> : <KartAssembly kart={{ ...defaultKart, seat }} driver={{ ...defaultDriver, transform: driver }} showAnchors={anchors} />}</Suspense>
+      <PreviewBoundary onStatus={setStatus}><Suspense fallback={null}>{raw ? <><RawModel url={kart.sourceUrl} scale={kart.transform.scale} position={[-1.8, 0.16, 0]} /><RawModel url={racer.sourceUrl} scale={0.3} position={[1.5, 0, 0]} /></> : <KartAssembly kart={{ ...kart, seat }} driver={{ ...racer, transform: driver, pose: fitted ? racer.pose : 'authored' }} fitting={fitted ? fit : {}} showAnchors={anchors} />}<Ready onStatus={setStatus} /></Suspense></PreviewBoundary>
       <PreviewCamera position={positions[view]} /><OrbitControls makeDefault target={[0, 0.85, 0]} minDistance={1} maxDistance={15} />
     </Canvas>
   </section></main>;
+}
+
+export function AssetPreview() {
+  const [kartId, setKartId] = useState<KartId>('practice');
+  const [racerId, setRacerId] = useState<RacerId>('supplied');
+  return <><div className="fitting-selectors"><label>Kart <select aria-label="Fitting kart" value={kartId} onChange={event => setKartId(event.currentTarget.value as KartId)}>{Object.values(kartAssets).map(kart => <option key={kart.id} value={kart.id}>{kart.name}</option>)}</select></label><label>Racer <select aria-label="Fitting racer" value={racerId} onChange={event => setRacerId(event.currentTarget.value as RacerId)}>{Object.values(driverAssets).map(racer => <option key={racer.id} value={racer.id}>{racer.name}</option>)}</select></label></div><FittingSession key={`${kartId}:${racerId}`} kart={kartAssets[kartId]} racer={driverAssets[racerId]} /></>;
 }
