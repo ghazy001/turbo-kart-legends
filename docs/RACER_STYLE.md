@@ -34,3 +34,11 @@ For a new driver, inspect Y-up source bounds and the pose's pelvis reference, ad
 This unifies proportions, framing and surface response; it does not rebuild the supplied models into an identical art style. All five sources remain unrigged with zero animation clips. Matching facial proportions, topology, clothing, textures, accessory removal and authored driving poses requires Blender/artist work. Original files and embedded credits remain preserved; local-use permission does not establish independently verified public-release rights.
 
 Captures: [Racer Select roster](design-qa/racer-style/roster.png), [Aang in the Boat Kart fitting workshop](design-qa/racer-style/aang-boat.png). The isolated QA tab reported no browser errors and was closed; the user's original tab was preserved.
+
+## SpongeBob clothing correction
+
+The earlier `hideWhileDriving: ['Object_2']` entry incorrectly treated that entire node as a prop. Inspection found pants-bottom and waistband cap faces in the same node as bubble-wand details. Removing it opened the clothing; the consistency pass also exposed that omission in portraits. The registry now retains the complete node in all presentations. No original/optimized GLB, racer scale, pose formula, material or gameplay system changed. The wand remains until an artist separates it safely from clothing.
+
+The real-model regression checks more than 200 clothing-cap vertices against their original positions (apart from the existing seated pelvis translation) for the portrait and all four cockpit fits. Existing generic hidden-node behavior remains independently tested. Browser inspection checked the restored portrait and Boat Kart front-quarter/side views; captures: [portrait](design-qa/spongebob-fix/portrait.png), [seated side view](design-qa/spongebob-fix/seated.png). No browser errors were recorded. Focused asset tests: **61 passed**; typecheck, lint and production build passed.
+
+Full regression run: **390 tests / 32 files passed in 244.44 seconds**, with loopback access for existing phone tests. `git diff --check` passed. The temporary browser QA tab was closed; original source assets and the user's tab were preserved.

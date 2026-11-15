@@ -100,6 +100,32 @@ describe('Milestone 3.5 registry and real assets', () => {
     expect(unchanged).toBeGreaterThan(1000); expect(error).toBeLessThan(1e-6); expect(moved).toBeGreaterThan(100);
     geometry.dispose(); model.dispose();
   });
+  it('keeps SpongeBob clothing caps intact in portraits and every seated kart fit', () => {
+    const driver = driverAssets.spongebob, source = racerModels[racers.findIndex(racer => racer.id === driver.id)].scene;
+    source.updateMatrixWorld(true);
+    const mesh = source.getObjectByName('Object_2') as Mesh;
+    const baked = mesh.geometry.clone().applyMatrix4(mesh.matrixWorld), positions = baked.getAttribute('position');
+    const options = [{}, ...karts.map(kart => driverFitOptions(kart, driver))];
+    for (const option of options) {
+      const model = prepareModel(source, option), clothing = model.root.getObjectByName('Object_2') as Mesh;
+      expect(clothing).toBeDefined();
+      const fitted = clothing.geometry.getAttribute('position'), point = new Vector3();
+      let clothingVertices = 0;
+      for (let i = 0; i < positions.count; i++) {
+        point.fromBufferAttribute(positions, i);
+        // Inspected source pants-bottom and waistband caps; exclude the separate wand.
+        if (point.y < 0.5 && Math.abs(point.x) < 0.4) {
+          const expected = point.clone();
+          if (option.staticPose) expected.y -= option.staticPose.hip;
+          const actual = new Vector3().fromBufferAttribute(fitted, i);
+          if (!option.staticPose) actual.applyMatrix4(clothing.matrixWorld);
+          expect(actual.distanceTo(expected)).toBeLessThan(1e-6); clothingVertices++;
+        }
+      }
+      expect(clothingVertices).toBeGreaterThan(200); model.dispose();
+    }
+    expect(source.getObjectByName('Object_2')).toBe(mesh); baked.dispose();
+  });
   it('clones bone hierarchies and wheel pivots independently, sharing immutable fitted buffers', () => {
     const kart = karts.findIndex(asset => asset.id === 'boat'), source = kartModels[kart].scene;
     const first = instantiateModel(source, 'test-boat', { wheels: karts[kart].wheels }), second = instantiateModel(source, 'test-boat', { wheels: karts[kart].wheels });

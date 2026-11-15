@@ -98,7 +98,8 @@ export const driverAssets = {
   spongebob: {
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'spongebob', name: 'SpongeBob', color: '#ecd448', description: 'A bright smile. Ready for the next corner.', sourceTitle: 'Nickelodeon Kart Racers 3 SpongeBob',
-    url: '/assets/optimized/characters/nickelodeon_kart_racers_3_spongebob.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_spongebob.glb', transform: transform(seatedRacerScale('spongebob')), pose: 'static-fit', hideWhileDriving: ['Object_2'],
+    // Object_2 mixes prop faces with the pants/shirt caps: hiding it opens the clothing.
+    url: '/assets/optimized/characters/nickelodeon_kart_racers_3_spongebob.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_spongebob.glb', transform: transform(seatedRacerScale('spongebob')), pose: 'static-fit',
     staticPose: { hip: 0.32, knee: 0.15, bend: 1.4, shoulder: [0.52, 0.7, 0], elbow: [0.74, 0.7, 0], wrist: [0.94, 0.7, 0], fittedElbow: [0.59, 0.62, 0.32], fittedWrist: [0.37, 0.7, 0.62], armMinY: 0.37, armMaxY: 1.32 },
   },
   crash: {

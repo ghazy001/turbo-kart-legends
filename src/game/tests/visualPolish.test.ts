@@ -40,7 +40,7 @@ describe('cockpit fitting', () => {
   it('removes only the configured non-driving prop from the clone', () => {
     const source = new Group(), prop = new Mesh(new BoxGeometry(), new MeshStandardMaterial()), body = prop.clone();
     prop.name = 'Object_2'; body.name = 'body'; source.add(prop, body);
-    const model = prepareModel(source, driverFitOptions(karts[0], driverAssets.spongebob));
+    const model = prepareModel(source, { hiddenNodes: ['Object_2'] });
     expect(source.getObjectByName('Object_2')).toBe(prop);
     expect(model.root.getObjectByName('Object_2')).toBeUndefined(); expect(model.root.getObjectByName('body')).toBeDefined();
     model.dispose(); prop.geometry.dispose(); (prop.material as MeshStandardMaterial).dispose();
