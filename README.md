@@ -55,6 +55,8 @@ All five supplied racers are **unrigged, with zero animation clips**. Current se
 
 Textures retain GLTFLoader color-space settings and are capped at 1024 px for GPU use. Static compatible mesh siblings are merged; shadow resolution and DPR remain bounded. Setup previews render on demand; Home adds a reduced-motion-aware turntable. Menus suspend the underlying scene. Visible menu thumbnails and selected/gameplay assets load through the shared cache; unsupported heavy/legacy sources are excluded. Failed gameplay loads fall back to the original procedural kart with a visible notice; reload retries. The garage has loading/error/retry states.
 
+Racers share consistent portrait height, seat-to-crown proportions and a matte finish across previews and gameplay. Natural silhouette differences remain; the source models have not been remodelled into one identical art style. See [racer consistency measurements and verification](docs/RACER_STYLE.md).
+
 Development tools:
 
 - `/?asset-preview`: choose any supported combination; adjust seat and driver position, rotation and scale; compare raw/static poses; show anchors; use side/front/top views; copy JSON into the registry. Changes are preview-only.

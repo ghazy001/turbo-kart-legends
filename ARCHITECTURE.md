@@ -281,3 +281,7 @@ Racer/Kart steps opt into `RaceFlowShell`'s coastal skin and quiet header. `Coas
 ## Coastal track/options/review pass
 
 All RaceSetupScreen steps opt into the same coastal shell and quiet header. Track, cup and options render HomeScene with `showSubject=false` behind DOM maps, avoiding an unnecessary GLB assembly. Its narrow fullscreen background uses a uniform readability tint; inline racer/kart previews keep their clear lighting. CourseMap still consumes sampled track geometry, and ordered cup tiles consume sunshineCup.tracks. The review projects existing draft values without creating new state; the existing launch/commit callback is unchanged. Existing Time Trial record summaries and VS row navigation remain. `coastalSetup.css` scopes the presentation and allows long content to scroll with actions in normal layout flow. No simulation/race/camera logic changed.
+
+## Racer presentation consistency
+
+`racerStyle.ts` owns inspected crown/pelvis references, common portrait/seated heights and matte surface constants. Registry scales derive uniformly from those references. `racerPresentation.ts` fits portrait bounds and modifies only runtime material clones. `modelInstances` caches source/matte variants independently; `driverFitOptions` opts seated assemblies into that profile. Player/AI/menu/podium assemblies retain the same parent transforms and hand targets. No cosmetic measurement feeds a collider or simulation value. See docs/RACER_STYLE.md for verification and artist-work limits.

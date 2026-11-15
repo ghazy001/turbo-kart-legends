@@ -1,3 +1,5 @@
+import { seatedRacerScale } from './racerStyle';
+
 /** Decorative meters: Y up, +Z forward. Never used to tune collision or racing. */
 export type Triple = [number, number, number];
 export interface VisualTransform { position: Triple; rotation: Triple; scale: number }
@@ -79,30 +81,30 @@ export const driverAssets = {
   supplied: {
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'supplied', name: 'Mario', color: '#ea624c', description: 'The original supplied local driver.', sourceTitle: 'Mario obj',
-    url: '/assets/optimized/characters/my-character.glb', sourceUrl: '/assets/characters/my-character.glb', transform: transform(0.24), pose: 'supplied-static-seat',
+    url: '/assets/optimized/characters/my-character.glb', sourceUrl: '/assets/characters/my-character.glb', transform: transform(seatedRacerScale('supplied')), pose: 'supplied-static-seat',
   },
   aang: {
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'aang', name: 'Aang', color: '#eab451', description: 'A bright orange racing companion.', sourceTitle: 'Nickelodeon Kart Racers 3 Aang',
-    url: '/assets/optimized/characters/nickelodeon_kart_racers_3_aang.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_aang.glb', transform: transform(0.65), pose: 'static-fit',
+    url: '/assets/optimized/characters/nickelodeon_kart_racers_3_aang.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_aang.glb', transform: transform(seatedRacerScale('aang')), pose: 'static-fit',
     staticPose: { hip: 1.03, knee: 0.48, bend: 1.4, shoulder: [0.27, 1.68, 0], elbow: [0.65, 1.68, 0], wrist: [0.97, 1.68, 0], fittedElbow: [0.41, 1.25, 0.3], fittedWrist: [0.35, 1.55, 0.59], armMinY: 1.5, armMaxY: 1.83 },
   },
   arnold: {
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'arnold', name: 'Arnold', color: '#56b3a0', description: 'Headphones on. Sunshine ahead.', sourceTitle: 'Nickelodeon Kart Racers 3 Arnold',
-    url: '/assets/optimized/characters/nickelodeon_kart_racers_3_arnold.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_arnold.glb', transform: transform(0.62), pose: 'static-fit',
+    url: '/assets/optimized/characters/nickelodeon_kart_racers_3_arnold.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_arnold.glb', transform: transform(seatedRacerScale('arnold')), pose: 'static-fit',
     staticPose: { armMeshes: ['Object_3'], protectComponentsAbove: 1.29, hip: 0.61, knee: 0.3, bend: 1.4, shoulder: [0.22, 1.25, 0], elbow: [0.5, 1.25, 0], wrist: [0.78, 1.25, 0], fittedElbow: [0.38, 0.87, 0.31], fittedWrist: [0.35, 1.05, 0.6], armMinY: 0.95, armMaxY: 1.4 },
   },
   spongebob: {
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'spongebob', name: 'SpongeBob', color: '#ecd448', description: 'A bright smile. Ready for the next corner.', sourceTitle: 'Nickelodeon Kart Racers 3 SpongeBob',
-    url: '/assets/optimized/characters/nickelodeon_kart_racers_3_spongebob.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_spongebob.glb', transform: transform(0.75), pose: 'static-fit', hideWhileDriving: ['Object_2'],
+    url: '/assets/optimized/characters/nickelodeon_kart_racers_3_spongebob.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_spongebob.glb', transform: transform(seatedRacerScale('spongebob')), pose: 'static-fit', hideWhileDriving: ['Object_2'],
     staticPose: { hip: 0.32, knee: 0.15, bend: 1.4, shoulder: [0.52, 0.7, 0], elbow: [0.74, 0.7, 0], wrist: [0.94, 0.7, 0], fittedElbow: [0.59, 0.62, 0.32], fittedWrist: [0.37, 0.7, 0.62], armMinY: 0.37, armMaxY: 1.32 },
   },
   crash: {
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'crash', name: 'Crash', color: '#e98c4a', description: 'A big grin for the next hairpin.', sourceTitle: 'CRASH BANDICOOT CARTOON',
-    url: '/assets/optimized/characters/crash_bandicoot_cartoon.glb', sourceUrl: '/assets/characters/crash_bandicoot_cartoon.glb', transform: transform(0.85), pose: 'static-fit',
+    url: '/assets/optimized/characters/crash_bandicoot_cartoon.glb', sourceUrl: '/assets/characters/crash_bandicoot_cartoon.glb', transform: transform(seatedRacerScale('crash')), pose: 'static-fit',
     staticPose: { hip: 0.42, knee: 0.2, bend: 1.4, shoulder: [0.22, 0.92, -0.23], elbow: [0.45, 0.92, -0.23], wrist: [0.66, 0.92, -0.23], fittedElbow: [0.36, 0.67, 0.23], fittedWrist: [0.28, 0.76, 0.46], armMinY: 0.78, armMaxY: 1.04 },
   },
 } satisfies Record<string, DriverAssetDefinition>;

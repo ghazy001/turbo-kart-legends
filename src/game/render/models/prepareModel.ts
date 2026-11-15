@@ -7,7 +7,7 @@ import type { StaticPoseDefinition, WheelDefinition } from '../../config/visualA
 
 export interface WheelRig { steer: Group; spin: Group; front: boolean }
 export interface PreparedModel { root: Group; wheels: WheelRig[]; dispose: () => void; releaseUnusedGeometry: () => void }
-export interface ModelOptions { staticDriver?: boolean; handTarget?: [number, number, number]; hiddenNodes?: readonly string[]; staticPose?: StaticPoseDefinition; wheels?: readonly WheelDefinition[] }
+export interface ModelOptions { surface?: 'racer-matte'; staticDriver?: boolean; handTarget?: [number, number, number]; hiddenNodes?: readonly string[]; staticPose?: StaticPoseDefinition; wheels?: readonly WheelDefinition[] }
 
 /** Split a joined left/right tire pair without cutting triangles or changing source buffers. */
 function wheelSide(source: BufferGeometry, side: -1 | 1): BufferGeometry {

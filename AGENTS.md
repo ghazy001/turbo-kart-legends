@@ -37,6 +37,8 @@ The user accepted Turbo Charge as the fourth item: grant the existing short Flar
 
 The user requested a step-by-step design rollout and chose a dark showroom with warm yellow accents. The first pass updates Home composition, hierarchy and its cosmetic preview only. The latest user request replaces the black showroom with a scenic coastal starting line and a parked selected kart/racer; preserve the approved minimal controls and no-tutorial-footer layout. Preserve all setup flow, gameplay, controls, selected profiles and race/phone systems. The user prefers fewer visible buttons, restrained accents and no permanent tutorial footer; keep secondary controls in Settings and retain keyboard/gamepad support. Home and all setup screens (racer, kart, track, cup, VS options and review) now share the coastal minimalist style; the user explicitly wants minimalist, clean, simple and attractive presentation throughout subsequent passes. Apply future screen passes incrementally after review; do not treat the whole game as visually migrated yet. See docs/DESIGN_ROLLOUT.md.
 
+The user requested consistent racer sizing/art direction. Decorative crown/pelvis normalization, common portrait framing and cloned matte material profiles are authorized; preserve source silhouettes/GLBs, credits, physics and collider dimensions. Do not claim uniform remodelling or rigged animation. See docs/RACER_STYLE.md.
+
 ## Preferred technology
 React + TypeScript + Vite + Three.js + @react-three/fiber; @react-three/drei selectively; Zustand for UI only; Rapier if needed for colliders/queries; Vitest for core tests. Use a stable compatible dependency set; check React and R3F peer dependencies. Do NOT use R3F alpha by default.
 

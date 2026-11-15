@@ -128,3 +128,7 @@ Captures: [Track Select](design-qa/setup/track-select.png), [Race review](design
 
 
 Final Pass 3 checks: `npm run typecheck`, `npm run lint` (zero warnings), `npm run test` (382/382 above), `npm run build` and `git diff --check` pass. Build: 763 modules; App CSS 68.44 kB / 14.25 kB gzip and App JS 232.68 kB / 74.54 kB gzip. The isolated browser error log was empty; the temporary QA tab was closed after viewport restoration. The original tab and saved race preferences were preserved. Next visual pass: HUD/item/drift readability and pause/settings.
+
+## Racer consistency follow-up
+
+Before HUD polish, the user requested more consistent racer sizes and style. Portrait fitting now uses common height instead of penalizing extended arms; seated scale derives from inspected crown/pelvis measurements. A shared matte profile keeps original paint/alpha while reducing metallic/glossy differences. No source GLB, game rule or collider changed. Full verification: 389 tests / 32 files plus typecheck, lint and build passed. See [measurements, browser observations and remaining artist work](RACER_STYLE.md). This is a presentation pass, not a full source-model art remake. HUD/pause polish remains the next design step.

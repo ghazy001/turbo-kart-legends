@@ -1,4 +1,4 @@
-import { BufferGeometry, Float32BufferAttribute, BoxGeometry, Group, Mesh, MeshStandardMaterial, Vector3 } from 'three';
+import { BufferGeometry, Float32BufferAttribute, BoxGeometry, Group, Mesh, MeshPhysicalMaterial, MeshStandardMaterial, Texture, Vector3 } from 'three';
 import { describe, expect, it } from 'vitest';
 import { driverAssets, karts, racers } from '../config/visualAssets';
 import { driverFitOptions } from '../render/models/driverFit';
@@ -7,6 +7,8 @@ import { applyPaletteBatch } from '../render/models/paletteBatch';
 import { protectedPoseVertices } from '../render/models/poseRegions';
 import { prepareModel } from '../render/models/prepareModel';
 import { instantiateModel, disposeModelCache } from '../render/models/modelInstances';
+import { racerStyle } from '../config/racerStyle';
+import { applyRacerSurface } from '../render/models/racerPresentation';
 
 function mount(point: Vector3, driver: typeof racers[number], kart: typeof karts[number]) {
   // Registry defaults are centered and unrotated; assert this before using the simple transform.
@@ -65,5 +67,31 @@ describe('static palette batching', () => {
     first.wheels[0].steer.rotation.y = 0.4; expect(second.wheels[0].steer.rotation.y).toBe(0);
     expect(first.wheels[0].spin.children[0]).not.toBe(second.wheels[0].spin.children[0]);
     expect(a.material.vertexColors).toBe(false); disposeModelCache(); a.geometry.dispose(); b.geometry.dispose(); a.material.dispose(); b.material.dispose();
+  });
+});
+
+describe('shared racer finish', () => {
+  it('keeps albedo/alpha while separating styled and original material variants', () => {
+    const map = new Texture(), packed = new Texture(), normal = new Texture();
+    const material = new MeshStandardMaterial({ map, roughnessMap: packed, metalnessMap: packed, normalMap: normal, roughness: 0.2, metalness: 0.8, transparent: true, opacity: 0.7, alphaTest: 0.3 });
+    const mesh = new Mesh(new BoxGeometry(), material), source = new Group(); source.add(mesh);
+    const original = instantiateModel(source, 'finish-source', {});
+    const first = instantiateModel(source, 'finish-racer', { surface: 'racer-matte' });
+    const second = instantiateModel(source, 'finish-racer', { surface: 'racer-matte' });
+    const surface = (root: Group) => { let result = material; root.traverse(node => { if (node instanceof Mesh) result = node.material as MeshStandardMaterial; }); return result; };
+    const styled = surface(first.root);
+    expect(styled).toBe(surface(second.root)); expect(styled).not.toBe(surface(original.root));
+    expect(styled.map).toBe(map); expect(styled.normalMap).toBe(normal); expect(styled.opacity).toBe(0.7); expect(styled.alphaTest).toBe(0.3);
+    expect(styled.roughness).toBe(racerStyle.roughness); expect(styled.metalness).toBe(0);
+    expect(styled.roughnessMap).toBeNull(); expect(styled.metalnessMap).toBeNull(); expect(styled.normalScale.x).toBe(racerStyle.normalStrength);
+    expect(material.roughness).toBe(0.2); expect(material.metalnessMap).toBe(packed); expect(material.normalScale.x).toBe(1);
+    expect(surface(original.root).metalness).toBe(0.8);
+    disposeModelCache(); mesh.geometry.dispose(); material.dispose(); map.dispose(); packed.dispose(); normal.dispose();
+  });
+  it('removes clearcoat from physical racer surfaces without changing the paint color', () => {
+    const source = new MeshPhysicalMaterial({ color: '#eab451', clearcoat: 1 });
+    const styled = source.clone(); applyRacerSurface(styled);
+    expect(styled.clearcoat).toBe(0); expect(styled.color.equals(source.color)).toBe(true); expect(source.clearcoat).toBe(1);
+    styled.dispose(); source.dispose();
   });
 });

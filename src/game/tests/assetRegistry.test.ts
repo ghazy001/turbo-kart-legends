@@ -11,6 +11,8 @@ import { adaptDiffuseLegacyMaterials } from '../render/models/assetLoader';
 import { createDriverAnimator } from '../render/models/driverAnimation';
 import { driverFitOptions } from '../render/models/driverFit';
 import { kartConfig } from '../config/kartConfig';
+import { racerStyle } from '../config/racerStyle';
+import { racerPortraitFit } from '../render/models/racerPresentation';
 import { RaceSession } from '../race/RaceSession';
 import { sunshineCircuit } from '../tracks/sunshineCircuit';
 
@@ -35,6 +37,16 @@ function mounted(root: Group, transform: { position: [number, number, number]; r
 }
 
 describe('Milestone 3.5 registry and real assets', () => {
+  for (const [index, racer] of racers.entries()) it(`${racer.id}: full-body portrait has the common height and a centered floor origin`, () => {
+    const source = racerModels[index].scene, before = new Box3().setFromObject(source, true);
+    const fit = racerPortraitFit(before), portrait = new Group();
+    portrait.scale.setScalar(fit.scale); portrait.position.set(...fit.position); portrait.add(source.clone(true));
+    const bounds = new Box3().setFromObject(portrait, true), size = bounds.getSize(new Vector3());
+    expect(size.y).toBeCloseTo(racerStyle.portraitHeight, 5);
+    expect(size.x).toBeLessThan(3.5); expect(size.z).toBeLessThan(1.5);
+    expect(bounds.min.y).toBeCloseTo(0, 5); expect(bounds.getCenter(new Vector3()).x).toBeCloseTo(0, 5);
+    expect(new Box3().setFromObject(source, true).equals(before)).toBe(true);
+  });
   it('uses unique IDs, covers nine selectable sources, and records the three unsupported files', () => {
     const assets = [...karts, ...racers]; expect(new Set(assets.map(asset => asset.id)).size).toBe(9);
     expect(new Set(assets.map(asset => asset.url)).size).toBe(9); expect(unsupportedAssets).toHaveLength(3);
@@ -67,6 +79,7 @@ describe('Milestone 3.5 registry and real assets', () => {
     const box = new Box3().setFromObject(motion, true);
     expect(box.min.y, `${racer.id}/${kart.id} feet`).toBeGreaterThan(0);
     expect(box.max.y).toBeLessThan(2.3); expect(box.getSize(new Vector3()).x).toBeLessThan(1.5);
+    expect((box.max.y - kart.seat.position[1]) / kart.seat.scale, 'common crown height above the same seat').toBeCloseTo(racerStyle.seatedCrownHeight, 3);
     const local = driver.getWorldPosition(new Vector3()); motion.position.set(11, 2, -8); motion.rotation.set(0, 1.1, 0.12); motion.scale.y = 0.9; motion.updateMatrixWorld(true);
     expect(driver.getWorldPosition(new Vector3()).distanceTo(motion.localToWorld(local))).toBeLessThan(1e-5);
     expect(new Box3().setFromObject(source, true).equals(before)).toBe(true); expect(kartModels[ki].scene).toBeDefined(); model.dispose();

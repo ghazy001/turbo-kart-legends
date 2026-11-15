@@ -7,7 +7,7 @@ function matrix(transform: VisualTransform) {
 }
 /** Static, symmetric wrist fitting only; no skeleton, IK or animation is fabricated. */
 export function driverFitOptions(kart: KartAssetDefinition, driver: DriverAssetDefinition): ModelOptions {
-  const options: ModelOptions = { hiddenNodes: driver.hideWhileDriving };
+  const options: ModelOptions = { hiddenNodes: driver.hideWhileDriving, surface: 'racer-matte' };
   if (driver.pose === 'authored') return options;
   const inverse = matrix(kart.seat).multiply(matrix(driver.transform)).invert();
   const wrist = new Vector3(...kart.steeringGrip).applyMatrix4(inverse);

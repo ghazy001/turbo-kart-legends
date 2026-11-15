@@ -3,9 +3,10 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { applyPaletteBatch } from './paletteBatch';
 import { prepareModel, type ModelOptions, type PreparedModel } from './prepareModel';
+import { applyRacerSurface } from './racerPresentation';
 
 const templates = new Map<Object3D, Map<string, PreparedModel>>();
-const materials = new Map<Material, Material>();
+const materials = new Map<Material, Map<string, Material>>();
 const palette = new Map<string, MeshStandardMaterial>();
 const textures = new Map<Texture, Texture>();
 /** One capped texture per source, shared across instances; GLTFLoader owns color-space settings. */
@@ -20,15 +21,19 @@ function optimizedTexture(source: Texture): Texture {
   const texture = source.clone(); texture.image = canvas; texture.anisotropy = 4; texture.needsUpdate = true;
   textures.set(source, texture); return texture;
 }
-function optimizeMaterials(root: Object3D) {
+function optimizeMaterials(root: Object3D, surface?: ModelOptions['surface']) {
   const get = (source: Material) => {
-    const cached = materials.get(source); if (cached) return cached;
+    let variants = materials.get(source);
+    if (!variants) { variants = new Map(); materials.set(source, variants); }
+    const key = surface ?? 'source';
+    const cached = variants.get(key); if (cached) return cached;
     const material = source.clone();
+    if (surface === 'racer-matte') applyRacerSurface(material);
     for (const key of Object.keys(material)) {
       const value = Reflect.get(material, key) as unknown;
       if (value instanceof Texture) Reflect.set(material, key, optimizedTexture(value));
     }
-    materials.set(source, material); return material;
+    variants.set(key, material); return material;
   };
   root.traverse(node => { if (node instanceof Mesh) node.material = Array.isArray(node.material) ? node.material.map(get) : get(node.material); });
 }
@@ -61,7 +66,7 @@ export function instantiateModel(source: Object3D, key: string, options: ModelOp
   let entries = templates.get(source); if (!entries) { entries = new Map(); templates.set(source, entries); }
   let template = entries.get(cacheKey);
   if (!template) {
-    template = prepareModel(source, options); optimizeMaterials(template.root);
+    template = prepareModel(source, options); optimizeMaterials(template.root, options.surface);
     const painted = options.wheels?.length ? applyPaletteBatch(template.root, palette) : [];
     const merged = options.staticDriver || options.staticPose || options.wheels?.length ? mergeStaticSiblings(template.root) : [];
     template.releaseUnusedGeometry();
@@ -80,7 +85,7 @@ export function instantiateModel(source: Object3D, key: string, options: ModelOp
 }
 export function disposeModelCache() {
   for (const entries of templates.values()) for (const template of entries.values()) template.dispose();
-  for (const material of materials.values()) material.dispose();
+  for (const variants of materials.values()) for (const material of variants.values()) material.dispose();
   for (const material of palette.values()) material.dispose();
   for (const texture of textures.values()) texture.dispose();
   templates.clear(); materials.clear(); textures.clear(); palette.clear();
