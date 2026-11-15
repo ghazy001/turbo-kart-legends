@@ -6,7 +6,7 @@ export function SelectionGrid({ step, selectedIndex, selection, onSelect }: {
   step: SelectionStep; selectedIndex: number; selection: VisualSelection; onSelect: (index: number) => void;
 }) {
   const entries = selectionEntries(step);
-  return <section className="selection-roster" aria-label={step === 'racer' ? 'Racer roster' : 'Kart collection'}>
+  return <section className="selection-roster" data-kind={step} aria-label={step === 'racer' ? 'Racer roster' : 'Kart collection'}>
     <div className="selection-roster-heading"><span>{step === 'racer' ? 'THE STARTING LINEUP' : 'THE SUNSHINE GARAGE'}</span><span>{String(entries.length).padStart(2, '0')} AVAILABLE</span></div>
     <div className="selection-grid" role="radiogroup" aria-label={step === 'racer' ? 'Choose racer' : 'Choose kart'}>
       {entries.map((asset, index) => <SelectionCard key={`${step}:${asset.id}`} asset={asset} index={index} selected={index === selectedIndex} step={step}

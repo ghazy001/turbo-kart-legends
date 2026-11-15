@@ -1,0 +1,88 @@
+/* The approved quiet coastal style, scoped to Racer / Kart Select. */
+.flow-coastal {
+  color: #fff9ed; background: #638d96; backdrop-filter: none;
+  font-family: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+}
+.flow-coastal .flow-backdrop { inset: 0; opacity: 1; filter: none; animation: none; background: linear-gradient(160deg, #6ca4b2, #edc5a1 55%, #8ba995); }
+.flow-coastal .selection-atmosphere { display: none; }
+.flow-coastal .flow-step-content > section { animation: coastal-fade .2s ease-out; }
+.flow-coastal .flow-header { max-width: 1640px; padding: 26px 6vw 12px; }
+.flow-coastal .selection-wordmark { gap: 12px; font-size: 11px; letter-spacing: 2px; }
+.flow-coastal .selection-wordmark > span { background: transparent; color: #ffda86; border: 1px solid #ffe5b540; width: 38px; height: 38px; border-radius: 10px; transform: none; }
+.flow-coastal .selection-wordmark strong { font-weight: 750; }
+.flow-coastal .selection-wordmark small { color: #d4dfd9; font-size: 7px; letter-spacing: 4px; margin-top: 6px; opacity: 1; }
+.flow-coastal .flow-heading { margin-top: 28px; }
+.flow-coastal .flow-mode-tag { color: #dfdfcc; font-size: 8px; font-weight: 650; letter-spacing: 1.5px; }
+.flow-coastal .flow-heading h2 { font-size: clamp(30px, 3.4vw, 44px); font-weight: 750; letter-spacing: -1.6px; margin: 7px 0 0; }
+.flow-coastal .flow-heading h2 em { color: #ffda86; font-style: normal; }
+.flow-coastal .selection-steps { grid-row: 1; grid-column: 2; align-self: center; gap: 17px; margin: 0; font-size: 10px; font-weight: 550; color: #3e5961; }
+.flow-coastal .selection-steps li { gap: 0; }
+.flow-coastal .selection-steps [data-complete=true] { color: #3e5961; }
+.flow-coastal .selection-steps [aria-current=step] { color: #24434c; font-weight: 750; text-decoration: underline; text-decoration-color: #556a67; text-underline-offset: 7px; }
+.flow-coastal .flow-content { max-width: 1640px; grid-template-columns: minmax(310px, .9fr) minmax(0, 1.35fr); align-items: center; gap: clamp(30px, 5vw, 80px); min-height: 330px; padding: 14px 6vw 20px; }
+.flow-coastal .selection-roster { position: relative; z-index: 3; min-width: 0; }
+.flow-coastal .selection-roster-heading, .flow-coastal .selection-roster-caption { display: none; }
+.flow-coastal .selection-grid { gap: 12px; }
+.flow-coastal .selection-card {
+  height: clamp(135px, 23vh, 190px); border: 1px solid #e6f2e625; border-radius: 12px;
+  background: #d2ecdf0b; box-shadow: none; animation: none;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.flow-coastal .selection-card:hover { background: #e2f5e516; transform: translateY(-2px); }
+.flow-coastal .selection-card[data-selected=true] { background: #ffdfa115; border-color: #ffda8699; box-shadow: none; transform: scale(1.015); }
+.flow-coastal .selection-card-number, .flow-coastal .selection-corners { display: none; }
+.flow-coastal .selection-card-model { inset: 6px 3px 33px; }
+.flow-coastal .selection-card-label { min-height: 32px; padding: 8px 11px; font-size: 11px; font-weight: 600; border: 0; border-radius: 0 0 12px 12px; background: transparent; }
+.flow-coastal .selection-card-label > span { color: #ffdf94; }
+.flow-coastal .selection-preview { z-index: 3; min-height: 360px; padding: 0; }
+.flow-coastal .selection-stage { min-height: 285px; }
+.coastal-scenery-view { position: fixed; inset: 0; pointer-events: none; }
+.coastal-preview-name { position: relative; z-index: 3; text-align: center; padding: 14px 0 0; animation: coastal-name-enter .2s ease-out; }
+.coastal-preview-name h3 { font-size: clamp(24px, 2.5vw, 34px); letter-spacing: -.7px; font-weight: 650; margin: 0; text-shadow: 0 2px 12px #23465366; }
+.coastal-preview-name p { margin: 9px 0 0; font-size: 11px; color: #e5e7dc; line-height: 1.6; min-height: 18px; }
+.flow-coastal .flow-footer { padding: 15px 6vw 24px; min-height: 75px; border: 0; background: transparent; box-shadow: none; }
+.flow-coastal .flow-footer-context { display: none; }
+.flow-coastal .selection-actions { width: 100%; justify-content: space-between; gap: 18px; }
+.flow-coastal .selection-back { color: #f6f5e6; font-size: 12px; padding: 13px 0; }
+.flow-coastal .selection-confirm { min-width: 155px; gap: 25px; font-size: 12px; font-weight: 700; border: 1px solid #fff0bf33; border-radius: 9px; box-shadow: none; background: #ffda86; color: #29434a; padding: 13px 17px; }
+.flow-coastal .selection-confirm:hover { background: #ffe7ad; transform: translateY(-1px); }
+.flow-coastal :focus-visible { outline: 2px solid #fff0c7; outline-offset: 4px; }
+.flow-coastal .home-scene-status { z-index: 3; }
+@keyframes coastal-name-enter { from { opacity: 0; translate: 0 4px; } to { opacity: 1; translate: 0 0; } }
+@keyframes coastal-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (min-width: 1700px) { .flow-coastal .flow-header, .flow-coastal .flow-content, .flow-coastal .flow-footer { padding-left: 80px; padding-right: 80px; } }
+@media (max-width: 1100px) {
+  .flow-coastal .flow-content { grid-template-columns: minmax(290px, 1fr) minmax(0, 1.1fr); gap: 24px; }
+  .flow-coastal .selection-steps { font-size: 9px; gap: 11px; }
+  .flow-coastal .selection-card { height: 145px; }
+  .flow-coastal .selection-card-label { font-size: 10px; padding: 8px; }
+}
+@media (max-height: 760px) and (min-width: 761px) {
+  .flow-coastal .flow-header { padding-top: 20px; }
+  .flow-coastal .flow-heading { margin-top: 20px; }
+  .flow-coastal .selection-card { height: 135px; }
+  .flow-coastal .selection-preview { min-height: 325px; }
+  .flow-coastal .selection-stage { min-height: 255px; }
+  .flow-coastal .flow-footer { padding-bottom: 17px; }
+}
+@media (max-width: 760px) {
+  .flow-coastal .flow-header { padding: 22px 7vw 10px; }
+  .flow-coastal .selection-steps { display: none; }
+  .flow-coastal .flow-heading { margin-top: 24px; }
+  .flow-coastal .flow-heading h2 { font-size: 32px; }
+  .flow-coastal .flow-content { grid-template-columns: 1fr; flex: 0 0 auto; padding: 12px 7vw 20px; gap: 22px; min-height: 0; }
+  .flow-coastal .selection-roster { order: 0; }
+  .flow-coastal .selection-card { height: 135px; }
+  .flow-coastal .selection-grid { gap: 10px; }
+  .flow-coastal .selection-preview { order: 1; height: auto; min-height: 350px; }
+  .flow-coastal .selection-stage { min-height: 275px; }
+  .coastal-scenery-view { position: absolute; inset: 0; }
+  .flow-coastal .flow-backdrop { background: linear-gradient(155deg, #315967, #6b8e91); }
+  .flow-coastal .flow-footer { padding: 10px 7vw 24px; }
+  .flow-coastal .selection-confirm { max-width: none; flex: 0 1 auto; }
+  .coastal-preview-name h3 { font-size: 27px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coastal-preview-name, .flow-coastal .flow-step-content > section { animation: none; }
+  .flow-coastal .selection-card, .flow-coastal .selection-confirm { transition: none; }
+}

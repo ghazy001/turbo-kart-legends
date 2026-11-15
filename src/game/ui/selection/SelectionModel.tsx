@@ -8,7 +8,7 @@ import { KartAssembly } from '../../render/KartAssembly';
 import type { DriverAssetDefinition, KartAssetDefinition } from '../../config/visualAssets';
 
 /** Portraits retain the source pose. They never modify the seated gameplay instance. */
-function RacerModel({ driver }: { driver: DriverAssetDefinition }) {
+export function RacerModel({ driver }: { driver: DriverAssetDefinition }) {
   const gltf = useGLTF(driver.url, false, false, configureAssetLoader);
   const model = useMemo(() => {
     const instance = instantiateModel(gltf.scene, `${driver.id}:portrait`, {});

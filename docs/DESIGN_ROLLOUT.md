@@ -7,8 +7,8 @@ The user chose a dark showroom with warm yellow accents on 2026-11-14 and reques
 | Pass | Focus | Status |
 | --- | --- | --- |
 | 1 | Home Menu, visual foundation, mode hierarchy and kart showroom | Implemented; verification below |
-| 2 | Racer and Kart Select: match the new shell, refine cards, previews and naming | Next review / implementation |
-| 3 | Track Select, cup itinerary, race options and final review | Planned |
+| 2 | Racer and Kart Select: match the new shell, refine cards, previews and naming | Implemented; coastal selection verification below |
+| 3 | Track Select, cup itinerary, race options and final review | Next visual pass |
 | 4 | In-race HUD, item/drift feedback and pause/settings readability | Planned |
 | 5 | Results, podium, loading/error states and consistent transitions | Planned |
 | 6 | Environment/art direction, lighting and final cross-screen/device QA | Planned |
@@ -85,3 +85,22 @@ Checks: full regression suite **382 tests across 32 files passed in 181.16 secon
 Capture: [coastal Home](design-qa/home/coastal-home.png).
 
 Final coastal checks: `npm run typecheck`, `npm run lint` (zero warnings), the full test suite above, `npm run build` and `git diff --check` pass. Production build: 761 modules, App CSS 55.13 kB / 12.26 kB gzip and App JS 234.59 kB / 75.11 kB gzip. A clean final reload produced no new browser errors; a transient React hook-order message during hot replacement of the developing preview was cleared by reloading and did not recur on startup. No simulation or gameplay source changed.
+
+
+## Pass 2 — Minimal coastal Racer / Kart Select
+
+The user approved the coastal Home and asked to continue with a minimalist, clean, simple and attractive style. This pass covers Racer Select and Kart Select only. Track/cup/options/review, settings, HUD and results remain for later individual passes.
+
+Both screens now use the same sunset coast, quiet glass cards, understated amber border/check selection, separate keyboard focus outline, compact title/progress text and two essential Back/Confirm actions. Removed visible roster slogans, numbers, oversized corner brackets, tutorial hints, duplicate context labels and header shortcut buttons from these two screens. Settings remains accessible from Home; later setup screens retain their existing shortcuts until their own pass. The three-column layout is deliberately retained so visual rows match the existing keyboard/gamepad grid rules.
+
+`CoastalSelectionPreview.tsx` reuses the existing independently cloned portrait or seated kart assembly through `HomeScene`, rather than adding a renderer. Racer previews show the supplied static/source pose; they are not new seated/idle animations. Kart preview includes the selected seated driver. Existing transforms, fitting, profile persistence, selection store, race handoff, controls and simulation remain authoritative.
+
+`coastalSelection.css` scopes the new presentation to those steps. `RaceFlowShell` adds an opt-in coastal skin/shadow flag and quiet header without changing other screens. `HomeScene` accepts a subject and a scene-only readability tint; drawing the tint inside the background view keeps thumbnail views clear. Fade-only section transitions avoid creating a transformed containing block around the fixed scenic view. `SelectionModel` exports its existing portrait renderer and SelectionGrid exposes its kind for styling/extensions. No new textures, GLBs, dependencies or animation loops were added.
+
+Browser QA used an isolated tab after the initial preview. Quick Race → Racer → Kart → Track works; Escape returns to Kart and Racer with Arnold / Boat Kart retained. Right from Boat wraps to Practice Kart; Down returns to Boat in the same column. All five portrait and four kart thumbnails loaded; the Arnold / Boat Kart hero was visually checked. At 1280 × 720 CSS pixels, content scroll dimensions equal the viewport. At 390 × 844 CSS pixels, content width remains 390, the stacked screen is 925 px high, and scrolling reaches both action buttons without overlap. No permanent menu-control hint block remains. Temporary viewport overrides were reset. The isolated browser error log was empty. Physical gamepad/phone checks and a renewed artist review of every combination were not performed.
+
+The full regression run passed **382 tests across 32 files in 219.41 seconds**, using the standard two-worker script with loopback access for phone tests and process-scoped idle-sleep prevention. No core, input, racing, checkpoint, item, physics, collider, AI or gameplay camera source changed.
+
+Captures: [Racer Select](design-qa/selection/racer-coastal.png), [Kart Select](design-qa/selection/kart-coastal.png).
+
+Final Pass 2 checks: `npm run typecheck`, `npm run lint` (zero warnings), `npm run test` (382/382 above), `npm run build` and `git diff --check` pass. Production build: 763 modules; App CSS 61.07 kB / 13.21 kB gzip and App JS 235.85 kB / 75.34 kB gzip. The temporary QA tab was closed; the user's original tab remains available.
