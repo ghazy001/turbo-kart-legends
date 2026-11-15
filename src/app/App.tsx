@@ -171,7 +171,7 @@ export function App() {
         {mode === 'results' && (cup ? <CupResultsMenu key={cup.round} cup={cup} selection={runtime.selection} interactive={!setupOpen && !panelOpen} onNext={nextCupRace} onRestart={restartCup} onMenu={backToMenu} /> : <ResultsMenu key={runtime.race.revision} race={runtime.race} selection={runtime.selection} interactive={!setupOpen && !panelOpen} onRestart={restart} onMenu={backToMenu} />)}
       </div>}
       {mode === 'menu' && !setupOpen && <MainMenuScreen store={menuStore} />}
-      {setupOpen && <RaceSetupScreen store={menuStore} records={runtime.records} tools={tools} onComplete={completeSetup} onClose={() => menuStore.home()} />}
+      {setupOpen && <RaceSetupScreen store={menuStore} records={runtime.records} onComplete={completeSetup} onClose={() => menuStore.home()} />}
       {menu.panel === 'settings' && <SettingsScreen audioEnabled={menu.audioEnabled} onAudio={toggleSound} onController={() => openPanel('controller')} onPhone={() => openPanel('phone')} onPractice={() => { menuStore.home(); setCup(null); const race = new RaceSession(trackDefinition(menu.selectedTrack).track); race.start('free-drive'); installRace(race); }} onClose={() => menuStore.back()} returnFocusElement={panelOrigin} />}
       {menu.panel === 'controller' && <ControllerSettingsPanel onClose={() => menuStore.back()} onPhone={() => openPanel('phone')} returnFocusElement={panelOrigin} />}
       {menu.panel === 'phone' && <PhoneControllerPanel host={runtime.phone} onClose={() => menuStore.back()} returnFocusElement={panelOrigin} />}

@@ -8,8 +8,8 @@ The user chose a dark showroom with warm yellow accents on 2026-11-14 and reques
 | --- | --- | --- |
 | 1 | Home Menu, visual foundation, mode hierarchy and kart showroom | Implemented; verification below |
 | 2 | Racer and Kart Select: match the new shell, refine cards, previews and naming | Implemented; coastal selection verification below |
-| 3 | Track Select, cup itinerary, race options and final review | Next visual pass |
-| 4 | In-race HUD, item/drift feedback and pause/settings readability | Planned |
+| 3 | Track Select, cup itinerary, race options and final review | Implemented; verification below |
+| 4 | In-race HUD, item/drift feedback and pause/settings readability | Next visual pass |
 | 5 | Results, podium, loading/error states and consistent transitions | Planned |
 | 6 | Environment/art direction, lighting and final cross-screen/device QA | Planned |
 
@@ -104,3 +104,27 @@ The full regression run passed **382 tests across 32 files in 219.41 seconds**, 
 Captures: [Racer Select](design-qa/selection/racer-coastal.png), [Kart Select](design-qa/selection/kart-coastal.png).
 
 Final Pass 2 checks: `npm run typecheck`, `npm run lint` (zero warnings), `npm run test` (382/382 above), `npm run build` and `git diff --check` pass. Production build: 763 modules; App CSS 61.07 kB / 13.21 kB gzip and App JS 235.85 kB / 75.34 kB gzip. The temporary QA tab was closed; the user's original tab remains available.
+
+
+## Pass 3 — Coastal tracks, cup, VS options and race review
+
+The user accepted the next design pass. All setup steps now use the approved minimalist coastal shell: compact headers/progress, readable translucent surfaces, restrained amber selection and essential Back/Confirm actions. Settings/input/phone shortcuts remain available from Home Settings and during gameplay; they no longer compete with setup selections.
+
+Track Select presents four compact, keyboard-selectable course rows and a larger flat SVG map/name/description. Maps still derive from actual sampled course data. Grand Prix uses a four-tile ordered route preview instead of repeating the itinerary in two lists; three laps/CPU count, scoring and tie information remain visible. VS keeps all existing 1/3/5 lap and Easy/Normal/Hard choices, with quieter buttons and no control-tutorial text. Final review now leads with the actual track/cup, a short racer/kart/length/rivals summary and the seated cosmetic preview. Time Trial retains the existing per-track personal-best panel and explicitly shows solo/no items in review. No gameplay or persistence rules changed.
+
+Files: `RaceSetupScreen.tsx`, `TrackSelectScreen.tsx`, `RaceOptionsScreen.tsx`, `HomeScene.tsx`, `App.tsx` and `coastalSetup.css`, plus the project/design documentation. `HomeScene` can render scenery without loading a preview model behind maps; the same shared demand-rendered Canvas remains in use. Narrow fullscreen scenery gets a uniform contrast tint, while inline model previews retain clear lighting. No new asset, texture, dependency, backend or renderer was added. The mode store, launch descriptor and race-start callback remain unchanged. Cup point labels read the existing `cupPoints` values.
+
+Verification:
+
+- Full regression suite: **382 tests / 32 files passed in 194.12 seconds**, using the standard two-worker command with loopback access for existing phone tests and process-scoped idle-sleep prevention.
+- Quick Race: keyboard Down wraps Volcano → Sunshine; the map updates. Review shows the selected track, Arnold / Boat Kart, three laps and Normal CPU. Back returns with the selected track retained.
+- VS: keyboard changed 1 → 3 laps and Normal → Hard; review showed `3 laps` and `3 CPU · Hard`. Leaving setup discarded the draft through the existing store; no race was started and saved defaults were not overwritten during QA.
+- Grand Prix: Cup Select displays all four tracks in order; review shows four races, three laps each, Normal CPU, 10/7/4/1 points and Start cup.
+- Time Trial: the empty personal-best state remains on track/review; review shows Solo and no items. Existing record persistence/validation remains covered by core tests; a populated record panel was not newly captured.
+- At 1280 × 720 CSS pixels, normal Track Select and Time Trial Track Select have scroll dimensions equal to the viewport. At 390 × 844, track content width remains 390 and scrolls to its map/actions; the longer Time Trial review also scrolls to both actions without overlap. A bright mobile background was caught and corrected with the scene-only tint. Temporary viewport overrides were reset.
+- Browser QA was isolated from the user's original tab. This pass verified setup through its final start actions; it did not play a new race or test physical phones/gamepads. Simulation, AI/navigation, driving/boost/drift, collisions, checkpoint/cup/record rules and gameplay camera source were not changed.
+
+Captures: [Track Select](design-qa/setup/track-select.png), [Race review](design-qa/setup/race-review.png), [VS options](design-qa/setup/vs-options.png), [Cup itinerary](design-qa/setup/cup-itinerary.png).
+
+
+Final Pass 3 checks: `npm run typecheck`, `npm run lint` (zero warnings), `npm run test` (382/382 above), `npm run build` and `git diff --check` pass. Build: 763 modules; App CSS 68.44 kB / 14.25 kB gzip and App JS 232.68 kB / 74.54 kB gzip. The isolated browser error log was empty; the temporary QA tab was closed after viewport restoration. The original tab and saved race preferences were preserved. Next visual pass: HUD/item/drift readability and pause/settings.

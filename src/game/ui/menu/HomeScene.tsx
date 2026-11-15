@@ -37,8 +37,8 @@ function CoastalCamera({ narrow }: { narrow: boolean }) {
     onUpdate={camera => camera.lookAt(narrow ? 0 : -2.7, narrow ? 0.9 : 1.2, 0)} />;
 }
 /** One view in the existing shared renderer, with an independently cloned parked assembly. */
-export function HomeScene({ driver, kart, kind = 'kart', className = 'home-scenery-view', tint = false }: {
-  driver: DriverAssetDefinition; kart: KartAssetDefinition; kind?: 'racer' | 'kart'; className?: string; tint?: boolean;
+export function HomeScene({ driver, kart, kind = 'kart', className = 'home-scenery-view', tint = false, showSubject = true }: {
+  driver: DriverAssetDefinition; kart: KartAssetDefinition; kind?: 'racer' | 'kart'; className?: string; tint?: boolean; showSubject?: boolean;
 }) {
   const narrow = useSyncExternalStore(subscribeScreen, narrowScreen);
   const [status, setStatus] = useState<AssetStatus>('loading'), [retry, setRetry] = useState(0);
@@ -46,16 +46,18 @@ export function HomeScene({ driver, kart, kind = 'kart', className = 'home-scene
   return <>
     <View className={className} index={0.5} aria-hidden="true">
       <CoastalCamera narrow={narrow} /><HomeScenery />
-      <PreviewBoundary key={`${driver.id}:${kart.id}:${retry}`} onStatus={setStatus}><Suspense fallback={null}>
+      {showSubject && <PreviewBoundary key={`${driver.id}:${kart.id}:${retry}`} onStatus={setStatus}><Suspense fallback={null}>
         <ParkedSubject driver={driver} kart={kart} kind={kind} onReady={ready} />
-      </Suspense></PreviewBoundary>
-      {tint && !narrow && <mesh frustumCulled={false} renderOrder={10000}>
+      </Suspense></PreviewBoundary>}
+      {tint && (!narrow || !showSubject) && <mesh frustumCulled={false} renderOrder={10000}>
         <planeGeometry args={[2, 2]} /><shaderMaterial transparent depthWrite={false} depthTest={false} toneMapped={false}
           vertexShader={'varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}'}
-          fragmentShader={'varying vec2 vUv; void main(){float left=1.0-smoothstep(0.12,0.7,vUv.x);float bottom=1.0-smoothstep(0.0,0.2,vUv.y);gl_FragColor=vec4(0.075,0.19,0.23,max(left*0.88,bottom*0.4));}'} />
+          fragmentShader={narrow
+            ? 'void main(){gl_FragColor=vec4(0.075,0.19,0.23,0.72);}'
+            : 'varying vec2 vUv; void main(){float left=1.0-smoothstep(0.12,0.7,vUv.x);float bottom=1.0-smoothstep(0.0,0.2,vUv.y);gl_FragColor=vec4(0.075,0.19,0.23,max(left*0.88,bottom*0.4));}'} />
       </mesh>}
     </View>
-    {status !== 'ready' && <div className="home-scene-status" role={status === 'error' ? 'alert' : 'status'}>
+    {showSubject && status !== 'ready' && <div className="home-scene-status" role={status === 'error' ? 'alert' : 'status'}>
       {status === 'error' ? <><span>Preview unavailable</span><button data-selection-action onClick={() => { useGLTF.clear(driver.url); useGLTF.clear(kart.url); setStatus('loading'); setRetry(value => value + 1); }}>Retry preview</button></> : kind === 'racer' ? 'Meeting your racer…' : 'Parking your kart…'}
     </div>}
   </>;
