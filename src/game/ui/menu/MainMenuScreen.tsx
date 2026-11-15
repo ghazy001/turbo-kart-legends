@@ -11,7 +11,7 @@ export function HomeMenuList({ index, onSelect, onConfirm }: { index: number; on
   const items = [...gameModes, { id: 'settings', name: 'Settings', icon: 'settings', detail: 'Sound, controls & pocket wheel' }];
   return <nav className="home-menu-list" aria-label="Game modes">{items.map((item, i) => <button key={item.id} className="home-menu-item" data-menu-current={i === index} aria-current={i === index ? 'true' : undefined}
     aria-label={`${item.name} ${item.detail}`} tabIndex={i === index ? 0 : -1} onPointerEnter={() => onSelect(i)} onFocus={() => onSelect(i)} onClick={() => { onSelect(i); onConfirm(); }}>
-    <strong>{item.name}</strong><span className="home-menu-arrow" aria-hidden="true">→</span>
+    <strong>{item.name}</strong>
   </button>)}</nav>;
 }
 

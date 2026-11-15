@@ -132,3 +132,15 @@ Final Pass 3 checks: `npm run typecheck`, `npm run lint` (zero warnings), `npm r
 ## Racer consistency follow-up
 
 Before HUD polish, the user requested more consistent racer sizes and style. Portrait fitting now uses common height instead of penalizing extended arms; seated scale derives from inspected crown/pelvis measurements. A shared matte profile keeps original paint/alpha while reducing metallic/glossy differences. No source GLB, game rule or collider changed. Full verification: 389 tests / 32 files plus typecheck, lint and build passed. See [measurements, browser observations and remaining artist work](RACER_STYLE.md). This is a presentation pass, not a full source-model art remake. HUD/pause polish remains the next design step.
+
+## Arcade button pass
+
+The user requested prettier game-style buttons and removal of the arrows inside them. Home modes now use restrained raised teal faces, a warm gold selected face, stronger labels and subtle pressed depth. Shared `GameButton.tsx` / `buttons.css` provides gold, quiet teal and light-surface variants for setup confirm/back, pause, race toolbar, results, settings and desktop phone-pairing actions. Hover, focus, pressed, disabled and reduced-motion states share that treatment. Existing handlers, native semantics, ARIA attributes and menu navigation markers are forwarded. No extra buttons or permanent tutorial hints were added.
+
+Decorative action arrows were removed from Home, current/legacy setup, settings, pause, results, pairing and calibration controls. Branding and actual directional-control instructions remain. Racer/kart/track cards and the phone's touch-driving pads keep their existing layouts and input behavior. The scene, models, loading barrier, race state, physics, camera and input formulas are unchanged; no dependency, font download, texture or audio was added.
+
+Browser QA: Home → Racer → Kart and Back retain Arnold/Boat Kart; Enter activates the same actions. At 390 × 844 CSS pixels, the selection content width is 390, both footer buttons remain within the viewport and measure approximately 48 px high. The viewport override was reset. Settings rows have no trailing arrows; the phone panel retains its disabled calibration action while unpaired. In the explicitly fabricated results preview, Enter on Race again emits the expected restart-preview notice; no completed race or record is implied. No browser errors were captured. The temporary QA tab was closed and the user's original tab/persistent choices were preserved. Physical controller/phone tests and a new full race were not performed for this cosmetic pass.
+
+`npm run typecheck`, `npm run lint`, `npm run build` and `git diff --check` pass. Existing focused menu/results tests: **32 passed / 3 files**. Full regression suite: **395 tests / 33 files passed in 152.55 seconds**, with loopback access for existing phone tests. Build: 768 modules; App CSS 71.02 kB / 14.91 kB gzip, App JS 235.23 kB / 75.54 kB gzip.
+
+Captures: [Home buttons](design-qa/buttons/home.png), [selection actions](design-qa/buttons/selection.png).

@@ -5,6 +5,7 @@ import { ItemHUD } from './ItemHUD';
 import { RaceHUD } from './RaceHUD';
 import { raceKindNames } from '../race/RaceSession';
 import { chargeTier } from '../kart/driftController';
+import { GameButton } from './GameButton';
 
 function DriftMeter({ runtime }: { runtime: GameRuntime }) {
   const panel = useRef<HTMLDivElement>(null);
@@ -104,8 +105,8 @@ export function HUD({ runtime, onPause, onReset }: { runtime: GameRuntime; onPau
       <div className="speed-track"><div ref={bar} /></div>
     </div>
     <div className="drive-toolbar"><span className="drive-hint"><kbd>W</kbd> GO <kbd>S</kbd> BRAKE <kbd>A</kbd><kbd>D</kbd> STEER <kbd>space</kbd> DRIFT</span>
-      <button onClick={onReset}><span aria-hidden="true">↺</span> Reset <kbd>R</kbd></button>
-      <button onClick={onPause} aria-label="Pause and controls"><span aria-hidden="true">Ⅱ</span> Pause / help <kbd>esc</kbd></button>
+      <GameButton tone="surface" size="small" onClick={onReset}>Reset <kbd>R</kbd></GameButton>
+      <GameButton tone="surface" size="small" onClick={onPause} aria-label="Pause and controls">Pause <kbd>esc</kbd></GameButton>
     </div>
   </>;
 }

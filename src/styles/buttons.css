@@ -1,0 +1,32 @@
+/* Small, tactile arcade actions. Cards and touch-driving pads keep their own layouts. */
+button.game-button[data-tone] {
+  --button-face: linear-gradient(180deg, #ffe6a7, #f5c46b);
+  --button-edge: #b58743;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; max-width: 100%; padding: 13px 24px;
+  border: 1px solid #ffeabb; border-radius: 14px;
+  background: var(--button-face); color: #253e47;
+  box-shadow: inset 0 1px 0 #ffffff70, 0 3px 0 var(--button-edge), 0 7px 16px #132f3a18;
+  font: 800 13px/1.25 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  letter-spacing: .025em; text-align: center; text-decoration: none;
+  cursor: pointer; touch-action: manipulation;
+  transition: transform .14s ease, box-shadow .14s ease, filter .14s ease, border-color .14s ease;
+}
+button.game-button[data-tone=quiet] {
+  --button-face: linear-gradient(180deg, #315560ed, #23434eeF); --button-edge: #15333e;
+  color: #f9f3e2; border-color: #c4ddd33d;
+  box-shadow: inset 0 1px 0 #ffffff12, 0 3px 0 var(--button-edge), 0 7px 16px #132f3a18;
+}
+button.game-button[data-tone=surface] {
+  --button-face: linear-gradient(180deg, #fffcf3, #eee8d9); --button-edge: #b5b7aa;
+  border-color: #d9dece; color: #29464d;
+}
+button.game-button[data-size=small] { min-height: 40px; padding: 10px 15px; font-size: 11px; border-radius: 11px; }
+button.game-button[data-tone]:focus-visible { outline: 2px solid #fff1c6; outline-offset: 4px; box-shadow: 0 0 0 6px #173c48, inset 0 1px 0 #ffffff70, 0 3px 0 var(--button-edge); }
+@media (hover: hover) and (pointer: fine) {
+  button.game-button[data-tone]:not(:disabled):hover { transform: translateY(-1px); filter: brightness(1.055); box-shadow: inset 0 1px 0 #ffffff60, 0 4px 0 var(--button-edge), 0 9px 18px #132f3a20; }
+}
+button.game-button[data-tone]:not(:disabled):active { transform: translateY(2px); filter: brightness(.98); box-shadow: inset 0 1px 2px #132f3a12, 0 1px 0 var(--button-edge); }
+button.game-button[data-tone]:disabled { cursor: not-allowed; opacity: .48; filter: saturate(.45); transform: none; box-shadow: inset 0 1px 0 #ffffff30, 0 1px 0 var(--button-edge); }
+@media (max-width: 520px) { button.game-button[data-tone] { padding-inline: 18px; font-size: 12px; } }
+@media (prefers-reduced-motion: reduce) { button.game-button[data-tone] { transition: none; } button.game-button[data-tone]:not(:disabled):hover { transform: none; } }

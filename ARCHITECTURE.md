@@ -289,3 +289,7 @@ All RaceSetupScreen steps opt into the same coastal shell and quiet header. Trac
 ## Race grid asset barrier
 
 `GameCanvas` owns a `RaceAssetLoading` store for its actual player/CPU lineup. Committed KartVisual assemblies report ready; loading draws no kart, and only actual errors use the procedural fallback. A hidden Canvas plus a DOM loading portal prevents partial grids from becoming visible. GameLoop holds the existing clock/inputs/audio until settlement and drops the first ready delta; `runtime.assetsReady` gates human driving/reset. Paired preloading uses KartAssembly's exact useGLTF key. No simulation rule or camera tuning changes. See docs/RACE_ASSET_LOADING.md.
+
+## Shared action buttons
+
+`ui/GameButton.tsx` wraps a native button, forwarding existing handlers/ARIA/navigation attributes and defaulting to `type="button"`. `styles/buttons.css` owns accent/quiet/surface variants and tactile interaction states. Home mode choices keep their existing roving-navigation component with matching faces in home.css. Selection cards and touch-driving pads retain their own layouts. This presentation layer has no store, simulation, input or asset-loading ownership. See docs/DESIGN_ROLLOUT.md.

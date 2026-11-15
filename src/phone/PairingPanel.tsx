@@ -1,5 +1,6 @@
 import { useEffect, useState, useSyncExternalStore, type ReactNode } from 'react';
 import QRCode from 'qrcode';
+import { GameButton } from '../game/ui/GameButton';
 import type { RemoteHost } from './RemoteHost';
 import { pairingUrl, PHONE_CONFIG } from './protocol';
 import { useDialogFocus } from '../game/ui/useDialogFocus';
@@ -30,13 +31,13 @@ export function PairingPanel({ host, onClose, children }: { host: RemoteHost; on
       <label>Computer address<select value={selectedOrigin} onChange={event => setOrigin(event.currentTarget.value)}>{origins.map(value => <option key={value}>{value}</option>)}</select></label>
       <p>Phone and computer must be on the same Wi-Fi. Keep this game tab visible.</p></div></div>
       <label className="pair-link-label">Controller link<input aria-label="Controller pairing link" readOnly value={url} onFocus={event => event.currentTarget.select()} /></label>
-      <button className="pair-secondary" onClick={() => { navigator.clipboard?.writeText(url).then(() => setCopied(true)).catch(() => setCopied(false)); }}>{copied ? 'Copied' : 'Copy controller link'}</button>
+      <GameButton tone="surface" size="small" className="pair-secondary" onClick={() => { navigator.clipboard?.writeText(url).then(() => setCopied(true)).catch(() => setCopied(false)); }}>{copied ? 'Copied' : 'Copy controller link'}</GameButton>
     </>}
     {offer && !waiting && state.link.state !== 'connected' && <p>Return to the phone to reconnect within 30 seconds, or generate a new code. A consumed QR code cannot pair another phone.</p>}
     {state.link.state === 'connected' && <div className="pair-connected"><span aria-hidden="true">✓</span><strong>Ready for the next corner.</strong><p>Close this panel, start or resume on the computer, then release the phone controls to arm. Touch works immediately; motion steering is optional.</p></div>}
     {children}
     {!offer?.lan && <div className="pair-help"><strong>For a real phone</strong><p>Stop the normal server, generate certificates with <code>npm run phone:cert</code>, trust the local CA on both devices, then run <code>npm run dev:phone</code>. Full Wi-Fi and certificate instructions are in <code>docs/PHONE_CONTROLLER.md</code>.</p></div>}
-    <div className="pair-actions"><button className="primary" onClick={onClose}>Back to the game ↗</button><button disabled={state.busy} className="pair-secondary" onClick={() => host.pair()}>{offer ? 'New pairing code' : 'Generate code'}</button><button className="pair-secondary" onClick={() => host.disconnect()}>Disconnect phone</button></div>
+    <div className="pair-actions"><GameButton className="primary" onClick={onClose}>Back to the game</GameButton><GameButton tone="surface" size="small" disabled={state.busy} className="pair-secondary" onClick={() => host.pair()}>{offer ? 'New pairing code' : 'Generate code'}</GameButton><GameButton tone="surface" size="small" className="pair-secondary" onClick={() => host.disconnect()}>Disconnect phone</GameButton></div>
     <p className="pair-footnote">Connection loss pauses driving and clears phone input. Keyboard and gamepad remain available.</p>
   </div></div>;
 }

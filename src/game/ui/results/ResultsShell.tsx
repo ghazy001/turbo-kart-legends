@@ -1,5 +1,6 @@
 import { Component, lazy, Suspense, useCallback, useState, type ReactNode } from 'react';
 import { formatTime } from '../formatTime';
+import { GameButton } from '../GameButton';
 import { panelCommand, useMenuNavigation } from '../menu/useMenuNavigation';
 import type { PodiumEntry } from './resultsPresentation';
 import { usePresentationMotion } from './usePresentationMotion';
@@ -35,6 +36,6 @@ export function ResultsShell({ id, label, title, description, badge, entries, ce
   return <div className="results-scrim finish-scrim"><div ref={navigation.ref} onKeyDownCapture={navigation.onKeyDownCapture} className="finish-shell" role="dialog" aria-modal="true" aria-labelledby={`${id}-title`}>
     <header className="finish-heading"><div><span className="finish-overline">{label}</span><h2 id={`${id}-title`}>{title}</h2><p>{description}</p></div><span className="finish-badge" data-celebrate={celebrate}>{badge}</span></header>
     <div className="finish-body"><PodiumPreview entries={entries} celebrate={celebrate} championship={championship} /><section className="finish-details" aria-label="Results details">{children}</section></div>
-    <footer className="finish-actions"><span className="finish-hints"><kbd>↑↓←→</kbd> Navigate <kbd>Enter</kbd> Confirm <kbd>Esc</kbd> Home<br /><small>PAD: STICK / D-PAD · A CONFIRM · B HOME</small></span><div><button className="finish-home" data-selection-action onClick={onHome}>Home</button><button className="finish-confirm selection-confirm" data-menu-current="true" data-selection-action onClick={onPrimary}>{primaryLabel}<span aria-hidden="true">↗</span></button></div></footer>
+    <footer className="finish-actions"><span className="finish-hints"><kbd>↑↓←→</kbd> Navigate <kbd>Enter</kbd> Confirm <kbd>Esc</kbd> Home<br /><small>PAD: STICK / D-PAD · A CONFIRM · B HOME</small></span><div><GameButton tone="quiet" className="finish-home" data-selection-action onClick={onHome}>Home</GameButton><GameButton className="finish-confirm selection-confirm" data-menu-current="true" data-selection-action onClick={onPrimary}>{primaryLabel}</GameButton></div></footer>
   </div></div>;
 }

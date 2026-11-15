@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { View } from '@react-three/drei';
 import { CanvasFrames } from '../selection/CanvasFrames';
+import { GameButton } from '../GameButton';
 import { stepNames, type FlowStep } from './menuCatalog';
 import type { useMenuNavigation } from './useMenuNavigation';
 import '../../../styles/selection.css';
@@ -16,7 +17,7 @@ export function StepHeader({ title, subtitle, mode, steps, step, tools, home = f
   </header>;
 }
 export function StepFooter({ context, confirm, onBack, onConfirm, home = false }: { context: string; confirm: string; onBack: () => void; onConfirm: () => void; home?: boolean }) {
-  return <footer className="selection-footer flow-footer"><div className="flow-footer-context"><span className="selection-player">P1</span><span>{context}</span></div><div className="selection-actions">{!home && <button className="selection-back" data-selection-action onClick={onBack}>← <span>Back</span></button>}<button className="selection-confirm" data-selection-action onClick={onConfirm}>{confirm}<span aria-hidden="true">↗</span></button></div></footer>;
+  return <footer className="selection-footer flow-footer"><div className="flow-footer-context"><span className="selection-player">P1</span><span>{context}</span></div><div className="selection-actions">{!home && <GameButton tone="quiet" className="selection-back" data-selection-action onClick={onBack}>Back</GameButton>}<GameButton className="selection-confirm" data-selection-action onClick={onConfirm}>{confirm}</GameButton></div></footer>;
 }
 export function RaceFlowShell({ navigation, revision, home = false, coastal = false, header, children, footer, inert = false }: {
   navigation: ReturnType<typeof useMenuNavigation>; revision: string; home?: boolean; coastal?: boolean; header: ReactNode; children: ReactNode; footer: ReactNode; inert?: boolean;
