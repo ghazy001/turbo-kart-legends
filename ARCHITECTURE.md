@@ -285,3 +285,7 @@ All RaceSetupScreen steps opt into the same coastal shell and quiet header. Trac
 ## Racer presentation consistency
 
 `racerStyle.ts` owns inspected crown/pelvis references, common portrait/seated heights and matte surface constants. Registry scales derive uniformly from those references. `racerPresentation.ts` fits portrait bounds and modifies only runtime material clones. `modelInstances` caches source/matte variants independently; `driverFitOptions` opts seated assemblies into that profile. Player/AI/menu/podium assemblies retain the same parent transforms and hand targets. No cosmetic measurement feeds a collider or simulation value. See docs/RACER_STYLE.md for verification and artist-work limits.
+
+## Race grid asset barrier
+
+`GameCanvas` owns a `RaceAssetLoading` store for its actual player/CPU lineup. Committed KartVisual assemblies report ready; loading draws no kart, and only actual errors use the procedural fallback. A hidden Canvas plus a DOM loading portal prevents partial grids from becoming visible. GameLoop holds the existing clock/inputs/audio until settlement and drops the first ready delta; `runtime.assetsReady` gates human driving/reset. Paired preloading uses KartAssembly's exact useGLTF key. No simulation rule or camera tuning changes. See docs/RACE_ASSET_LOADING.md.

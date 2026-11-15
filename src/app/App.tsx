@@ -51,7 +51,7 @@ if (import.meta.hot) {
 export function App() {
   const [runtime] = useState<GameRuntime>(() => {
     const race = new RaceSession(sunshineCircuit, undefined, { seed: createRaceSeed(), ...previewItems });
-    return { records: new TrialRecords(), trialGhostVisible: true, race, simulation: race.player.simulation, mode: 'menu', uiInput: new ActionInput(), keyboard: null, gamepad: null, phone: new RemoteHost(), audio: new DrivingAudio(), demoDriving: false, selection: loadSelection() };
+    return { records: new TrialRecords(), trialGhostVisible: true, race, simulation: race.player.simulation, mode: 'menu', assetsReady: false, uiInput: new ActionInput(), keyboard: null, gamepad: null, phone: new RemoteHost(), audio: new DrivingAudio(), demoDriving: false, selection: loadSelection() };
   });
   const [menuStore] = useState(() => createRaceFlowStore(runtime.selection));
   const menu = useSyncExternalStore(menuStore.subscribe, menuStore.getSnapshot);
@@ -76,7 +76,7 @@ export function App() {
     runtime.simulation.clock.reset(); runtime.mode = next; setMode(next);
   }, [runtime]);
   const reset = useCallback(() => {
-    if (runtime.mode === 'results' || runtime.mode === 'menu') return;
+    if (runtime.mode === 'results' || runtime.mode === 'menu' || !runtime.assetsReady) return;
     runtime.keyboard?.clear(); runtime.gamepad?.clear(); runtime.phone.clear(); runtime.uiInput.clear();
     runtime.race.recover(); runtime.audio.reset();
     if (runtime.mode === 'playing' && document.activeElement instanceof HTMLElement) document.activeElement.blur();
@@ -136,10 +136,10 @@ export function App() {
     };
     const loseFocus = () => { runtime.audio.silence(); if (runtime.mode === 'playing') changeMode('paused'); };
     const keyboard = createKeyboard(window, document, {
-      enabled: () => runtime.mode === 'playing', onReset: reset, onPause: togglePause, onFocusLost: loseFocus,
+      enabled: () => runtime.mode === 'playing' && runtime.assetsReady, onReset: reset, onPause: togglePause, onFocusLost: loseFocus,
     });
     runtime.gamepad = new GamepadController(() => navigator.getGamepads?.() ?? [], {
-      enabled: () => runtime.mode === 'playing', onPause: togglePause, onReset: reset, onDisconnect: loseFocus,
+      enabled: () => runtime.mode === 'playing' && runtime.assetsReady, onPause: togglePause, onReset: reset, onDisconnect: loseFocus,
     });
     runtime.keyboard = keyboard;
     return () => { keyboard.dispose(); runtime.keyboard = null; runtime.gamepad = null; runtime.audio.dispose(); };

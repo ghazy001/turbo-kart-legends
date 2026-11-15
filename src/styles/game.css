@@ -104,7 +104,16 @@ kbd { display: inline-flex; align-items: center; justify-content: center; min-wi
 @media (max-width: 700px) { .game-shell { min-height: 700px; } .topbar { left: 20px; right: 20px; top: 20px; } .session-tag { font-size: 7px; letter-spacing: 0.8px; padding: 9px; gap: 6px; } .brand { font-size: 8px; } .brand strong { font-size: 11px; } .start-menu { top: 18%; left: 7%; width: 86%; } h1 { font-size: 76px; } .mode-menu::before { background: linear-gradient(90deg, #f8f5e9f2, #f8f5e9b5 75%, #f8f5e926); } .course-card { width: 320px; } .menu-footer { left: 20px; right: 20px; font-size: 6px; } .menu-footer > span:last-child { display: none; } .speed-card { left: 20px; bottom: 24px; width: 135px; padding: 15px; } .speed-value output { font-size: 46px; } .drive-toolbar { bottom: 24px; right: 20px; flex-direction: column; align-items: stretch; } .drive-toolbar button { padding: 7px 9px; font-size: 10px; } .map-card { top: 92px; right: 20px; width: 122px; padding: 12px; } .map-card svg { height: 96px; } .map-card .micro-label { font-size: 6px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
 
-.asset-status { position: absolute; top: 90px; left: 50%; transform: translateX(-50%); padding: 10px 16px; border-radius: 12px; background: #fff8e9f2; color: #173c48; font-size: 12px; box-shadow: 0 3px 15px #173c4820; text-align: center; }
+.asset-status { position: absolute; z-index: 36; top: 90px; left: 50%; transform: translateX(-50%); padding: 10px 16px; border-radius: 12px; background: #fff8e9f2; color: #173c48; font-size: 12px; box-shadow: 0 3px 15px #173c4820; text-align: center; }
+.race-loading { position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px; text-align: center; color: #fff6df; background: radial-gradient(ellipse at 75% 20%, #657f78, transparent 65%), linear-gradient(135deg, #233d47, #3f6267); }
+.race-loading h1 { display: block; margin: 20px 0 0; font-size: clamp(24px, 4vw, 44px); font-style: normal; line-height: 1.15; letter-spacing: -.045em; }
+.race-loading h1 > span { display: inline; }
+.race-loading h1 span { color: #ffda89; }
+.race-loading p { margin: 12px 0 28px; color: #d6e3dc; font-size: 13px; }
+.race-loading progress { appearance: none; width: min(260px, 75vw); height: 5px; border: 0; border-radius: 10px; overflow: hidden; background: #ffffff24; accent-color: #ffda89; }
+.race-loading progress::-webkit-progress-bar { background: #ffffff24; border-radius: 10px; }
+.race-loading progress::-webkit-progress-value { background: #ffda89; border-radius: 10px; }
+.race-loading progress::-moz-progress-bar { background: #ffda89; border-radius: 10px; }
 
 /* M3 race flow: the road stays readable between compact corner HUD panels. */
 .mode-menu .start-menu { top: 13%; }

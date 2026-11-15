@@ -12,7 +12,8 @@ import type { KartVisualRuntime } from './runtime';
 
 export interface KartAssemblyProps { kart?: KartAssetDefinition; driver?: DriverAssetDefinition; runtime?: KartVisualRuntime; showAnchors?: boolean; fitting?: ModelOptions; celebrating?: boolean }
 export function preloadAssembly(kart: KartAssetDefinition, driver: DriverAssetDefinition) {
-  useGLTF.preload(kart.url, false, false, configureAssetLoader); useGLTF.preload(driver.url, false, false, configureAssetLoader);
+  // Match the paired useGLTF cache key used by KartAssembly, not two unrelated keys.
+  useGLTF.preload([kart.url, driver.url], false, false, configureAssetLoader);
 }
 /** Shared by player, AI and fitting tools. The seat is under the SAME visual motion parent. */
 export function KartAssembly({ kart = defaultKart, driver = defaultDriver, runtime, showAnchors = false, fitting, celebrating = false }: KartAssemblyProps) {

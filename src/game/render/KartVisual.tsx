@@ -6,8 +6,9 @@ import { KartAssembly } from './KartAssembly';
 import { KartEffects } from './KartEffects';
 import { ProceduralKartVisual } from './ProceduralKartVisual';
 import type { KartVisualRuntime } from './runtime';
+import type { AssetStatus } from './models/RaceAssetLoading';
 
-export type AssetStatus = 'loading' | 'ready' | 'error';
+export type { AssetStatus } from './models/RaceAssetLoading';
 const ignoreStatus = () => undefined;
 
 class ModelBoundary extends Component<{ children: ReactNode; runtime: KartVisualRuntime; onStatus: (status: AssetStatus) => void }, { failed: boolean }> {
@@ -22,9 +23,9 @@ class ModelBoundary extends Component<{ children: ReactNode; runtime: KartVisual
   }
 }
 
-function LoadingKart({ runtime, onStatus }: { runtime: KartVisualRuntime; onStatus: (status: AssetStatus) => void }) {
+function LoadingKart({ onStatus }: { onStatus: (status: AssetStatus) => void }) {
   useEffect(() => { onStatus('loading'); }, [onStatus]);
-  return <ProceduralKartVisual runtime={runtime} />;
+  return null;
 }
 
 function MovingKart({ runtime, kart, driver, onStatus }: { runtime: KartVisualRuntime; kart: KartAssetDefinition; driver: DriverAssetDefinition; onStatus: (status: AssetStatus) => void }) {
@@ -51,7 +52,7 @@ export function KartVisual({ runtime, kart = defaultKart, driver = defaultDriver
   runtime: KartVisualRuntime; kart?: KartAssetDefinition; driver?: DriverAssetDefinition; onStatus?: (status: AssetStatus) => void;
 }) {
   return <ModelBoundary key={`${kart.id}-${driver.id}`} runtime={runtime} onStatus={onStatus}>
-    <Suspense fallback={<LoadingKart runtime={runtime} onStatus={onStatus} />}>
+    <Suspense fallback={<LoadingKart onStatus={onStatus} />}>
       <MovingKart runtime={runtime} kart={kart} driver={driver} onStatus={onStatus} />
     </Suspense>
   </ModelBoundary>;

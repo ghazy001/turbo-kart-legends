@@ -1,13 +1,17 @@
 import { RenderStats, type RenderSample } from '../dev/RenderStats';
 import { driverAssets, kartAssets } from '../config/visualAssets';
-import { Component, Fragment, useState, type ErrorInfo, type ReactNode } from 'react';
+import { Component, Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore, type ErrorInfo, type ReactNode } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
+import { createPortal } from 'react-dom';
 import { PCFShadowMap } from 'three';
 import { cameraConfig, sceneConfig } from '../config/kartConfig';
 import { NEUTRAL_INPUT } from '../core/types';
 import { ChaseCamera } from './ChaseCamera';
 import { Environment } from './Environment';
-import { KartVisual, type AssetStatus } from './KartVisual';
+import { KartVisual } from './KartVisual';
+import { preloadAssembly } from './KartAssembly';
+import { RaceAssetLoading } from './models/RaceAssetLoading';
+import { opponentSelections } from '../config/visualSelection';
 import { TrackVisual } from './TrackVisual';
 import type { GameRuntime } from './runtime';
 import { ItemVisuals } from './ItemVisuals';
@@ -17,9 +21,18 @@ import { waypointInput } from '../ai/waypointController';
 import { mixHumanInputs } from '../controls/inputSources';
 import { TimeTrialGhost } from './TimeTrialGhost';
 
-function GameLoop({ runtime, onFinish }: { runtime: GameRuntime; onFinish: () => void }) {
+function GameLoop({ runtime, onFinish, assets }: { runtime: GameRuntime; onFinish: () => void; assets: RaceAssetLoading }) {
+  const firstReadyFrame = useRef(true);
   useFrame((_, delta) => {
     const pad = runtime.gamepad?.poll() ?? NEUTRAL_INPUT;
+    if (!assets.getSnapshot().ready) {
+      firstReadyFrame.current = true;
+      runtime.race.pause(); runtime.audio.silence();
+      runtime.keyboard?.clear(); runtime.gamepad?.clear(); runtime.phone.clear(); runtime.uiInput.clear();
+      return;
+    }
+    // Loading/decoding time must not consume countdown or simulation time.
+    if (firstReadyFrame.current) { runtime.race.pause(); delta = 0; firstReadyFrame.current = false; }
     const human = mixHumanInputs(runtime.keyboard?.sample() ?? NEUTRAL_INPUT, pad, runtime.phone.sample(runtime.mode === 'playing'), runtime.uiInput.sample());
     const input = import.meta.env.DEV && runtime.demoDriving
       ? waypointInput(runtime.simulation.current, runtime.race.track, { id: 'player', lane: runtime.demoLane ?? 0, targetSpeed: runtime.demoSpeed ?? 18.2 }, runtime.race.racers.filter(racer => racer.progress.finishTime === null).map(racer => ({ id: racer.id, state: racer.simulation.current }))) : human;
@@ -50,29 +63,40 @@ class SceneBoundary extends Component<{ children: ReactNode; onError: () => void
 export function GameCanvas({ runtime, onError, onFinish, suspended = false, sceneRevision = 0 }: { runtime: GameRuntime; onError: () => void; onFinish: () => void; suspended?: boolean; sceneRevision?: number }) {
   const [renderSample, setRenderSample] = useState<RenderSample | null>(null);
   const stats = import.meta.env.DEV && new URLSearchParams(window.location.search).has('render-stats');
-  const [assetStatus, setAssetStatus] = useState<AssetStatus>('loading');
+  const race = runtime.race, selection = runtime.selection, kind = race.kind;
+  const lineup = useMemo(() => {
+    const choices = opponentSelections(selection);
+    return [{ id: 'player', selection }, ...(kind === 'quick-race' ? race.opponents.map((racer, i) => ({ id: racer.id, selection: choices[i] })) : [])];
+  }, [race, kind, selection]);
+  const assets = useMemo(() => new RaceAssetLoading(lineup.map(entry => entry.id)), [lineup]);
+  const assetStatus = useSyncExternalStore(assets.subscribe, assets.getSnapshot);
+  useLayoutEffect(() => { runtime.assetsReady = assetStatus.ready; }, [runtime, assetStatus.ready]);
+  useEffect(() => { for (const entry of lineup) preloadAssembly(kartAssets[entry.selection.kartId], driverAssets[entry.selection.racerId]); }, [lineup]);
   return <SceneBoundary onError={onError}>
     <Canvas frameloop={suspended ? 'never' : 'always'} shadows={{ type: PCFShadowMap }} dpr={[1, sceneConfig.dprMax]}
+      style={{ visibility: assetStatus.ready ? 'visible' : 'hidden' }}
       camera={{ fov: cameraConfig.fov, near: 0.1, far: 450 }}
       gl={{ antialias: true, powerPreference: 'high-performance' }}
       fallback={<div className="webgl-fallback">Interactive 3D circuit. A desktop browser with WebGL support is required.</div>}
       aria-label={`${runtime.race.track.definition.name} 3D kart game`}>
       {stats && <RenderStats onSample={setRenderSample} />}
-      <Fragment key={sceneRevision}>
-        <GameLoop runtime={runtime} onFinish={onFinish} />
+      <Fragment key={`${sceneRevision}:${selection.kartId}:${selection.racerId}:${kind}`}>
+        <GameLoop runtime={runtime} onFinish={onFinish} assets={assets} />
         <Environment track={runtime.simulation.track} runtime={runtime} />
         <TrackVisual track={runtime.simulation.track} />
         <RaceTrackVisual runtime={runtime} />
-        <OpponentVisuals runtime={runtime} />
+        <OpponentVisuals runtime={runtime} statusFor={assets.reporter} />
         <TimeTrialGhost runtime={runtime} />
         <ItemVisuals runtime={runtime} />
-        <KartVisual runtime={runtime} kart={kartAssets[runtime.selection.kartId]} driver={driverAssets[runtime.selection.racerId]} onStatus={setAssetStatus} />
+        <KartVisual runtime={runtime} kart={kartAssets[selection.kartId]} driver={driverAssets[selection.racerId]} onStatus={assets.reporter('player')} />
         <ChaseCamera runtime={runtime} />
       </Fragment>
     </Canvas>
     {stats && renderSample && <output className="render-stats">Render: {renderSample.calls} calls · {renderSample.triangles.toLocaleString()} triangles · {renderSample.geometries} geometries · {renderSample.textures} textures · median {renderSample.medianMs.toFixed(1)} ms · p95 {renderSample.p95Ms.toFixed(1)} ms</output>}
-    {assetStatus !== 'ready' && <p className="asset-status" role={assetStatus === 'error' ? 'alert' : 'status'}>
-      {assetStatus === 'error' ? 'Model unavailable. Using the original kart. Reload to retry.' : 'Loading kart & driver…'}
-    </p>}
+    {!suspended && !assetStatus.ready && createPortal(<div className="race-loading" role="status" aria-live="polite">
+      <span className="micro-label">TURBO KART LEGENDS</span><h1>Getting the grid ready<span>…</span></h1>
+      <p>Loading racers & karts</p><progress aria-label="Racers ready" value={assetStatus.settled} max={assetStatus.total} />
+    </div>, document.body)}
+    {!suspended && assetStatus.failed > 0 && createPortal(<p className="asset-status" role="alert">{assetStatus.failed} racer model{assetStatus.failed === 1 ? '' : 's'} unavailable. Using original kart fallback. Reload to retry.</p>, document.body)}
   </SceneBoundary>;
 }

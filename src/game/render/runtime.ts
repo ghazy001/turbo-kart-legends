@@ -22,6 +22,8 @@ export interface GameRuntime {
   demoItems?: boolean;
   demoSpeed?: number;
   mode: GameMode;
+  /** Presentation readiness only: hold the grid/countdown until all assemblies settle. */
+  assetsReady: boolean;
   uiInput: ActionInput;
   keyboard: KeyboardController | null;
   gamepad: GamepadController | null;

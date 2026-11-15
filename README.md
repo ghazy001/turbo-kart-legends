@@ -57,6 +57,8 @@ Textures retain GLTFLoader color-space settings and are capped at 1024 px for GP
 
 Racers share consistent portrait height, seat-to-crown proportions and a matte finish across previews and gameplay. Natural silhouette differences remain; the source models have not been remodelled into one identical art style. See [racer consistency measurements and verification](docs/RACER_STYLE.md).
 
+Starting a race waits for the player and all CPU kart/driver assemblies behind a loading screen before releasing the countdown. Original procedural karts appear only if a model actually fails, with a visible notice. See [race asset loading behavior and verification](docs/RACE_ASSET_LOADING.md).
+
 Development tools:
 
 - `/?asset-preview`: choose any supported combination; adjust seat and driver position, rotation and scale; compare raw/static poses; show anchors; use side/front/top views; copy JSON into the registry. Changes are preview-only.
