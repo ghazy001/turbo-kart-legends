@@ -16,7 +16,7 @@ export function StepHeader({ title, subtitle, mode, steps, step, tools, home = f
   </header>;
 }
 export function StepFooter({ context, confirm, onBack, onConfirm, home = false }: { context: string; confirm: string; onBack: () => void; onConfirm: () => void; home?: boolean }) {
-  return <footer className="selection-footer flow-footer"><div className="flow-footer-context"><span className="selection-player">P1</span><span>{context}</span></div><div className="selection-input-hints" aria-label="Menu controls"><span><kbd>↑↓←→</kbd><kbd>WASD</kbd> Navigate</span><span><kbd>Enter</kbd><kbd>Space</kbd> Confirm</span>{!home && <span><kbd>Esc</kbd><kbd>⌫</kbd> Back</span>}<small>CONTROLLER: STICK / D-PAD · A CONFIRM · B BACK</small></div><div className="selection-actions">{!home && <button className="selection-back" data-selection-action onClick={onBack}>← <span>Back</span></button>}<button className="selection-confirm" data-selection-action onClick={onConfirm}>{confirm}<span aria-hidden="true">↗</span></button></div></footer>;
+  return <footer className="selection-footer flow-footer"><div className="flow-footer-context"><span className="selection-player">P1</span><span>{context}</span></div><div className="selection-actions">{!home && <button className="selection-back" data-selection-action onClick={onBack}>← <span>Back</span></button>}<button className="selection-confirm" data-selection-action onClick={onConfirm}>{confirm}<span aria-hidden="true">↗</span></button></div></footer>;
 }
 export function RaceFlowShell({ navigation, revision, home = false, header, children, footer, inert = false }: {
   navigation: ReturnType<typeof useMenuNavigation>; revision: string; home?: boolean; header: ReactNode; children: ReactNode; footer: ReactNode; inert?: boolean;

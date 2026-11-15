@@ -202,4 +202,4 @@ Collect **Turbo Charge**, drive forward at least **4 m/s** and use the usual **E
 
 ### Design rollout: Home Menu
 
-The first design pass introduces a charcoal showroom, warm yellow selection states, a larger live kart preview and clearer mode/profile details on Home. The existing mode setup and racing behavior remain. Keyboard arrows/WASD navigate; Enter/Space confirms; Tab reaches the sound/controller/phone tools. Other screens will receive their own visual passes next. See [design direction, files, QA and next screens](docs/DESIGN_ROLLOUT.md).
+The first design pass introduces a charcoal showroom, warm yellow selection states, a larger live kart preview and clearer mode/profile details on Home. The existing mode setup and racing behavior remain. Keyboard arrows/WASD navigate; Enter/Space confirms. Open Settings for sound, controller mappings and phone pairing. Home uses five quiet text choices without duplicate shortcut buttons or a tutorial footer; setup keeps its Back/Confirm actions without permanent control hints. Other screens will receive their own visual passes next. See [design direction, files, QA and next screens](docs/DESIGN_ROLLOUT.md).

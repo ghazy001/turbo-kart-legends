@@ -19,6 +19,7 @@
 .flow-footer .selection-input-hints kbd { background: #36545e; color: #f5edce; border-color: #8caea7; }
 .flow-footer-context { display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: .6px; }
 .flow-footer .selection-confirm { min-width: 175px; }
+.flow-footer .selection-actions { margin-left: auto; }
 .track-roster { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
 .track-select-card { position: relative; display: block; width: 100%; text-align: left; padding: 0; overflow: hidden; border: 2px solid #f7ce75; border-radius: 20px; background: #234950a8; color: #f8f6e3; box-shadow: 0 14px 35px #102c3e26; }
 .track-select-card > svg { width: 100%; display: block; height: clamp(150px,24vh,225px); object-fit: cover; background: #78a997; }
@@ -57,7 +58,7 @@
 .settings-options small { display: block; font-size: 10px; margin-top: 5px; color: #c1d4c9; }
 .settings-options b { margin-left: auto; color: #f8cc74; font-size: 12px; }
 .settings-smallprint { font-size: 10px; color: #c3d7c8; line-height: 1.7; margin: 20px 0; }
-.menu-panel-footer { border-top: 1px solid #e8f2d826; padding-top: 20px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+.menu-panel-footer { border-top: 1px solid #e8f2d826; padding-top: 20px; margin-top: 20px; display: flex; justify-content: flex-end; align-items: center; gap: 15px; }
 .menu-panel-footer > span { font-size: 9px; color: #c5d6c8; }
 .menu-panel-footer kbd { font: inherit; color: #f7d18a; }
 .menu-settings-panel :focus-visible { outline: 3px solid #ffda88; outline-offset: 3px; }
