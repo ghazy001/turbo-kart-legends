@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react';
 import { driverAssets, kartAssets } from '../../config/visualAssets';
-import { SelectionPreview } from '../selection/SelectionPreview';
+import { HomeScene } from './HomeScene';
 import { gameModes } from './menuCatalog';
 import type { RaceFlowStore } from './raceFlowStore';
 import { RaceFlowShell, StepHeader } from './RaceFlowShell';
@@ -18,9 +18,9 @@ export function HomeMenuList({ index, onSelect, onConfirm }: { index: number; on
 export function HomeMenuHero({ store }: { store: RaceFlowStore }) {
   const state = useSyncExternalStore(store.subscribe, store.getSnapshot), mode = gameModes[state.homeIndex];
   const driver = driverAssets[state.selectedRacer], kart = kartAssets[state.selectedKart];
-  return <section className="home-hero" aria-label="Race showroom">
+  return <section className="home-hero" aria-label="Coastal starting line">
     <div className="home-showroom-stage">
-      <SelectionPreview step="kart" driver={driver} kart={kart} presentation="showroom" animate={state.panel === 'none'} />
+      <HomeScene driver={driver} kart={kart} />
     </div>
     <div className="home-showroom-details">
       <p className="home-lineup">{driver.name}<span aria-hidden="true"> / </span>{kart.name}</p>

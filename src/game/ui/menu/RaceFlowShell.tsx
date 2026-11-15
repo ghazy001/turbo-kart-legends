@@ -23,6 +23,6 @@ export function RaceFlowShell({ navigation, revision, home = false, header, chil
 }) {
   return <div ref={navigation.ref} onKeyDownCapture={navigation.onKeyDownCapture} className={`selection-screen flow-screen${home ? ' flow-home' : ''}`} role={home ? 'region' : 'dialog'} aria-modal={home ? undefined : true} aria-labelledby={home ? 'home-title' : 'flow-title'} inert={inert}>
     <div className="flow-backdrop" aria-hidden="true" /><div className="selection-atmosphere" aria-hidden="true" />{header}<div className="selection-content flow-content">{children}</div>
-    <div className="selection-webgl" aria-hidden="true"><Canvas frameloop="demand" dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }} eventSource={navigation.ref}><CanvasFrames revision={revision} /><View.Port /></Canvas></div>{footer}
+    <div className="selection-webgl" aria-hidden="true"><Canvas shadows={home} frameloop="demand" dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }} eventSource={navigation.ref}><CanvasFrames revision={revision} /><View.Port /></Canvas></div>{footer}
   </div>;
 }

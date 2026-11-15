@@ -70,3 +70,18 @@ Browser verification: Down moves from Quick Race to Grand Prix; Enter on Quick R
 Capture: [simplified Home](design-qa/home/simplified-home.png).
 
 Final refinement checks: `npm run typecheck`, `npm run lint` (zero warnings), `npm run test` (**382/382 tests, 32 files, 282.86 seconds**) and `npm run build` all pass. The regression suite used process-scoped idle-sleep prevention and loopback access for the existing phone tests. Browser error log was empty. App CSS is 54.67 kB / 12.15 kB gzip and App JS is 228.04 kB / 72.80 kB gzip; compared with the initial Home pass, both bundles are smaller. `git diff --check` passes.
+
+
+## Coastal starting line — 2026-11-15
+
+The user approved the simplified menu and requested a more attractive backdrop, suggesting the selected kart/racer on a road. Home now replaces the black showroom with an original procedural sunset coast: a winding asphalt road, edge stripes/center dashes, ocean, distant faceted islands, palms, rocks and a warm sun/sky. A soft teal scrim protects menu contrast. The same five choices remain; no tutorial footer, extra controls or labels were added.
+
+`HomeScene.tsx` owns the menu-only camera, model loading/retry and the selected independently cloned assembly. Its bounds align to the road without modifying gameplay models or colliders. `HomeScenery.tsx` owns a decorative sampled ribbon road and procedural scenery; it is not a new playable track. `MainMenuScreen.tsx` swaps its showroom preview for that scene; `RaceFlowShell.tsx` uses the same single shared renderer, with shadows enabled on Home only. `home.css` layers scenery behind the readable menu and uses an inline close-up on narrow screens. README, architecture and design instructions record the new direction.
+
+The scene uses demand rendering, DPR capped at 1.5, one 1024 × 1024 directional shadow map, a bounded low-poly scene, no additional renderer, external textures, downloads, animation loop or dependencies. Road buffers are memoized and disposed. Menu navigation/state, setup previews, simulation, AI, handling, items, cameras during racing and phone systems retain their existing ownership.
+
+Checks: full regression suite **382 tests across 32 files passed in 181.16 seconds**, with loopback access for the existing phone tests. Browser checks confirm keyboard mode navigation, Enter opening Racer Select and Escape returning Home. At 1280 × 720 CSS pixels, content dimensions equal the viewport; at 390 × 844 there is no horizontal overflow, exactly five buttons and no Home footer. The default viewport was restored. The displayed Arnold / Boat Kart assembly remains attached and sits on the road with visible shadows. Other combinations retain the shared assembly/fitting layer; this pass did not repeat a full artist review of all combinations or physical device testing. No FPS benchmark is claimed.
+
+Capture: [coastal Home](design-qa/home/coastal-home.png).
+
+Final coastal checks: `npm run typecheck`, `npm run lint` (zero warnings), the full test suite above, `npm run build` and `git diff --check` pass. Production build: 761 modules, App CSS 55.13 kB / 12.26 kB gzip and App JS 234.59 kB / 75.11 kB gzip. A clean final reload produced no new browser errors; a transient React hook-order message during hot replacement of the developing preview was cleared by reloading and did not recur on startup. No simulation or gameplay source changed.
