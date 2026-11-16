@@ -1,6 +1,6 @@
-import { Suspense, useCallback, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { PerspectiveCamera, View, useGLTF } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { type Group, type PerspectiveCamera as ThreeCamera } from 'three';
 import type { DriverAssetDefinition, KartAssetDefinition } from '../../config/visualAssets';
 import { KartAssembly } from '../../render/KartAssembly';
@@ -9,9 +9,13 @@ import { PreviewBoundary } from '../GaragePreview';
 import { HomeScenery } from './HomeScenery';
 import { RacerModel } from '../selection/SelectionModel';
 import { placePreviewOnFloor } from '../../render/models/racerPresentation';
+import type { PreviewRotation } from '../selection/previewRotation';
 
-function ParkedSubject({ driver, kart, kind, terrace, onReady }: { driver: DriverAssetDefinition; kart: KartAssetDefinition; kind: 'racer' | 'kart'; terrace: boolean; onReady: () => void }) {
+function ParkedSubject({ driver, kart, kind, terrace, rotation, onReady }: { driver: DriverAssetDefinition; kart: KartAssetDefinition; kind: 'racer' | 'kart'; terrace: boolean; rotation?: PreviewRotation; onReady: () => void }) {
   const root = useRef<Group>(null);
+  const invalidate = useThree(state => state.invalidate);
+  useEffect(() => rotation?.subscribe(invalidate), [rotation, invalidate]);
+  useFrame(() => { if (root.current && rotation) root.current.rotation.y = -0.18 + rotation.getSnapshot(); }, -1);
   useLayoutEffect(() => {
     if (!root.current) return;
     placePreviewOnFloor(root.current, terrace ? 0.20 : 0.035);
@@ -38,8 +42,8 @@ function CoastalCamera({ narrow, terrace }: { narrow: boolean; terrace: boolean 
     onUpdate={camera => camera.lookAt(targetX, targetY, 0)} />;
 }
 /** One view in the existing shared renderer, with an independently cloned parked assembly. */
-export function HomeScene({ driver, kart, kind = 'kart', scenery = 'road', className = 'home-scenery-view', tint = false, showSubject = true }: {
-  driver: DriverAssetDefinition; kart: KartAssetDefinition; kind?: 'racer' | 'kart'; scenery?: 'road' | 'terrace'; className?: string; tint?: boolean; showSubject?: boolean;
+export function HomeScene({ driver, kart, kind = 'kart', scenery = 'road', className = 'home-scenery-view', tint = false, showSubject = true, rotation }: {
+  driver: DriverAssetDefinition; kart: KartAssetDefinition; kind?: 'racer' | 'kart'; scenery?: 'road' | 'terrace'; className?: string; tint?: boolean; showSubject?: boolean; rotation?: PreviewRotation;
 }) {
   const narrow = useSyncExternalStore(subscribeScreen, narrowScreen);
   const [status, setStatus] = useState<AssetStatus>('loading'), [retry, setRetry] = useState(0);
@@ -48,7 +52,7 @@ export function HomeScene({ driver, kart, kind = 'kart', scenery = 'road', class
     <View className={className} index={0.5} aria-hidden="true">
       <CoastalCamera narrow={narrow} terrace={scenery === 'terrace'} /><HomeScenery variant={scenery} />
       {showSubject && <PreviewBoundary key={`${driver.id}:${kart.id}:${retry}`} onStatus={setStatus}><Suspense fallback={null}>
-        <ParkedSubject driver={driver} kart={kart} kind={kind} terrace={scenery === 'terrace'} onReady={ready} />
+        <ParkedSubject driver={driver} kart={kart} kind={kind} terrace={scenery === 'terrace'} rotation={rotation} onReady={ready} />
       </Suspense></PreviewBoundary>}
       {tint && (!narrow || !showSubject) && <mesh frustumCulled={false} renderOrder={10000}>
         <planeGeometry args={[2, 2]} /><shaderMaterial transparent depthWrite={false} depthTest={false} toneMapped={false}

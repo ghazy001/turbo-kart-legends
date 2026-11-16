@@ -308,7 +308,10 @@ Menu subject placement uses `placePreviewOnFloor` after skin-aware matrix synchr
 
 Kart Select reuses the artwork-card path through `KartAssetDefinition.artwork` and the shared `SelectionArtwork` type. `SelectionCard` selects driver portraits or kart artwork, with the same GLB fallback. Generic `data-artwork` / `--artwork-*` styling preserves Racer Select; `kartCards.css` frames full kart silhouettes over teal glass. `selectionGridColumns` supplies three racer columns or two kart columns to both menu stores and the CSS grid variable. This changes menu navigation to match the 2×2 collection, without changing IDs, final selection commit, simulation or physics. The live seated assembly and road stay intact. See docs/KART_IMAGE_CARDS.md.
 
+Racer preview rotation is menu-local `PreviewRotation` state, owned by the keyed `CoastalSelectionPreview`. A transparent `RacerRotationSurface` handles captured primary Pointer Events (mouse/touch), cancellation/lifecycle cleanup and an accessible keyboard slider. Only that small DOM control subscribes to its angle; the GLB subject subscribes to invalidate the demand canvas and reads yaw in `useFrame`. Camera, scenery, model cache/source rig and game simulation remain independent. The existing navigation hook yields directional keys only when the rotation control is focused, retaining global confirm/back. Studio portrait paths/crops remain registry data; the nameplate is scoped DOM/CSS. See docs/RACER_PREVIEW_ROTATION.md.
+
 ## Shared action buttons
+
 
 
 

@@ -60,7 +60,21 @@ The user supplied four WebP images on 2026-11-16 for Kart Select. Copies are bun
 
 The separate `select karts.webp` board is a visual reference and is not bundled. Its illustrative stat bars were not added: existing kart selections remain cosmetic and share the same handling.
 
-## Racer face-card artwork — supplied local prototype images
+## Studio racer portraits — current card artwork
+
+The user supplied five new square JPEGs on 2026-11-16 for Racer Select. The originals were copied into `assets/portraits/studio/`; only CSS framing/materials of the surrounding UI changed. Author/license metadata was not supplied or independently verified. These remain user-supplied local prototype artwork, without an asserted public-release license. The GLB racers and their credits remain separate and unchanged.
+
+| Bundled file | Supplied filename |
+| --- | --- |
+| `assets/portraits/studio/mario.jpg` | `Mario.jpg` |
+| `assets/portraits/studio/sonic.jpg` | `sonic.jpg` |
+| `assets/portraits/studio/arnold.jpg` | `Arnold.jpg` |
+| `assets/portraits/studio/crash.jpg` | `crash.jpg` |
+| `assets/portraits/studio/spongebob.jpg` | `spongeBob.jpg` |
+
+## Earlier racer face-card artwork — preserved sources
+
+Superseded in the active registry by the studio portraits above; earlier files remain preserved.
 
 The user supplied these five JPEGs on 2026-11-16 specifically for Racer Select. Copies retain their original bytes; CSS frames the faces without changing the files. Author and license information were not supplied or independently verified. Existing local prototype permission is retained; no public-release license or original authorship is asserted.
 

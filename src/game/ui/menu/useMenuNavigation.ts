@@ -42,6 +42,8 @@ export function useMenuNavigation(command: (action: SelectionCommand) => void, r
     trapFocus(event);
     if (event.altKey || event.ctrlKey || event.metaKey || event.nativeEvent.isComposing) return;
     const action = keyboardSelectionCommand(event.code); if (!action) return;
+    // The focused preview owns rotation arrows; confirm/back retain the menu flow.
+    if (action !== 'confirm' && action !== 'back' && event.target instanceof Element && event.target.closest('[data-preview-rotation]')) return;
     event.stopPropagation();
     if (event.target instanceof Element && event.target.closest('input, select, textarea') && action !== 'back') return;
     if (event.repeat && (action === 'confirm' || action === 'back')) { event.preventDefault(); return; }
