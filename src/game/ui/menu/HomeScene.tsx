@@ -9,16 +9,16 @@ import { PreviewBoundary } from '../GaragePreview';
 import { HomeScenery } from './HomeScenery';
 import { RacerModel } from '../selection/SelectionModel';
 
-function ParkedSubject({ driver, kart, kind, onReady }: { driver: DriverAssetDefinition; kart: KartAssetDefinition; kind: 'racer' | 'kart'; onReady: () => void }) {
+function ParkedSubject({ driver, kart, kind, terrace, onReady }: { driver: DriverAssetDefinition; kart: KartAssetDefinition; kind: 'racer' | 'kart'; terrace: boolean; onReady: () => void }) {
   const root = useRef<Group>(null);
   useLayoutEffect(() => {
     if (!root.current) return;
     root.current.updateWorldMatrix(true, true);
     const bounds = new Box3().setFromObject(root.current, true);
-    if (!bounds.isEmpty()) root.current.position.y += 0.035 - bounds.min.y;
+    if (!bounds.isEmpty()) root.current.position.y += (terrace ? 0.20 : 0.035) - bounds.min.y;
     onReady();
-  }, [driver, kart, kind, onReady]);
-  return <group ref={root} scale={kind === 'kart' ? 1.12 : 1.05} rotation={[0, -0.18, 0]}>
+  }, [driver, kart, kind, terrace, onReady]);
+  return <group ref={root} scale={kind === 'kart' ? 1.12 : terrace ? 1.3 : 1.05} rotation={[0, -0.18, 0]}>
     {kind === 'racer' ? <RacerModel driver={driver} /> : <KartAssembly driver={driver} kart={kart} />}
   </group>;
 }
@@ -28,26 +28,28 @@ const subscribeScreen = (listener: () => void) => {
   query.addEventListener('change', listener);
   return () => query.removeEventListener('change', listener);
 };
-function CoastalCamera({ narrow }: { narrow: boolean }) {
+function CoastalCamera({ narrow, terrace }: { narrow: boolean; terrace: boolean }) {
   const camera = useRef<ThreeCamera>(null);
+  const targetX = narrow ? 0 : terrace ? -3.6 : -2.7;
+  const targetY = terrace ? 1.5 : narrow ? 0.9 : 1.2;
   // Set after R3F's camera sizing; the View portal owns its own aspect ratio.
-  useFrame(() => camera.current?.lookAt(narrow ? 0 : -2.7, narrow ? 0.9 : 1.2, 0), -2);
+  useFrame(() => camera.current?.lookAt(targetX, targetY, 0), -2);
   return <PerspectiveCamera ref={camera} makeDefault fov={narrow ? 38 : 36} near={0.1} far={150}
-    position={narrow ? [4, 2.3, 5.5] : [7, 3.5, 10]}
-    onUpdate={camera => camera.lookAt(narrow ? 0 : -2.7, narrow ? 0.9 : 1.2, 0)} />;
+    position={terrace ? narrow ? [0, 2.4, 6.8] : [0, 3.3, 12] : narrow ? [4, 2.3, 5.5] : [7, 3.5, 10]}
+    onUpdate={camera => camera.lookAt(targetX, targetY, 0)} />;
 }
 /** One view in the existing shared renderer, with an independently cloned parked assembly. */
-export function HomeScene({ driver, kart, kind = 'kart', className = 'home-scenery-view', tint = false, showSubject = true }: {
-  driver: DriverAssetDefinition; kart: KartAssetDefinition; kind?: 'racer' | 'kart'; className?: string; tint?: boolean; showSubject?: boolean;
+export function HomeScene({ driver, kart, kind = 'kart', scenery = 'road', className = 'home-scenery-view', tint = false, showSubject = true }: {
+  driver: DriverAssetDefinition; kart: KartAssetDefinition; kind?: 'racer' | 'kart'; scenery?: 'road' | 'terrace'; className?: string; tint?: boolean; showSubject?: boolean;
 }) {
   const narrow = useSyncExternalStore(subscribeScreen, narrowScreen);
   const [status, setStatus] = useState<AssetStatus>('loading'), [retry, setRetry] = useState(0);
   const ready = useCallback(() => setStatus('ready'), []);
   return <>
     <View className={className} index={0.5} aria-hidden="true">
-      <CoastalCamera narrow={narrow} /><HomeScenery />
+      <CoastalCamera narrow={narrow} terrace={scenery === 'terrace'} /><HomeScenery variant={scenery} />
       {showSubject && <PreviewBoundary key={`${driver.id}:${kart.id}:${retry}`} onStatus={setStatus}><Suspense fallback={null}>
-        <ParkedSubject driver={driver} kart={kart} kind={kind} onReady={ready} />
+        <ParkedSubject driver={driver} kart={kart} kind={kind} terrace={scenery === 'terrace'} onReady={ready} />
       </Suspense></PreviewBoundary>}
       {tint && (!narrow || !showSubject) && <mesh frustumCulled={false} renderOrder={10000}>
         <planeGeometry args={[2, 2]} /><shaderMaterial transparent depthWrite={false} depthTest={false} toneMapped={false}

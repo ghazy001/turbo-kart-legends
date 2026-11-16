@@ -43,7 +43,10 @@ The user supplied Movie Sonic (Sonic Rumble) to replace Aang in the local roster
 
 The user's latest `the_spongebob_squarepants.glb` supersedes the earlier pending `spongebob_squarepants.glb` replacement. Use the latest model under the stable `spongebob` ID; preserve all supplied sources and credits. It has 25 unrigged meshes and zero clips. Fit only named arm/leg meshes, retain face/torso/clothing and UVs, normalize the exporter units, cap runtime textures offline and match shared crown/portrait heights and matte materials across all four unchanged karts. See docs/SPONGEBOB_REPLACEMENT.md.
 
+The user supplied five racer portraits and requested face cards while retaining the live GLB side preview. Racer Select uses these images with configurable crops, restrained warm highlights and a coastal presentation terrace instead of a road. Home, Kart Select and later setup screens retain their existing scenery. Keep the roster cosmetic-only, existing navigation/persistence and the no-tutorial-footer design. See docs/RACER_FACE_CARDS.md.
+
 ## Preferred technology
+
 React + TypeScript + Vite + Three.js + @react-three/fiber; @react-three/drei selectively; Zustand for UI only; Rapier if needed for colliders/queries; Vitest for core tests. Use a stable compatible dependency set; check React and R3F peer dependencies. Do NOT use R3F alpha by default.
 
 ## Architecture rules

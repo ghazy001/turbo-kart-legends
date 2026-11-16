@@ -17,6 +17,7 @@ import { CoastalSelectionPreview } from './CoastalSelectionPreview';
 import { HomeScene } from './HomeScene';
 import '../../../styles/coastalSelection.css';
 import '../../../styles/coastalSetup.css';
+import '../../../styles/racerCards.css';
 
 export function RacerSelectScreen({ store }: { store: RaceFlowStore }) {
   const state = store.getSnapshot();
@@ -60,7 +61,7 @@ export function RaceSetupScreen({ store, records, onComplete, onClose, returnFoc
     }
   }, `${step}:${state.racerIndex}:${state.kartIndex}:${state.trackIndex}:${state.optionsIndex}:${state.vsOptions.laps}:${state.vsOptions.difficulty}`, state.panel === 'none', returnFocusElement);
   const confirmLabel = state.intent === 'cosmetic' && step === 'kart' ? 'Save lineup' : step === 'ready' ? state.currentMode === 'grand-prix' ? 'Start cup' : 'Start race' : step === 'options' ? 'Review lineup' : step === 'track' ? state.currentMode === 'vs-race' ? 'Race options' : 'Review lineup' : step === 'racer' ? 'Choose kart' : step === 'kart' ? 'Choose track' : 'Choose racer';
-  return <RaceFlowShell coastal navigation={navigation} inert={state.panel !== 'none'} revision={`${step}:${state.selectedRacer}:${state.selectedKart}:${state.selectedTrack}`}
+  return <RaceFlowShell coastal step={step} navigation={navigation} inert={state.panel !== 'none'} revision={`${step}:${state.selectedRacer}:${state.selectedKart}:${state.selectedTrack}`}
     header={<StepHeader title={step === 'track' && state.currentMode === 'grand-prix' ? 'Cup itinerary' : titles[step][0]} subtitle={titles[step][1]} mode={state.intent === 'cosmetic' ? 'YOUR LINEUP' : modeDefinition(state.currentMode).name} steps={setupSteps(state.currentMode, state.intent === 'cosmetic')} step={step} tools={null} quiet />}
     footer={<StepFooter context={`${driver.name} / ${kart.name}`} confirm={confirmLabel} onBack={back} onConfirm={confirm} />}>
     {sceneryOnly && <HomeScene driver={driver} kart={kart} className="setup-scenery-view" showSubject={false} tint />}

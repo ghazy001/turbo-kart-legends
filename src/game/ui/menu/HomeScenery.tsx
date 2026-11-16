@@ -58,7 +58,18 @@ void main() {
   gl_FragColor = vec4(mix(sky, vec3(1.0, 0.95, 0.76), sun), 1.0);
 }`;
 
-export function HomeScenery() {
+/** The racer lounge reuses the coast, with a presentation terrace instead of asphalt. */
+function RacerTerrace() {
+  return <group>
+    <mesh position={[0, -0.10, -3]} receiveShadow><boxGeometry args={[26, 0.16, 28]} /><meshStandardMaterial color="#b8b9a5" roughness={0.95} /></mesh>
+    <mesh position={[0, 0.065, 0]} receiveShadow><cylinderGeometry args={[2.05, 2.16, 0.23, 64]} /><meshStandardMaterial color="#e4d5b8" roughness={0.85} /></mesh>
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.183, 0]} receiveShadow><circleGeometry args={[1.97, 64]} /><meshStandardMaterial color="#e9dfca" roughness={0.92} /></mesh>
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.186, 0]}><ringGeometry args={[1.92, 1.94, 64]} /><meshBasicMaterial color="#b99a62" /></mesh>
+    <mesh position={[0, 0.07, -12]}><boxGeometry args={[26, 0.17, 0.22]} /><meshStandardMaterial color="#ddcfb4" roughness={0.9} /></mesh>
+  </group>;
+}
+
+export function HomeScenery({ variant = 'road' }: { variant?: 'road' | 'terrace' }) {
   return <>
     <mesh><sphereGeometry args={[110, 32, 16]} /><shaderMaterial side={BackSide} vertexShader={skyVertex} fragmentShader={skyFragment} depthWrite={false} toneMapped={false} /></mesh>
     <mesh position={[-60, 11, -92]}><sphereGeometry args={[2.8, 24, 16]} /><meshBasicMaterial color="#fff3ce" fog={false} toneMapped={false} /></mesh>
@@ -70,7 +81,7 @@ export function HomeScenery() {
     <directionalLight position={[7, 6, 9]} color="#d3eeff" intensity={1.3} />
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.07, 0]}><planeGeometry args={[240, 240]} /><meshLambertMaterial color="#9bad83" /></mesh>
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[-52, -0.05, -20]}><planeGeometry args={[80, 200]} /><meshBasicMaterial color="#8ebfc1" /></mesh>
-    <CoastalRoad />
+    {variant === 'terrace' ? <RacerTerrace /> : <CoastalRoad />}
     {[[11, 2, -30, 14], [22, 3, -47, 21], [-24, 1, -58, 12], [5, 2, -76, 17]].map(([x, y, z, scale], i) => <mesh key={i} position={[x, y, z]} scale={[scale, scale * 0.45, scale * 0.7]}>
       <icosahedronGeometry args={[1, 1]} /><meshLambertMaterial color={i % 2 ? '#8aa699' : '#a5b49a'} flatShading />
     </mesh>)}

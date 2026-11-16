@@ -47,6 +47,20 @@ Retired from the selectable roster on 2026-11-16; preserved source and derivativ
 - Declared license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 - Geometry: 61,916 triangles; 0 skins; 0 clips.
 
+## Racer face-card artwork — supplied local prototype images
+
+The user supplied these five JPEGs on 2026-11-16 specifically for Racer Select. Copies retain their original bytes; CSS frames the faces without changing the files. Author and license information were not supplied or independently verified. Existing local prototype permission is retained; no public-release license or original authorship is asserted.
+
+| Bundled file | Supplied filename |
+| --- | --- |
+| `assets/portraits/mario.jpg` | `Mario.jpg` |
+| `assets/portraits/sonic.jpg` | `Sonic.jpg` |
+| `assets/portraits/arnold.jpg` | `arnold.jpg` |
+| `assets/portraits/crash.jpg` | `Crash.jpg` |
+| `assets/portraits/spongebob.jpg` | `spongeBob.jpg` |
+
+The separate `select racer.jpg` board was a layout reference only and is not bundled. The active roster retains Sonic; no Aang entry or unequal character stats were added from the reference.
+
 ## The SpongeBob Squarepants — current replacement racer
 
 - File: `assets/characters/the_spongebob_squarepants.glb`

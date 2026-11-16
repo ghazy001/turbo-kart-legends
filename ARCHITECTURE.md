@@ -300,6 +300,11 @@ Sonic occupies the retired Aang registry slot with its own `sonic` ID. `loadSele
 
 The latest SpongeBob retains the `spongebob` ID and uses 25 unrigged meshes. Its derivative adds a 0.01 unit wrapper and caps embedded images to 1024 pixels; source nodes, materials, UVs and geometry remain. `scripts/glb-textures.mjs` uses macOS sips only during offline regeneration; normal builds use checked-in derivatives. `StaticPoseDefinition.origin` centers the source, with explicit `armMeshes` / `legMeshes` leaving face/torso/clothing fixed. Static arm fitting uses inspected rest directions, supporting the supplied angled pose; posed indexed meshes refresh tangents for correct normal-map shading. The shared matte profile disables emissive glow. `driverFitOptions` still derives per-kart wrist targets, and the same immutable-template/independent-object assembly serves menus, player, AI and podiums. All supplied SpongeBob sources remain archived in place; the Boat Kart and gameplay rules are unchanged. See docs/SPONGEBOB_REPLACEMENT.md.
 
+## Racer face-card presentation
+
+Racer Select additionally reads optional `DriverAssetDefinition.portrait` artwork/crop settings. `SelectionCard` renders the supplied JPEG as decorative DOM artwork inside the existing radio button, falling back to its model thumbnail on image failure. Normal racer cards add no Drei Views; the selected live GLB still uses the shared renderer. `RaceFlowShell.data-flow-step` scopes `racerCards.css` to the racer step. `CoastalSelectionPreview` chooses `HomeScene.scenery='terrace'` only for racers: the same coast/lights surround a raised display plinth with a separate menu camera framing. Default road scenery and gameplay camera/physics remain unchanged. Race-flow state, indices, input and final profile commit are unchanged. See docs/RACER_FACE_CARDS.md.
+
 ## Shared action buttons
+
 
 `ui/GameButton.tsx` wraps a native button, forwarding existing handlers/ARIA/navigation attributes and defaulting to `type="button"`. `styles/buttons.css` owns accent/quiet/surface variants and tactile interaction states. Home mode choices keep their existing roving-navigation component with matching faces in home.css. Selection cards and touch-driving pads retain their own layouts. This presentation layer has no store, simulation, input or asset-loading ownership. See docs/DESIGN_ROLLOUT.md.

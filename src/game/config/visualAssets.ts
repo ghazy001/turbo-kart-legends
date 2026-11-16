@@ -30,7 +30,7 @@ export interface RigSeatDefinition {
 }
 export interface AssetInfo {
   id: string; name: string; url: string; sourceUrl: string; color: string; description: string; sourceTitle: string;
-  /** Live model portrait, rendered in the menu's shared canvas. */
+  /** Live model thumbnail; also the fallback when supplied face-card artwork fails. */
   thumbnail: { kind: 'model'; yaw: number };
   locked?: boolean; lockReason?: string;
 }
@@ -43,6 +43,8 @@ export interface KartAssetDefinition extends AssetInfo {
   axle?: 'x' | 'z'; spinDirection?: number;
 }
 export interface DriverAssetDefinition extends AssetInfo {
+  /** Supplied face-card artwork only; the side preview and gameplay still use the GLB. */
+  portrait?: { url: string; position: string; scale: number };
   transform: VisualTransform;
   pose: 'supplied-static-seat' | 'static-fit' | 'rig-seat' | 'authored';
   /** Non-driving props omitted from the seated assembly, retained in source portraits. */
@@ -94,11 +96,13 @@ export const kartAssets = {
 } satisfies Record<string, KartAssetDefinition>;
 export const driverAssets = {
   supplied: {
+    portrait: { url: '/assets/portraits/mario.jpg', position: '55% 32%', scale: 1.5 },
     thumbnail: { kind: 'model', yaw: -0.3 },
-    id: 'supplied', name: 'Mario', color: '#ea624c', description: 'The original supplied local driver.', sourceTitle: 'Mario obj',
+    id: 'supplied', name: 'Mario', color: '#ea624c', description: 'Ready for another sunny lap.', sourceTitle: 'Mario obj',
     url: '/assets/optimized/characters/my-character.glb', sourceUrl: '/assets/characters/my-character.glb', transform: transform(seatedRacerScale('supplied')), pose: 'supplied-static-seat',
   },
   sonic: {
+    portrait: { url: '/assets/portraits/sonic.jpg', position: '56% 34%', scale: 1.5 },
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'sonic', name: 'Sonic', color: '#388bd7', description: 'Blue skies. A little more attitude.', sourceTitle: 'Movie Sonic (Sonic Rumble)',
     url: '/assets/optimized/characters/movie_sonic_sonic_rumble.glb', sourceUrl: '/assets/characters/movie_sonic_sonic_rumble.glb', transform: transform(seatedRacerScale('sonic')), pose: 'rig-seat',
@@ -108,12 +112,14 @@ export const driverAssets = {
       fingers: ['L_FingerMiddle_A_017', 'R_FingerMiddle_A_035'], toes: ['L_Foot_B_050', 'R_Foot_B_054'] },
   },
   arnold: {
+    portrait: { url: '/assets/portraits/arnold.jpg', position: '52% 32%', scale: 1.65 },
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'arnold', name: 'Arnold', color: '#56b3a0', description: 'Headphones on. Sunshine ahead.', sourceTitle: 'Nickelodeon Kart Racers 3 Arnold',
     url: '/assets/optimized/characters/nickelodeon_kart_racers_3_arnold.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_arnold.glb', transform: transform(seatedRacerScale('arnold')), pose: 'static-fit',
     staticPose: { armMeshes: ['Object_3'], protectComponentsAbove: 1.29, hip: 0.61, knee: 0.3, bend: 1.4, shoulder: [0.22, 1.25, 0], elbow: [0.5, 1.25, 0], wrist: [0.78, 1.25, 0], fittedElbow: [0.38, 0.87, 0.31], fittedWrist: [0.35, 1.05, 0.6], armMinY: 0.95, armMaxY: 1.4 },
   },
   spongebob: {
+    portrait: { url: '/assets/portraits/spongebob.jpg', position: '52% 36%', scale: 1.6 },
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'spongebob', name: 'SpongeBob', color: '#ecd448', description: 'A bright smile. Ready for the next corner.', sourceTitle: 'The SpongeBob Squarepants',
     url: '/assets/optimized/characters/the_spongebob_squarepants.glb', sourceUrl: '/assets/characters/the_spongebob_squarepants.glb', transform: transform(seatedRacerScale('spongebob')), pose: 'static-fit',
@@ -123,6 +129,7 @@ export const driverAssets = {
       shoulder: [0.95, 1.45, -0.04], elbow: [1.18, 1.30, 0], wrist: [1.51, 1.15, 0.04], fittedElbow: [0.90, 1.12, 0.46], fittedWrist: [0.60, 1.60, 1.20], armMinY: 0.90, armMaxY: 1.56 },
   },
   crash: {
+    portrait: { url: '/assets/portraits/crash.jpg', position: '54% 33%', scale: 1.6 },
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'crash', name: 'Crash', color: '#e98c4a', description: 'A big grin for the next hairpin.', sourceTitle: 'CRASH BANDICOOT CARTOON',
     url: '/assets/optimized/characters/crash_bandicoot_cartoon.glb', sourceUrl: '/assets/characters/crash_bandicoot_cartoon.glb', transform: transform(seatedRacerScale('crash')), pose: 'static-fit',

@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { defaultSelection, racers, karts } from '../config/visualAssets';
 import { createSelectionStore, moveGrid } from '../ui/selection/selectionStore';
@@ -52,6 +53,15 @@ describe('two-step racer/kart draft', () => {
     for (const asset of [...racers, ...karts]) {
       expect(asset.name.length).toBeGreaterThan(0); expect(asset.url).toMatch(/^\/assets\/.*\.glb$/);
       expect(asset.thumbnail.kind).toBe('model'); expect(Number.isFinite(asset.thumbnail.yaw)).toBe(true);
+    }
+  });
+  it('the full racer roster has distinct bundled JPEG artwork alongside its real GLB preview', () => {
+    expect(new Set(racers.map(racer => racer.portrait?.url)).size).toBe(racers.length);
+    for (const racer of racers) {
+      if (!racer.portrait) throw new Error(`Missing roster artwork for ${racer.id}`);
+      const bytes = readFileSync(new URL(`../../../public${racer.portrait.url}`, import.meta.url));
+      expect([...bytes.subarray(0, 3)]).toEqual([0xff, 0xd8, 0xff]);
+      expect(racer.url).toMatch(/\.glb$/);
     }
   });
 });
