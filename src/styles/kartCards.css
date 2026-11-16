@@ -1,0 +1,25 @@
+/* Full kart silhouettes, using the same artwork-card shell as Racer Select. */
+.flow-coastal[data-flow-step=kart] .selection-grid { gap: 15px; }
+.flow-coastal[data-flow-step=kart] .selection-card[data-artwork=true] {
+  height: clamp(180px, 27vh, 235px);
+  background: radial-gradient(ellipse at 50% 30%, #bed9c826, transparent 75%), linear-gradient(145deg, #365b64e6, #203e4de6);
+}
+.flow-coastal[data-flow-step=kart] .selection-card[data-artwork=true][data-selected=true] {
+  background: radial-gradient(ellipse at 50% 30%, #ffe4a826, transparent 75%), linear-gradient(145deg, #426366eb, #284650eb);
+}
+.flow-coastal[data-flow-step=kart] .selection-card-art { inset: 3px 6px 40px; }
+.flow-coastal[data-flow-step=kart] .selection-card-art::after { background: none; }
+.flow-coastal[data-flow-step=kart] .selection-card-art img { filter: saturate(.9) brightness(.98) drop-shadow(0 9px 8px #0c253755); }
+.flow-coastal[data-flow-step=kart] .selection-card:hover img,
+.flow-coastal[data-flow-step=kart] .selection-card[data-selected=true] img { filter: saturate(1) brightness(1.04) drop-shadow(0 9px 8px #0c253755); }
+.flow-coastal[data-flow-step=kart] .selection-card[data-artwork=true] .selection-card-label { padding: 12px 15px; min-height: 40px; }
+.flow-coastal[data-flow-step=kart] .coastal-preview-name { top: 26px; }
+@media (max-height: 760px) and (min-width: 761px) {
+  .flow-coastal[data-flow-step=kart] .selection-card[data-artwork=true] { height: clamp(160px, 26vh, 195px); }
+}
+@media (max-width: 760px) {
+  .flow-coastal[data-flow-step=kart] .coastal-preview-name { top: 0; }
+  .flow-coastal[data-flow-step=kart] .selection-grid { gap: 10px; }
+  .flow-coastal[data-flow-step=kart] .selection-card[data-artwork=true] { height: clamp(155px, 36vw, 220px); }
+  .flow-coastal[data-flow-step=kart] .selection-card[data-artwork=true] .selection-card-label { padding: 10px 12px; font-size: 12px; }
+}

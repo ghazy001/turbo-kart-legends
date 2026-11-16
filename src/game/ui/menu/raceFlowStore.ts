@@ -1,7 +1,7 @@
 import { aiDifficulties, defaultRaceOptions, lapChoices, normalizeRaceOptions, type RaceOptions } from '../../config/raceOptions';
 import { loadVSOptions } from '../../config/vsPreferences';
 import { racers, karts, type RacerId, type KartId, type VisualSelection } from '../../config/visualAssets';
-import { moveGrid, type GridDirection } from '../selection/selectionStore';
+import { moveGrid, selectionGridColumns, type GridDirection } from '../selection/selectionStore';
 import { gameModes, trackCatalog, modeDefinition, setupSteps, type FlowStep, type MenuMode, sunshineCup, type TrackId } from './menuCatalog';
 import type { RaceKind } from '../../race/RaceSession';
 
@@ -79,7 +79,7 @@ export function createRaceFlowStore(selection: VisualSelection, preferences = lo
       if (!['racer', 'kart', 'track'].includes(state.currentStep) || state.currentStep === 'track' && state.currentMode === 'grand-prix') return;
       let index = state.currentStep === 'racer' ? state.racerIndex : state.currentStep === 'kart' ? state.kartIndex : state.trackIndex;
       for (let count = 0; count < entries.length; count++) {
-        index = moveGrid(index, direction, entries.length, state.currentStep === 'track' ? 1 : 3);
+        index = moveGrid(index, direction, entries.length, state.currentStep === 'track' ? 1 : selectionGridColumns[state.currentStep === 'kart' ? 'kart' : 'racer']);
         const candidate = entries[index];
         if (!('locked' in candidate) || !candidate.locked) { api.choose(index); return; }
       }

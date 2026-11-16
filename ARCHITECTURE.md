@@ -306,7 +306,10 @@ Racer Select additionally reads optional `DriverAssetDefinition.portrait` artwor
 
 Menu subject placement uses `placePreviewOnFloor` after skin-aware matrix synchronization. `updateWorldMatrix` alone leaves attached-skin inverse bind matrices stale, so it must not be used to measure a skinned portrait before its first render. Portrait normalization likewise refreshes the cloned hierarchy with `updateMatrixWorld(true)`. This prevents Sonic's feet from being grounded using pre-render bounds, without changing source geometry, rig poses, or gameplay transforms. The real-asset floor/idempotence regression and fresh-load browser capture are recorded in docs/RACER_FACE_CARDS.md.
 
+Kart Select reuses the artwork-card path through `KartAssetDefinition.artwork` and the shared `SelectionArtwork` type. `SelectionCard` selects driver portraits or kart artwork, with the same GLB fallback. Generic `data-artwork` / `--artwork-*` styling preserves Racer Select; `kartCards.css` frames full kart silhouettes over teal glass. `selectionGridColumns` supplies three racer columns or two kart columns to both menu stores and the CSS grid variable. This changes menu navigation to match the 2×2 collection, without changing IDs, final selection commit, simulation or physics. The live seated assembly and road stay intact. See docs/KART_IMAGE_CARDS.md.
+
 ## Shared action buttons
+
 
 
 

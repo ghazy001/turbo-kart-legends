@@ -1,6 +1,7 @@
 import { driverAssets, kartAssets, racers, karts, type RacerId, type KartId, type VisualSelection, type AssetInfo } from '../../config/visualAssets';
 
 export type SelectionStep = 'racer' | 'kart';
+export const selectionGridColumns: Record<SelectionStep, number> = { racer: 3, kart: 2 };
 export type GridDirection = 'left' | 'right' | 'up' | 'down';
 export interface SelectionState {
   currentStep: SelectionStep;
@@ -50,7 +51,7 @@ export function createSelectionStore(selection: VisualSelection) {
     getSnapshot: () => state,
     subscribe: (listener: () => void) => { listeners.add(listener); return () => { listeners.delete(listener); }; },
     choose,
-    move(direction: GridDirection, columns = 3) {
+    move(direction: GridDirection, columns = selectionGridColumns[state.currentStep]) {
       const entries = selectionEntries(state.currentStep);
       let index = state.currentStep === 'racer' ? state.racerIndex : state.kartIndex;
       for (let i = 0; i < entries.length; i++) {

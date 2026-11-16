@@ -45,7 +45,9 @@ describe('Home and mode setup flow', () => {
   });
   it('navigates each grid, rejects invalid indices and retains the real track', () => {
     const flow = store(); flow.begin('quick-race'); flow.choose(-1); flow.move('down'); expect(flow.getSnapshot().selectedRacer).toBe('spongebob');
-    flow.next(); flow.move('down'); expect(flow.getSnapshot().selectedKart).toBe('boat');
+    flow.next(); flow.move('down'); expect(flow.getSnapshot().selectedKart).toBe('ds');
+    flow.move('right'); expect(flow.getSnapshot().selectedKart).toBe('boat');
+    flow.move('up'); expect(flow.getSnapshot().selectedKart).toBe('go64');
     flow.next(); flow.choose(99); flow.move('right'); expect(flow.getSnapshot().selectedTrack).toBe(trackCatalog[1].id);
   });
   it('validates preferences, survives denied storage, and persists sound/mode/track independently from draft cosmetics', () => {

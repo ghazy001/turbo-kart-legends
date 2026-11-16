@@ -28,13 +28,16 @@ export interface RigSeatDefinition {
   fingers: readonly [string, string];
   toes: readonly [string, string];
 }
+export interface SelectionArtwork { url: string; position: string; scale: number }
 export interface AssetInfo {
   id: string; name: string; url: string; sourceUrl: string; color: string; description: string; sourceTitle: string;
-  /** Live model thumbnail; also the fallback when supplied face-card artwork fails. */
+  /** Live model thumbnail; also the fallback when supplied card artwork fails. */
   thumbnail: { kind: 'model'; yaw: number };
   locked?: boolean; lockReason?: string;
 }
 export interface KartAssetDefinition extends AssetInfo {
+  /** Supplied card artwork; the side preview and gameplay still use the GLB. */
+  artwork?: SelectionArtwork;
   transform: VisualTransform; seat: VisualTransform;
   /** Approximate right-hand grip in assembly meters (+X right, +Z forward). */
   steeringGrip: Triple;
@@ -44,7 +47,7 @@ export interface KartAssetDefinition extends AssetInfo {
 }
 export interface DriverAssetDefinition extends AssetInfo {
   /** Supplied face-card artwork only; the side preview and gameplay still use the GLB. */
-  portrait?: { url: string; position: string; scale: number };
+  portrait?: SelectionArtwork;
   transform: VisualTransform;
   pose: 'supplied-static-seat' | 'static-fit' | 'rig-seat' | 'authored';
   /** Non-driving props omitted from the seated assembly, retained in source portraits. */
@@ -58,6 +61,7 @@ const transform = (scale: number, position: Triple = [0, 0, 0], yaw = 0): Visual
 const wheelParts = (prefix: string) => Array.from({ length: 4 }, (_, i) => `${prefix}_${i}`);
 export const kartAssets = {
   practice: {
+    artwork: { url: '/assets/kart-cards/practice.webp', position: '50% 56%', scale: 0.96 },
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'practice', name: 'Practice Kart', color: '#e98742', description: 'Light frame. Familiar silhouette.', sourceTitle: 'Supplied practice kart',
     url: '/assets/optimized/karts/my-kart.glb', sourceUrl: '/assets/karts/my-kart.glb', transform: transform(1.5, [0, 0.15517, -0.03223]), seat: transform(1, [0, 0.64, -0.27]), steeringGrip: [0.29, 0.98, 0.28],
@@ -67,6 +71,7 @@ export const kartAssets = {
     ], wheelRadius: 0.232876,
   },
   go64: {
+    artwork: { url: '/assets/kart-cards/go64.webp', position: '50% 56%', scale: 0.96 },
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'go64', name: 'Go Kart 64', color: '#e77877', description: 'Twin engines. Bright tubular frame.', sourceTitle: 'Go kart 64',
     url: '/assets/optimized/karts/go_kart_64.glb', sourceUrl: '/assets/karts/go_kart_64.glb', transform: transform(16.5, [0, -0.25086, -0.07258], Math.PI), seat: transform(1.1, [0, 0.64, 0.1]), steeringGrip: [0.24, 1.0, 0.45],
@@ -76,6 +81,7 @@ export const kartAssets = {
     ], wheelRadius: 0.2838, spinDirection: -1,
   },
   ds: {
+    artwork: { url: '/assets/kart-cards/ds.webp', position: '50% 56%', scale: 0.96 },
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'ds', name: 'DS Kart', color: '#e85d56', description: 'Low nose. A compact classic.', sourceTitle: 'Mario Kart DS',
     url: '/assets/optimized/karts/mario_kart_ds.glb', sourceUrl: '/assets/karts/mario_kart_ds.glb', transform: transform(12, [0, -0.02869, 0.06193]), seat: transform(0.83, [0, 0.44, -0.045]), steeringGrip: [0.105, 0.50, 0.31],
@@ -85,6 +91,7 @@ export const kartAssets = {
     ], wheelRadius: 0.1733,
   },
   boat: {
+    artwork: { url: '/assets/kart-cards/boat.webp', position: '50% 56%', scale: 0.96 },
     thumbnail: { kind: 'model', yaw: -0.3 },
     id: 'boat', name: 'Boat Kart', color: '#6abbd1', description: 'A little seaside spirit on four wheels.', sourceTitle: 'Nickelodeon Kart Racers 3 SpongeBob Boat Kart',
     url: '/assets/optimized/characters/nickelodeon_kart_racers_3_spongebob_boat_kart.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_spongebob_boat_kart.glb', transform: transform(0.48, [0, 0.30274, 0.59355]), seat: transform(1, [0, 0.72, -0.4]), steeringGrip: [0.27, 1.01, 0.27],

@@ -47,7 +47,9 @@ describe('two-step racer/kart draft', () => {
     expect(moveGrid(0, 'up', 5, 3)).toBe(3);
     const store = createSelectionStore(defaultSelection); store.move('down');
     expect(store.getSnapshot().selectedRacer).toBe('spongebob');
-    store.confirm(); store.move('down'); expect(store.getSnapshot().selectedKart).toBe('boat');
+    store.confirm(); store.move('down'); expect(store.getSnapshot().selectedKart).toBe('ds');
+    store.move('right'); expect(store.getSnapshot().selectedKart).toBe('boat');
+    store.move('up'); expect(store.getSnapshot().selectedKart).toBe('go64');
   });
   it('every selectable definition exposes a named model thumbnail and model path', () => {
     for (const asset of [...racers, ...karts]) {
@@ -62,6 +64,16 @@ describe('two-step racer/kart draft', () => {
       const bytes = readFileSync(new URL(`../../../public${racer.portrait.url}`, import.meta.url));
       expect([...bytes.subarray(0, 3)]).toEqual([0xff, 0xd8, 0xff]);
       expect(racer.url).toMatch(/\.glb$/);
+    }
+  });
+  it('all kart cards use distinct bundled WebP artwork while preserving their GLB preview', () => {
+    expect(new Set(karts.map(kart => kart.artwork?.url)).size).toBe(karts.length);
+    for (const kart of karts) {
+      if (!kart.artwork) throw new Error(`Missing kart artwork for ${kart.id}`);
+      const bytes = readFileSync(new URL(`../../../public${kart.artwork.url}`, import.meta.url));
+      expect(bytes.toString('ascii', 0, 4)).toBe('RIFF');
+      expect(bytes.toString('ascii', 8, 12)).toBe('WEBP');
+      expect(kart.url).toMatch(/\.glb$/);
     }
   });
 });

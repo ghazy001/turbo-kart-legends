@@ -43,7 +43,7 @@ The user supplied Movie Sonic (Sonic Rumble) to replace Aang in the local roster
 
 The user's latest `the_spongebob_squarepants.glb` supersedes the earlier pending `spongebob_squarepants.glb` replacement. Use the latest model under the stable `spongebob` ID; preserve all supplied sources and credits. It has 25 unrigged meshes and zero clips. Fit only named arm/leg meshes, retain face/torso/clothing and UVs, normalize the exporter units, cap runtime textures offline and match shared crown/portrait heights and matte materials across all four unchanged karts. See docs/SPONGEBOB_REPLACEMENT.md.
 
-The user supplied five racer portraits and requested face cards while retaining the live GLB side preview. Racer Select uses these images with configurable crops, restrained warm highlights and a coastal presentation terrace instead of a road. Home, Kart Select and later setup screens retain their existing scenery. Keep the roster cosmetic-only, existing navigation/persistence and the no-tutorial-footer design. See docs/RACER_FACE_CARDS.md.
+The user supplied five racer portraits and requested face cards while retaining the live GLB side preview. Racer Select uses these images with configurable crops, restrained warm highlights and a coastal presentation terrace instead of a road. Kart Select now uses four supplied WebP cards in a matching 2×2 grid, retaining the live seated racer/kart preview and coastal road. Shared column definitions keep DOM and keyboard/gamepad navigation aligned. Home and later setup screens retain their existing scenery. Keep selection cosmetic-only, existing persistence and the no-tutorial-footer design. See docs/RACER_FACE_CARDS.md and docs/KART_IMAGE_CARDS.md.
 
 ## Preferred technology
 

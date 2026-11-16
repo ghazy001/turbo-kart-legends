@@ -1,36 +1,36 @@
-/* Portrait artwork belongs to the roster; the live GLB remains on the coastal terrace. */
+/* Shared artwork-card treatment; each step keeps its independent live GLB preview. */
 .flow-coastal[data-flow-step=racer] .flow-content {
   grid-template-columns: minmax(350px, 1.15fr) minmax(0, 1fr);
   gap: clamp(32px, 5vw, 80px);
 }
 .flow-coastal[data-flow-step=racer] .selection-grid { gap: 15px; }
-.flow-coastal .selection-card[data-portrait=true] {
+.flow-coastal .selection-card[data-artwork=true] {
   height: clamp(175px, 27vh, 245px); overflow: hidden; border-radius: 16px;
   border-color: #edf0e329; background: #09283c;
   box-shadow: 0 8px 24px #102e361f, inset 0 1px 0 #fff2d51a;
 }
 .selection-card-art { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
 .selection-card-art img {
-  width: 100%; height: 100%; object-fit: cover; object-position: var(--portrait-position, 50% 35%);
-  transform: scale(var(--portrait-scale, 1)); transform-origin: var(--portrait-position, 50% 35%);
+  width: 100%; height: 100%; object-fit: cover; object-position: var(--artwork-position, 50% 35%);
+  transform: scale(var(--artwork-scale, 1)); transform-origin: var(--artwork-position, 50% 35%);
   transition: transform .3s ease, filter .3s ease; filter: saturate(.88) brightness(.9);
 }
 .selection-card-art::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(180deg, #081c2810 50%, #0b253998 78%, #0b2539f2 100%);
 }
-.flow-coastal .selection-card[data-portrait=true]:hover { transform: translateY(-3px); border-color: #f8e5b988; }
-.selection-card[data-portrait=true]:hover img, .selection-card[data-portrait=true][data-selected=true] img { filter: saturate(1) brightness(1); }
-.flow-coastal .selection-card[data-portrait=true][data-selected=true] {
+.flow-coastal .selection-card[data-artwork=true]:hover { transform: translateY(-3px); border-color: #f8e5b988; }
+.selection-card[data-artwork=true]:hover img, .selection-card[data-artwork=true][data-selected=true] img { filter: saturate(1) brightness(1); }
+.flow-coastal .selection-card[data-artwork=true][data-selected=true] {
   border-color: #ffe0a0; transform: translateY(-2px) scale(1.018);
   box-shadow: 0 0 0 2px #ffdc8c27, 0 10px 28px #0b263a38;
 }
-.flow-coastal .selection-card[data-portrait=true] .selection-card-label {
+.flow-coastal .selection-card[data-artwork=true] .selection-card-label {
   padding: 14px 15px; min-height: 48px; font-size: clamp(12px, 1.1vw, 16px);
   font-weight: 700; letter-spacing: -.2px; background: transparent; text-shadow: 0 2px 5px #06182688;
 }
-.flow-coastal .selection-card[data-portrait=true] .selection-card-label > span { display: none; }
-.flow-coastal .selection-card[data-portrait=true] .selection-card-number {
+.flow-coastal .selection-card[data-artwork=true] .selection-card-label > span { display: none; }
+.flow-coastal .selection-card[data-artwork=true] .selection-card-number {
   display: block; top: 13px; left: 14px; font-size: 9px; color: #f3e8d3; opacity: .7;
 }
 .selection-card-picked {
@@ -47,18 +47,18 @@
 @media (max-width: 1100px) and (min-width: 761px) {
   .flow-coastal[data-flow-step=racer] .flow-content { grid-template-columns: minmax(350px, 1.2fr) minmax(0, 1fr); gap: 24px; }
   .flow-coastal[data-flow-step=racer] .selection-grid { gap: 11px; }
-  .flow-coastal .selection-card[data-portrait=true] .selection-card-label { padding: 12px 10px; font-size: 12px; }
+  .flow-coastal .selection-card[data-artwork=true] .selection-card-label { padding: 12px 10px; font-size: 12px; }
 }
 @media (max-height: 760px) and (min-width: 761px) {
-  .flow-coastal .selection-card[data-portrait=true] { height: clamp(155px, 26vh, 195px); }
+  .flow-coastal .selection-card[data-artwork=true] { height: clamp(155px, 26vh, 195px); }
   .flow-coastal[data-flow-step=racer] .selection-preview { min-height: 360px; }
   .flow-coastal[data-flow-step=racer] .selection-stage { min-height: 285px; }
 }
 @media (max-width: 760px) {
   .flow-coastal[data-flow-step=racer] .flow-content { grid-template-columns: 1fr; gap: 22px; }
   .flow-coastal[data-flow-step=racer] .selection-grid { gap: 10px; }
-  .flow-coastal .selection-card[data-portrait=true] { height: clamp(145px, 26vw, 200px); border-radius: 12px; }
-  .flow-coastal .selection-card[data-portrait=true] .selection-card-label { padding: 11px 9px; font-size: 11px; }
+  .flow-coastal .selection-card[data-artwork=true] { height: clamp(145px, 26vw, 200px); border-radius: 12px; }
+  .flow-coastal .selection-card[data-artwork=true] .selection-card-label { padding: 11px 9px; font-size: 11px; }
   .flow-coastal[data-flow-step=racer] .selection-preview { min-height: 380px; }
   .flow-coastal[data-flow-step=racer] .selection-stage { min-height: 300px; }
   .selection-card-picked { width: 19px; height: 19px; top: 8px; right: 8px; font-size: 11px; }

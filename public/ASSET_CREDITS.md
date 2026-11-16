@@ -47,6 +47,19 @@ Retired from the selectable roster on 2026-11-16; preserved source and derivativ
 - Declared license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 - Geometry: 61,916 triangles; 0 skins; 0 clips.
 
+## Kart-card artwork — supplied local prototype images
+
+The user supplied four WebP images on 2026-11-16 for Kart Select. Copies are bundled as supplied; CSS frames each full kart silhouette. Author/license metadata was not supplied or independently verified. These are local prototype visuals; no public-release rights or original authorship are asserted.
+
+| Bundled file | Supplied filename |
+| --- | --- |
+| `assets/kart-cards/practice.webp` | `PracticeKart.webp` |
+| `assets/kart-cards/go64.webp` | `GoKart64.webp` |
+| `assets/kart-cards/ds.webp` | `DSKart.webp` |
+| `assets/kart-cards/boat.webp` | `BoatKart.webp` |
+
+The separate `select karts.webp` board is a visual reference and is not bundled. Its illustrative stat bars were not added: existing kart selections remain cosmetic and share the same handling.
+
 ## Racer face-card artwork — supplied local prototype images
 
 The user supplied these five JPEGs on 2026-11-16 specifically for Racer Select. Copies retain their original bytes; CSS frames the faces without changing the files. Author and license information were not supplied or independently verified. Existing local prototype permission is retained; no public-release license or original authorship is asserted.

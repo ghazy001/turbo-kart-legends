@@ -18,6 +18,7 @@ import { HomeScene } from './HomeScene';
 import '../../../styles/coastalSelection.css';
 import '../../../styles/coastalSetup.css';
 import '../../../styles/racerCards.css';
+import '../../../styles/kartCards.css';
 
 export function RacerSelectScreen({ store }: { store: RaceFlowStore }) {
   const state = store.getSnapshot();
