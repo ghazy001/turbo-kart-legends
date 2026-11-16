@@ -45,7 +45,7 @@ The user's latest `the_spongebob_squarepants.glb` supersedes the earlier pending
 
 The user supplied five racer portraits and requested face cards while retaining the live GLB side preview. Racer Select uses these images with configurable crops, restrained warm highlights and a coastal presentation terrace instead of a road. Kart Select now uses four supplied WebP cards in a matching 2×2 grid, retaining the live seated racer/kart preview and coastal road. Shared column definitions keep DOM and keyboard/gamepad navigation aligned. Home and later setup screens retain their existing scenery. Keep selection cosmetic-only, existing persistence and the no-tutorial-footer design. See docs/RACER_FACE_CARDS.md and docs/KART_IMAGE_CARDS.md.
 
-The latest Racer Select update uses the user's five square studio portraits, adds mouse/touch 360° subject-only rotation and a compact nameplate below the preview. Preserve the coastal stage and full-body/skin grounding fix. Rotation is menu-local, clears gestures on blur/visibility/unmount and never rotates the gameplay actor or camera. Existing Enter/Space/back and grid navigation remain; focused preview arrows rotate, Home resets. See docs/RACER_PREVIEW_ROTATION.md.
+The latest Racer Select update uses the user's five square studio portraits, adds mouse/touch 360° subject-only rotation with no separate name panel below the preview; racer names remain on cards and in accessible labels. Preserve the coastal stage and full-body/skin grounding fix. Rotation is menu-local, clears gestures on blur/visibility/unmount and never rotates the gameplay actor or camera. Existing Enter/Space/back and grid navigation remain; focused preview arrows rotate, Home resets. See docs/RACER_PREVIEW_ROTATION.md.
 
 ## Preferred technology
 

@@ -48,15 +48,6 @@
 .flow-coastal[data-flow-step=racer] .selection-card-art::after { background: linear-gradient(180deg, transparent 56%, #eef0e9e6 100%); }
 .flow-coastal[data-flow-step=racer] .selection-card[data-artwork=true] .selection-card-label { color: #25434d; text-shadow: none; }
 .flow-coastal[data-flow-step=racer] .selection-card[data-artwork=true] .selection-card-number { color: #36525b; }
-.flow-coastal[data-flow-step=racer] .racer-nameplate {
-  align-self: center; top: 24px; width: min(100%, 360px); margin-top: 16px; padding: 14px 24px 16px;
-  border: 1px solid #fffaf070; border-radius: 18px;
-  background: linear-gradient(135deg, #fff9e5cf, #e1e9e1c7); box-shadow: 0 9px 28px #284c4e12;
-}
-.racer-nameplate-caption { display: inline-block; color: #64766c; font-size: 8px; font-weight: 700; letter-spacing: 2.4px; }
-.racer-nameplate-caption::before { content: ''; display: inline-block; width: 16px; height: 2px; background: #b2914d; vertical-align: middle; margin-right: 9px; }
-.flow-coastal[data-flow-step=racer] .racer-nameplate h3 { margin-top: 5px; font-size: clamp(28px, 2.7vw, 38px); line-height: 1.1; letter-spacing: -.9px; color: #25434d; text-shadow: none; }
-.flow-coastal[data-flow-step=racer] .racer-nameplate p { color: #526b6c; margin-top: 7px; font-size: 10px; }
 .racer-rotation-surface { position: absolute; inset: 0 0 -20px; z-index: 5; border-radius: 24px; cursor: grab; touch-action: pan-y pinch-zoom; user-select: none; -webkit-user-select: none; }
 .racer-rotation-surface:active { cursor: grabbing; }
 .racer-rotation-mark { position: absolute; top: 14px; right: 16px; border: 1px solid #fff7de66; border-radius: 20px; padding: 6px 10px; color: #37525b; background: #fff5de6b; font-size: 10px; font-weight: 650; letter-spacing: 1px; pointer-events: none; }

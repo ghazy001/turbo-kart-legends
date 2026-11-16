@@ -1,6 +1,6 @@
 # Racer Select — face cards and coastal terrace
 
-The latest studio portrait refresh, 360° mouse/touch subject rotation and refined nameplate supersede the original card imagery/name treatment described below. Earlier sources and QA remain preserved. See [current interaction and verification](RACER_PREVIEW_ROTATION.md).
+The latest studio portrait refresh, 360° mouse/touch subject rotation and removal of the separate preview name panel supersede the original card imagery/name treatment described below. Earlier sources and QA remain preserved. See [current interaction and verification](RACER_PREVIEW_ROTATION.md).
 
 Implemented from the five user-supplied portraits on 2026-11-16. This is a presentation change; no driving, AI, race, camera-follow, item, collider or record logic changed.
 
