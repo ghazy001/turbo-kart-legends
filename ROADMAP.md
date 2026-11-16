@@ -121,3 +121,7 @@ The user selected a dark showroom / warm yellow direction. Pass 1 implements a c
 ## Sunshine Circuit gameplay and environment pass
 
 The user's track-specific enhancement request adds the original coastal venue, asphalt/edge treatment, refined loop, a continuous raised roller, two turbo strips and crest jump, with shared surface queries and ordinary AI/player fixed-step inputs. Other tracks and core handling/race systems remain. Branched shortcuts and moving collision hazards remain future work; validate this simpler course before expanding topology. See docs/SUNSHINE_CIRCUIT_UPGRADE.md for verification and limits.
+
+## Sunshine supplied-model scenery pass
+
+The supplied tree replaces primitive palms, with curated groves and source-derived LODs. Supplied static spectators populate three viewing lawns, two supplied fuel dispensers form a harbor pit stop, and supplied tire runs back the existing collision rails. Shared instancing, static material merging, distance/frustum culling and model readiness preserve the race flow. Handling, camera, items/jumps/boosts and other courses remain unchanged. See docs/SUNSHINE_ENVIRONMENT_ASSETS.md for asset provenance, budgets, checks and remaining release/device limits.

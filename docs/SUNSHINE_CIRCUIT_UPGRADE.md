@@ -1,5 +1,7 @@
 # Sunshine Circuit — coastal venue and track features
 
+The subsequent [supplied environment integration](SUNSHINE_ENVIRONMENT_ASSETS.md) replaces this first pass’s primitive trees/crowds and adds imported pumps/tire walls. Gameplay and the historical verification below remain.
+
 ## Delivered scope
 
 Sunshine alone gets a smoother asymmetric 743 m loop, the existing 11 m driving width, a 38 m long / 1.4 m high continuous coastal roller, two directional turbo strips and a crest launch. There are no missing road sections: slow/reverse racers can drive across the roller normally. Steering, drift charge thresholds, gravity, existing boost tiers, input mappings, AI pursuit, lap gates, scoring and kart capsules retain their existing tuning. Other courses retain their flat surfaces, themes and cameras.

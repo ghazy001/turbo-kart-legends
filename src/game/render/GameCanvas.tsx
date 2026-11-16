@@ -1,3 +1,4 @@
+import { sunshineAssetSlots } from './SunshineAssetScenery';
 import { surfaceHeightAt } from '../tracks/trackSurface';
 import { TrackFeaturesVisual } from './TrackFeaturesVisual';
 import { RenderStats, type RenderSample } from '../dev/RenderStats';
@@ -70,7 +71,7 @@ export function GameCanvas({ runtime, onError, onFinish, suspended = false, scen
     const choices = opponentSelections(selection);
     return [{ id: 'player', selection }, ...(kind === 'quick-race' ? race.opponents.map((racer, i) => ({ id: racer.id, selection: choices[i] })) : [])];
   }, [race, kind, selection]);
-  const assets = useMemo(() => new RaceAssetLoading(lineup.map(entry => entry.id)), [lineup]);
+  const assets = useMemo(() => new RaceAssetLoading([...lineup.map(entry => entry.id), ...(race.track.definition.id === 'sunshine-circuit' ? sunshineAssetSlots : [])]), [lineup, race.track]);
   const assetStatus = useSyncExternalStore(assets.subscribe, assets.getSnapshot);
   useLayoutEffect(() => { runtime.assetsReady = assetStatus.ready; }, [runtime, assetStatus.ready]);
   useEffect(() => { for (const entry of lineup) preloadAssembly(kartAssets[entry.selection.kartId], driverAssets[entry.selection.racerId]); }, [lineup]);
@@ -84,7 +85,7 @@ export function GameCanvas({ runtime, onError, onFinish, suspended = false, scen
       {stats && <RenderStats onSample={setRenderSample} />}
       <Fragment key={`${sceneRevision}:${selection.kartId}:${selection.racerId}:${kind}`}>
         <GameLoop runtime={runtime} onFinish={onFinish} assets={assets} />
-        <Environment track={runtime.simulation.track} runtime={runtime} />
+        <Environment track={runtime.simulation.track} runtime={runtime} statusFor={assets.reporter} />
         <TrackVisual track={runtime.simulation.track} />
         <TrackFeaturesVisual track={runtime.simulation.track} active={runtime.mode === 'playing'} />
         <RaceTrackVisual runtime={runtime} />
@@ -98,8 +99,8 @@ export function GameCanvas({ runtime, onError, onFinish, suspended = false, scen
     {stats && renderSample && <output className="render-stats">Render: {renderSample.calls} calls · {renderSample.triangles.toLocaleString()} triangles · {renderSample.geometries} geometries · {renderSample.textures} textures · median {renderSample.medianMs.toFixed(1)} ms · p95 {renderSample.p95Ms.toFixed(1)} ms</output>}
     {!suspended && !assetStatus.ready && createPortal(<div className="race-loading" role="status" aria-live="polite">
       <span className="micro-label">TURBO KART LEGENDS</span><h1>Getting the grid ready<span>…</span></h1>
-      <p>Loading racers & karts</p><progress aria-label="Racers ready" value={assetStatus.settled} max={assetStatus.total} />
+      <p>Loading racers, karts & scenery</p><progress aria-label="Race assets ready" value={assetStatus.settled} max={assetStatus.total} />
     </div>, document.body)}
-    {!suspended && assetStatus.failed > 0 && createPortal(<p className="asset-status" role="alert">{assetStatus.failed} racer model{assetStatus.failed === 1 ? '' : 's'} unavailable. Using original kart fallback. Reload to retry.</p>, document.body)}
+    {!suspended && assetStatus.failed > 0 && createPortal(<p className="asset-status" role="alert">{assetStatus.failed} asset{assetStatus.failed === 1 ? '' : 's'} unavailable. Racer fallbacks remain playable; missing scenery is omitted. Reload to retry.</p>, document.body)}
   </SceneBoundary>;
 }

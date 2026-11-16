@@ -22,7 +22,7 @@ export function readAccessor(document, binary, index) {
   for (let i = 0; i < accessor.count; i++) binary.copy(data, i * width, offset + i * stride, offset + i * stride + width);
   return new ArrayType(data.buffer.slice(data.byteOffset, data.byteOffset + data.length));
 }
-export async function optimizeGLB(bytes, ratio = 0.55, error = 0.0015, sceneScale = 1) {
+export async function optimizeGLB(bytes, ratio = 0.55, error = 0.0015, sceneScale = 1, simplifyOptions = {}) {
   await MeshoptSimplifier.ready;
   const { document: doc, binary } = unpackGLB(bytes), output = structuredClone(doc);
   if (sceneScale !== 1) for (const scene of output.scenes ?? []) {
@@ -56,7 +56,8 @@ export async function optimizeGLB(bytes, ratio = 0.55, error = 0.0015, sceneScal
     const count = indices?.length ?? doc.accessors[primitive.attributes.POSITION].count;
     report.beforeTriangles += count / 3;
     // Skins, morph targets and small parts retain their complete topology/bindings.
-    const canSimplify = indices && (primitive.mode ?? 4) === 4 && count >= 3600 && !primitive.targets && primitive.attributes.JOINTS_0 === undefined;
+    const preserveLeaves = simplifyOptions.preserveLeaves && /leaf/i.test(doc.materials?.[primitive.material]?.name ?? '');
+    const canSimplify = !preserveLeaves && indices && (primitive.mode ?? 4) === 4 && count >= 3600 && !primitive.targets && primitive.attributes.JOINTS_0 === undefined;
     let simplified = null;
     if (canSimplify) {
       const positions = readAccessor(doc, binary, primitive.attributes.POSITION);
@@ -74,9 +75,14 @@ export async function optimizeGLB(bytes, ratio = 0.55, error = 0.0015, sceneScal
         for (let v = 1; v < vertexCount; v++) { if (positions[v * 3 + axis] < positions[lo * 3 + axis]) lo = v; if (positions[v * 3 + axis] > positions[hi * 3 + axis]) hi = v; }
         lock[lo] = 1; lock[hi] = 1;
       }
-      const [result, actualError] = MeshoptSimplifier.simplifyWithAttributes(indices, positions, 3, values, stride, weights, lock, Math.floor(count * ratio / 3) * 3, error, ['LockBorder']);
+      const target = Math.floor(count * ratio / 3) * 3;
+      const spatial = simplifyOptions.spatial && /trunk/i.test(doc.materials?.[primitive.material]?.name ?? '');
+      const [result, actualError] = spatial
+        ? MeshoptSimplifier.simplifySloppy(indices, positions, 3, lock, target, error)
+        : MeshoptSimplifier.simplifyWithAttributes(indices, positions, 3, values, stride, weights, lock, target, error, simplifyOptions.flags ?? ['LockBorder']);
       if (result.length < count) { simplified = result; report.maxRelativeError = Math.max(report.maxRelativeError, actualError); }
     }
+    if (!simplified && simplifyOptions.compact && indices) simplified = indices;
     if (simplified) {
       const [remap, unique] = MeshoptSimplifier.compactMesh(simplified);
       for (const [semantic, index] of Object.entries(primitive.attributes)) {
@@ -86,7 +92,7 @@ export async function optimizeGLB(bytes, ratio = 0.55, error = 0.0015, sceneScal
       }
       const IndexArray = arrays[doc.accessors[originalIndices].componentType];
       primitive.indices = addAccessor(originalIndices, IndexArray.from(simplified), 34963);
-      report.afterTriangles += simplified.length / 3; report.simplifiedPrimitives++;
+      report.afterTriangles += simplified.length / 3; if (simplified.length < count) report.simplifiedPrimitives++;
     } else {
       for (const [key, index] of Object.entries(primitive.attributes)) primitive.attributes[key] = copyAccessor(index);
       if (originalIndices !== undefined) primitive.indices = copyAccessor(originalIndices);

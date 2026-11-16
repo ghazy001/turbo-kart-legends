@@ -1,0 +1,172 @@
+[
+  {
+    "source": "gas-station",
+    "output": "gas-station",
+    "sourceSha256": "02eba5a964e43fb72d0905af23bc3e78e6d852c0958fdbb0a7af5dae8bdc9ed6",
+    "sourceBytes": 4746648,
+    "outputBytes": 4604160,
+    "textureCap": 1024,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1134960,
+        "sha256": "9f5a937ba391d990a4653806cb94dbe78e8e65d2d12cac3b1759537bf0e232a8"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1307245,
+        "sha256": "e2a549097a220acf5c1d82c913e1c1302e96816e1a13224765cb55243d2d5631"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 8516,
+        "sha256": "7edda12ea4c33d2df3db66003e35c9f68a49350a006ee2c0352e00b353396fea"
+      },
+      {
+        "index": 3,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 991897,
+        "sha256": "b9e20aa8c4eed294e98256747244441cf567845c00ab7c91b634a3134d2ce22c"
+      }
+    ],
+    "beforeTriangles": 26118,
+    "afterTriangles": 21970,
+    "simplifiedPrimitives": 2,
+    "maxRelativeError": 0.00016713318473193794
+  },
+  {
+    "source": "tire-wall",
+    "output": "tire-wall",
+    "sourceSha256": "0f58f123ef4ed8c631e49913e291ea2ed06ad163c0e4f5c5057dffff90f92f18",
+    "sourceBytes": 1726968,
+    "outputBytes": 566808,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/jpeg",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 512,
+        "height": 256,
+        "bytes": 39730,
+        "sha256": "aa1423e16735cd71e59fb762570506fcdb80c5ef51b1cafe27d098a2113f0509"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 512,
+        "height": 256,
+        "bytes": 184361,
+        "sha256": "e870492e8441452483024b943087d852f3452d8e6652af7f6db659adfd421eea"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 512,
+        "height": 256,
+        "bytes": 188796,
+        "sha256": "ef6d854be72f728c863740c76732668e0fd9840495b92f9bda56082f427b848c"
+      }
+    ],
+    "beforeTriangles": 3392,
+    "afterTriangles": 3392,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "spectators",
+    "output": "spectators",
+    "sourceSha256": "4a669a060b10ffe775971efe90f5c3a8b343de7950b669b9a971f444700f3ac8",
+    "sourceBytes": 700944,
+    "outputBytes": 700776,
+    "textureCap": 1024,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 512,
+        "sourceHeight": 512,
+        "width": 512,
+        "height": 512,
+        "bytes": 322586,
+        "sha256": "43ccd93283bcf230822486fc1e27ec7e6259f06849ebca3c2da5d843c2df855c"
+      }
+    ],
+    "beforeTriangles": 5038,
+    "afterTriangles": 5038,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "stylized-tree",
+    "output": "stylized-tree",
+    "sourceSha256": "21d570dc9a743a0e3416ea00b7e2393a24b781468da62ef6bcaf5a1767b1c82c",
+    "sourceBytes": 14893416,
+    "outputBytes": 2995560,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 2048,
+        "sourceHeight": 2048,
+        "width": 512,
+        "height": 512,
+        "bytes": 94658,
+        "sha256": "3e9b7c4b1f22e16a69d06d942cc2f29e89952b2a9680b29dca245e9801d53554"
+      }
+    ],
+    "beforeTriangles": 149364,
+    "afterTriangles": 36211,
+    "simplifiedPrimitives": 3,
+    "maxRelativeError": 0.016002556309103966
+  },
+  {
+    "source": "stylized-tree",
+    "output": "stylized-tree-far",
+    "sourceSha256": "21d570dc9a743a0e3416ea00b7e2393a24b781468da62ef6bcaf5a1767b1c82c",
+    "sourceBytes": 14893416,
+    "outputBytes": 970748,
+    "textureCap": 256,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 2048,
+        "sourceHeight": 2048,
+        "width": 256,
+        "height": 256,
+        "bytes": 28829,
+        "sha256": "1c1316e737037d6db81fcc84557cc6fafd639e3ea2dc72ace3d2dadef3c910f3"
+      }
+    ],
+    "beforeTriangles": 131470,
+    "afterTriangles": 11611,
+    "simplifiedPrimitives": 3,
+    "maxRelativeError": 0.03931346535682678
+  }
+]

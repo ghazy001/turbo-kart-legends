@@ -1,0 +1,374 @@
+[
+  {
+    "id": "gas-station",
+    "metadata": {
+      "extras": {
+        "author": "26d63 (https://sketchfab.com/DeatheDis)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/gas-station-7cdcf415aa9f4f0cb34f20215b4b8251",
+        "title": "Gas Station"
+      },
+      "generator": "Sketchfab-15.77.0",
+      "version": "2.0"
+    },
+    "sha256": "02eba5a964e43fb72d0905af23bc3e78e6d852c0958fdbb0a7af5dae8bdc9ed6",
+    "bytes": 4746648,
+    "min": [
+      -0.7381925428602685,
+      -0.006101368391602521,
+      -0.40883306680771103
+    ],
+    "max": [
+      0.7375325421145517,
+      2.4959019261702418,
+      0.4088304714311266
+    ],
+    "size": [
+      1.4757250849748202,
+      2.5020032945618444,
+      0.8176635382388376
+    ],
+    "skins": 0,
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Wire2_low_Material001_0",
+        "triangles": 5760
+      },
+      {
+        "name": "Wire1_low_Material001_0",
+        "triangles": 8064
+      },
+      {
+        "name": "BotPanel_low_Material001_0",
+        "triangles": 24
+      },
+      {
+        "name": "BotPart_low_Material001_0",
+        "triangles": 30
+      },
+      {
+        "name": "BoxPart_low_Material001_0",
+        "triangles": 456
+      },
+      {
+        "name": "Connector1_low_Material001_0",
+        "triangles": 82
+      },
+      {
+        "name": "Connector2_low_Material001_0",
+        "triangles": 82
+      },
+      {
+        "name": "Connector3_low_Material001_0",
+        "triangles": 82
+      },
+      {
+        "name": "LeftBarrelConnector_low_Material001_0",
+        "triangles": 159
+      },
+      {
+        "name": "LeftBlock_low_Material001_0",
+        "triangles": 6
+      },
+      {
+        "name": "LeftGun_low_Material001_0",
+        "triangles": 874
+      },
+      {
+        "name": "Middle_low_Material001_0",
+        "triangles": 86
+      },
+      {
+        "name": "RightBarrelConnector_low_Material001_0",
+        "triangles": 159
+      },
+      {
+        "name": "RightBlock_low_Material001_0",
+        "triangles": 6
+      },
+      {
+        "name": "RightGun_low_Material001_0",
+        "triangles": 874
+      },
+      {
+        "name": "Top_low_Material001_0",
+        "triangles": 28
+      },
+      {
+        "name": "TV_low_Material001_0",
+        "triangles": 682
+      },
+      {
+        "name": "1_low_Material001_0",
+        "triangles": 10
+      },
+      {
+        "name": "2_low_Material001_0",
+        "triangles": 48
+      },
+      {
+        "name": "3_low_Material001_0",
+        "triangles": 78
+      },
+      {
+        "name": "4_low_Material001_0",
+        "triangles": 78
+      },
+      {
+        "name": "5_low_Material001_0",
+        "triangles": 335
+      },
+      {
+        "name": "Crate_08_low_Material001_0",
+        "triangles": 333
+      },
+      {
+        "name": "Crate_09_low_Material001_0",
+        "triangles": 333
+      },
+      {
+        "name": "Crate_14_low_Material001_0",
+        "triangles": 328
+      },
+      {
+        "name": "Crate_17_low_Material001_0",
+        "triangles": 146
+      },
+      {
+        "name": "Crate_26_low_Material001_0",
+        "triangles": 46
+      },
+      {
+        "name": "Crate_27_low_Material001_0",
+        "triangles": 46
+      },
+      {
+        "name": "Crate_28_low_Material001_0",
+        "triangles": 46
+      },
+      {
+        "name": "Crate_29_low_Material001_0",
+        "triangles": 46
+      },
+      {
+        "name": "Crate_33_low_Material001_0",
+        "triangles": 578
+      },
+      {
+        "name": "Pipe_low_Material001_0",
+        "triangles": 880
+      },
+      {
+        "name": "BackPart_low_Material001_0",
+        "triangles": 492
+      },
+      {
+        "name": "LeftBarrel_low_Material001_0",
+        "triangles": 1020
+      },
+      {
+        "name": "LeftPanel_low_Material001_0",
+        "triangles": 562
+      },
+      {
+        "name": "MainPipe_low_Material001_0",
+        "triangles": 874
+      },
+      {
+        "name": "Panel_low_Material001_0",
+        "triangles": 205
+      },
+      {
+        "name": "RightBarrel_low_Material001_0",
+        "triangles": 1020
+      },
+      {
+        "name": "RightPanel_low_Material001_0",
+        "triangles": 562
+      },
+      {
+        "name": "TopPanel_low_Material001_0",
+        "triangles": 20
+      },
+      {
+        "name": "Crate_34_low_Material001_0",
+        "triangles": 578
+      }
+    ]
+  },
+  {
+    "id": "tire-wall",
+    "metadata": {
+      "extras": {
+        "author": "Jack Kelly (https://sketchfab.com/SecretImbecile)",
+        "license": "SKETCHFAB Standard (https://sketchfab.com/licenses)",
+        "source": "https://sketchfab.com/3d-models/race-track-tire-wall-32391f2710b846e58f7b998dee618acb",
+        "title": "Race track tire wall"
+      },
+      "generator": "Sketchfab-16.7.0",
+      "version": "2.0"
+    },
+    "sha256": "0f58f123ef4ed8c631e49913e291ea2ed06ad163c0e4f5c5057dffff90f92f18",
+    "bytes": 1726968,
+    "min": [
+      -0.5321866072645264,
+      0.001390341968224643,
+      -0.557328016515747
+    ],
+    "max": [
+      3.500194212056152,
+      0.9729321634591981,
+      0.5460828831233828
+    ],
+    "size": [
+      4.032380819320679,
+      0.9715418214909735,
+      1.1034108996391299
+    ],
+    "skins": 0,
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 512
+      },
+      {
+        "width": 1024,
+        "height": 512
+      },
+      {
+        "width": 1024,
+        "height": 512
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Tyrewall-material",
+        "triangles": 3392
+      }
+    ]
+  },
+  {
+    "id": "spectators",
+    "metadata": {
+      "extras": {
+        "author": "teacherap123 (https://sketchfab.com/teacherap123)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/spectators-1fae32c06cd74ca09d8714280059fd45",
+        "title": "spectators"
+      },
+      "generator": "Sketchfab-16.87.0",
+      "version": "2.0"
+    },
+    "sha256": "4a669a060b10ffe775971efe90f5c3a8b343de7950b669b9a971f444700f3ac8",
+    "bytes": 700944,
+    "min": [
+      -6.351856231689453,
+      -0.02273100055754297,
+      -5.636468887329102
+    ],
+    "max": [
+      4.985640048980713,
+      2.1643679141998304,
+      5.068941116333009
+    ],
+    "size": [
+      11.337496280670166,
+      2.1870989147573736,
+      10.70541000366211
+    ],
+    "skins": 0,
+    "clips": [],
+    "images": [
+      {
+        "width": 512,
+        "height": 512
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Object_6",
+        "triangles": 5038
+      }
+    ]
+  },
+  {
+    "id": "stylized-tree",
+    "metadata": {
+      "extras": {
+        "author": "yonimantz (https://sketchfab.com/yonimantz09)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/stylized-tree-6d1aeea748f147789004bc03e1930d32",
+        "title": "Stylized Tree"
+      },
+      "generator": "Sketchfab-12.68.0",
+      "version": "2.0"
+    },
+    "sha256": "21d570dc9a743a0e3416ea00b7e2393a24b781468da62ef6bcaf5a1767b1c82c",
+    "bytes": 14893416,
+    "min": [
+      -0.18911366993679835,
+      -7.502894230970253e-9,
+      -0.19700159916482746
+    ],
+    "max": [
+      0.17871503430496816,
+      0.5639603383569122,
+      0.192007504599199
+    ],
+    "size": [
+      0.3678287042417665,
+      0.5639603458598064,
+      0.3890091037640264
+    ],
+    "skins": 0,
+    "clips": [],
+    "images": [
+      {
+        "width": 2048,
+        "height": 2048
+      }
+    ],
+    "meshes": [
+      {
+        "name": "oak_01_leafes_Mat001_0",
+        "triangles": 32766
+      },
+      {
+        "name": "oak_01_leafes_Mat001_0_1",
+        "triangles": 26886
+      },
+      {
+        "name": "oak_01001_trunk_Mat001_0",
+        "triangles": 37114
+      },
+      {
+        "name": "oak_01001_trunk_Mat001_0_1",
+        "triangles": 44492
+      },
+      {
+        "name": "oak_01001_trunk_Mat001_0_2",
+        "triangles": 40896
+      }
+    ]
+  }
+]

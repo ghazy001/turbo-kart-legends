@@ -1,3 +1,4 @@
+import type { AssetStatusReporter } from './models/RaceAssetLoading';
 import { SunshineScenery } from './SunshineScenery';
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
@@ -103,7 +104,7 @@ function StartArea({ track }: { track: SampledTrack }) {
   </group>;
 }
 
-export function Environment({ track, runtime }: { track: SampledTrack; runtime: GameRuntime }) {
+export function Environment({ track, runtime, statusFor }: { track: SampledTrack; runtime: GameRuntime; statusFor: (id: string) => AssetStatusReporter }) {
   const theme = trackDefinition(track.definition.id).theme;
   const sunshine = track.definition.id === 'sunshine-circuit';
   const light = useRef<DirectionalLight>(null);
@@ -123,7 +124,7 @@ export function Environment({ track, runtime }: { track: SampledTrack; runtime: 
       shadow-mapSize={[sunshine ? 2048 : 1024, sunshine ? 2048 : 1024]} shadow-normalBias={sunshine ? 0.025 : 0} shadow-camera-left={-30} shadow-camera-right={30}
       shadow-camera-top={30} shadow-camera-bottom={-30} shadow-camera-far={180} shadow-bias={-0.0005} />
     <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow><planeGeometry args={[1600, 1600]} /><meshStandardMaterial color={theme.ground} roughness={1} /></mesh>
-    {sunshine ? <SunshineScenery track={track} runtime={runtime} /> : theme.volcanic ? <VolcanicScenery track={track} /> : <Forest track={track} />}
+    {sunshine ? <SunshineScenery track={track} runtime={runtime} statusFor={statusFor} /> : theme.volcanic ? <VolcanicScenery track={track} /> : <Forest track={track} />}
     <StartArea track={track} />
     {theme.winter && <AlpineScenery track={track} />}
     {!theme.winter && !theme.volcanic && Array.from({ length: 12 }, (_, i) => {

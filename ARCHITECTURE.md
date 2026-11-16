@@ -321,3 +321,7 @@ Racer preview rotation is menu-local `PreviewRotation` state, owned by the keyed
 ## Sunshine surface and track features
 
 Optional `TrackDefinition.rises` and `features` add a shared pure height surface and swept directional track triggers, used only by Sunshine Circuit. Road/rails/checkpoint decorations, reset, grounded drift/hop checks, vertical landing, items and cosmetic kart pitch read that surface. Planar handling, capsule dimensions, navigation and race validation keep their owners. Turbo pads grant the existing Surge state plus a capped entry kick; the roller lip grants a ballistic impulse. Feature definitions/tuning invalidate obsolete Sunshine replay fingerprints without changing other courses' record inputs. Coastal scenery/dashes use static instancing and a small generated asphalt texture; additional FOV response is Sunshine-only and honors reduced motion. See docs/SUNSHINE_CIRCUIT_UPGRADE.md.
+
+## Supplied Sunshine environment models
+
+`environmentAssets` and `sunshineAssetLayout` own source-relative fitting, curated placements and conservative rail clearance. `environmentModel` bakes/merges immutable static buffers by material; `SunshineAssetScenery` instances them with per-view distance/frustum compaction and fixed-source-envelope tree LODs. Five environment slots join the existing race readiness barrier; errors omit scenery and settle independently of racer fallbacks. No scenery owns simulation or colliders. Offline derivatives/credits and quality results are in docs/SUNSHINE_ENVIRONMENT_ASSETS.md.

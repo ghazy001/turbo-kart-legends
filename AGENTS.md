@@ -49,6 +49,8 @@ The latest Racer Select update uses the user's five square studio portraits, add
 
 The user authorized a Sunshine Circuit-only graphics/gameplay upgrade: refine the original loop, road detail, original coastal venue, atmosphere, turbo pads and a raised jump roller. Optional shared surface/feature definitions may extend existing grounding/jump ownership and add capped pad entry boosts. Preserve other courses, planar handling/drift/AI/scoring tuning, controls and capsule dimensions. Raise road/rails/decoration, reset and items from the same surface; obsolete Sunshine trial records must fail compatibility, without invalidating other tracks. Branch shortcuts and moving hazards remain deferred. See docs/SUNSHINE_CIRCUIT_UPGRADE.md.
 
+The user supplied `gas_station.glb`, `race_track_tire_wall.glb`, `spectators.glb` and `stylized_tree.glb` to replace Sunshine's basic vegetation/crowds and enrich its scenery. Preserve source files/credits, use fitted static shared GLB batches with tree LODs and curated off-road placements, and keep existing rails as the collision face. The station source is one fuel dispenser, and all four assets have no clips/skins. Source licensing metadata is recorded, not independently verified. Preserve every gameplay/camera/other-track rule. See docs/SUNSHINE_ENVIRONMENT_ASSETS.md.
+
 ## Preferred technology
 
 

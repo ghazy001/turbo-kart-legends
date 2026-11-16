@@ -1,3 +1,4 @@
+import environmentAudit from '../../../docs/assets/environment-audit.json';
 import { Component, Suspense, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
@@ -26,7 +27,7 @@ function Model({ url, onReady }: { url: string; onReady: () => void }) {
 }
 export function AssetInspection() {
   const ready = useCallback(() => setError('Model ready'), []);
-  const files = audit.filter(asset => asset.category !== 'ignored');
+  const files = [...audit.filter(asset => asset.category !== 'ignored' && !asset.path.startsWith('assets/environment/')), ...environmentAudit.map(asset => ({ path: `assets/environment/${asset.id}.glb`, category: 'environment', triangles: asset.meshes.reduce((sum, mesh) => sum + mesh.triangles, 0), skins: [], clips: [], requiredExtensions: [], min: asset.min, max: asset.max }))];
   const [error, setError] = useState('');
   const [index, setIndex] = useState(0); const asset = files[index];
   return <main className="asset-preview"><aside><a href="/">← Game</a><h1>Source model inspection</h1>
