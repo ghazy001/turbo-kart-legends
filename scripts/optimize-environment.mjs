@@ -11,6 +11,8 @@ const definitions = [
   ['stylized-tree', 'stylized-tree-far', 0.025, 0.06, 256],
   ['viking-house', 'viking-house', 0.5, 0.002, 1024],
   ['cactus', 'cactus', 1, 0.001, 512],
+  ['stylized-house', 'stylized-house', 0.8, 0.001, 1024],
+  ['lowpoly-gas-station', 'lowpoly-gas-station', 0.7, 0.002, 1024],
 ];
 const report = [];
 for (const [source, output, ratio, error, textureCap] of definitions) {

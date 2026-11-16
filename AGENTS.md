@@ -53,6 +53,8 @@ The user supplied `gas_station.glb`, `race_track_tire_wall.glb`, `spectators.glb
 
 The user's house/cactus follow-up replaces Sunshine's primitive buildings with multiple supplied Viking Houses, relocates the two fuel dispensers with shared paving definitions, and fills open roadside areas with supplied cacti. Preserve original sources/credits, static instancing, source-envelope spacing and road/lagoon clearance. Both new sources are static with no clips/skins. Keep gameplay, camera and other tracks unchanged. See docs/SUNSHINE_ENVIRONMENT_ASSETS.md.
 
+The user requested less repeated Viking architecture, supplied `stilized_house.glb` and `lowpoly_gas_station.glb`, and reported misaligned road markings and poorly presented turbo/jump features. Mix the supplied houses and fit the complete station; rebuild Sunshine paint from the rendered ribbon/surface with readable forward turbo/jump cues. Keep trigger/boost/jump formulas, track definition, colliders, AI, camera and other circuits unchanged. Preserve source files/credits and static batching. See docs/SUNSHINE_ROAD_POLISH.md.
+
 ## Preferred technology
 
 

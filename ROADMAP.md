@@ -130,3 +130,8 @@ The supplied tree replaces primitive palms, with curated groves and source-deriv
 ## Sunshine settlement follow-up
 
 Replaced primitive buildings with 14 supplied timber tower houses, added 62 supplied cacti in spaced gardens/verges and relocated both fuel dispensers onto two shared-definition paved service areas. All six source models retain credits and checked-in optimized derivatives. Existing races, controls, physics/camera and other courses are preserved. See docs/SUNSHINE_ENVIRONMENT_ASSETS.md.
+
+
+## Sunshine road presentation and scenery variety
+
+Mixed 10 supplied Stylized Houses with four Viking Houses, fitted the supplied complete western gas station, and replaced incorrectly rotated dashes/flat pad pieces with road-following paint. Turbo pads and the existing jump roller gain clear forward chevrons, borders and aligned activation stripes. Core features/physics/camera and other courses remain unchanged. See docs/SUNSHINE_ROAD_POLISH.md.

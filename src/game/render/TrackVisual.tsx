@@ -1,7 +1,8 @@
 import { roadHeight } from '../tracks/trackSurface';
 import { makeAsphaltTextures } from './roadTexture';
-import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
-import { BufferGeometry, Float32BufferAttribute, InstancedMesh, Object3D } from 'three';
+import { useEffect, useMemo } from 'react';
+import { BufferGeometry, Float32BufferAttribute } from 'three';
+import { makeRoadDashes } from './surfacePaint';
 import { sceneConfig } from '../config/kartConfig';
 import type { SampledTrack } from '../core/types';
 import { pointAtDistance } from '../race/trackProgress';
@@ -74,13 +75,13 @@ export function TrackVisual({ track }: { track: SampledTrack }) {
       </mesh>)}
     </group>
     {sunshine && <RoadDashes track={track} />}
-    <group position={[spawn.x, 0.075, spawn.z]} rotation={[0, spawn.heading, 0]}>
+    {!sunshine && <group position={[spawn.x, 0.075, spawn.z]} rotation={[0, spawn.heading, 0]}>
       {[12, 28, 44].map(z => <group key={z} position={[0, 0, z]}>
         {[-1, 1].map(side => <mesh key={side} position={[side * 0.4, 0, 0]} rotation={[-Math.PI / 2, 0, -side * 0.6]}>
           <planeGeometry args={[0.13, 1.2]} /><meshStandardMaterial color="#e4e9d7" />
         </mesh>)}
       </group>)}
-    </group>
+    </group>}
   </group>;
 }
 
@@ -105,19 +106,7 @@ function RailSide({ track, offset }: { track: SampledTrack; offset: number }) {
 }
 
 function RoadDashes({ track }: { track: SampledTrack }) {
-  const mesh = useRef<InstancedMesh>(null);
-  const count = Math.floor(track.length / 9);
-  useLayoutEffect(() => {
-    const object = new Object3D();
-    for (let i = 0; i < count; i++) {
-      const p = pointAtDistance(track, i * 9 + 4);
-      object.position.set(p.x, roadHeight(track, p.distance) + 0.065, p.z);
-      object.rotation.set(-Math.PI / 2, 0, -Math.atan2(p.tx, p.tz)); object.updateMatrix();
-      mesh.current?.setMatrixAt(i, object.matrix);
-    }
-    if (mesh.current) { mesh.current.instanceMatrix.needsUpdate = true; mesh.current.computeBoundingSphere(); }
-  }, [track, count]);
-  return <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
-    <planeGeometry args={[0.14, 2.3]} /><meshStandardMaterial color="#ecedda" transparent opacity={0.6} />
-  </instancedMesh>;
+  const geometry = useMemo(() => makeRoadDashes(track), [track]);
+  useEffect(() => () => geometry.dispose(), [geometry]);
+  return <mesh geometry={geometry} receiveShadow><meshStandardMaterial color="#eae9d8" roughness={0.95} /></mesh>;
 }

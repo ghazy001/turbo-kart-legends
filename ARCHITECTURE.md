@@ -327,3 +327,7 @@ Optional `TrackDefinition.rises` and `features` add a shared pure height surface
 `environmentAssets` and `sunshineAssetLayout` own source-relative fitting, curated placements and conservative rail clearance. `environmentModel` bakes/merges immutable static buffers by material; `SunshineAssetScenery` instances them with per-view distance/frustum compaction and fixed-source-envelope tree LODs. Seven registry-derived environment slots join the existing race readiness barrier; errors omit scenery and settle independently of racer fallbacks. No scenery owns simulation or colliders. Offline derivatives/credits and quality results are in docs/SUNSHINE_ENVIRONMENT_ASSETS.md.
 
 Sunshine house/cactus placements share the existing static material-batch pipeline. `sunshineServiceAreas` keeps both relocated pump transforms and their paved supports in agreement. Source-envelope reservations separate houses, cactus gardens, trees and viewing areas; no decorative bounds become gameplay colliders.
+
+## Sunshine road paint and scenery variety
+
+`surfacePaint` builds static material batches in course-distance/lateral coordinates using interpolated rendered ribbon edges/heights. `featurePaint` reads existing triggers, dresses turbo strips and the roller approach, and never writes simulation state. Dashes reserve feature/start gaps. The eight-asset registry supplies nine readiness slots; mixed houses and the complete western service station reuse static instancing/source-envelope spacing, with per-area asset/yaw/paving definitions. See docs/SUNSHINE_ROAD_POLISH.md.

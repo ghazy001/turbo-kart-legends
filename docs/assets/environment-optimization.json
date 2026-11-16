@@ -226,5 +226,93 @@
     "afterTriangles": 3780,
     "simplifiedPrimitives": 0,
     "maxRelativeError": 0
+  },
+  {
+    "source": "stylized-house",
+    "output": "stylized-house",
+    "sourceSha256": "28b47c0986bbdafca4d97811b0631f4e511ceaa3abbddc07177cf94c9e709e9a",
+    "sourceBytes": 4927808,
+    "outputBytes": 4791108,
+    "textureCap": 1024,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1217431,
+        "sha256": "0f51bb2332bda16a52875685e5d2740cfd12d8b6e81aa8a62e1bb0faa1cc84d4"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 797464,
+        "sha256": "2f9664868b0e70633ca9baf2f185d5894994de9ceba2cb71b942580b68114484"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1819660,
+        "sha256": "5d206b6e05b8fd821141e94cce97cc3da3a3abaa2cc3c633115e09568b87208b"
+      }
+    ],
+    "beforeTriangles": 15944,
+    "afterTriangles": 12754,
+    "simplifiedPrimitives": 1,
+    "maxRelativeError": 0.00046395824756473303
+  },
+  {
+    "source": "lowpoly-gas-station",
+    "output": "lowpoly-gas-station",
+    "sourceSha256": "238bf6ffde615e7b29ce4aeeb01d44e57c2a67dc57b4cec5c4120f519ceb54fa",
+    "sourceBytes": 3814368,
+    "outputBytes": 3661660,
+    "textureCap": 1024,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 512,
+        "sourceHeight": 512,
+        "width": 512,
+        "height": 512,
+        "bytes": 1285,
+        "sha256": "ae62e5ad0a1b8a067e739b1137f07de1795676794aaef81b576db5201a0d9e33"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1124197,
+        "sha256": "afa6c4163f69c504cad98d197c9457f0f7b2cf23e46be66b0197cdfc15ac32f5"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 914250,
+        "sha256": "30ea75e7bd1b9166069d11beb5606bef0ba83933005a0b87d80d0806b27f448b"
+      }
+    ],
+    "beforeTriangles": 31370,
+    "afterTriangles": 27786,
+    "simplifiedPrimitives": 4,
+    "maxRelativeError": 0.001982159912586212
   }
 ]

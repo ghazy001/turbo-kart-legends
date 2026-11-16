@@ -28,14 +28,14 @@ export function sunshineAssetLayout(track: SampledTrack): EnvironmentPlacement[]
     const placement: EnvironmentPlacement = { id: `${asset}-${placements.length}`, asset, position: [q.x, y, q.z], yaw: Math.atan2(p.tx, p.tz) + rotation, scale, tint };
     const railFace = track.definition.roadWidth / 2 + sceneConfig.railCenterOffset - sceneConfig.railWidth / 2;
     if (placementClearance(track, placement) < railFace + 0.16) return;
-    if (asset === 'viking-house' || asset === 'cactus' || asset === 'stylized-tree') {
+    if (asset === 'viking-house' || asset === 'stylized-house' || asset === 'lowpoly-gas-station' || asset === 'cactus' || asset === 'stylized-tree') {
       // Preserve lagoon shoreline, spectator lawns and room between full source envelopes.
       if ((q.x / 63) ** 2 + ((q.z - 12) / 76) ** 2 < 1.15 || overlaps(placement, asset === 'cactus' ? 1 : 1.5)) return;
     }
     placements.push(placement);
   };
-  // Spread the supplied dispensers between two clear roadside service areas.
-  for (const area of sunshineServiceAreas) add('gas-station', track.length * area.fraction, area.offset);
+  // One compact vintage stop and one complete station keep the two service areas distinct.
+  for (const area of sunshineServiceAreas) add(area.asset, track.length * area.fraction, area.offset, 1, area.rotation);
   for (const area of viewingAreas) add('spectators', area.fraction * track.length, area.side * 18.5, area.fraction === 0.71 ? 1.05 : 1, area.fraction === 0.365 ? 0.12 : 0, 0.32);
   // Short protective runs on the outside of three bends; existing rails remain the contact face.
   const [tireWidth, , tireLength] = environmentSize('tire-wall');
@@ -50,7 +50,7 @@ export function sunshineAssetLayout(track: SampledTrack): EnvironmentPlacement[]
   // Small groups with open gaps between them: the supplied broad-fronted houses face the road.
   const villages = [0.005, 0.04, 0.075, 0.21, 0.245, 0.465, 0.50, 0.54, 0.64, 0.785, 0.875, 0.915, 0.955, 0.985];
   for (const [index, fraction] of villages.entries()) {
-    add('viking-house', fraction * track.length, [23, 29, 24][index % 3], 0.88 + random(index + 1200) * 0.25, -Math.PI / 2 + (random(index + 1220) - 0.5) * 0.14);
+    add(index % 4 === 0 ? 'viking-house' : 'stylized-house', fraction * track.length, [23, 29, 24][index % 3], 0.88 + random(index + 1200) * 0.25, -Math.PI / 2 + (random(index + 1220) - 0.5) * 0.14);
   }
   // Deliberately composed groves: open harbor frontage, viewing lawns and lagoon shoreline.
   const groves = [{ f: 0.105, side: -1 }, { f: 0.21, side: -1 }, { f: 0.285, side: 1 }, { f: 0.41, side: -1 }, { f: 0.51, side: 1 }, { f: 0.61, side: -1 }, { f: 0.66, side: 1 }, { f: 0.78, side: -1 }, { f: 0.9, side: -1 }, { f: 0.95, side: 1 }];

@@ -30,8 +30,10 @@ export function prepareEnvironmentModel(source: Object3D, id: EnvironmentAssetId
     geometry.computeBoundingBox(); geometry.computeBoundingSphere();
     const material = original.clone();
     if (material instanceof MeshStandardMaterial) {
-      material.roughness = Math.max(material.roughness, id === 'gas-station' ? 0.55 : 0.8);
-      if (id === 'gas-station') { material.metalness = Math.min(material.metalness, 0.3); material.aoMapIntensity = 0.6; }
+      const service = id === 'gas-station' || id === 'lowpoly-gas-station';
+      if (!material.transparent) material.roughness = Math.max(material.roughness, service ? 0.55 : 0.8);
+      if (service) { material.metalness = Math.min(material.metalness, 0.3); material.aoMapIntensity = 0.6; }
+      if (id === 'stylized-house') { material.metalness = Math.min(material.metalness, 0.05); material.aoMapIntensity = 0.75; }
       material.emissiveIntensity = id === 'gas-station' ? 0.35 : 0;
       if (id === 'stylized-tree' && /leaf/i.test(material.name)) {
         material.transparent = false; material.alphaTest = 0.15; material.depthWrite = true; material.alphaToCoverage = true;

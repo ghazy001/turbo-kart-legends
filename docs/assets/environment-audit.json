@@ -466,5 +466,241 @@
         "triangles": 3780
       }
     ]
+  },
+  {
+    "id": "stylized-house",
+    "metadata": {
+      "extras": {
+        "author": "D.Milekhin (https://sketchfab.com/D.Milekhin)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/stilized-house-191a15100a9a487fa39540a208bed857",
+        "title": "Stilized house"
+      },
+      "generator": "Sketchfab-14.39.1",
+      "version": "2.0"
+    },
+    "sha256": "28b47c0986bbdafca4d97811b0631f4e511ceaa3abbddc07177cf94c9e709e9a",
+    "bytes": 4927808,
+    "min": [
+      -11.135761012082668,
+      -0.0044662000306778535,
+      -8.196626793021373
+    ],
+    "max": [
+      4.268877887676403,
+      13.628540857257253,
+      6.8917988197671125
+    ],
+    "size": [
+      15.404638899759071,
+      13.63300705728793,
+      15.088425612788486
+    ],
+    "skins": 0,
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "SM_House__0",
+        "triangles": 15944
+      }
+    ]
+  },
+  {
+    "id": "lowpoly-gas-station",
+    "metadata": {
+      "extras": {
+        "author": "AspectStudios (https://sketchfab.com/AspectStudio)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/lowpoly-gas-station-02a11319cb744999adddd7236a46bf8e",
+        "title": "Lowpoly Gas Station"
+      },
+      "generator": "Sketchfab-16.72.0",
+      "version": "2.0"
+    },
+    "sha256": "238bf6ffde615e7b29ce4aeeb01d44e57c2a67dc57b4cec5c4120f519ceb54fa",
+    "bytes": 3814368,
+    "min": [
+      -11.973219260575931,
+      -0.2060140945163198,
+      -8.33133564446861
+    ],
+    "max": [
+      19.139606505790198,
+      9.96364693305685,
+      11.322502035740712
+    ],
+    "size": [
+      31.11282576636613,
+      10.16966102757317,
+      19.65383768020932
+    ],
+    "skins": 0,
+    "clips": [],
+    "images": [
+      {
+        "width": 512,
+        "height": 512
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Box_Open_Palette_0",
+        "triangles": 216
+      },
+      {
+        "name": "Coin9_Palette_0",
+        "triangles": 1200
+      },
+      {
+        "name": "Counter_Corner_Palette_0",
+        "triangles": 540
+      },
+      {
+        "name": "DisplayShelf1_Palette_0",
+        "triangles": 344
+      },
+      {
+        "name": "DisplayShelf2_Palette_0",
+        "triangles": 344
+      },
+      {
+        "name": "Fridge001_Palette_0",
+        "triangles": 2124
+      },
+      {
+        "name": "Gas_Pumps_Palette_0",
+        "triangles": 7876
+      },
+      {
+        "name": "Open-Close_Material_0",
+        "triangles": 20
+      },
+      {
+        "name": "Rack_Palette_0",
+        "triangles": 288
+      },
+      {
+        "name": "Rack004_Palette_0",
+        "triangles": 192
+      },
+      {
+        "name": "Register_Palette_0",
+        "triangles": 424
+      },
+      {
+        "name": "Register-Draw_Palette_0",
+        "triangles": 220
+      },
+      {
+        "name": "Sale-Sign_Palette_0",
+        "triangles": 1620
+      },
+      {
+        "name": "Shelf002_Palette_0",
+        "triangles": 632
+      },
+      {
+        "name": "Shelf005_Palette_0",
+        "triangles": 632
+      },
+      {
+        "name": "Shelf2001_Palette_0",
+        "triangles": 316
+      },
+      {
+        "name": "Shelf2003_Palette_0",
+        "triangles": 474
+      },
+      {
+        "name": "Sign_Palette_0",
+        "triangles": 836
+      },
+      {
+        "name": "Sign_Sign_0",
+        "triangles": 4
+      },
+      {
+        "name": "Sign1_Material_0",
+        "triangles": 12
+      },
+      {
+        "name": "Sign2_Material_0",
+        "triangles": 12
+      },
+      {
+        "name": "Snacks_Palette_0",
+        "triangles": 1984
+      },
+      {
+        "name": "Snacks1016_Palette_0",
+        "triangles": 1984
+      },
+      {
+        "name": "Snacks1032_Palette018_0",
+        "triangles": 1984
+      },
+      {
+        "name": "Snacks2013_Palette_0",
+        "triangles": 456
+      },
+      {
+        "name": "Soda1012_Palette_0",
+        "triangles": 900
+      },
+      {
+        "name": "Soda2041_Palette_0",
+        "triangles": 2520
+      },
+      {
+        "name": "Soda3002_Palette_0",
+        "triangles": 2580
+      },
+      {
+        "name": "Store_Palette001_0",
+        "triangles": 24
+      },
+      {
+        "name": "Store_Palette_0",
+        "triangles": 524
+      },
+      {
+        "name": "Door_Palette_0",
+        "triangles": 36
+      },
+      {
+        "name": "Door_Palette001_0",
+        "triangles": 8
+      },
+      {
+        "name": "Door2_Palette_0",
+        "triangles": 36
+      },
+      {
+        "name": "Door2_Palette001_0",
+        "triangles": 8
+      }
+    ]
   }
 ]

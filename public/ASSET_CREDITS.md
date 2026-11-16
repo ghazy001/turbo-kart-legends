@@ -230,3 +230,11 @@ Modifications: offline runtime derivatives under `assets/optimized/environment/`
 - **Cactus** — ThymKruijt ([author](https://sketchfab.com/superkiller080), [embedded model source](https://sketchfab.com/3d-models/cactus-add594bc9bfc465488bf76badfdd82cb)). Preserved at `assets/environment/cactus.glb`.
 - Both sources declare [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). These are embedded uploader declarations, not independently verified public-release rights.
 - Modifications: source-relative centering, grounding/scaling and instance transforms; offline house mesh simplification and cactus texture resizing. Runtime derivatives live under `assets/optimized/environment/`. House baked unlit/outline materials, source UVs, cactus normal/base-color maps and both embedded credit blocks are retained. No animation or skeleton exists in either source. Original hashes, bounds and processing results are in `docs/assets/environment-audit.json` and `environment-optimization.json`.
+
+
+## Additional Sunshine house and complete station (2026-11-16)
+
+- **Stilized house** — D.Milekhin ([author](https://sketchfab.com/D.Milekhin), [embedded source](https://sketchfab.com/3d-models/stilized-house-191a15100a9a487fa39540a208bed857)). User file `stilized_house.glb` is preserved at `assets/environment/stylized-house.glb`.
+- **Lowpoly Gas Station** — AspectStudios ([author](https://sketchfab.com/AspectStudio), [embedded source](https://sketchfab.com/3d-models/lowpoly-gas-station-02a11319cb744999adddd7236a46bf8e)). User file `lowpoly_gas_station.glb` is preserved at `assets/environment/lowpoly-gas-station.glb`.
+- Both uploaders declare [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). These embedded declarations are recorded without independently verifying public-release rights.
+- Modifications: offline mesh simplification/texture caps, source-relative ground alignment/centering/scaling, static per-material merging and instance transforms. House cloned runtime materials use matte wood/stone settings; station window transparency and authored roughness remain. Original UVs, image content/color spaces and embedded metadata/credits are preserved. No character rig or animation is claimed. Source hashes and derivative budgets are in `docs/assets/environment-audit.json` and `environment-optimization.json`.

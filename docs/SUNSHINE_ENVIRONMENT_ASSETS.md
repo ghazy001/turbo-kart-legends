@@ -81,3 +81,6 @@ Seven scenery readiness slots now derive from the typed registry, avoiding a mis
 - Captures: [cactus-lined racing](design-qa/sunshine-settlement/racing.png), [house/garden bend](design-qa/sunshine-settlement/settlement.png), [validated results](design-qa/sunshine-settlement/results.png).
 
 - Full `npm run test`: **430 tests / 36 files passed in 196.41 s**, including existing driving/collision/AI/cup/items/records/phone coverage. The relay tests ran with local loopback access; the browser QA tab was closed before this run.
+
+
+Latest follow-up: the previously documented 14-Viking-house layout is superseded by a 10/4 Stylized/Viking mix and the complete western gas station, with nine scenery slots. See [Sunshine road polish](SUNSHINE_ROAD_POLISH.md) for current counts, provenance, road/feature redesign and verification.

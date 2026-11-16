@@ -26,7 +26,7 @@ export function sunshineScenery(track: SampledTrack) {
   // Wide forecourt uses its actual rectangular footprint, rather than the conservative prop circle.
   for (const area of sunshineServiceAreas) {
     const forecourt = pointAtDistance(track, track.length * area.fraction), pad = offsetSample(forecourt, area.offset);
-    boxes.push({ position: [pad.x, 0.015, pad.z], scale: [7, 0.03, 10], rotation: [0, Math.atan2(forecourt.tx, forecourt.tz), 0], color: '#c6c4b3' });
+    boxes.push({ position: [pad.x, 0.015, pad.z], scale: [area.paving[0], 0.03, area.paving[1]], rotation: [0, Math.atan2(forecourt.tx, forecourt.tz), 0], color: '#c6c4b3' });
   }
   // Reflector posts provide continuous scale/speed cues at the road edge.
   for (let i = 0; i < track.length / 8; i++) for (const side of [-1, 1]) {
