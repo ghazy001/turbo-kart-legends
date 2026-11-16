@@ -46,6 +46,7 @@ export function prepareModel(source: Object3D, options: ModelOptions = {}): Prep
         const position = baked.getAttribute('position'), point = new Vector3();
         for (let i = 0; i < position.count; i++) { point.fromBufferAttribute(position, i); fit(point, mesh.name, !protectedVertices?.[i]); position.setXYZ(i, point.x, point.y, point.z); }
         position.needsUpdate = true; baked.computeVertexNormals();
+        if (baked.index && baked.hasAttribute('tangent') && baked.hasAttribute('uv')) baked.computeTangents();
       }
       const definitions = options.wheels?.filter(item => (item.nodes ?? [item.node]).includes(mesh.name)) ?? [];
       if (definitions.length) for (const definition of definitions) {

@@ -1443,6 +1443,778 @@
     ]
   },
   {
+    "path": "assets/characters/spongebob_squarepants.glb",
+    "category": "racer",
+    "bytes": 99824,
+    "sha256": "d231a5be671a499ca39a4a5d330b6a3b58adc19f13989101100182f36b790c23",
+    "asset": {
+      "extras": {
+        "author": "sonicfan443 (https://sketchfab.com/sonicfan443)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/spongebob-squarepants-4dc65614da13403fa45a9710b4b4d655",
+        "title": "Spongebob Squarepants"
+      },
+      "generator": "Sketchfab-12.66.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -0.570482,
+      0.006526,
+      -0.1922
+    ],
+    "max": [
+      0.724518,
+      1.005126,
+      0.2758
+    ],
+    "size": [
+      1.295,
+      0.9986,
+      0.468
+    ],
+    "triangles": 2558,
+    "meshes": [
+      {
+        "name": "Object_2",
+        "skinned": false,
+        "vertices": 2017,
+        "triangles": 2558,
+        "min": [
+          -0.570482,
+          0.006526,
+          -0.1922
+        ],
+        "max": [
+          0.724518,
+          1.005126,
+          0.2758
+        ],
+        "center": [
+          0.077018,
+          0.505826,
+          0.0418
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/png",
+        "bytes": 2473,
+        "width": 128,
+        "height": 128,
+        "sha256": "8e8e6c46a8e8f332d4c4a598289fc1a117426a2df6a41ceb9b2cca72d5754950"
+      }
+    ],
+    "estimatedTextureMiB": 0.08333333333333333,
+    "materials": [
+      {
+        "doubleSided": true,
+        "name": "spongebob",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0.6
+        }
+      }
+    ]
+  },
+  {
+    "path": "assets/characters/the_spongebob_squarepants.glb",
+    "category": "racer",
+    "bytes": 43380292,
+    "sha256": "b6809dc40918a8c87b5f7308e31b27a983878e43cc4e91ff38634587ad7286fc",
+    "asset": {
+      "extras": {
+        "author": "Pixel (https://sketchfab.com/stefan.lengyel1)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/the-spongebob-squarepants-74e87e0af5b2495792d8068d561fd816",
+        "title": "The SpongeBob Squarepants"
+      },
+      "generator": "Sketchfab-12.63.0",
+      "version": "2.0"
+    },
+    "requiredExtensions": [],
+    "min": [
+      -172.694397,
+      -0.4588,
+      -52.828538
+    ],
+    "max": [
+      182.298803,
+      315.679411,
+      107.29707
+    ],
+    "size": [
+      354.9932,
+      316.138211,
+      160.125608
+    ],
+    "triangles": 29835,
+    "meshes": [
+      {
+        "name": "defaultMaterial",
+        "skinned": false,
+        "vertices": 2311,
+        "triangles": 2926,
+        "min": [
+          32.3264,
+          8.510402,
+          6.586798
+        ],
+        "max": [
+          49.004999,
+          18.817602,
+          13.378699
+        ],
+        "center": [
+          40.6657,
+          13.664002,
+          9.982748
+        ]
+      },
+      {
+        "name": "defaultMaterial_1",
+        "skinned": false,
+        "vertices": 1184,
+        "triangles": 1940,
+        "min": [
+          27.296001,
+          -0.4588,
+          -11.040601
+        ],
+        "max": [
+          54.216301,
+          24.589904,
+          43.864699
+        ],
+        "center": [
+          40.756151,
+          12.065552,
+          16.412049
+        ]
+      },
+      {
+        "name": "defaultMaterial_2",
+        "skinned": false,
+        "vertices": 904,
+        "triangles": 1536,
+        "min": [
+          34.873399,
+          14.437299,
+          -5.074005
+        ],
+        "max": [
+          46.1907,
+          45.840999,
+          5.980295
+        ],
+        "center": [
+          40.53205,
+          30.139149,
+          0.453145
+        ]
+      },
+      {
+        "name": "defaultMaterial_3",
+        "skinned": false,
+        "vertices": 429,
+        "triangles": 768,
+        "min": [
+          35.764101,
+          17.415299,
+          -4.417009
+        ],
+        "max": [
+          45.212099,
+          76.964099,
+          5.030998
+        ],
+        "center": [
+          40.4881,
+          47.189699,
+          0.306995
+        ]
+      },
+      {
+        "name": "defaultMaterial_4",
+        "skinned": false,
+        "vertices": 363,
+        "triangles": 576,
+        "min": [
+          20.723601,
+          55.0984,
+          -19.701906
+        ],
+        "max": [
+          60.544801,
+          91.817405,
+          20.314393
+        ],
+        "center": [
+          40.634201,
+          73.457903,
+          0.306243
+        ]
+      },
+      {
+        "name": "defaultMaterial_5",
+        "skinned": false,
+        "vertices": 672,
+        "triangles": 1160,
+        "min": [
+          99.373102,
+          96.135401,
+          -17.315413
+        ],
+        "max": [
+          182.298803,
+          148.638796,
+          21.469588
+        ],
+        "center": [
+          140.835953,
+          122.387099,
+          2.077087
+        ]
+      },
+      {
+        "name": "defaultMaterial_6",
+        "skinned": false,
+        "vertices": 287,
+        "triangles": 460,
+        "min": [
+          83.7394,
+          122.0142,
+          -20.794316
+        ],
+        "max": [
+          133.204901,
+          154.287004,
+          14.672885
+        ],
+        "center": [
+          108.472151,
+          138.150602,
+          -3.060715
+        ]
+      },
+      {
+        "name": "defaultMaterial_7",
+        "skinned": false,
+        "vertices": 2311,
+        "triangles": 2926,
+        "min": [
+          -50.142503,
+          8.510402,
+          6.586798
+        ],
+        "max": [
+          -33.463901,
+          18.817602,
+          13.378699
+        ],
+        "center": [
+          -41.803202,
+          13.664002,
+          9.982748
+        ]
+      },
+      {
+        "name": "defaultMaterial_8",
+        "skinned": false,
+        "vertices": 672,
+        "triangles": 1160,
+        "min": [
+          -172.694397,
+          96.135401,
+          -17.315413
+        ],
+        "max": [
+          -89.7686,
+          148.638796,
+          21.469588
+        ],
+        "center": [
+          -131.231499,
+          122.387099,
+          2.077087
+        ]
+      },
+      {
+        "name": "defaultMaterial_9",
+        "skinned": false,
+        "vertices": 1184,
+        "triangles": 1940,
+        "min": [
+          -55.172902,
+          -0.4588,
+          -11.040601
+        ],
+        "max": [
+          -28.252599,
+          24.589904,
+          43.864699
+        ],
+        "center": [
+          -41.71275,
+          12.065552,
+          16.412049
+        ]
+      },
+      {
+        "name": "defaultMaterial_10",
+        "skinned": false,
+        "vertices": 904,
+        "triangles": 1536,
+        "min": [
+          -47.595599,
+          14.437299,
+          -5.074005
+        ],
+        "max": [
+          -36.2782,
+          45.840999,
+          5.980295
+        ],
+        "center": [
+          -41.9369,
+          30.139149,
+          0.453145
+        ]
+      },
+      {
+        "name": "defaultMaterial_11",
+        "skinned": false,
+        "vertices": 429,
+        "triangles": 768,
+        "min": [
+          -46.704799,
+          17.415299,
+          -4.417009
+        ],
+        "max": [
+          -37.256801,
+          76.964099,
+          5.030998
+        ],
+        "center": [
+          -41.9808,
+          47.189699,
+          0.306995
+        ]
+      },
+      {
+        "name": "defaultMaterial_12",
+        "skinned": false,
+        "vertices": 363,
+        "triangles": 576,
+        "min": [
+          -61.745298,
+          55.0984,
+          -19.701906
+        ],
+        "max": [
+          -21.924099,
+          91.817405,
+          20.314393
+        ],
+        "center": [
+          -41.834699,
+          73.457903,
+          0.306243
+        ]
+      },
+      {
+        "name": "defaultMaterial_13",
+        "skinned": false,
+        "vertices": 287,
+        "triangles": 460,
+        "min": [
+          -123.600399,
+          122.0142,
+          -20.794316
+        ],
+        "max": [
+          -74.134898,
+          154.287004,
+          14.672885
+        ],
+        "center": [
+          -98.867649,
+          138.150602,
+          -3.060715
+        ]
+      },
+      {
+        "name": "defaultMaterial_14",
+        "skinned": false,
+        "vertices": 180,
+        "triangles": 228,
+        "min": [
+          -52.250302,
+          271.43591,
+          46.455467
+        ],
+        "max": [
+          58.550799,
+          296.887713,
+          48.52847
+        ],
+        "center": [
+          3.150249,
+          284.161812,
+          47.491969
+        ]
+      },
+      {
+        "name": "defaultMaterial_15",
+        "skinned": false,
+        "vertices": 316,
+        "triangles": 508,
+        "min": [
+          -17.992599,
+          194.711106,
+          38.391978
+        ],
+        "max": [
+          23.3863,
+          220.68141,
+          41.942973
+        ],
+        "center": [
+          2.69685,
+          207.696258,
+          40.167476
+        ]
+      },
+      {
+        "name": "defaultMaterial_16",
+        "skinned": false,
+        "vertices": 128,
+        "triangles": 204,
+        "min": [
+          -17.821801,
+          154.165401,
+          0.65618
+        ],
+        "max": [
+          22.129101,
+          183.590901,
+          30.613181
+        ],
+        "center": [
+          2.15365,
+          168.878151,
+          15.63468
+        ]
+      },
+      {
+        "name": "defaultMaterial_17",
+        "skinned": false,
+        "vertices": 388,
+        "triangles": 632,
+        "min": [
+          -72.4024,
+          215.96201,
+          41.295073
+        ],
+        "max": [
+          78.305799,
+          244.951802,
+          58.907476
+        ],
+        "center": [
+          2.951699,
+          230.456906,
+          50.101274
+        ]
+      },
+      {
+        "name": "defaultMaterial_18",
+        "skinned": false,
+        "vertices": 36,
+        "triangles": 48,
+        "min": [
+          -73.612303,
+          93.943598,
+          -37.348813
+        ],
+        "max": [
+          76.156503,
+          101.177506,
+          37.240488
+        ],
+        "center": [
+          1.2721,
+          97.560552,
+          -0.054162
+        ]
+      },
+      {
+        "name": "defaultMaterial_19",
+        "skinned": false,
+        "vertices": 514,
+        "triangles": 960,
+        "min": [
+          -60.0362,
+          223.610312,
+          40.984568
+        ],
+        "max": [
+          66.367197,
+          287.122518,
+          67.30727
+        ],
+        "center": [
+          3.165498,
+          255.366415,
+          54.145919
+        ]
+      },
+      {
+        "name": "defaultMaterial_20",
+        "skinned": false,
+        "vertices": 612,
+        "triangles": 1040,
+        "min": [
+          -8.4941,
+          83.432905,
+          36.37949
+        ],
+        "max": [
+          11.5885,
+          124.83751,
+          40.165088
+        ],
+        "center": [
+          1.5472,
+          104.135208,
+          38.272289
+        ]
+      },
+      {
+        "name": "defaultMaterial_21",
+        "skinned": false,
+        "vertices": 136,
+        "triangles": 208,
+        "min": [
+          -36.548701,
+          110.286705,
+          35.201685
+        ],
+        "max": [
+          39.042401,
+          124.7685,
+          39.204686
+        ],
+        "center": [
+          1.24685,
+          117.527603,
+          37.203185
+        ]
+      },
+      {
+        "name": "defaultMaterial_22",
+        "skinned": false,
+        "vertices": 360,
+        "triangles": 577,
+        "min": [
+          -75.594699,
+          73.467096,
+          -39.281212
+        ],
+        "max": [
+          78.2143,
+          106.076304,
+          39.69639
+        ],
+        "center": [
+          1.3098,
+          89.7717,
+          0.207589
+        ]
+      },
+      {
+        "name": "defaultMaterial_23",
+        "skinned": false,
+        "vertices": 442,
+        "triangles": 584,
+        "min": [
+          -74.791098,
+          103.4326,
+          -38.458312
+        ],
+        "max": [
+          77.065402,
+          126.047806,
+          38.998687
+        ],
+        "center": [
+          1.137152,
+          114.740203,
+          0.270187
+        ]
+      },
+      {
+        "name": "defaultMaterial_24",
+        "skinned": false,
+        "vertices": 3441,
+        "triangles": 6114,
+        "min": [
+          -105.806899,
+          114.253696,
+          -52.828538
+        ],
+        "max": [
+          112.215102,
+          315.679411,
+          107.29707
+        ],
+        "center": [
+          3.204101,
+          214.966553,
+          27.234266
+        ]
+      }
+    ],
+    "skins": [],
+    "clips": [],
+    "images": [
+      {
+        "mimeType": "image/jpeg",
+        "bytes": 928209,
+        "width": null,
+        "height": null,
+        "sha256": "99ecbac9be3f19abbd9526ead600fbcc84b4d7bb947a396d9d7b79cff295be4e"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 8531970,
+        "width": 4096,
+        "height": 4096,
+        "sha256": "82d222fe7ff510b17c0e7eb99898e3a40c702310806bf72ea012bc92c24a3ae5"
+      },
+      {
+        "mimeType": "image/jpeg",
+        "bytes": 304169,
+        "width": null,
+        "height": null,
+        "sha256": "19089abe402cb021846456c0865f7868d72f4134b23ae8ad806043fbff966433"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 17800527,
+        "width": 4096,
+        "height": 4096,
+        "sha256": "60125e09eb25d57abf2592925ea03a29bf2540bbda4167f1972d6b790c2dafac"
+      },
+      {
+        "mimeType": "image/jpeg",
+        "bytes": 1056173,
+        "width": null,
+        "height": null,
+        "sha256": "8beda694d260d5a60505dc3189a23001ad77674dd06e01932ae22610bb5b7f15"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 3092490,
+        "width": 4096,
+        "height": 4096,
+        "sha256": "36c6201ad8d4eae55d0e10feb33ba8058537b07b3fc05b888ef9c2562a2e0c11"
+      },
+      {
+        "mimeType": "image/jpeg",
+        "bytes": 196892,
+        "width": null,
+        "height": null,
+        "sha256": "ce51a8c9e3575fc2062633011fe9b41980bd1b7154edbf31efdd7776aad1d657"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 10136975,
+        "width": 4096,
+        "height": 4096,
+        "sha256": "126bed7b970677dd3ca348b2f438d827b21ce61c240de976e210cbb663b17de2"
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 35838,
+        "width": 4096,
+        "height": 4096,
+        "sha256": "516398e44e3b69e10d9d3eace50349d2bd6cb21a38de2c3a2ca14d1f26d8f1d1"
+      }
+    ],
+    "estimatedTextureMiB": 426.66666666666663,
+    "materials": [
+      {
+        "doubleSided": true,
+        "emissiveFactor": [
+          1,
+          1,
+          1
+        ],
+        "emissiveTexture": {
+          "index": 2
+        },
+        "name": "TELO",
+        "normalTexture": {
+          "index": 3
+        },
+        "occlusionTexture": {
+          "index": 1
+        },
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicRoughnessTexture": {
+            "index": 1
+          }
+        }
+      },
+      {
+        "doubleSided": true,
+        "emissiveFactor": [
+          1,
+          1,
+          1
+        ],
+        "emissiveTexture": {
+          "index": 6
+        },
+        "extensions": {
+          "KHR_materials_clearcoat": {
+            "clearcoatFactor": 0.5671661528920344,
+            "clearcoatRoughnessFactor": 0.09291264615216242,
+            "clearcoatTexture": {
+              "index": 8
+            }
+          }
+        },
+        "name": "OSTATNE",
+        "normalTexture": {
+          "index": 7
+        },
+        "occlusionTexture": {
+          "index": 5
+        },
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 4
+          },
+          "metallicRoughnessTexture": {
+            "index": 5
+          }
+        }
+      }
+    ]
+  },
+  {
     "path": "assets/items/banana-trap.glb",
     "category": "item",
     "bytes": 14268,

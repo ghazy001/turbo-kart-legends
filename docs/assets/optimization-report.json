@@ -119,5 +119,111 @@
     "afterTriangles": 22149,
     "simplifiedPrimitives": 0,
     "maxRelativeError": 0
+  },
+  {
+    "source": "characters/the_spongebob_squarepants.glb",
+    "output": "optimized/characters/the_spongebob_squarepants.glb",
+    "sourceSha256": "b6809dc40918a8c87b5f7308e31b27a983878e43cc4e91ff38634587ad7286fc",
+    "sourceBytes": 43380292,
+    "outputBytes": 5187328,
+    "ratio": 1,
+    "sceneScale": 0.01,
+    "textureMaxSize": 1024,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/jpeg",
+        "sourceWidth": 4096,
+        "sourceHeight": 4096,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 55921,
+        "sha256": "60a70ee19d4e155cb443c92aedb124ebd05df1532f02c55f2bae655433e9a9c0"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 4096,
+        "sourceHeight": 4096,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 833806,
+        "sha256": "70d36ddc22a87a8660e2a39be89fa035d319790198842d1543642712ec2622ad"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/jpeg",
+        "sourceWidth": 4096,
+        "sourceHeight": 4096,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 22881,
+        "sha256": "124c3a0f2dd490869b026d51e25a26666482c077e737c50c1c11b3aef781ba64"
+      },
+      {
+        "index": 3,
+        "mimeType": "image/png",
+        "sourceWidth": 4096,
+        "sourceHeight": 4096,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1421192,
+        "sha256": "0edc82a872245f069ddac7f337e676d65d3bd29b90d3b2fb34908ac87cc6612c"
+      },
+      {
+        "index": 4,
+        "mimeType": "image/jpeg",
+        "sourceWidth": 4096,
+        "sourceHeight": 4096,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 95142,
+        "sha256": "56cd474e09b24a85de224342e1210d1b3c0c048bf476b942bf7e60fc11fbded6"
+      },
+      {
+        "index": 5,
+        "mimeType": "image/png",
+        "sourceWidth": 4096,
+        "sourceHeight": 4096,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 436482,
+        "sha256": "2875bc7c23db1b166a57b5b1aa39f2f00ecc4cdda5fc34cff60c5ef84a4b9db6"
+      },
+      {
+        "index": 6,
+        "mimeType": "image/jpeg",
+        "sourceWidth": 4096,
+        "sourceHeight": 4096,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 17405,
+        "sha256": "98c17756b0ec7d93cda6c42c0965bb3ffbe9f8da1ec2d08201b1df7ffe2d8a65"
+      },
+      {
+        "index": 7,
+        "mimeType": "image/png",
+        "sourceWidth": 4096,
+        "sourceHeight": 4096,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 978740,
+        "sha256": "45a653cba9936bcb7d9139b6bbbf4c5a8ed262ee2383117ff176a803c56bc609"
+      },
+      {
+        "index": 8,
+        "mimeType": "image/png",
+        "sourceWidth": 4096,
+        "sourceHeight": 4096,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 24136,
+        "sha256": "a4be9972011bdf70b2f42dad331a71c71e39cba186e9b28e0c1a73e87cb04969"
+      }
+    ],
+    "beforeTriangles": 29835,
+    "afterTriangles": 29835,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
   }
 ]

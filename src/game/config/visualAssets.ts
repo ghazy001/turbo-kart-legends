@@ -6,11 +6,14 @@ export interface VisualTransform { position: Triple; rotation: Triple; scale: nu
 export interface WheelDefinition { node: string; nodes?: readonly string[]; front: boolean; side?: -1 | 1 }
 export type AnimationAction = 'idle' | 'steerLeft' | 'steerRight' | 'leanLeft' | 'leanRight' | 'driftLeft' | 'driftRight' | 'victory';
 export interface StaticPoseDefinition {
+  /** Scene-space center offset applied before the symmetric static fit. */
+  origin?: Triple;
   hip: number; knee: number; bend: number;
   shoulder: Triple; elbow: Triple; wrist: Triple;
   fittedElbow: Triple; fittedWrist: Triple;
   armMinY: number; armMaxY: number;
   armMeshes?: readonly string[];
+  legMeshes?: readonly string[];
   /** Skip arm bending for complete mesh islands that extend above this height. */
   protectComponentsAbove?: number;
 }
@@ -112,10 +115,12 @@ export const driverAssets = {
   },
   spongebob: {
     thumbnail: { kind: 'model', yaw: -0.3 },
-    id: 'spongebob', name: 'SpongeBob', color: '#ecd448', description: 'A bright smile. Ready for the next corner.', sourceTitle: 'Nickelodeon Kart Racers 3 SpongeBob',
-    // Object_2 mixes prop faces with the pants/shirt caps: hiding it opens the clothing.
-    url: '/assets/optimized/characters/nickelodeon_kart_racers_3_spongebob.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_spongebob.glb', transform: transform(seatedRacerScale('spongebob')), pose: 'static-fit',
-    staticPose: { hip: 0.32, knee: 0.15, bend: 1.4, shoulder: [0.52, 0.7, 0], elbow: [0.74, 0.7, 0], wrist: [0.94, 0.7, 0], fittedElbow: [0.59, 0.62, 0.32], fittedWrist: [0.37, 0.7, 0.62], armMinY: 0.37, armMaxY: 1.32 },
+    id: 'spongebob', name: 'SpongeBob', color: '#ecd448', description: 'A bright smile. Ready for the next corner.', sourceTitle: 'The SpongeBob Squarepants',
+    url: '/assets/optimized/characters/the_spongebob_squarepants.glb', sourceUrl: '/assets/characters/the_spongebob_squarepants.glb', transform: transform(seatedRacerScale('spongebob')), pose: 'static-fit',
+    staticPose: { origin: [0.032041, 0, 0], hip: 0.82, knee: 0.38, bend: 1.4,
+      armMeshes: ['defaultMaterial_5', 'defaultMaterial_6', 'defaultMaterial_8', 'defaultMaterial_13'],
+      legMeshes: ['defaultMaterial', 'defaultMaterial_1', 'defaultMaterial_2', 'defaultMaterial_3', 'defaultMaterial_4', 'defaultMaterial_7', 'defaultMaterial_9', 'defaultMaterial_10', 'defaultMaterial_11', 'defaultMaterial_12'],
+      shoulder: [0.95, 1.45, -0.04], elbow: [1.18, 1.30, 0], wrist: [1.51, 1.15, 0.04], fittedElbow: [0.90, 1.12, 0.46], fittedWrist: [0.60, 1.60, 1.20], armMinY: 0.90, armMaxY: 1.56 },
   },
   crash: {
     thumbnail: { kind: 'model', yaw: -0.3 },

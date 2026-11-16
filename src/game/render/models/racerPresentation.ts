@@ -16,6 +16,8 @@ export function applyRacerSurface(material: Material): void {
   material.metalnessMap = null;
   material.roughnessMap = null;
   material.envMapIntensity = racerStyle.environmentIntensity;
+  material.emissiveIntensity = 0;
+  material.emissiveMap = null;
   material.normalScale.multiplyScalar(racerStyle.normalStrength);
   if ('clearcoat' in material) Reflect.set(material, 'clearcoat', 0);
 }

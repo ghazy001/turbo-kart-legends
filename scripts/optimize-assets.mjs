@@ -3,6 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { MeshoptSimplifier } from 'three/addons/libs/meshopt_simplifier.module.js';
+import { capGLBTextures } from './glb-textures.mjs';
 
 const components = { SCALAR: 1, VEC2: 2, VEC3: 3, VEC4: 4, MAT4: 16 };
 const arrays = { 5120: Int8Array, 5121: Uint8Array, 5122: Int16Array, 5123: Uint16Array, 5125: Uint32Array, 5126: Float32Array };
@@ -109,13 +110,16 @@ const sources = [
   ['characters/my-character.glb', 0.65], ['characters/nickelodeon_kart_racers_3_aang.glb', 0.65],
   ['characters/nickelodeon_kart_racers_3_arnold.glb', 0.65], ['characters/nickelodeon_kart_racers_3_spongebob.glb', 0.65], ['characters/crash_bandicoot_cartoon.glb', 0.65],
   ['characters/movie_sonic_sonic_rumble.glb', 1, 100],
+  ['characters/the_spongebob_squarepants.glb', 1, 0.01, 1024],
 ];
 export async function generateAssets() {
   const root = new URL('../public/assets/', import.meta.url), reports = [];
-  for (const [source, ratio, sceneScale = 1] of sources) {
-    const original = await readFile(new URL(source, root)), { bytes, report } = await optimizeGLB(original, ratio, 0.0015, sceneScale);
+  for (const [source, ratio, sceneScale = 1, textureMaxSize] of sources) {
+    const original = await readFile(new URL(source, root));
+    const capped = textureMaxSize ? await capGLBTextures(original, textureMaxSize) : null;
+    const { bytes, report } = await optimizeGLB(capped?.bytes ?? original, ratio, 0.0015, sceneScale);
     const target = new URL(`optimized/${source}`, root); await mkdir(new URL('.', target), { recursive: true }); await writeFile(target, bytes);
-    const result = { source, output: `optimized/${source}`, sourceSha256: createHash('sha256').update(original).digest('hex'), sourceBytes: original.length, outputBytes: bytes.length, ratio, ...(sceneScale === 1 ? {} : { sceneScale }), ...report };
+    const result = { source, output: `optimized/${source}`, sourceSha256: createHash('sha256').update(original).digest('hex'), sourceBytes: original.length, outputBytes: bytes.length, ratio, ...(sceneScale === 1 ? {} : { sceneScale }), ...(capped ? { textureMaxSize, images: capped.images } : {}), ...report };
     reports.push(result); console.log(`${source}: ${report.beforeTriangles} → ${report.afterTriangles} triangles; ${original.length} → ${bytes.length} bytes`);
   }
   await writeFile(new URL('../docs/assets/optimization-report.json', import.meta.url), JSON.stringify(reports, null, 2) + '\n');

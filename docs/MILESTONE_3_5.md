@@ -1,5 +1,7 @@
 # Milestone 3.5 — Asset integration and cosmetic garage
 
+SpongeBob replacement (2026-11-16): the stable `spongebob` ID now loads the latest `the_spongebob_squarepants.glb` via a texture-capped runtime derivative. The former racer and earlier pending replacement sources remain preserved; the original source-table row below is historical. The Boat Kart is unchanged. See [replacement fitting and checks](SPONGEBOB_REPLACEMENT.md).
+
 Current roster update (2026-11-16): Sonic replaces Aang. Five racers / four karts remain; four drivers are unrigged, Sonic uses a real 56-joint skin, and all have zero clips. The source table and initial milestone checks below document the original integration. See [Sonic integration](SONIC_INTEGRATION.md) for its unit normalization, static seated rig fit and selection migration.
 
 Implemented 2026-11-05 in the existing Vite/React/R3F project. M1–M3 gameplay, controls, AI navigation, checkpoint/lap/race logic, collider dimensions and chase camera are preserved. This is a local prototype using supplied models with the user's explicit local-use permission. Embedded uploader license labels are recorded, not represented as independently verified franchise/public-release rights.

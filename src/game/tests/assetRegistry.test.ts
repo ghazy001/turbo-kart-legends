@@ -104,31 +104,41 @@ describe('Milestone 3.5 registry and real assets', () => {
     expect(unchanged).toBeGreaterThan(1000); expect(error).toBeLessThan(1e-6); expect(moved).toBeGreaterThan(100);
     geometry.dispose(); model.dispose();
   });
-  it('keeps SpongeBob clothing caps intact in portraits and every seated kart fit', () => {
+  it('preserves the latest SpongeBob face/clothing meshes and UVs while fitting only its named limbs', () => {
     const driver = driverAssets.spongebob, source = racerModels[racers.findIndex(racer => racer.id === driver.id)].scene;
     source.updateMatrixWorld(true);
-    const mesh = source.getObjectByName('Object_2') as Mesh;
-    const baked = mesh.geometry.clone().applyMatrix4(mesh.matrixWorld), positions = baked.getAttribute('position');
-    const options = [{}, ...karts.map(kart => driverFitOptions(kart, driver))];
-    for (const option of options) {
-      const model = prepareModel(source, option), clothing = model.root.getObjectByName('Object_2') as Mesh;
-      expect(clothing).toBeDefined();
-      const fitted = clothing.geometry.getAttribute('position'), point = new Vector3();
-      let clothingVertices = 0;
-      for (let i = 0; i < positions.count; i++) {
-        point.fromBufferAttribute(positions, i);
-        // Inspected source pants-bottom and waistband caps; exclude the separate wand.
-        if (point.y < 0.5 && Math.abs(point.x) < 0.4) {
-          const expected = point.clone();
-          if (option.staticPose) expected.y -= option.staticPose.hip;
-          const actual = new Vector3().fromBufferAttribute(fitted, i);
-          if (!option.staticPose) actual.applyMatrix4(clothing.matrixWorld);
-          expect(actual.distanceTo(expected)).toBeLessThan(1e-6); clothingVertices++;
+    const meshes: Mesh[] = []; source.traverse(node => { if (node instanceof Mesh) meshes.push(node); });
+    expect(meshes).toHaveLength(25);
+    expect(meshes.reduce((sum, mesh) => sum + (mesh.geometry.index?.count ?? 0) / 3, 0)).toBe(29835);
+    expect(source.getObjectsByProperty('type', 'SkinnedMesh')).toHaveLength(0);
+    for (const kart of karts) {
+      const model = prepareModel(source, driverFitOptions(kart, driver));
+      let preserved = 0, movingArms = 0, movingLegs = 0;
+      for (const mesh of meshes) {
+        const fittedMesh = model.root.getObjectByName(mesh.name) as Mesh;
+        expect(fittedMesh).toBeDefined();
+        expect(fittedMesh.geometry.getAttribute('uv').array).toEqual(mesh.geometry.getAttribute('uv').array);
+        expect(fittedMesh.geometry.index?.count).toBe(mesh.geometry.index?.count);
+        const baked = mesh.geometry.clone().applyMatrix4(mesh.matrixWorld), positions = baked.getAttribute('position'), fitted = fittedMesh.geometry.getAttribute('position');
+        const normals = fittedMesh.geometry.getAttribute('normal'), tangents = fittedMesh.geometry.getAttribute('tangent');
+        const arm = driver.staticPose.armMeshes.includes(mesh.name), leg = driver.staticPose.legMeshes.includes(mesh.name);
+        for (let i = 0; i < positions.count; i++) {
+          const expected = new Vector3().fromBufferAttribute(positions, i).sub(new Vector3(...driver.staticPose.origin)); expected.y -= driver.staticPose.hip;
+          const error = new Vector3().fromBufferAttribute(fitted, i).distanceTo(expected);
+          expect(Number.isFinite(tangents.getX(i) + tangents.getY(i) + tangents.getZ(i))).toBe(true);
+          expect(Math.abs(normals.getX(i) * tangents.getX(i) + normals.getY(i) * tangents.getY(i) + normals.getZ(i) * tangents.getZ(i))).toBeLessThan(1e-5);
+          if (!arm && !leg) { expect(error).toBeLessThan(1e-6); preserved++; }
+          else if (error > 0.02) { if (arm) movingArms++; if (leg) movingLegs++; }
         }
+        baked.dispose();
       }
-      expect(clothingVertices).toBeGreaterThan(200); model.dispose();
+      expect(preserved).toBeGreaterThan(5000); expect(movingArms).toBeGreaterThan(1000); expect(movingLegs).toBeGreaterThan(5000);
+      model.dispose();
+      const assembled = instantiateModel(source, 'latest-spongebob-batching', driverFitOptions(kart, driver));
+      let renderedMeshes = 0; assembled.root.traverse(node => { if (node instanceof Mesh) renderedMeshes++; });
+      expect(renderedMeshes).toBe(2); // The 25 source parts share two compatible material batches.
     }
-    expect(source.getObjectByName('Object_2')).toBe(mesh); baked.dispose();
+    expect(source.getObjectByName('defaultMaterial_24')).toBe(meshes[24]);
   });
   it('clones bone hierarchies and wheel pivots independently, sharing immutable fitted buffers', () => {
     const kart = karts.findIndex(asset => asset.id === 'boat'), source = kartModels[kart].scene;

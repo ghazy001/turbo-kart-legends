@@ -19,7 +19,7 @@ describe('cockpit fitting', () => {
   for (const kart of karts) for (const racer of racers.filter(driver => driver.staticPose)) it(`${racer.id}/${kart.id}: wrists reach the configured wheel grips`, () => {
     const options = driverFitOptions(kart, racer);
     expect(options.staticPose).toBeDefined();
-    const point = new Vector3(...racer.staticPose!.wrist);
+    const point = new Vector3(...racer.staticPose!.wrist).add(new Vector3(...(racer.staticPose!.origin ?? [0, 0, 0])));
     createStaticPose(options.staticPose!)(point, racer.staticPose!.armMeshes?.[0]);
     expect(mount(point, racer, kart).distanceTo(new Vector3(...kart.steeringGrip))).toBeLessThan(1e-5);
     expect(racer.staticPose!.fittedWrist).not.toBe(options.staticPose!.fittedWrist);
@@ -73,7 +73,7 @@ describe('static palette batching', () => {
 describe('shared racer finish', () => {
   it('keeps albedo/alpha while separating styled and original material variants', () => {
     const map = new Texture(), packed = new Texture(), normal = new Texture();
-    const material = new MeshStandardMaterial({ map, roughnessMap: packed, metalnessMap: packed, normalMap: normal, roughness: 0.2, metalness: 0.8, transparent: true, opacity: 0.7, alphaTest: 0.3 });
+    const material = new MeshStandardMaterial({ map, roughnessMap: packed, metalnessMap: packed, normalMap: normal, roughness: 0.2, metalness: 0.8, emissiveMap: map, emissiveIntensity: 1, transparent: true, opacity: 0.7, alphaTest: 0.3 });
     const mesh = new Mesh(new BoxGeometry(), material), source = new Group(); source.add(mesh);
     const original = instantiateModel(source, 'finish-source', {});
     const first = instantiateModel(source, 'finish-racer', { surface: 'racer-matte' });
@@ -83,6 +83,8 @@ describe('shared racer finish', () => {
     expect(styled).toBe(surface(second.root)); expect(styled).not.toBe(surface(original.root));
     expect(styled.map).toBe(map); expect(styled.normalMap).toBe(normal); expect(styled.opacity).toBe(0.7); expect(styled.alphaTest).toBe(0.3);
     expect(styled.roughness).toBe(racerStyle.roughness); expect(styled.metalness).toBe(0);
+    expect(styled.emissiveIntensity).toBe(0); expect(material.emissiveIntensity).toBe(1);
+    expect(styled.emissiveMap).toBeNull(); expect(material.emissiveMap).toBe(map);
     expect(styled.roughnessMap).toBeNull(); expect(styled.metalnessMap).toBeNull(); expect(styled.normalScale.x).toBe(racerStyle.normalStrength);
     expect(material.roughness).toBe(0.2); expect(material.metalnessMap).toBe(packed); expect(material.normalScale.x).toBe(1);
     expect(surface(original.root).metalness).toBe(0.8);

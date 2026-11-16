@@ -47,7 +47,27 @@ Retired from the selectable roster on 2026-11-16; preserved source and derivativ
 - Declared license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 - Geometry: 61,916 triangles; 0 skins; 0 clips.
 
+## The SpongeBob Squarepants — current replacement racer
+
+- File: `assets/characters/the_spongebob_squarepants.glb`
+- Author/uploader: Pixel (https://sketchfab.com/stefan.lengyel1)
+- Embedded source: https://sketchfab.com/3d-models/the-spongebob-squarepants-74e87e0af5b2495792d8068d561fd816
+- Declared license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+- Geometry: 29,835 triangles; 25 meshes; 0 skins / 0 clips. Nine embedded JPEG/PNG images.
+- The user's latest replacement, supplied 2026-11-16. Original source and metadata are unchanged. The runtime derivative adds a 0.01 export-unit wrapper and caps textures to 1024 pixels. Runtime clones receive centered, approximate named-limb static fitting and shared matte/non-emissive shading. No bones or clips are added. Uploader metadata has not been independently verified as franchise/public-release rights.
+
+## Spongebob Squarepants — earlier supplied source, archived
+
+- File: `assets/characters/spongebob_squarepants.glb`
+- Author/uploader: sonicfan443 (https://sketchfab.com/sonicfan443)
+- Embedded source: https://sketchfab.com/3d-models/spongebob-squarepants-4dc65614da13403fa45a9710b4b4d655
+- Declared license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+- Geometry: 2,558 triangles; 2,017 vertices; 1 mesh; 0 skins / 0 clips. One 128 × 128 PNG.
+- Supplied earlier on 2026-11-16, then superseded by the user's latest file before this task was committed. The preserved source is not selectable and has no active runtime derivative. Uploader metadata has not been independently verified as franchise/public-release rights.
+
 ## Nickelodeon Kart Racers 3 SpongeBob
+
+Retired from the selectable roster on 2026-11-16; original and optimized files remain preserved. The stable `spongebob` ID now loads `the_spongebob_squarepants.glb`. The Boat Kart remains a separate supported asset.
 
 - File: `assets/characters/nickelodeon_kart_racers_3_spongebob.glb`
 - Author/uploader: SMF Friends Fan 2024 YouTube Live (https://sketchfab.com/cherylhill28)

@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { unpackGLB, readAccessor } from './optimize-assets.mjs';
+import { imageDimensions } from './glb-textures.mjs';
 
 const reports = JSON.parse(readFileSync(new URL('../docs/assets/optimization-report.json', import.meta.url)));
 const combatItem = JSON.parse(readFileSync(new URL('../docs/assets/combat-item-audit.json', import.meta.url)));
@@ -30,7 +31,16 @@ describe('offline GLB derivatives', () => {
     } else { expect(JSON.stringify(b.nodes)).toBe(JSON.stringify(a.nodes)); expect(b.scenes).toEqual(a.scenes); }
     expect(b.materials).toEqual(a.materials); expect(b.textures).toEqual(a.textures);
     expect(b.animations?.length ?? 0).toBe(a.animations?.length ?? 0);
-    for (const [i, image] of (a.images ?? []).entries()) expect(imageBytes(result, b.images[i]).equals(imageBytes(original, image))).toBe(true);
+    for (const [i, image] of (a.images ?? []).entries()) {
+      const data = imageBytes(result, b.images[i]);
+      if (report.textureMaxSize) {
+        const size = imageDimensions(data, b.images[i].mimeType);
+        expect(b.images[i].mimeType).toBe(image.mimeType);
+        expect(Math.max(size.width, size.height)).toBeLessThanOrEqual(report.textureMaxSize);
+        expect(size).toEqual({ width: report.images[i].width, height: report.images[i].height });
+        expect(createHash('sha256').update(data).digest('hex')).toBe(report.images[i].sha256);
+      } else expect(data.equals(imageBytes(original, image))).toBe(true);
+    }
     for (const [i, skin] of (a.skins ?? []).entries()) {
       expect(b.skins[i].joints).toEqual(skin.joints);
       expect(readAccessor(b, result.binary, b.skins[i].inverseBindMatrices)).toEqual(readAccessor(a, original.binary, skin.inverseBindMatrices));

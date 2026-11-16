@@ -41,6 +41,8 @@ The user requested consistent racer sizing/art direction. Decorative crown/pelvi
 
 The user supplied Movie Sonic (Sonic Rumble) to replace Aang in the local roster. Preserve the original GLB/credits, normalize the runtime export units, fit its real skeleton into all four unchanged cockpits, match shared portrait/seated proportions and matte materials, and migrate saved Aang selections to Sonic. The supplied Sonic has a skin but zero clips: its fitted static joint pose is not an authored driving animation. Keep the retired Aang files intact. See docs/SONIC_INTEGRATION.md.
 
+The user's latest `the_spongebob_squarepants.glb` supersedes the earlier pending `spongebob_squarepants.glb` replacement. Use the latest model under the stable `spongebob` ID; preserve all supplied sources and credits. It has 25 unrigged meshes and zero clips. Fit only named arm/leg meshes, retain face/torso/clothing and UVs, normalize the exporter units, cap runtime textures offline and match shared crown/portrait heights and matte materials across all four unchanged karts. See docs/SPONGEBOB_REPLACEMENT.md.
+
 ## Preferred technology
 React + TypeScript + Vite + Three.js + @react-three/fiber; @react-three/drei selectively; Zustand for UI only; Rapier if needed for colliders/queries; Vitest for core tests. Use a stable compatible dependency set; check React and R3F peer dependencies. Do NOT use R3F alpha by default.
 

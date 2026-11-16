@@ -1,5 +1,7 @@
 # Racer consistency pass
 
+SpongeBob replacement (2026-11-16): the current `spongebob` ID uses the latest **The SpongeBob Squarepants** model, centered before its named-limb static fit, with the same 2.3 portrait / 0.94 seated height and matte finish. The old bubble-wand model and its clothing-fix notes below are historical. The earlier pending 2,558-triangle replacement was superseded by the user's latest file. See [current replacement source and fit checks](SPONGEBOB_REPLACEMENT.md).
+
 Roster update (2026-11-16): Sonic now replaces Aang, retaining the same 2.3 portrait / 0.94 seated crown standards and matte finish. Sonic has a real skin but no clips; the other four selectable racers remain unrigged. The original measurements and QA below describe the earlier Aang roster. See [current Sonic fitting and verification](SONIC_INTEGRATION.md).
 
 Portrait fitting previously used height and arm span, making wide or outstretched characters appear shorter. Seated drivers also used unrelated hand-tuned scales. Portraits now share a 2.3-unit height; seated drivers share a 0.94-unit crown height above the pelvis/seat before each kart's existing seat transform. Uniform scaling preserves silhouettes: broad heads and slim bodies still differ naturally.
