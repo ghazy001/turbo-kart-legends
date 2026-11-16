@@ -3,11 +3,12 @@ import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { createSuppliedStaticPose } from './staticDriverPose';
 import { protectedPoseVertices } from './poseRegions';
 import { createStaticPose } from './staticPose';
-import type { StaticPoseDefinition, WheelDefinition } from '../../config/visualAssets';
+import type { RigSeatDefinition, StaticPoseDefinition, WheelDefinition } from '../../config/visualAssets';
+import { applyRigSeatPose } from './rigSeatPose';
 
 export interface WheelRig { steer: Group; spin: Group; front: boolean }
 export interface PreparedModel { root: Group; wheels: WheelRig[]; dispose: () => void; releaseUnusedGeometry: () => void }
-export interface ModelOptions { surface?: 'racer-matte'; staticDriver?: boolean; handTarget?: [number, number, number]; hiddenNodes?: readonly string[]; staticPose?: StaticPoseDefinition; wheels?: readonly WheelDefinition[] }
+export interface ModelOptions { surface?: 'racer-matte'; staticDriver?: boolean; handTarget?: [number, number, number]; hiddenNodes?: readonly string[]; staticPose?: StaticPoseDefinition; rigSeat?: RigSeatDefinition; wheels?: readonly WheelDefinition[] }
 
 /** Split a joined left/right tire pair without cutting triangles or changing source buffers. */
 function wheelSide(source: BufferGeometry, side: -1 | 1): BufferGeometry {
@@ -28,6 +29,7 @@ function wheelSide(source: BufferGeometry, side: -1 | 1): BufferGeometry {
 /** Preserve skeletons and the cached GLTF. Bake only static meshes that need fitting/pivots. */
 export function prepareModel(source: Object3D, options: ModelOptions = {}): PreparedModel {
   const root = new Group(), instance = clone(source);
+  if (options.rigSeat) applyRigSeatPose(instance, options.rigSeat, options.handTarget ?? [0.2, 0.55, 0.35]);
   for (const name of options.hiddenNodes ?? []) instance.getObjectByName(name)?.removeFromParent(); const wheels: WheelRig[] = [], owned: BufferGeometry[] = [];
   instance.traverse(node => { if (node instanceof Mesh) { node.castShadow = true; node.receiveShadow = true; } });
   if (!options.staticDriver && !options.staticPose && !options.wheels?.length) root.add(instance);

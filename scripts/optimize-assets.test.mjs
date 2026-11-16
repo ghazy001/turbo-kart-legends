@@ -18,7 +18,16 @@ describe('offline GLB derivatives', () => {
     const optimized = readFileSync(new URL(`../public/assets/${report.output}`, import.meta.url));
     expect(createHash('sha256').update(source).digest('hex')).toBe(report.sourceSha256);
     const original = unpackGLB(source), result = unpackGLB(optimized), a = original.document, b = result.document;
-    expect(b.asset).toEqual(a.asset); expect(JSON.stringify(b.nodes)).toBe(JSON.stringify(a.nodes)); expect(b.scenes).toEqual(a.scenes);
+    expect(b.asset).toEqual(a.asset);
+    if (report.sceneScale) {
+      expect(JSON.stringify(b.nodes.slice(0, a.nodes.length))).toBe(JSON.stringify(a.nodes));
+      expect(b.nodes).toHaveLength(a.nodes.length + a.scenes.length);
+      for (const [i, scene] of a.scenes.entries()) {
+        const wrapper = a.nodes.length + i;
+        expect(b.scenes[i]).toEqual({ ...scene, nodes: [wrapper] });
+        expect(b.nodes[wrapper]).toEqual({ name: 'Runtime unit normalization', scale: Array(3).fill(report.sceneScale), children: scene.nodes });
+      }
+    } else { expect(JSON.stringify(b.nodes)).toBe(JSON.stringify(a.nodes)); expect(b.scenes).toEqual(a.scenes); }
     expect(b.materials).toEqual(a.materials); expect(b.textures).toEqual(a.textures);
     expect(b.animations?.length ?? 0).toBe(a.animations?.length ?? 0);
     for (const [i, image] of (a.images ?? []).entries()) expect(imageBytes(result, b.images[i]).equals(imageBytes(original, image))).toBe(true);

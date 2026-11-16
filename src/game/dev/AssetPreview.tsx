@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
-import { Mesh, PCFShadowMap } from 'three';
+import { Box3, Mesh, PCFShadowMap } from 'three';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { configureAssetLoader } from '../render/models/assetLoader';
 import { driverAssets, kartAssets, type KartId, type RacerId, type KartAssetDefinition, type DriverAssetDefinition, type Triple, type VisualTransform } from '../config/visualAssets';
@@ -10,15 +10,17 @@ import { KartAssembly } from '../render/KartAssembly';
 import './assetPreview.css';
 import { PreviewBoundary } from '../ui/GaragePreview';
 import type { AssetStatus } from '../render/KartVisual';
+import { racerPortraitFit } from '../render/models/racerPresentation';
 
-function RawModel({ url, scale, position }: { url: string; scale: number; position: Triple }) {
+function RawModel({ url, scale, position, portrait = false }: { url: string; scale: number; position: Triple; portrait?: boolean }) {
   const gltf = useGLTF(url, false, false, configureAssetLoader);
   const instance = useMemo(() => {
     const scene = clone(gltf.scene);
     scene.traverse(node => { if (node instanceof Mesh) { node.castShadow = true; node.receiveShadow = true; } });
     return scene;
   }, [gltf.scene]);
-  return <primitive object={instance} scale={scale} position={position} dispose={null} />;
+  const fit = useMemo(() => portrait ? racerPortraitFit(new Box3().setFromObject(instance, true)) : null, [instance, portrait]);
+  return <group position={position}><group scale={fit?.scale ?? scale} position={fit?.position}><primitive object={instance} dispose={null} /></group></group>;
 }
 function TransformEditor({ title, value, onChange }: { title: string; value: VisualTransform; onChange: (next: VisualTransform) => void }) {
   return <fieldset><legend>{title}</legend>
@@ -44,7 +46,6 @@ function PreviewCamera({ position }: { position: Triple }) {
 const positions: Triple[] = [[4, 2.8, 5], [5, 1.7, 0], [0, 1.7, 5], [0, 7, 0.01]];
 function Ready({ onStatus }: { onStatus: (status: AssetStatus) => void }) { useEffect(() => { onStatus('ready'); }, [onStatus]); return null; }
 function FittingSession({ kart, racer }: { kart: KartAssetDefinition; racer: DriverAssetDefinition }) {
-  const fit = useMemo(() => driverFitOptions(kart, racer), [kart, racer]);
   const [status, setStatus] = useState<AssetStatus>('loading');
   const [seat, setSeat] = useState<VisualTransform>(kart.seat);
   const [driver, setDriver] = useState<VisualTransform>(racer.transform);
@@ -52,6 +53,7 @@ function FittingSession({ kart, racer }: { kart: KartAssetDefinition; racer: Dri
   const [anchors, setAnchors] = useState(false);
   const [fitted, setFitted] = useState(true);
   const [view, setView] = useState(0);
+  const fit = useMemo(() => driverFitOptions({ ...kart, seat }, { ...racer, transform: driver }), [kart, racer, seat, driver]);
 
   return <main className="asset-preview"><aside>
     <a href="/">← Back to driving</a> · <a href="/?asset-inspect">Raw file inventory</a><p className="eyebrow">DEVELOPMENT • VISUAL FITTING</p><h1>Kart & driver workshop</h1>
@@ -63,7 +65,7 @@ function FittingSession({ kart, racer }: { kart: KartAssetDefinition; racer: Dri
     <TransformEditor title="Seat" value={seat} onChange={setSeat} /><TransformEditor title="Driver" value={driver} onChange={setDriver} />
     <button onClick={() => { setSeat(kart.seat); setDriver(racer.transform); }}>Restore defaults</button>
     <p role="status">{status === 'ready' ? 'Models ready' : status === 'error' ? 'Model failed to load' : 'Loading models…'}</p>
-    <p className="pose-note">Unrigged character • 0 animation clips. The assembly uses an approximate static mesh pose, not a seated driving animation.</p>
+    <p className="pose-note">{racer.rigSeat ? 'Rigged character • 0 animation clips. Existing joints use a fitted static seated pose.' : 'Unrigged character • 0 animation clips. The assembly uses an approximate static mesh pose, not a seated driving animation.'}</p>
     <details><summary>Copy fitting settings</summary><pre>{JSON.stringify({ kartId: kart.id, racerId: racer.id, seat, driver, steeringGrip: kart.steeringGrip }, null, 2)}</pre></details>
   </aside><section aria-label="3D asset fitting preview">
     <Canvas frameloop="demand" shadows={{ type: PCFShadowMap }} camera={{ position: positions[0], fov: 42, near: 0.05, far: 100 }} dpr={[1, 1.5]}>
@@ -71,7 +73,7 @@ function FittingSession({ kart, racer }: { kart: KartAssetDefinition; racer: Dri
       <directionalLight position={[-3, 7, 5]} intensity={2.6} castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.0003} />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow><planeGeometry args={[30, 30]} /><meshStandardMaterial color="#b2c7b4" roughness={0.9} /></mesh>
       <gridHelper args={[12, 24, '#7e9c91', '#a2b7a8']} />
-      <PreviewBoundary onStatus={setStatus}><Suspense fallback={null}>{raw ? <><RawModel url={kart.sourceUrl} scale={kart.transform.scale} position={[-1.8, 0.16, 0]} /><RawModel url={racer.sourceUrl} scale={0.3} position={[1.5, 0, 0]} /></> : <KartAssembly kart={{ ...kart, seat }} driver={{ ...racer, transform: driver, pose: fitted ? racer.pose : 'authored' }} fitting={fitted ? fit : {}} showAnchors={anchors} />}<Ready onStatus={setStatus} /></Suspense></PreviewBoundary>
+      <PreviewBoundary onStatus={setStatus}><Suspense fallback={null}>{raw ? <><RawModel url={kart.sourceUrl} scale={kart.transform.scale} position={[-1.8, 0.16, 0]} /><RawModel url={racer.sourceUrl} scale={1} position={[1.5, 0, 0]} portrait /></> : <KartAssembly kart={{ ...kart, seat }} driver={{ ...racer, transform: driver, pose: fitted ? racer.pose : 'authored' }} fitting={fitted ? fit : {}} showAnchors={anchors} />}<Ready onStatus={setStatus} /></Suspense></PreviewBoundary>
       <PreviewCamera position={positions[view]} /><OrbitControls makeDefault target={[0, 0.85, 0]} minDistance={1} maxDistance={15} />
     </Canvas>
   </section></main>;

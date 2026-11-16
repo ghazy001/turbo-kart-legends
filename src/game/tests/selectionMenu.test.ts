@@ -14,7 +14,7 @@ describe('two-step racer/kart draft', () => {
     const store = createSelectionStore(profile);
     expect(store.getSnapshot()).toEqual({ currentStep: 'racer', selectedRacer: 'crash', selectedKart: 'boat', racerIndex: 4, kartIndex: 3 });
     store.choose(1); expect(profile).toEqual({ racerId: 'crash', kartId: 'boat' });
-    expect(store.getSnapshot().selectedRacer).toBe('aang');
+    expect(store.getSnapshot().selectedRacer).toBe('sonic');
   });
   it('requires two confirmations, keeps both choices and indices on back, then returns the spawn schema', () => {
     const store = createSelectionStore(defaultSelection);

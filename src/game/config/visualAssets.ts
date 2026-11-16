@@ -14,6 +14,17 @@ export interface StaticPoseDefinition {
   /** Skip arm bending for complete mesh islands that extend above this height. */
   protectComponentsAbove?: number;
 }
+export interface RigSeatDefinition {
+  hip: number;
+  palmOffset: number;
+  elbow: { minWidth: number; widthRatio: number; height: number; reachRatio: number };
+  knee: Triple; ankle: Triple;
+  /** Inspected left/right upper arm, elbow and wrist names. */
+  arms: readonly [readonly [string, string, string], readonly [string, string, string]];
+  legs: readonly [readonly [string, string, string], readonly [string, string, string]];
+  fingers: readonly [string, string];
+  toes: readonly [string, string];
+}
 export interface AssetInfo {
   id: string; name: string; url: string; sourceUrl: string; color: string; description: string; sourceTitle: string;
   /** Live model portrait, rendered in the menu's shared canvas. */
@@ -30,10 +41,11 @@ export interface KartAssetDefinition extends AssetInfo {
 }
 export interface DriverAssetDefinition extends AssetInfo {
   transform: VisualTransform;
-  pose: 'supplied-static-seat' | 'static-fit' | 'authored';
+  pose: 'supplied-static-seat' | 'static-fit' | 'rig-seat' | 'authored';
   /** Non-driving props omitted from the seated assembly, retained in source portraits. */
   hideWhileDriving?: readonly string[];
   staticPose?: StaticPoseDefinition;
+  rigSeat?: RigSeatDefinition;
   /** Explicit clip names only; declare compatible seated clips after inspecting bindings. */
   clips?: Partial<Record<AnimationAction, string>>;
 }
@@ -83,11 +95,14 @@ export const driverAssets = {
     id: 'supplied', name: 'Mario', color: '#ea624c', description: 'The original supplied local driver.', sourceTitle: 'Mario obj',
     url: '/assets/optimized/characters/my-character.glb', sourceUrl: '/assets/characters/my-character.glb', transform: transform(seatedRacerScale('supplied')), pose: 'supplied-static-seat',
   },
-  aang: {
+  sonic: {
     thumbnail: { kind: 'model', yaw: -0.3 },
-    id: 'aang', name: 'Aang', color: '#eab451', description: 'A bright orange racing companion.', sourceTitle: 'Nickelodeon Kart Racers 3 Aang',
-    url: '/assets/optimized/characters/nickelodeon_kart_racers_3_aang.glb', sourceUrl: '/assets/characters/nickelodeon_kart_racers_3_aang.glb', transform: transform(seatedRacerScale('aang')), pose: 'static-fit',
-    staticPose: { hip: 1.03, knee: 0.48, bend: 1.4, shoulder: [0.27, 1.68, 0], elbow: [0.65, 1.68, 0], wrist: [0.97, 1.68, 0], fittedElbow: [0.41, 1.25, 0.3], fittedWrist: [0.35, 1.55, 0.59], armMinY: 1.5, armMaxY: 1.83 },
+    id: 'sonic', name: 'Sonic', color: '#388bd7', description: 'Blue skies. A little more attitude.', sourceTitle: 'Movie Sonic (Sonic Rumble)',
+    url: '/assets/optimized/characters/movie_sonic_sonic_rumble.glb', sourceUrl: '/assets/characters/movie_sonic_sonic_rumble.glb', transform: transform(seatedRacerScale('sonic')), pose: 'rig-seat',
+    rigSeat: { hip: 0.37572, palmOffset: 0.10, elbow: { minWidth: 0.12, widthRatio: 0.8, height: 0.43, reachRatio: 0.4 }, knee: [0.07, 0.36, 0.15], ankle: [0.09, 0.23, 0.18],
+      arms: [['L_Arm_A_011', 'L_Arm_B_012', 'L_Hand_013'], ['R_Arm_A_029', 'R_Arm_B_030', 'R_Hand_031']],
+      legs: [['L_Leg_A_047', 'L_Leg_B_048', 'L_Foot_A_049'], ['R_Leg_A_051', 'R_Leg_B_052', 'R_Foot_A_053']],
+      fingers: ['L_FingerMiddle_A_017', 'R_FingerMiddle_A_035'], toes: ['L_Foot_B_050', 'R_Foot_B_054'] },
   },
   arnold: {
     thumbnail: { kind: 'model', yaw: -0.3 },

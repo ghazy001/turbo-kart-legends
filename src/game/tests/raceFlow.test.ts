@@ -29,9 +29,9 @@ describe('Home and mode setup flow', () => {
   });
   it('commits a launch profile for subsequent mode setups and preserves draft selection under panels', () => {
     const flow = store(); flow.begin('quick-race'); flow.choose(1); flow.panel('controller'); flow.back();
-    expect(flow.getSnapshot()).toMatchObject({ currentStep: 'racer', selectedRacer: 'aang', panel: 'none' });
+    expect(flow.getSnapshot()).toMatchObject({ currentStep: 'racer', selectedRacer: 'sonic', panel: 'none' });
     flow.next(); flow.choose(3); flow.commit(); flow.home(); flow.begin('time-trial');
-    expect(flow.selection()).toEqual({ racerId: 'aang', kartId: 'boat' });
+    expect(flow.selection()).toEqual({ racerId: 'sonic', kartId: 'boat' });
   });
   it('pause cosmetic editing has only two steps and produces save instead of a race launch', () => {
     const flow = store(); flow.begin('grand-prix', 'cosmetic'); expect(flow.getSnapshot().currentStep).toBe('racer');

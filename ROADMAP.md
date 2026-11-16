@@ -42,7 +42,7 @@ Implementation status (2026-11-05): Quick Race with three AI rivals, Time Trial,
 
 ## Milestone 3.5 — Asset integration and cosmetic selection
 
-Five supplied racers and four karts share typed registry definitions, independent GLB instances, configurable seat anchors and a two-step fullscreen Racer Select → Kart Select flow with shared 3D previews, keyboard/gamepad navigation and local persistence (see docs/SELECTION_FLOW.md). AI uses distinct cosmetics. All racers are unrigged/static; no animation clips are invented. A duplicate, complex legacy-material kart and oversized high-detail kart are documented outside gameplay. All M1–M3 mechanics remain unchanged. See `docs/MILESTONE_3_5.md` for validation, credits, performance limits and asset authoring instructions.
+Five supplied racers and four karts share typed registry definitions, independent GLB instances, configurable seat anchors and a two-step fullscreen Racer Select → Kart Select flow with shared 3D previews, keyboard/gamepad navigation and local persistence (see docs/SELECTION_FLOW.md). AI uses distinct cosmetics. Sonic replaces Aang: four racers use static vertex fits, Sonic uses its real skeleton in a fitted static seated pose, and no animation clips are invented. See docs/SONIC_INTEGRATION.md. A duplicate, complex legacy-material kart and oversized high-detail kart are documented outside gameplay. All M1–M3 mechanics remain unchanged. See `docs/MILESTONE_3_5.md` for validation, credits, performance limits and asset authoring instructions.
 
 ## Milestone 3.6 — Wireless phone controller
 

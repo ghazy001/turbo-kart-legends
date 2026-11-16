@@ -106,5 +106,18 @@
     "afterTriangles": 23836,
     "simplifiedPrimitives": 2,
     "maxRelativeError": 0.0009294507326558232
+  },
+  {
+    "source": "characters/movie_sonic_sonic_rumble.glb",
+    "output": "optimized/characters/movie_sonic_sonic_rumble.glb",
+    "sourceSha256": "5abdaa76812df5cedadbce12af60c5fe03842d3ef67dbf6914c1750a7236d0c8",
+    "sourceBytes": 2750520,
+    "outputBytes": 2751600,
+    "ratio": 1,
+    "sceneScale": 100,
+    "beforeTriangles": 22149,
+    "afterTriangles": 22149,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
   }
 ]

@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { AnimationClip, Box3, Group, Mesh, NumberKeyframeTrack, SkinnedMesh, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { describe, expect, it } from 'vitest';
 import { driverAssets, karts, racers, unsupportedAssets } from '../config/visualAssets';
 import { isVisualSelection, loadSelection, opponentSelections, saveSelection, selectionStorageKey } from '../config/visualSelection';
@@ -40,10 +41,13 @@ describe('Milestone 3.5 registry and real assets', () => {
   for (const [index, racer] of racers.entries()) it(`${racer.id}: full-body portrait has the common height and a centered floor origin`, () => {
     const source = racerModels[index].scene, before = new Box3().setFromObject(source, true);
     const fit = racerPortraitFit(before), portrait = new Group();
-    portrait.scale.setScalar(fit.scale); portrait.position.set(...fit.position); portrait.add(source.clone(true));
+    portrait.scale.setScalar(fit.scale); portrait.position.set(...fit.position); portrait.add(clone(source));
+    // SkinnedMesh refreshes its attached bind inverse on updateMatrixWorld, as the renderer does.
+    portrait.updateMatrixWorld(true);
     const bounds = new Box3().setFromObject(portrait, true), size = bounds.getSize(new Vector3());
     expect(size.y).toBeCloseTo(racerStyle.portraitHeight, 5);
-    expect(size.x).toBeLessThan(3.5); expect(size.z).toBeLessThan(1.5);
+    // Sonic's rear quills occupy 1.502 m at the common 2.3 m portrait height.
+    expect(size.x).toBeLessThan(3.5); expect(size.z).toBeLessThan(1.6);
     expect(bounds.min.y).toBeCloseTo(0, 5); expect(bounds.getCenter(new Vector3()).x).toBeCloseTo(0, 5);
     expect(new Box3().setFromObject(source, true).equals(before)).toBe(true);
   });
@@ -136,14 +140,38 @@ describe('Milestone 3.5 registry and real assets', () => {
     expect((first.wheels[0].spin.children[0] as Mesh).geometry).toBe((second.wheels[0].spin.children[0] as Mesh).geometry);
     disposeModelCache();
   });
+  it('fits Sonic with actual independent joints and wheel-aligned palms in all four cockpits', () => {
+    const driver = driverAssets.sonic, source = racerModels[racers.findIndex(racer => racer.id === 'sonic')].scene;
+    const sourceHand = source.getObjectByName(driver.rigSeat.arms[0][2])!;
+    const before = sourceHand.quaternion.clone();
+    for (const kart of karts) {
+      const options = driverFitOptions(kart, driver);
+      const first = instantiateModel(source, 'sonic-rig-test', options), second = instantiateModel(source, 'sonic-rig-test', options);
+      const seat = mounted(mounted(first.root, driver.transform), kart.seat);
+      for (const [index, side] of [1, -1].entries()) {
+        const hand = first.root.getObjectByName(driver.rigSeat.arms[index][2])!;
+        const palm = hand.getWorldPosition(new Vector3()).add(new Vector3(0, 0, driver.rigSeat.palmOffset * kart.seat.scale * driver.transform.scale));
+        expect(palm.distanceTo(new Vector3(side * kart.steeringGrip[0], kart.steeringGrip[1], kart.steeringGrip[2]))).toBeLessThan(1e-5);
+        const otherHand = second.root.getObjectByName(hand.name)!;
+        expect(hand).not.toBe(otherHand);
+        const otherRotation = otherHand.quaternion.clone(); hand.rotation.x += 0.2;
+        expect(otherHand.quaternion.equals(otherRotation)).toBe(true);
+      }
+      expect(new Box3().setFromObject(seat, true).min.y).toBeGreaterThan(0);
+      first.dispose(); second.dispose();
+    }
+    expect(sourceHand.quaternion.equals(before)).toBe(true);
+    expect(driver.pose).toBe('rig-seat'); expect(driver).not.toHaveProperty('clips');
+    disposeModelCache();
+  });
 });
 
 describe('cosmetic selection and animation contracts', () => {
   it('rejects unknown/prototype IDs and corrupt or version-incompatible saved selection', () => {
     const port = { getItem: () => '{broken', setItem: () => undefined };
     expect(loadSelection(port)).toEqual({ kartId: 'practice', racerId: 'supplied' });
-    expect(isVisualSelection({ kartId: '__proto__', racerId: 'aang' })).toBe(false);
-    expect(loadSelection({ ...port, getItem: () => JSON.stringify({ version: 99, selection: { kartId: 'boat', racerId: 'aang' } }) })).toEqual(loadSelection(port));
+    expect(isVisualSelection({ kartId: '__proto__', racerId: 'sonic' })).toBe(false);
+    expect(loadSelection({ ...port, getItem: () => JSON.stringify({ version: 99, selection: { kartId: 'boat', racerId: 'sonic' } }) })).toEqual(loadSelection(port));
   });
   it('round-trips valid selection and survives browser storage denial', () => {
     const data = new Map<string, string>(), storage = { getItem: (key: string) => data.get(key) ?? null, setItem: (key: string, value: string) => { data.set(key, value); } };
@@ -151,6 +179,12 @@ describe('cosmetic selection and animation contracts', () => {
     expect(saveSelection(selection, storage)).toBe(true); expect(data.has(selectionStorageKey)).toBe(true); expect(loadSelection(storage)).toEqual(selection);
     const denied = { getItem: () => { throw new Error('denied'); }, setItem: () => { throw new Error('denied'); } };
     expect(saveSelection(selection, denied)).toBe(false); expect(loadSelection(denied).kartId).toBe('practice');
+  });
+  it('migrates retired Aang selections to Sonic while preserving the kart and validating it', () => {
+    const storage = (kartId: string) => ({ getItem: () => JSON.stringify({ version: 1, selection: { racerId: 'aang', kartId } }), setItem: () => undefined });
+    expect(loadSelection(storage('boat'))).toEqual({ racerId: 'sonic', kartId: 'boat' });
+    expect(loadSelection(storage('__proto__'))).toEqual({ racerId: 'supplied', kartId: 'practice' });
+    expect(isVisualSelection({ racerId: 'aang', kartId: 'boat' })).toBe(false);
   });
   it('assigns three distinct AI appearances for every player combo without changing a running race', () => {
     const race = new RaceSession(sunshineCircuit); race.start('quick-race'); const revision = race.revision, simulations = race.racers.map(racer => racer.simulation);

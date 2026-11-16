@@ -4,6 +4,15 @@ The user confirmed permission for local use on 2026-11-05. The following are emb
 
 Runtime modifications: visual scale/orientation/seat fitting; approximate static racer vertex poses; independent skeleton clones; centered/split wheel pivots; static mesh merging; textures capped to 1024 px on the GPU. Crash’s zero-specular diffuse legacy material is mapped to its modern PBR equivalent. No animation clips were added.
 
+## Movie Sonic (Sonic Rumble)
+
+- File: `assets/characters/movie_sonic_sonic_rumble.glb`
+- Author/uploader: Guilherme Navarro (https://sketchfab.com/guinavarro.al)
+- Embedded source: https://sketchfab.com/3d-models/movie-sonic-sonic-rumble-8c9e03bf96e24a0a84378d7b9a8a4716
+- Declared license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+- Geometry: 22,149 triangles; 6 skinned meshes; 1 skin / 56 joints; 0 clips.
+- Supplied by the user on 2026-11-16 to replace Aang locally. The original source is preserved byte-for-byte. Runtime derivative adds only a 100× scene-unit wrapper; joint/skin bindings, textures, materials and metadata remain intact. Runtime clones receive a static seated joint fit and the shared matte profile. No authored animation is added. Embedded uploader metadata has not been independently verified as franchise/public-release rights.
+
 ## CRASH BANDICOOT CARTOON
 
 - File: `assets/characters/crash_bandicoot_cartoon.glb`
@@ -21,6 +30,8 @@ Runtime modifications: visual scale/orientation/seat fitting; approximate static
 - Geometry: 36,482 triangles; 0 skins; 0 clips.
 
 ## Nickelodeon Kart Racers 3 Aang
+
+Retired from the selectable roster on 2026-11-16; preserved source and derivative for provenance. Sonic takes this slot.
 
 - File: `assets/characters/nickelodeon_kart_racers_3_aang.glb`
 - Author/uploader: SMF Friends Fan 2024 YouTube Live (https://sketchfab.com/cherylhill28)

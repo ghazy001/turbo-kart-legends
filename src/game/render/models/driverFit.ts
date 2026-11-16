@@ -11,6 +11,12 @@ export function driverFitOptions(kart: KartAssetDefinition, driver: DriverAssetD
   if (driver.pose === 'authored') return options;
   const inverse = matrix(kart.seat).multiply(matrix(driver.transform)).invert();
   const wrist = new Vector3(...kart.steeringGrip).applyMatrix4(inverse);
+  if (driver.rigSeat) {
+    wrist.y += driver.rigSeat.hip;
+    // Place the glove palm at the wheel, rather than its wrist joint.
+    wrist.z -= driver.rigSeat.palmOffset;
+    return { ...options, rigSeat: driver.rigSeat, handTarget: wrist.toArray() as Triple };
+  }
   if (driver.pose === 'supplied-static-seat') {
     wrist.y += 3;
     // The supplied glove extends beyond its wrist along the forearm.

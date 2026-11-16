@@ -7,10 +7,10 @@ export const racerStyle = {
   normalStrength: 0.35,
 } as const;
 
-/** Inspected Y-up crown and pelvis heights in each preserved source scene's units. */
+/** Inspected Y-up crown/pelvis heights in runtime scene units (Sonic has an offline unit wrapper). */
 const sourceHeights = {
   supplied: { crown: 7.133939, pelvis: 3 },
-  aang: { crown: 2.305219, pelvis: 1.03 },
+  sonic: { crown: 1.007082, pelvis: 0.37572 },
   arnold: { crown: 2.226009, pelvis: 0.61 },
   spongebob: { crown: 1.445064, pelvis: 0.32 },
   crash: { crown: 1.39055, pelvis: 0.42 },

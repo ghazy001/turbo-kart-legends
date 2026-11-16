@@ -21,9 +21,14 @@ export function readAccessor(document, binary, index) {
   for (let i = 0; i < accessor.count; i++) binary.copy(data, i * width, offset + i * stride, offset + i * stride + width);
   return new ArrayType(data.buffer.slice(data.byteOffset, data.byteOffset + data.length));
 }
-export async function optimizeGLB(bytes, ratio = 0.55, error = 0.0015) {
+export async function optimizeGLB(bytes, ratio = 0.55, error = 0.0015, sceneScale = 1) {
   await MeshoptSimplifier.ready;
   const { document: doc, binary } = unpackGLB(bytes), output = structuredClone(doc);
+  if (sceneScale !== 1) for (const scene of output.scenes ?? []) {
+    const wrapper = output.nodes.length;
+    output.nodes.push({ name: 'Runtime unit normalization', scale: [sceneScale, sceneScale, sceneScale], children: scene.nodes });
+    scene.nodes = [wrapper];
+  }
   const chunks = [], views = [], accessors = [], cached = new Map(); let offset = 0;
   const addView = (data, target) => {
     const padded = Buffer.alloc(Math.ceil(data.byteLength / 4) * 4); Buffer.from(data.buffer, data.byteOffset, data.byteLength).copy(padded);
@@ -103,13 +108,14 @@ const sources = [
   ['characters/nickelodeon_kart_racers_3_spongebob_boat_kart.glb', 0.6],
   ['characters/my-character.glb', 0.65], ['characters/nickelodeon_kart_racers_3_aang.glb', 0.65],
   ['characters/nickelodeon_kart_racers_3_arnold.glb', 0.65], ['characters/nickelodeon_kart_racers_3_spongebob.glb', 0.65], ['characters/crash_bandicoot_cartoon.glb', 0.65],
+  ['characters/movie_sonic_sonic_rumble.glb', 1, 100],
 ];
 export async function generateAssets() {
   const root = new URL('../public/assets/', import.meta.url), reports = [];
-  for (const [source, ratio] of sources) {
-    const original = await readFile(new URL(source, root)), { bytes, report } = await optimizeGLB(original, ratio);
+  for (const [source, ratio, sceneScale = 1] of sources) {
+    const original = await readFile(new URL(source, root)), { bytes, report } = await optimizeGLB(original, ratio, 0.0015, sceneScale);
     const target = new URL(`optimized/${source}`, root); await mkdir(new URL('.', target), { recursive: true }); await writeFile(target, bytes);
-    const result = { source, output: `optimized/${source}`, sourceSha256: createHash('sha256').update(original).digest('hex'), sourceBytes: original.length, outputBytes: bytes.length, ratio, ...report };
+    const result = { source, output: `optimized/${source}`, sourceSha256: createHash('sha256').update(original).digest('hex'), sourceBytes: original.length, outputBytes: bytes.length, ratio, ...(sceneScale === 1 ? {} : { sceneScale }), ...report };
     reports.push(result); console.log(`${source}: ${report.beforeTriangles} → ${report.afterTriangles} triangles; ${original.length} → ${bytes.length} bytes`);
   }
   await writeFile(new URL('../docs/assets/optimization-report.json', import.meta.url), JSON.stringify(reports, null, 2) + '\n');

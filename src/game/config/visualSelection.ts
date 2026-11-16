@@ -10,7 +10,11 @@ export function loadSelection(storage?: StoragePort): VisualSelection {
   try {
     const port = storage ?? window.localStorage;
     const saved: unknown = JSON.parse(port.getItem(selectionStorageKey) ?? 'null');
-    if (saved && typeof saved === 'object' && 'version' in saved && saved.version === 1 && 'selection' in saved && isVisualSelection(saved.selection)) return { ...saved.selection };
+    if (saved && typeof saved === 'object' && 'version' in saved && saved.version === 1 && 'selection' in saved) {
+      const selection = saved.selection;
+      const migrated = selection && typeof selection === 'object' && 'racerId' in selection && selection.racerId === 'aang' ? { ...selection, racerId: 'sonic' } : selection;
+      if (isVisualSelection(migrated)) return { ...migrated };
+    }
   } catch { /* Private browsing, corrupt data or storage denial: retain playable defaults. */ }
   return { ...defaultSelection };
 }
