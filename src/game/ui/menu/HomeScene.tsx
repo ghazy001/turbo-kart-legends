@@ -1,21 +1,20 @@
 import { Suspense, useCallback, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { PerspectiveCamera, View, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { Box3, type Group, type PerspectiveCamera as ThreeCamera } from 'three';
+import { type Group, type PerspectiveCamera as ThreeCamera } from 'three';
 import type { DriverAssetDefinition, KartAssetDefinition } from '../../config/visualAssets';
 import { KartAssembly } from '../../render/KartAssembly';
 import type { AssetStatus } from '../../render/KartVisual';
 import { PreviewBoundary } from '../GaragePreview';
 import { HomeScenery } from './HomeScenery';
 import { RacerModel } from '../selection/SelectionModel';
+import { placePreviewOnFloor } from '../../render/models/racerPresentation';
 
 function ParkedSubject({ driver, kart, kind, terrace, onReady }: { driver: DriverAssetDefinition; kart: KartAssetDefinition; kind: 'racer' | 'kart'; terrace: boolean; onReady: () => void }) {
   const root = useRef<Group>(null);
   useLayoutEffect(() => {
     if (!root.current) return;
-    root.current.updateWorldMatrix(true, true);
-    const bounds = new Box3().setFromObject(root.current, true);
-    if (!bounds.isEmpty()) root.current.position.y += (terrace ? 0.20 : 0.035) - bounds.min.y;
+    placePreviewOnFloor(root.current, terrace ? 0.20 : 0.035);
     onReady();
   }, [driver, kart, kind, terrace, onReady]);
   return <group ref={root} scale={kind === 'kart' ? 1.12 : terrace ? 1.3 : 1.05} rotation={[0, -0.18, 0]}>

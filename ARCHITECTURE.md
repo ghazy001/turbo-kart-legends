@@ -304,7 +304,10 @@ The latest SpongeBob retains the `spongebob` ID and uses 25 unrigged meshes. Its
 
 Racer Select additionally reads optional `DriverAssetDefinition.portrait` artwork/crop settings. `SelectionCard` renders the supplied JPEG as decorative DOM artwork inside the existing radio button, falling back to its model thumbnail on image failure. Normal racer cards add no Drei Views; the selected live GLB still uses the shared renderer. `RaceFlowShell.data-flow-step` scopes `racerCards.css` to the racer step. `CoastalSelectionPreview` chooses `HomeScene.scenery='terrace'` only for racers: the same coast/lights surround a raised display plinth with a separate menu camera framing. Default road scenery and gameplay camera/physics remain unchanged. Race-flow state, indices, input and final profile commit are unchanged. See docs/RACER_FACE_CARDS.md.
 
+Menu subject placement uses `placePreviewOnFloor` after skin-aware matrix synchronization. `updateWorldMatrix` alone leaves attached-skin inverse bind matrices stale, so it must not be used to measure a skinned portrait before its first render. Portrait normalization likewise refreshes the cloned hierarchy with `updateMatrixWorld(true)`. This prevents Sonic's feet from being grounded using pre-render bounds, without changing source geometry, rig poses, or gameplay transforms. The real-asset floor/idempotence regression and fresh-load browser capture are recorded in docs/RACER_FACE_CARDS.md.
+
 ## Shared action buttons
+
 
 
 `ui/GameButton.tsx` wraps a native button, forwarding existing handlers/ARIA/navigation attributes and defaulting to `type="button"`. `styles/buttons.css` owns accent/quiet/surface variants and tactile interaction states. Home mode choices keep their existing roving-navigation component with matching faces in home.css. Selection cards and touch-driving pads retain their own layouts. This presentation layer has no store, simulation, input or asset-loading ownership. See docs/DESIGN_ROLLOUT.md.

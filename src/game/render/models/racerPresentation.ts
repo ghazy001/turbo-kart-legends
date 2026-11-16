@@ -1,4 +1,4 @@
-import { Box3, MeshStandardMaterial, Vector3, type Material } from 'three';
+import { Box3, MeshStandardMaterial, Vector3, type Material, type Object3D } from 'three';
 import { racerStyle } from '../../config/racerStyle';
 
 /** Uniform height fitting: an extended hand or accessory must not shrink the body. */
@@ -6,6 +6,16 @@ export function racerPortraitFit(bounds: Box3) {
   const size = bounds.getSize(new Vector3()), center = bounds.getCenter(new Vector3());
   const scale = racerStyle.portraitHeight / Math.max(size.y, 0.01);
   return { scale, position: [-center.x * scale, -bounds.min.y * scale, -center.z * scale] as [number, number, number] };
+}
+
+/** Place an independent subject on the menu's untransformed floor. */
+export function placePreviewOnFloor(root: Object3D, floorY: number): void {
+  root.parent?.updateWorldMatrix(true, false);
+  // Attached skins refresh bindMatrixInverse here, not in updateWorldMatrix.
+  root.updateMatrixWorld(true);
+  const bounds = new Box3().setFromObject(root, true);
+  if (!bounds.isEmpty()) root.position.y += floorY - bounds.min.y;
+  root.updateMatrixWorld(true);
 }
 
 /** Apply only to a cached runtime clone. Keep the original albedo, alpha and texture UVs. */

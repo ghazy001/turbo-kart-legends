@@ -13,7 +13,7 @@ import { createDriverAnimator } from '../render/models/driverAnimation';
 import { driverFitOptions } from '../render/models/driverFit';
 import { kartConfig } from '../config/kartConfig';
 import { racerStyle } from '../config/racerStyle';
-import { racerPortraitFit } from '../render/models/racerPresentation';
+import { placePreviewOnFloor, racerPortraitFit } from '../render/models/racerPresentation';
 import { RaceSession } from '../race/RaceSession';
 import { sunshineCircuit } from '../tracks/sunshineCircuit';
 
@@ -38,6 +38,20 @@ function mounted(root: Group, transform: { position: [number, number, number]; r
 }
 
 describe('Milestone 3.5 registry and real assets', () => {
+  it('keeps Sonic’s complete shoes above the terrace after the first rendered skeleton update', () => {
+    const source = racerModels[racers.findIndex(racer => racer.id === 'sonic')].scene;
+    const instance = instantiateModel(source, 'sonic:portrait-floor-regression', { surface: 'racer-matte' });
+    const fit = racerPortraitFit(new Box3().setFromObject(instance.root, true));
+    const portrait = new Group(); portrait.scale.setScalar(fit.scale); portrait.position.set(...fit.position); portrait.add(instance.root);
+    const subject = new Group(); subject.scale.setScalar(1.3); subject.rotation.y = -0.18; subject.add(portrait);
+    placePreviewOnFloor(subject, 0.20);
+    subject.updateMatrixWorld(true); // Same attached-skin matrix update as the renderer.
+    const bounds = new Box3().setFromObject(subject, true);
+    expect(bounds.min.y).toBeCloseTo(0.20, 5);
+    expect(bounds.getSize(new Vector3()).y).toBeCloseTo(racerStyle.portraitHeight * 1.3, 4);
+    placePreviewOnFloor(subject, 0.20); subject.updateMatrixWorld(true);
+    expect(new Box3().setFromObject(subject, true).min.y).toBeCloseTo(0.20, 5);
+  });
   for (const [index, racer] of racers.entries()) it(`${racer.id}: full-body portrait has the common height and a centered floor origin`, () => {
     const source = racerModels[index].scene, before = new Box3().setFromObject(source, true);
     const fit = racerPortraitFit(before), portrait = new Group();

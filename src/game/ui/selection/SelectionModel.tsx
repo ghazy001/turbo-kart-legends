@@ -13,6 +13,7 @@ export function RacerModel({ driver }: { driver: DriverAssetDefinition }) {
   const gltf = useGLTF(driver.url, false, false, configureAssetLoader);
   const model = useMemo(() => {
     const instance = instantiateModel(gltf.scene, `${driver.id}:portrait`, { surface: 'racer-matte', hiddenNodes: driver.hideWhileDriving });
+    instance.root.updateMatrixWorld(true);
     return { root: instance.root, ...racerPortraitFit(new Box3().setFromObject(instance.root, true)) };
   }, [gltf.scene, driver.id, driver.hideWhileDriving]);
   return <group rotation={driver.transform.rotation}><group scale={model.scale} position={model.position}><primitive object={model.root} dispose={null} /></group></group>;

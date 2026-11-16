@@ -38,3 +38,13 @@ Arrows/WASD navigate the same three-column grid. Enter/Space confirms, Escape/Ba
 ## Next improvements
 
 If desired, create optimized WebP/AVIF portrait derivatives with matching art-direction crops. Authored idle/selection poses would improve the GLB presentation; current models still have no supplied animation clips. Preserve the simple face-card layout and cosmetic-only selection behavior.
+
+## Sonic floor-placement correction — 2026-11-16
+
+On a fresh page load, Sonic's shoes could be buried in the presentation plinth. The preview measured its bounds with `updateWorldMatrix`, which does not refresh an attached `SkinnedMesh`'s inverse bind matrix. The subsequent renderer update changed those bounds after the floor offset had already been applied.
+
+`placePreviewOnFloor` now refreshes parents, calls the skin-aware `updateMatrixWorld(true)` before measuring precise bounds, moves the independent preview to the existing floor height, then refreshes matrices again. `RacerModel` also refreshes its cloned hierarchy before calculating portrait normalization. This changes menu placement only; no source GLB, skeleton pose, camera framing, racer sizing, gameplay or collider was edited.
+
+The real-model regression failed with the old update path, then passed with the fix. It verifies the lowest rendered point stays at the terrace floor, full portrait height is retained, and repeated placement does not move the feet. Browser verification from a fresh reload showed complete legs and red shoes; switching Mario → Sonic retained the correction, with no console errors. [Corrected preview](design-qa/sonic-floor-fix/preview.png).
+
+`npm run typecheck`, `npm run lint` (zero warnings), `npm run build` and `git diff --check` passed. The final full suite passed **397 tests / 33 files in 263.35 seconds**, including the new real-Sonic grounding regression and existing gameplay/model/menu/phone checks. Local relay tests ran with loopback permission. Build: 3.99 seconds; app JS 237.50 kB / 76.41 kB gzip. Existing device/hardware/manual race limitations above remain unchanged.
