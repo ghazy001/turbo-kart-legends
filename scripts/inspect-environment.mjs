@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { unpackGLB } from './optimize-assets.mjs';
 import { imageDimensions } from './glb-textures.mjs';
 import { createHash } from 'node:crypto';
-const names = ['gas-station', 'tire-wall', 'spectators', 'stylized-tree', 'viking-house', 'cactus', 'stylized-house', 'lowpoly-gas-station', 'cotton-candy-stall', 'ice-cream-truck', 'lollipops-pack', 'sugar-mascot', 'sugarcube-corner'];
+const names = ['gas-station', 'tire-wall', 'spectators', 'stylized-tree', 'viking-house', 'cactus', 'stylized-house', 'lowpoly-gas-station', 'cotton-candy-stall', 'ice-cream-truck', 'lollipops-pack', 'sugar-mascot', 'sugarcube-corner', 'cartoon-volcano', 'charizard', 'desert-rocks', 'dinosaur', 'deadly-nadder', 'momma-dino'];
 export async function environmentGeometry(bytes) {
   const length = bytes.readUInt32LE(12), document = JSON.parse(bytes.toString('utf8', 20, 20 + length));
   const strip = value => {
@@ -22,10 +22,10 @@ export async function inspectEnvironment() {
   for (const name of names) {
     const bytes = await readFile(new URL(`../public/assets/environment/${name}.glb`, import.meta.url)), { document, binary } = unpackGLB(bytes);
     const gltf = await environmentGeometry(bytes); gltf.scene.updateMatrixWorld(true);
-    const box = new Box3().setFromObject(gltf.scene), meshes = [];
+    const box = new Box3().setFromObject(gltf.scene), precise = new Box3().setFromObject(gltf.scene, true), meshes = [];
     gltf.scene.traverse(node => { if (node instanceof Mesh) meshes.push({ name: node.name, triangles: (node.geometry.index?.count ?? node.geometry.attributes.position.count) / 3 }); });
     const images = (document.images ?? []).map(image => { const view = document.bufferViews[image.bufferView]; return imageDimensions(binary.subarray(view.byteOffset ?? 0, (view.byteOffset ?? 0) + view.byteLength), image.mimeType); });
-    report.push({ id: name, metadata: document.asset, sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length, min: box.min.toArray(), max: box.max.toArray(), size: box.getSize(new Vector3()).toArray(), skins: gltf.scene.getObjectsByProperty('isSkinnedMesh', true).length, declaredSkins: document.skins?.length ?? 0, bones: gltf.scene.getObjectsByProperty('isBone', true).length, extensions: document.extensionsUsed ?? [], clips: gltf.animations.map(a => a.name), images, meshes });
+    report.push({ id: name, metadata: document.asset, sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length, min: box.min.toArray(), max: box.max.toArray(), size: box.getSize(new Vector3()).toArray(), preciseMin: precise.min.toArray(), preciseSize: precise.getSize(new Vector3()).toArray(), skins: gltf.scene.getObjectsByProperty('isSkinnedMesh', true).length, declaredSkins: document.skins?.length ?? 0, bones: gltf.scene.getObjectsByProperty('isBone', true).length, extensions: document.extensionsUsed ?? [], clips: gltf.animations.map(a => a.name), images, meshes });
   }
   await writeFile(new URL('../docs/assets/environment-audit.json', import.meta.url), JSON.stringify(report, null, 2) + '\n');
   for (const r of report) console.log(r.id, 'size:', r.size, 'images:', r.images, 'triangles:', r.meshes.reduce((sum, m) => sum + m.triangles, 0));

@@ -17,8 +17,8 @@ export const trackCatalog = [
     theme: { candy: false, winter: true, volcanic: false, sky: '#b8d9ef', ground: '#e5f0f6', road: '#3d607b', rail: '#3772a5', rock: '#a4bbce',
       leaves: ['#397c81', '#316977', '#478a8c', '#2d6270'], hills: ['#8aa9c1', '#b2cadb'], map: '#a7c6da', sign: 'FROSTBITE', subtitle: 'P E A K' } },
   { id: 'volcano-sprint', name: 'Volcano Sprint', track: volcanoSprint, region: 'THE EMBER CALDERA',
-    description: 'Glowing lava, basalt spires and linked caldera bends. Keep your cool and chase the perfect exit.', difficulty: 'Linked caldera bends', laps: 3,
-    theme: { candy: false, winter: false, volcanic: true, sky: '#704b56', ground: '#4d4656', road: '#85909c', rail: '#e7a353', rock: '#514858',
+    description: 'A glowing caldera, rugged rock gardens and prehistoric creatures around linked bends.', difficulty: 'Linked caldera bends', laps: 3,
+    theme: { candy: false, winter: false, volcanic: true, sky: '#b98f89', ground: '#655964', road: '#6d727c', rail: '#97674b', rock: '#514858',
       leaves: ['#775563', '#916476', '#ad7d87', '#735067'], hills: ['#554451', '#684954'], map: '#594451', sign: 'VOLCANO', subtitle: 'S P R I N T' } },
 ] as const;
 export type TrackId = typeof trackCatalog[number]['id'];

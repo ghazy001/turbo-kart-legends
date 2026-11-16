@@ -3,6 +3,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { optimizeGLB } from './optimize-assets.mjs';
 import { capGLBTextures } from './glb-textures.mjs';
+import { modernizeEnvironment } from './modernize-environment.mjs';
 const definitions = [
   ['gas-station', 'gas-station', 0.7, 0.002, 1024],
   ['tire-wall', 'tire-wall', 0.65, 0.002, 512],
@@ -18,11 +19,17 @@ const definitions = [
   ['lollipops-pack', 'lollipops-pack', 1, 0.001, 512],
   ['sugar-mascot', 'sugar-mascot', 1, 0.001, 512],
   ['sugarcube-corner', 'sugarcube-corner', 0.8, 0.001, 1024],
+  ['cartoon-volcano', 'cartoon-volcano', 0.8, 0.002, 1024],
+  ['charizard', 'charizard', 0.4, 0.003, 512],
+  ['desert-rocks', 'desert-rocks', 1, 0.001, 512],
+  ['dinosaur', 'dinosaur', 1, 0.001, 512],
+  ['deadly-nadder', 'deadly-nadder', 0.16, 0.006, 1024],
+  ['momma-dino', 'momma-dino', 0.45, 0.003, 512],
 ];
 const report = [];
 for (const [source, output, ratio, error, textureCap] of definitions) {
   const original = await readFile(new URL(`../public/assets/environment/${source}.glb`, import.meta.url));
-  const capped = await capGLBTextures(original, textureCap);
+  const capped = await capGLBTextures(modernizeEnvironment(original, source), textureCap);
   const tree = source === 'stylized-tree';
   const result = await optimizeGLB(tree ? thinTreeLeaves(capped.bytes, output.endsWith('-far') ? 0.15 : 0.45, output.endsWith('-far') ? 2.1 : 1.4) : capped.bytes, ratio, error, 1, tree ? { flags: ['Permissive'], spatial: true, preserveLeaves: true, compact: true } : {});
   await writeFile(new URL(`../public/assets/optimized/environment/${output}.glb`, import.meta.url), result.bytes);

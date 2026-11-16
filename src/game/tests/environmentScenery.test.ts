@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { Box3, Mesh, Vector3 } from 'three';
+import { Box3, Mesh, MeshPhysicalMaterial, SkinnedMesh, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { describe, expect, it } from 'vitest';
 import { environmentAssets, environmentSize, sunshineEnvironmentIds, type EnvironmentAssetId } from '../config/environmentAssets';
@@ -101,8 +101,8 @@ describe('supplied Sunshine environment composition', () => {
     }
   });
   it('records real static capabilities, preserves credits, and budgets mesh/texture derivatives', async () => {
-    expect(audit).toHaveLength(13);
-    for (const source of audit) { expect(source.skins).toBe(0); expect(source.clips).toEqual([]); expect(source.metadata.extras.author).toBeTruthy(); }
+    expect(audit).toHaveLength(19);
+    for (const source of audit) { expect(source.skins).toBe(source.id === 'dinosaur' ? 21 : 0); expect(source.clips).toEqual([]); expect(source.metadata.extras.author).toBeTruthy(); }
     for (const asset of report) {
       const bytes = readFileSync(new URL(`../../../public/assets/optimized/environment/${asset.output}.glb`, import.meta.url));
       const doc = JSON.parse(bytes.subarray(20, 20 + bytes.readUInt32LE(12)).toString()) as { asset: unknown };
@@ -126,6 +126,28 @@ describe('supplied Sunshine environment composition', () => {
     }
     disposeEnvironmentModels();
   });
+  it('freezes the dinosaur pose into independent static buffers while retaining every source triangle and rig', async () => {
+    const loaded = await loadGeometry(environmentAssets.dinosaur.url), skins: SkinnedMesh[] = [];
+    loaded.scene.traverse(node => { if (node instanceof SkinnedMesh) skins.push(node); });
+    const rotations = skins[0].skeleton.bones.map(bone => bone.quaternion.toArray());
+    const model = prepareEnvironmentModel(loaded.scene, 'dinosaur');
+    expect(skins).toHaveLength(21);
+    expect(skins[0].skeleton.bones.map(bone => bone.quaternion.toArray())).toEqual(rotations);
+    expect(skins.every(mesh => mesh.geometry.hasAttribute('skinWeight'))).toBe(true);
+    expect(model.parts.every(part => !part.geometry.hasAttribute('skinWeight') && !part.geometry.hasAttribute('skinIndex'))).toBe(true);
+    expect(model.parts.reduce((sum, part) => sum + part.geometry.index!.count / 3, 0)).toBe(37768);
+    const frozen = Array.from(model.parts[0].geometry.attributes.position.array);
+    skins[0].skeleton.bones[0].rotation.x += 0.4; loaded.scene.updateMatrixWorld(true);
+    expect(Array.from(model.parts[0].geometry.attributes.position.array)).toEqual(frozen);
+    disposeEnvironmentModels();
+  });
+  it('preserves Momma Dino’s colored body and complete mesh layouts without a scene-transmission pass', async () => {
+    const loaded = await loadGeometry(environmentAssets['momma-dino'].url), model = prepareEnvironmentModel(loaded.scene, 'momma-dino');
+    expect(model.parts.some(part => part.geometry.hasAttribute('color'))).toBe(true);
+    expect(model.parts.reduce((sum, part) => sum + part.geometry.index!.count / 3, 0)).toBe(report.find(asset => asset.source === 'momma-dino')!.afterTriangles);
+    expect(model.parts.every(part => !(part.material instanceof MeshPhysicalMaterial) || part.material.transmission === 0)).toBe(true);
+    disposeEnvironmentModels();
+  });
   it.each(Object.keys(environmentAssets) as EnvironmentAssetId[])('%s: ground-aligns, centers and batches the real source without mutating cached geometry', async id => {
     const asset = environmentAssets[id], loaded = await loadGeometry(asset.url);
     loaded.scene.updateMatrixWorld(true); const before = new Box3().setFromObject(loaded.scene);
@@ -137,7 +159,7 @@ describe('supplied Sunshine environment composition', () => {
     const expected = environmentSize(id), size = box.getSize(new Vector3());
     expect(size.x).toBeLessThanOrEqual(expected[0] + 0.001); expect(size.x).toBeGreaterThan(expected[0] * 0.93);
     expect(size.z).toBeLessThanOrEqual(expected[2] + 0.001); expect(size.z).toBeGreaterThan(expected[2] * 0.93);
-    expect(model.parts.length).toBeLessThanOrEqual(id === 'cotton-candy-stall' ? 12 : id === 'lowpoly-gas-station' ? 5 : id === 'stylized-tree' || id === 'viking-house' || id === 'lollipops-pack' ? 2 : 1);
+    expect(model.parts.length).toBeLessThanOrEqual(id === 'momma-dino' ? 7 : id === 'charizard' ? 5 : id === 'cotton-candy-stall' ? 12 : id === 'lowpoly-gas-station' ? 5 : id === 'stylized-tree' || id === 'viking-house' || id === 'lollipops-pack' ? 2 : 1);
     expect(prepareEnvironmentModel(loaded.scene, id)).toBe(model);
     expect(new Box3().setFromObject(loaded.scene).equals(before)).toBe(true);
     for (const part of model.parts) expect(sourceMeshes.some(mesh => mesh.geometry === part.geometry || mesh.material === part.material)).toBe(false);

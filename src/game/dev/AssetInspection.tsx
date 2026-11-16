@@ -27,17 +27,20 @@ function Model({ url, onReady }: { url: string; onReady: () => void }) {
 }
 export function AssetInspection() {
   const ready = useCallback(() => setError('Model ready'), []);
-  const files = [...audit.filter(asset => asset.category !== 'ignored' && !asset.path.startsWith('assets/environment/')), ...environmentAudit.map(asset => ({ path: `assets/environment/${asset.id}.glb`, category: 'environment', triangles: asset.meshes.reduce((sum, mesh) => sum + mesh.triangles, 0), skins: Array.from({ length: asset.skins }), clips: asset.clips, requiredExtensions: asset.extensions, min: asset.min, max: asset.max }))];
+  const files = [...audit.filter(asset => asset.category !== 'ignored' && !asset.path.startsWith('assets/environment/')), ...environmentAudit.map(asset => ({ path: `assets/environment/${asset.id}.glb`, category: 'environment', triangles: asset.meshes.reduce((sum, mesh) => sum + mesh.triangles, 0), skins: Array.from({ length: asset.declaredSkins }, (_, i) => i), skinnedMeshes: asset.skins, bones: asset.bones, clips: asset.clips, requiredExtensions: asset.extensions, min: asset.min, max: asset.max }))];
+  const [runtime, setRuntime] = useState(false);
   const [error, setError] = useState('');
   const [index, setIndex] = useState(0); const asset = files[index];
   return <main className="asset-preview"><aside><a href="/">← Game</a><h1>Source model inspection</h1>
     <label>Source file<select aria-label="Source asset" value={index} onChange={event => { setError(''); setIndex(Number(event.currentTarget.value)); }}>{files.map((file, i) => <option key={file.path} value={i}>{file.path.split('/').pop()}</option>)}</select></label>
-    <p>{asset.category} • {asset.triangles?.toLocaleString()} triangles • {asset.skins?.length} skins • {asset.clips?.length} clips</p>
+    <label><input type="checkbox" checked={runtime} onChange={event => { setError(''); setRuntime(event.currentTarget.checked); }} />Inspect optimized runtime derivative (environment only)</label>
+    <p>Source audit: {asset.category} • {asset.triangles?.toLocaleString()} triangles • {asset.skins?.length} skins • {asset.clips?.length} clips</p>
+    {'skinnedMeshes' in asset && <p>{asset.skinnedMeshes} bound meshes • {asset.bones} bones. {runtime ? 'Rendering runtime derivative.' : 'Rendering preserved source.'}</p>}
     <p>{asset.requiredExtensions?.join(', ') || 'Standard metallic/roughness materials'}</p>
     <p role="status">{error || 'Read-only source inspection'}</p><p>Drag to orbit; scroll to zoom. Normalized for inspection only.</p><pre>{JSON.stringify({ bounds: [asset.min, asset.max], skins: asset.skins, clips: asset.clips }, null, 2)}</pre>
   </aside><section><Canvas frameloop="demand" shadows={{ type: PCFShadowMap }} camera={{ position: [4, 3, 5], fov: 42 }} dpr={[1, 1.25]}>
     <color attach="background" args={['#d7e8e5']} /><hemisphereLight args={['#fff9e8', '#6c897d', 2.1]} /><directionalLight position={[-3, 7, 5]} intensity={2.6} castShadow />
     <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow><planeGeometry args={[30, 30]} /><meshStandardMaterial color="#b2c7b4" /></mesh>
-    <InspectionBoundary key={asset.path} onError={setError}><Suspense fallback={null}><Model url={`/${asset.path}`} onReady={ready} /></Suspense></InspectionBoundary><OrbitControls target={[0, 1, 0]} />
+    <InspectionBoundary key={`${asset.path}-${runtime}`} onError={setError}><Suspense fallback={null}><Model url={`/${runtime && asset.category === 'environment' ? asset.path.replace('assets/environment/', 'assets/optimized/environment/') : asset.path}`} onReady={ready} /></Suspense></InspectionBoundary><OrbitControls target={[0, 1, 0]} />
   </Canvas></section></main>;
 }

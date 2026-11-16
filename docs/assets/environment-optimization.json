@@ -574,5 +574,249 @@
     "afterTriangles": 10457,
     "simplifiedPrimitives": 2,
     "maxRelativeError": 0.000997654628008604
+  },
+  {
+    "source": "cartoon-volcano",
+    "output": "cartoon-volcano",
+    "sourceSha256": "fcc90ab12d5cf840bc3b7b411ed75367bd574d836bcf0045a9c584dcfd3e838f",
+    "sourceBytes": 972588,
+    "outputBytes": 910792,
+    "textureCap": 1024,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 388312,
+        "sha256": "39b7ee851db92d3aff1b5e0210496a2bc288bac353c1db38d5cc33802d5a5f37"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 245525,
+        "sha256": "e8a4a664d057f317105f5bb730b1e3eed8e375dc7e0f2d6631b1a5d10ef87e1d"
+      }
+    ],
+    "beforeTriangles": 8496,
+    "afterTriangles": 6796,
+    "simplifiedPrimitives": 1,
+    "maxRelativeError": 0.0008453137124888599
+  },
+  {
+    "source": "charizard",
+    "output": "charizard",
+    "sourceSha256": "ff6a81eb9f3c655b7174717812782d04f029280b718051baa3d430f18612892a",
+    "sourceBytes": 1285520,
+    "outputBytes": 568088,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/jpeg",
+        "sourceWidth": 512,
+        "sourceHeight": 512,
+        "width": 512,
+        "height": 512,
+        "bytes": 43864,
+        "sha256": "d7364879a61a2a3f49cd3a4135a37dd91b761c42dd3f60b2cbd1b7dcde63c273"
+      }
+    ],
+    "beforeTriangles": 43208,
+    "afterTriangles": 17676,
+    "simplifiedPrimitives": 5,
+    "maxRelativeError": 0.001952217542566359
+  },
+  {
+    "source": "desert-rocks",
+    "output": "desert-rocks",
+    "sourceSha256": "f10146a3caecfd7f8dce061c5e013da06ce28844b0f4e10c94ff9535cb761f5d",
+    "sourceBytes": 944268,
+    "outputBytes": 408296,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/jpeg",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 46887,
+        "sha256": "1ed5699c8e2bd722d1ffc40cf4efe7c4f1bd925c5e048252130d6e65ec7b4b78"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 80403,
+        "sha256": "117c1a94ed32ee1723224bf1c482695dfa943f084c4958824d1de37f3f38adf2"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 237553,
+        "sha256": "e27ad598b73b4afa5392c1251db4dc319a90c2a8eb61160b30ca742270bf00e5"
+      }
+    ],
+    "beforeTriangles": 992,
+    "afterTriangles": 992,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "dinosaur",
+    "output": "dinosaur",
+    "sourceSha256": "6df64896e8ffac6212c280c4060d955d837f36f46aaf49ba49ee4a5b87efd253",
+    "sourceBytes": 3596568,
+    "outputBytes": 2508168,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 260668,
+        "sha256": "89780d9fdbbb5fbf82e569145858997ef7c326d5332945f0b2fcc4f636d9db01"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 6667,
+        "sha256": "4b7188724dfcbdcc6f0dda1f043042dbf351b407d0691dbe6ba03fa1f7ffa704"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 269124,
+        "sha256": "82485ea7c51d94213ff67d3c661427bfe25c26ef3dde13dd80cd67f5b69a12f7"
+      }
+    ],
+    "beforeTriangles": 37768,
+    "afterTriangles": 37768,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "deadly-nadder",
+    "output": "deadly-nadder",
+    "sourceSha256": "5ce6dc75a7ce38600367bfd1795961a9850477b909f598870768c55ca25cc39e",
+    "sourceBytes": 11700648,
+    "outputBytes": 3644312,
+    "textureCap": 1024,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 741798,
+        "sha256": "8f43a33cb14df9abec763f9d25d0f174fa061984d48872d9d0c5e83260d764ff"
+      }
+    ],
+    "beforeTriangles": 358247,
+    "afterTriangles": 74829,
+    "simplifiedPrimitives": 11,
+    "maxRelativeError": 0.00596831226721406
+  },
+  {
+    "source": "momma-dino",
+    "output": "momma-dino",
+    "sourceSha256": "b7dc06842d9c688f24c995b006c2663bd95a0526416ea246ee045ad35c8138d8",
+    "sourceBytes": 7835752,
+    "outputBytes": 3867432,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 235947,
+        "sha256": "74f18438837e09daa5000265ca7e0d116145c2b56d6f5f8b2386630e824201a8"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 215275,
+        "sha256": "9929436ca53df8b8a3879eefaeb35567f34150713b15a9dbb6955ad099d90d0d"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 204185,
+        "sha256": "97beac3f2af034cfb34e7c14c812b009d42c061dcba8b43ee20ff278541a8a72"
+      },
+      {
+        "index": 3,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 263669,
+        "sha256": "b9f56b75d1097fc573f7fd3a04089d757d5d0554bd7fff82f53e8162000e64e9"
+      },
+      {
+        "index": 4,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 3760,
+        "sha256": "1fe4c6a9ee892ad8d0c0466fc2608190087ff7642bc9c2272a28a637ea251aa8"
+      },
+      {
+        "index": 5,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 4499,
+        "sha256": "1bde9b996d77f0d1832d3d9f52d80cb24a34c0b68bd11fda1ee23d92b687efa3"
+      }
+    ],
+    "beforeTriangles": 67580,
+    "afterTriangles": 33374,
+    "simplifiedPrimitives": 2,
+    "maxRelativeError": 0.0029795756563544273
   }
 ]

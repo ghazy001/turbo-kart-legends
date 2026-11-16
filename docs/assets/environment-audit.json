@@ -28,6 +28,16 @@
       2.5020032945618444,
       0.8176635382388376
     ],
+    "preciseMin": [
+      -0.7381925428602685,
+      -0.006101368391602521,
+      -0.40883306680771103
+    ],
+    "preciseSize": [
+      1.4757250849748202,
+      2.502003291101237,
+      0.8176635382388376
+    ],
     "skins": 0,
     "declaredSkins": 0,
     "bones": 0,
@@ -249,6 +259,16 @@
       0.9715418214909735,
       1.1034108996391299
     ],
+    "preciseMin": [
+      -0.5321866072645264,
+      0.0013903419682248326,
+      -0.557328016515747
+    ],
+    "preciseSize": [
+      4.032380819320679,
+      0.9715418214909731,
+      1.1034108996391299
+    ],
     "skins": 0,
     "declaredSkins": 0,
     "bones": 0,
@@ -304,6 +324,16 @@
       2.1870989147573736,
       10.70541000366211
     ],
+    "preciseMin": [
+      -6.351856231689453,
+      -0.02273100055754145,
+      -5.636468887329102
+    ],
+    "preciseSize": [
+      11.337496280670166,
+      2.1870989147573705,
+      10.70541000366211
+    ],
     "skins": 0,
     "declaredSkins": 0,
     "bones": 0,
@@ -350,6 +380,16 @@
       0.3678287042417665,
       0.5639603458598064,
       0.3890091037640264
+    ],
+    "preciseMin": [
+      -0.18911366993679835,
+      -2.2506521126890446e-17,
+      -0.1970015923470631
+    ],
+    "preciseSize": [
+      0.3678287042417665,
+      0.5639603287759264,
+      0.38900908194621575
     ],
     "skins": 0,
     "declaredSkins": 0,
@@ -414,6 +454,16 @@
       32.06263476610184,
       16.030935287475593
     ],
+    "preciseMin": [
+      -21.656129837036133,
+      -0.04307299852371294,
+      -8.015466690063475
+    ],
+    "preciseSize": [
+      42.299224853515625,
+      32.06263476610184,
+      16.030935287475586
+    ],
     "skins": 0,
     "declaredSkins": 0,
     "bones": 0,
@@ -464,6 +514,16 @@
       0.1362210640411332
     ],
     "size": [
+      1.2200797156554444,
+      1.9847015429033377,
+      0.38608402432822597
+    ],
+    "preciseMin": [
+      -0.6096242545567776,
+      0,
+      -0.24986296028709276
+    ],
+    "preciseSize": [
       1.2200797156554444,
       1.9847015429033377,
       0.38608402432822597
@@ -519,6 +579,16 @@
       13.63300705728793,
       15.088425612788486
     ],
+    "preciseMin": [
+      -11.135761012082668,
+      -0.004465364213102023,
+      -8.196626090677666
+    ],
+    "preciseSize": [
+      15.404638899759071,
+      13.6330062214702,
+      15.0884240272255
+    ],
     "skins": 0,
     "declaredSkins": 0,
     "bones": 0,
@@ -570,6 +640,16 @@
       11.322502035740712
     ],
     "size": [
+      31.11282576636613,
+      10.16966102757317,
+      19.65383768020932
+    ],
+    "preciseMin": [
+      -11.973219260575931,
+      -0.2060140945163198,
+      -8.33133564446861
+    ],
+    "preciseSize": [
       31.11282576636613,
       10.16966102757317,
       19.65383768020932
@@ -763,6 +843,16 @@
       0.4619465219999932,
       0.3803935069560699
     ],
+    "preciseMin": [
+      -0.2617140811140506,
+      -0.14151437774413103,
+      -0.14390910174016305
+    ],
+    "preciseSize": [
+      0.5227590199098464,
+      0.37509311057963246,
+      0.2879743656949637
+    ],
     "skins": 0,
     "declaredSkins": 0,
     "bones": 0,
@@ -940,6 +1030,16 @@
       4.47778589204265,
       6.020556191265982
     ],
+    "preciseMin": [
+      -1.6179191442298446,
+      -1.821754391784225e-8,
+      -3.5511442718967197
+    ],
+    "preciseSize": [
+      3.2358380443190526,
+      4.477784435352644,
+      6.020555480478065
+    ],
     "skins": 0,
     "declaredSkins": 0,
     "bones": 0,
@@ -998,6 +1098,16 @@
       1.503595024966852,
       0.8271073898888394
     ],
+    "preciseMin": [
+      -0.8521265983581543,
+      -5.719541213436092e-10,
+      -0.6794696470064405
+    ],
+    "preciseSize": [
+      3.377467393875122,
+      1.5035949962595883,
+      0.827107348487984
+    ],
     "skins": 0,
     "declaredSkins": 0,
     "bones": 0,
@@ -1050,6 +1160,16 @@
       141.09305264848098,
       208.54047851805586,
       73.6567451462858
+    ],
+    "preciseMin": [
+      -64.65005114859798,
+      -4.286244319656265,
+      -27.787161500224833
+    ],
+    "preciseSize": [
+      115.42426337109356,
+      194.2857088789833,
+      65.79175598617815
     ],
     "skins": 0,
     "declaredSkins": 1,
@@ -1106,6 +1226,16 @@
       9.046356158527704,
       3.842131491298576
     ],
+    "preciseMin": [
+      -4.589658559471104,
+      -0.005317234900064078,
+      -1.403028648760425
+    ],
+    "preciseSize": [
+      8.930437843101913,
+      9.046356158527702,
+      3.8421314912985727
+    ],
     "skins": 0,
     "declaredSkins": 0,
     "bones": 0,
@@ -1129,6 +1259,581 @@
       {
         "name": "Object_4",
         "triangles": 3492
+      }
+    ]
+  },
+  {
+    "id": "cartoon-volcano",
+    "metadata": {
+      "extras": {
+        "author": "Sufi_Artist (https://sketchfab.com/Sufi_Artist)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/cartoon-volcano-3d-model-f76caafb0a92425b81afb70deb8910c2",
+        "title": "\"cartoon Volcano – 3D Model\""
+      },
+      "generator": "Sketchfab-16.45.0",
+      "version": "2.0"
+    },
+    "sha256": "fcc90ab12d5cf840bc3b7b411ed75367bd574d836bcf0045a9c584dcfd3e838f",
+    "bytes": 972588,
+    "min": [
+      -0.31762538829626763,
+      -0.26329793331624396,
+      -0.1164969051824194
+    ],
+    "max": [
+      0.3318252456580417,
+      0.27462338764684446,
+      0.49836406358274843
+    ],
+    "size": [
+      0.6494506339543094,
+      0.5379213209630884,
+      0.6148609687651678
+    ],
+    "preciseMin": [
+      -0.31762538829626763,
+      -0.26329793331624396,
+      -0.1164969051824194
+    ],
+    "preciseSize": [
+      0.6494506339543094,
+      0.5379213209630884,
+      0.6148609687651678
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [
+      "KHR_materials_pbrSpecularGlossiness"
+    ],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Object_5",
+        "triangles": 8496
+      }
+    ]
+  },
+  {
+    "id": "charizard",
+    "metadata": {
+      "extras": {
+        "author": "My Crea Pro (https://sketchfab.com/Beany-Boy)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/charizard-2bfa8441c87347eb84df8e6574eddb86",
+        "title": "charizard"
+      },
+      "generator": "Sketchfab-12.68.0",
+      "version": "2.0"
+    },
+    "sha256": "ff6a81eb9f3c655b7174717812782d04f029280b718051baa3d430f18612892a",
+    "bytes": 1285520,
+    "min": [
+      -13.547712326049805,
+      -0.12451799958944422,
+      -23.84012794494629
+    ],
+    "max": [
+      13.547712326049805,
+      19.25077819824219,
+      10.80669975280762
+    ],
+    "size": [
+      27.09542465209961,
+      19.375296197831634,
+      34.646827697753906
+    ],
+    "preciseMin": [
+      -13.547712326049805,
+      -0.12451799958944088,
+      -23.84012794494629
+    ],
+    "preciseSize": [
+      27.09542465209961,
+      19.375296197831627,
+      34.646827697753906
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [
+      "KHR_texture_transform"
+    ],
+    "clips": [],
+    "images": [
+      {
+        "width": 512,
+        "height": 512
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Object_2",
+        "triangles": 1584
+      },
+      {
+        "name": "Object_3",
+        "triangles": 3880
+      },
+      {
+        "name": "Object_4",
+        "triangles": 8
+      },
+      {
+        "name": "Object_5",
+        "triangles": 27144
+      },
+      {
+        "name": "Object_6",
+        "triangles": 656
+      },
+      {
+        "name": "Object_7",
+        "triangles": 5088
+      },
+      {
+        "name": "Object_8",
+        "triangles": 4848
+      }
+    ]
+  },
+  {
+    "id": "desert-rocks",
+    "metadata": {
+      "extras": {
+        "author": "MartynaGrek (https://sketchfab.com/MartynaGrek)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/desert-rocks-d333ebf8ead74697a1428bafdb97d26b",
+        "title": "Desert Rocks"
+      },
+      "generator": "Sketchfab-12.66.0",
+      "version": "2.0"
+    },
+    "sha256": "f10146a3caecfd7f8dce061c5e013da06ce28844b0f4e10c94ff9535cb761f5d",
+    "bytes": 944268,
+    "min": [
+      -0.6240350008010864,
+      -0.57116703589889,
+      -1.0000000249665026
+    ],
+    "max": [
+      0.6240350008010864,
+      0.57116703589889,
+      1.0000000249665026
+    ],
+    "size": [
+      1.2480700016021729,
+      1.14233407179778,
+      2.0000000499330053
+    ],
+    "preciseMin": [
+      -0.6240350008010864,
+      -0.5711670136643484,
+      -1.000000019350551
+    ],
+    "preciseSize": [
+      1.2480700016021729,
+      1.1423340173463261,
+      1.9999999982085748
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "defaultMaterial",
+        "triangles": 992
+      }
+    ]
+  },
+  {
+    "id": "dinosaur",
+    "metadata": {
+      "extras": {
+        "author": "Coco Jinjo (https://sketchfab.com/Estelle.Ggo)",
+        "license": "CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)",
+        "source": "https://sketchfab.com/3d-models/dinosaur-5adbdb6f72f849f7bc9851939fb5c2df",
+        "title": "Dinosaur"
+      },
+      "generator": "Sketchfab-12.64.0",
+      "version": "2.0"
+    },
+    "sha256": "6df64896e8ffac6212c280c4060d955d837f36f46aaf49ba49ee4a5b87efd253",
+    "bytes": 3596568,
+    "min": [
+      -19.57078435223845,
+      -1.3604478692987716,
+      -76.44426949606135
+    ],
+    "max": [
+      19.585955354890817,
+      68.4476983555138,
+      49.165741166185114
+    ],
+    "size": [
+      39.15673970712927,
+      69.80814622481256,
+      125.61001066224647
+    ],
+    "preciseMin": [
+      -19.57078435223845,
+      -1.3604478692987716,
+      -76.44426949606135
+    ],
+    "preciseSize": [
+      39.15673970712927,
+      69.80814622481256,
+      125.61001066224647
+    ],
+    "skins": 21,
+    "declaredSkins": 1,
+    "bones": 58,
+    "extensions": [
+      "KHR_materials_pbrSpecularGlossiness"
+    ],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Object_66",
+        "triangles": 474
+      },
+      {
+        "name": "Object_68",
+        "triangles": 540
+      },
+      {
+        "name": "Object_70",
+        "triangles": 520
+      },
+      {
+        "name": "Object_72",
+        "triangles": 564
+      },
+      {
+        "name": "Object_74",
+        "triangles": 572
+      },
+      {
+        "name": "Object_76",
+        "triangles": 436
+      },
+      {
+        "name": "Object_78",
+        "triangles": 478
+      },
+      {
+        "name": "Object_80",
+        "triangles": 462
+      },
+      {
+        "name": "Object_82",
+        "triangles": 476
+      },
+      {
+        "name": "Object_84",
+        "triangles": 466
+      },
+      {
+        "name": "Object_86",
+        "triangles": 28364
+      },
+      {
+        "name": "Object_88",
+        "triangles": 404
+      },
+      {
+        "name": "Object_90",
+        "triangles": 500
+      },
+      {
+        "name": "Object_92",
+        "triangles": 478
+      },
+      {
+        "name": "Object_94",
+        "triangles": 388
+      },
+      {
+        "name": "Object_96",
+        "triangles": 388
+      },
+      {
+        "name": "Object_98",
+        "triangles": 480
+      },
+      {
+        "name": "Object_100",
+        "triangles": 382
+      },
+      {
+        "name": "Object_102",
+        "triangles": 456
+      },
+      {
+        "name": "Object_104",
+        "triangles": 488
+      },
+      {
+        "name": "Object_106",
+        "triangles": 452
+      }
+    ]
+  },
+  {
+    "id": "deadly-nadder",
+    "metadata": {
+      "extras": {
+        "author": "iseanica (https://sketchfab.com/iseanica)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/httyd-deadly-nadder-e85c9295e4a14132ad9c6eab4a013fa5",
+        "title": "HTTYD Deadly Nadder"
+      },
+      "generator": "Sketchfab-12.65.0",
+      "version": "2.0"
+    },
+    "sha256": "5ce6dc75a7ce38600367bfd1795961a9850477b909f598870768c55ca25cc39e",
+    "bytes": 11700648,
+    "min": [
+      -1.9840478975742002,
+      -0.8400019657213207,
+      -2.500332505512887
+    ],
+    "max": [
+      1.9840478975742002,
+      1.1974559214478049,
+      1.3115647106834276
+    ],
+    "size": [
+      3.9680957951484004,
+      2.0374578871691256,
+      3.8118972161963143
+    ],
+    "preciseMin": [
+      -1.9840478975742002,
+      -0.8400019657213207,
+      -2.500332505512887
+    ],
+    "preciseSize": [
+      3.9680957951484004,
+      2.0374578871691256,
+      3.8118972161963143
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Object_2",
+        "triangles": 11526
+      },
+      {
+        "name": "Object_3",
+        "triangles": 42515
+      },
+      {
+        "name": "Object_4",
+        "triangles": 6026
+      },
+      {
+        "name": "Object_5",
+        "triangles": 43432
+      },
+      {
+        "name": "Object_6",
+        "triangles": 42726
+      },
+      {
+        "name": "Object_7",
+        "triangles": 3644
+      },
+      {
+        "name": "Object_8",
+        "triangles": 24100
+      },
+      {
+        "name": "Object_9",
+        "triangles": 14954
+      },
+      {
+        "name": "Object_10",
+        "triangles": 113371
+      },
+      {
+        "name": "Object_11",
+        "triangles": 45077
+      },
+      {
+        "name": "Object_12",
+        "triangles": 10876
+      }
+    ]
+  },
+  {
+    "id": "momma-dino",
+    "metadata": {
+      "extras": {
+        "author": "HenryIsRaptor (https://sketchfab.com/Sporx-Nightcall)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/momma-dino-remake-9d95ec6f09044c279705ef85e0a31d66",
+        "title": "Momma Dino (Remake)"
+      },
+      "generator": "Sketchfab-12.68.0",
+      "version": "2.0"
+    },
+    "sha256": "b7dc06842d9c688f24c995b006c2663bd95a0526416ea246ee045ad35c8138d8",
+    "bytes": 7835752,
+    "min": [
+      -0.40175307423589457,
+      -0.01714813920513203,
+      -1.8913132251766727
+    ],
+    "max": [
+      0.401904082278137,
+      1.4558742981024129,
+      1.17662077014751
+    ],
+    "size": [
+      0.8036571565140316,
+      1.473022437307545,
+      3.0679339953241826
+    ],
+    "preciseMin": [
+      -0.40175307423589457,
+      -0.017147828909716445,
+      -1.8913131288736968
+    ],
+    "preciseSize": [
+      0.8036571565140316,
+      1.473022057839133,
+      3.0679337001958267
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [
+      "KHR_materials_clearcoat",
+      "KHR_materials_transmission"
+    ],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "MommaDino_Material001_0",
+        "triangles": 58460
+      },
+      {
+        "name": "Tongue_Material001_0",
+        "triangles": 640
+      },
+      {
+        "name": "Teeth_Material001_0",
+        "triangles": 5984
+      },
+      {
+        "name": "L_Eyeball_Sclera_0",
+        "triangles": 864
+      },
+      {
+        "name": "L_Eyeball_Pupil_0",
+        "triangles": 32
+      },
+      {
+        "name": "L_Eyeball_Iris_0",
+        "triangles": 256
+      },
+      {
+        "name": "L_Eyeball_Cornea_0",
+        "triangles": 96
+      },
+      {
+        "name": "R_Eyeball_Sclera_0",
+        "triangles": 864
+      },
+      {
+        "name": "R_Eyeball_Pupil_0",
+        "triangles": 32
+      },
+      {
+        "name": "R_Eyeball_Iris_0",
+        "triangles": 256
+      },
+      {
+        "name": "R_Eyeball_Cornea_0",
+        "triangles": 96
       }
     ]
   }

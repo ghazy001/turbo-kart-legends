@@ -335,3 +335,7 @@ Sunshine house/cactus placements share the existing static material-batch pipeli
 ## Sugar Rush supplied scenery
 
 `EnvironmentAssetScenery` generalizes the existing Sunshine static renderer without changing simulation ownership. Registry course lists supply only each track’s model/readiness IDs. `sugarScenery` generates deterministic candy-market placements and matching paved supports with whole-envelope road/prop separation; `SugarScenery` renders them through material batches and one paving instance batch. Sugar road paint reuses sampled ribbon geometry and asphalt, with a dedicated pastel curb palette. See docs/SUGAR_RUSH_ENVIRONMENT.md.
+
+## Volcano supplied scenery
+
+`volcanoAssetLayout` composes supplied calderas, rock gardens and posed creature landmarks with full-envelope road/prop/lava clearance. `VolcanicScenery` keeps existing lava fields and renders six course-scoped model batches/readiness slots. The shared preparation path explicitly freezes only Dinosaur’s independently cloned bound skeleton, and separates material batches by compatible vertex layouts for Momma Dino. Other sources remain static; no animation or collision ownership is introduced. Offline artistic matte conversion handles only the two inspected complex legacy sources. See docs/VOLCANO_ENVIRONMENT_ASSETS.md.

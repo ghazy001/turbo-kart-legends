@@ -58,6 +58,9 @@ The user requested less repeated Viking architecture, supplied `stilized_house.g
 
 The user requested the same supplied-asset scenery treatment for Sugar Rush Valley. Integrate the cotton-candy stall, ice-cream truck, lollipop pack, static sugar mascot, Sugarcube Corner and reused complete station with course-specific loading, conservative off-road spacing, shared static batching and road-aligned paint. Preserve sources/credits, unused-skeleton facts and license caveats; do not change track geometry, physics, AI, camera, items or other courses. See docs/SUGAR_RUSH_ENVIRONMENT.md.
 
+
+The user requested the supplied-model scenery pass for Volcano Sprint using the six GLBs from Downloads/vlocano. Fit calderas, rocks and static creature landmarks through the shared course-specific renderer/readiness barrier. Preserve source files/credits, distinguish actual rigging from absent clips, convert incompatible legacy materials only in derivatives, and keep wings/tails beyond the racing corridor/lava. No simulation, AI, camera, collider, item or race-rule changes. See docs/VOLCANO_ENVIRONMENT_ASSETS.md.
+
 ## Preferred technology
 
 

@@ -253,3 +253,19 @@ All five new originals below are preserved byte-for-byte. The supplied `lowpoly_
 | `sugarcube_corner.glb` → `assets/environment/sugarcube-corner.glb` | [Olivia Sabatka](https://sketchfab.com/discopears) | https://sketchfab.com/3d-models/sugarcube-corner-1a70d3380d534ae589c452ada453f7a4 | [SKETCHFAB Standard](https://sketchfab.com/licenses) |
 
 Modifications: offline texture resizing/limited triangle simplification in `assets/optimized/environment/`, source-transform baking, precise grounding/scaling, static per-material batching, instance transforms and restrained matte/near-opaque material adjustments. Original UVs and embedded credit blocks are retained. The mascot's skeleton is unused by its visible mesh; no rigging or animation is invented. Sugarcube's two source line segments are preserved in files but omitted by the runtime mesh batch. See `docs/SUGAR_RUSH_ENVIRONMENT.md` and the source/derivative audit JSON files for details and budgets.
+
+
+## Supplied Volcano Sprint scenery (2026-11-16)
+
+All six supplied `Downloads/vlocano` originals are preserved byte-for-byte. These are embedded uploader declarations, not independently verified public/commercial-release rights. Dinosaur's noncommercial restriction and franchise-related rights require review before release.
+
+| Supplied filename → preserved path | Embedded author | Embedded source | Declared license |
+| --- | --- | --- | --- |
+| `cartoon_volcano__3d_model.glb` → `assets/environment/cartoon-volcano.glb` | Sufi_Artist (https://sketchfab.com/Sufi_Artist) | https://sketchfab.com/3d-models/cartoon-volcano-3d-model-f76caafb0a92425b81afb70deb8910c2 | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
+| `charizard.glb` → `assets/environment/charizard.glb` | My Crea Pro (https://sketchfab.com/Beany-Boy) | https://sketchfab.com/3d-models/charizard-2bfa8441c87347eb84df8e6574eddb86 | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
+| `desert_rocks.glb` → `assets/environment/desert-rocks.glb` | MartynaGrek (https://sketchfab.com/MartynaGrek) | https://sketchfab.com/3d-models/desert-rocks-d333ebf8ead74697a1428bafdb97d26b | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
+| `dinosaur.glb` → `assets/environment/dinosaur.glb` | Coco Jinjo (https://sketchfab.com/Estelle.Ggo) | https://sketchfab.com/3d-models/dinosaur-5adbdb6f72f849f7bc9851939fb5c2df | CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/) |
+| `httyd_deadly_nadder.glb` → `assets/environment/deadly-nadder.glb` | iseanica (https://sketchfab.com/iseanica) | https://sketchfab.com/3d-models/httyd-deadly-nadder-e85c9295e4a14132ad9c6eab4a013fa5 | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
+| `momma_dino_remake.glb` → `assets/environment/momma-dino.glb` | HenryIsRaptor (https://sketchfab.com/Sporx-Nightcall) | https://sketchfab.com/3d-models/momma-dino-remake-9d95ec6f09044c279705ef85e0a31d66 | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
+
+Modifications: offline limited mesh simplification and texture caps; precise centering/grounding/scaling and static instancing. Volcano and Dinosaur runtime derivatives use an explicit artistic matte nonmetal conversion of legacy specular/glossiness materials, retaining original diffuse/normal textures and credits. Dinosaur's bound skeleton is cloned and its supplied pose frozen once into static runtime buffers; original rig/bindings remain. No animation clips exist or are invented. Momma Dino retains authored vertex colors and UV layouts in compatible separate batches; its clear eye shell avoids scene transmission. Originals and embedded credits remain intact. See `docs/VOLCANO_ENVIRONMENT_ASSETS.md`, `docs/assets/environment-audit.json` and `environment-optimization.json`.

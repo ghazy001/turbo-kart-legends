@@ -139,3 +139,7 @@ Mixed 10 supplied Stylized Houses with four Viking Houses, fitted the supplied c
 ## Sugar Rush Valley supplied-model scenery
 
 Integrated the five supplied candy-market GLBs and reused the complete station, replacing the primitive candy-tree field with spaced shops, stalls, parked trucks, static mascots and varied lollipop gardens. Road-aligned paint, asphalt, pastel curbs and softer atmosphere preserve the existing sampled circuit and every gameplay rule. Shared per-course instancing/loading keeps other circuits isolated. See docs/SUGAR_RUSH_ENVIRONMENT.md for capabilities, provenance, checks and limits.
+
+## Volcano Sprint supplied-model scenery
+
+Replaced primitive calderas/pillars with supplied cartoon volcanoes and spaced rock gardens, adding a few static dragon/dinosaur landmarks at distinct bends. The six supplied assets have optimized derivatives, precise fitting, per-course readiness, shared instancing and preserved credits. Textured asphalt/aligned paint, amber curbs and softer dusk lighting preserve route, physics, AI, camera, items, records and cup rules. No animation clips or new hazards are invented. See docs/VOLCANO_ENVIRONMENT_ASSETS.md.
