@@ -68,7 +68,6 @@ export function App() {
     runtime.selection = next; menuStore.commit(); setStorageFailed(!saveSelection(next));
   };
   const [sceneFailed, setSceneFailed] = useState(false);
-  const muted = !menu.audioEnabled;
   const changeMode = useCallback((next: GameMode) => {
     runtime.keyboard?.clear(); runtime.gamepad?.clear(); runtime.phone.clear(); runtime.uiInput.clear();
     if (next === 'playing') runtime.audio.unlock();
@@ -164,10 +163,8 @@ export function App() {
     <div className="scene"><GameCanvas sceneRevision={sceneRevision} runtime={runtime} onError={sceneError} onFinish={finish} suspended={mode === 'menu' || mode === 'results' || setupOpen || panelOpen} /></div>
     {!sceneFailed && <>
       {mode !== 'menu' && <div inert={setupOpen || panelOpen} className={setupOpen || panelOpen ? 'selection-underlay' : undefined}>
-        <header className="topbar"><div className="brand"><span className="brand-badge" aria-hidden="true">T<span>↗</span></span><span>TURBO KART<br /><strong>LEGENDS</strong></span></div><div className="session-tag"><span className="status-dot" />{runtime.race.track.definition.name.toUpperCase()}<span className="session-type">{sessionName}</span></div></header>
-        {mode !== 'results' && <HUD key={`${sceneRevision}:${runtime.race.revision}`} runtime={runtime} onPause={pause} onReset={reset} />}
-        <div className="game-menu-tools">{tools}</div>
-        {mode === 'paused' && !setupOpen && !panelOpen && <PauseMenu onCustomize={() => menuStore.begin(menu.currentMode, 'cosmetic')} onResume={() => changeMode('playing')} onReset={reset} onRestart={restart} onMenu={backToMenu} muted={muted} onToggleSound={toggleSound} />}
+        {mode !== 'results' && <HUD key={`${sceneRevision}:${runtime.race.revision}`} runtime={runtime} onPause={pause} />}
+        {mode === 'paused' && !setupOpen && !panelOpen && <PauseMenu onCustomize={() => menuStore.begin(menu.currentMode, 'cosmetic')} onResume={() => changeMode('playing')} onReset={reset} onRestart={restart} onMenu={backToMenu} runtime={runtime} tools={tools} sessionName={`${runtime.race.track.definition.name} · ${sessionName}`} />}
         {mode === 'results' && (cup ? <CupResultsMenu key={cup.round} cup={cup} selection={runtime.selection} interactive={!setupOpen && !panelOpen} onNext={nextCupRace} onRestart={restartCup} onMenu={backToMenu} /> : <ResultsMenu key={runtime.race.revision} race={runtime.race} selection={runtime.selection} interactive={!setupOpen && !panelOpen} onRestart={restart} onMenu={backToMenu} />)}
       </div>}
       {mode === 'menu' && !setupOpen && <MainMenuScreen store={menuStore} />}

@@ -26,18 +26,24 @@ export function RaceHUD({ runtime }: { runtime: GameRuntime }) {
   if (runtime.race.kind === 'free-drive') return null;
   const countdown = view.phase === 'countdown';
   return <>
-    <section className="race-card" aria-live="off" aria-label="Race timing and position">
-      <div className="race-primary"><div><span className="micro-label">LAP</span><output aria-label="Current lap">{view.lap}<small> / {runtime.race.options.laps}</small></output></div>
-        {runtime.race.kind === 'quick-race' && <div><span className="micro-label">POSITION</span><output aria-label="Race position">{view.position}<small> / {view.standings.length}</small></output></div>}</div>
-      <div className="race-time"><span>RACE</span><output aria-label="Race time">{formatTime(view.elapsed)}</output></div>
-      <div className="race-time"><span>THIS LAP</span><output aria-label="Current lap time">{formatTime(view.lapTime)}</output></div>
-      <div className="race-time"><span>BEST LAP</span><output aria-label="Best lap time">{formatTime(view.best)}</output></div>
-      <div className="race-time split-time"><span>LAST SPLIT</span><output aria-label="Last checkpoint split">{formatTime(view.split)}</output></div>
-      <span className="checkpoint-hint">{runtime.race.kind === 'quick-race' && <b className="race-difficulty">{difficultyDefinition(runtime.race.options.difficulty).name} CPU</b>}{view.checkpoint === 0 ? 'NEXT · FINISH LINE' : `NEXT · GATE ${view.checkpoint} / ${raceConfig.checkpoints - 1}`}</span>
-      {runtime.race.kind === 'time-trial' && <TimeTrialHUD runtime={runtime} />}
+    <section className="hud-timing" aria-live="off" aria-label="Race clock">
+      <span>{runtime.race.kind === 'time-trial' ? 'TIME TRIAL' : 'RACE TIME'}</span><output aria-label="Race time">{formatTime(view.elapsed)}</output>
+      {runtime.race.kind === 'time-trial' && <TimeTrialHUD runtime={runtime} compact />}
     </section>
-    {runtime.race.kind === 'quick-race' && <ol className="race-standings" aria-label="Live race standings">{view.standings.map(racer => <li key={racer.id} data-player={racer.id === 'player'}><i style={{ background: racer.color }} /><span>{racer.name}</span>{racer.finished && <span aria-label="Finished">✓</span>}</li>)}</ol>}
-    {(countdown || view.phase === 'racing' && view.elapsed < raceConfig.goDisplay) && <div className="countdown-overlay" role="status" aria-live="polite" aria-atomic="true"><span>{countdown ? `READY FOR ${runtime.race.track.definition.name.toUpperCase()}?` : 'MAKE IT A GOOD ONE'}</span><strong>{countdown ? view.countdown : 'GO!'}</strong><p>{countdown ? 'Hold W / ↑ or RT. The grid releases at GO.' : `${runtime.race.options.laps === 1 ? 'One lap' : `${runtime.race.options.laps} laps`}. Find your flow.`}</p></div>}
-    {view.wrongWay && !countdown && <div className="wrong-way" role="status">↶ WRONG WAY <span>Turn around or press R to recover.</span></div>}
+    <div className="hud-lap"><svg width="22" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V3h14v11H5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /><path d="M6 4h4v4H6m8-4h4v4h-4m-4 0h4v5h-4" fill="currentColor" /></svg><div><span>LAP</span><output aria-label="Current lap">{view.lap}<small> / {runtime.race.options.laps}</small></output></div></div>
+    {runtime.race.kind === 'quick-race' && <div className="hud-position"><output aria-label="Race position"><strong>{view.position}</strong><span> / {view.standings.length}</span></output><small>POSITION</small></div>}
+    {(countdown || view.phase === 'racing' && view.elapsed < raceConfig.goDisplay) && <div className="hud-countdown" role="status" aria-live="polite" aria-atomic="true"><span>{countdown ? 'READY' : 'LET’S RACE'}</span><strong>{countdown ? view.countdown : 'GO!'}</strong></div>}
+    {view.wrongWay && !countdown && <div className="hud-wrong-way" role="status">Wrong way <span>Turn around · R to recover</span></div>}
   </>;
+}
+
+/** Detailed information stays available while paused, away from the driving line. */
+export function RaceDetails({ runtime }: { runtime: GameRuntime }) {
+  const view = snapshot(runtime);
+  if (runtime.race.kind === 'free-drive') return null;
+  return <details className="pause-race-details"><summary>Timing & standings</summary>
+    <dl>{[['Race time', formatTime(view.elapsed)], ['Current lap', `${view.lap} / ${runtime.race.options.laps}`], ['Lap time', formatTime(view.lapTime)], ['Best lap', formatTime(view.best)], ['Last split', formatTime(view.split)], ['Next gate', view.checkpoint === 0 ? 'Finish line' : `${view.checkpoint} / ${raceConfig.checkpoints - 1}`]].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+    {runtime.race.kind === 'quick-race' && <><p>{difficultyDefinition(runtime.race.options.difficulty).name} CPU</p><ol aria-label="Live race standings">{view.standings.map(racer => <li key={racer.id}>{racer.name}{racer.finished ? ' · Finished' : ''}</li>)}</ol></>}
+    {runtime.race.kind === 'time-trial' && <TimeTrialHUD runtime={runtime} />}
+  </details>;
 }

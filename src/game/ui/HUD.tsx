@@ -3,110 +3,74 @@ import type { GameRuntime } from '../render/runtime';
 import { boostTiers } from '../config/driftConfig';
 import { ItemHUD } from './ItemHUD';
 import { RaceHUD } from './RaceHUD';
-import { raceKindNames } from '../race/RaceSession';
 import { chargeTier } from '../kart/driftController';
 import { GameButton } from './GameButton';
+import '../../styles/hud.css';
 
 function DriftMeter({ runtime }: { runtime: GameRuntime }) {
-  const panel = useRef<HTMLDivElement>(null);
-  const title = useRef<HTMLOutputElement>(null);
-  const hint = useRef<HTMLSpanElement>(null);
-  const charge = useRef<HTMLProgressElement>(null);
-  const source = useRef<HTMLSpanElement>(null);
-  const nodes = useRef<(HTMLSpanElement | null)[]>([]);
+  const panel = useRef<HTMLDivElement>(null), title = useRef<HTMLOutputElement>(null), charge = useRef<HTMLProgressElement>(null);
   useEffect(() => {
     const update = () => {
-      const state = runtime.simulation.current;
-      const boosting = state.boostRemaining > 0;
-      const tier = boosting ? state.boostTier : chargeTier(state.driftCharge);
-      const config = tier ? boostTiers[tier - 1] : null;
-      const drifting = state.driftDirection !== 0;
+      const state = runtime.simulation.current, boosting = state.boostRemaining > 0;
+      const tier = boosting ? state.boostTier : chargeTier(state.driftCharge), config = tier ? boostTiers[tier - 1] : null;
       if (panel.current) {
-        panel.current.dataset.phase = boosting ? 'boost' : drifting ? 'drift' : 'ready';
-        panel.current.style.setProperty('--ability-color', config?.color ?? '#91bba5');
+        panel.current.hidden = !boosting && state.driftDirection === 0;
+        panel.current.dataset.phase = boosting ? 'boost' : 'drift';
+        panel.current.style.setProperty('--ability-color', config?.color ?? '#a5ded4');
       }
-      if (title.current) title.current.value = boosting ? `${config?.name.toUpperCase()} TURBO`
-        : drifting ? config ? `${config.name.toUpperCase()} READY` : 'BUILDING CHARGE' : 'MAKE THE CORNER COUNT';
-      if (hint.current) hint.current.textContent = boosting ? `${state.boostRemaining.toFixed(1)}s · Enjoy the straight!`
-        : drifting ? state.y > 0 ? 'Land, hold the turn, then release Space.'
-          : tier === 3 ? 'Maximum charge! Release Space for Flare.'
-            : tier ? 'Release Space to boost · hold for the next tier.' : 'Keep steering to charge your mini-turbo.'
-          : '27+ km/h: steer + hold Space. Release to boost.';
-      if (charge.current) charge.current.value = boosting && config
-        ? state.boostRemaining / config.duration * boostTiers[2].charge : state.driftCharge;
-      if (source.current) source.current.textContent = runtime.gamepad?.connected ? 'CONTROLLER CONNECTED' : 'SPACE · HOLD & RELEASE';
-      nodes.current.forEach((node, i) => { if (node) node.dataset.ready = String(i < tier); });
+      if (title.current) title.current.value = boosting ? `${config?.name ?? 'Turbo'} · ${state.boostRemaining.toFixed(1)}s` : config ? `${config.name} ready` : 'Charging';
+      if (charge.current) charge.current.value = boosting && config ? state.boostRemaining / config.duration * boostTiers[2].charge : state.driftCharge;
     };
-    update();
-    const timer = window.setInterval(update, 100);
-    return () => window.clearInterval(timer);
+    update(); const timer = window.setInterval(update, 100); return () => window.clearInterval(timer);
   }, [runtime]);
-  return <div ref={panel} className="drift-card" data-phase="ready">
-    <span ref={source} className="micro-label">SPACE · HOLD & RELEASE</span>
-    <output ref={title} aria-label="Drift and turbo status">MAKE THE CORNER COUNT</output>
+  return <div ref={panel} className="hud-drift" hidden>
+    <output ref={title} aria-label="Drift and turbo status">Charging</output>
     <progress ref={charge} aria-label="Drift charge or remaining turbo" max={boostTiers[2].charge} value={0} />
-    <div className="tier-labels">{boostTiers.map((tier, i) => <span key={tier.name} ref={node => { nodes.current[i] = node; }} data-ready="false"><i style={{ background: tier.color }} />{i + 1} {tier.name}</span>)}</div>
-    <span ref={hint} className="drift-hint">27+ km/h: steer + hold Space. Release to boost.</span>
   </div>;
 }
 
 function CircuitMap({ runtime }: { runtime: GameRuntime }) {
-  const marker = useRef<SVGCircleElement>(null);
-  const opponents = useRef<(SVGCircleElement | null)[]>([]);
+  const marker = useRef<SVGCircleElement>(null), opponents = useRef<(SVGCircleElement | null)[]>([]);
   const samples = runtime.simulation.track.samples;
-  const minX = Math.min(...samples.map(p => p.x)) - 18, minZ = Math.min(...samples.map(p => p.z)) - 18;
-  const width = Math.max(...samples.map(p => p.x)) - minX + 18, height = Math.max(...samples.map(p => p.z)) - minZ + 18;
+  const minX = Math.min(...samples.map(p => p.x)) - 22, minZ = Math.min(...samples.map(p => p.z)) - 22;
+  const width = Math.max(...samples.map(p => p.x)) - minX + 22, height = Math.max(...samples.map(p => p.z)) - minZ + 22;
   const path = samples.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)},${p.z.toFixed(1)}`).join(' ') + 'Z';
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      marker.current?.setAttribute('cx', String(runtime.simulation.current.x));
-      marker.current?.setAttribute('cy', String(runtime.simulation.current.z));
+    const update = () => {
+      marker.current?.setAttribute('cx', String(runtime.simulation.current.x)); marker.current?.setAttribute('cy', String(runtime.simulation.current.z));
       runtime.race.opponents.forEach((racer, index) => {
-        const node = opponents.current[index];
-        if (!node) return;
+        const node = opponents.current[index]; if (!node) return;
         node.setAttribute('cx', String(racer.simulation.current.x)); node.setAttribute('cy', String(racer.simulation.current.z));
         node.style.display = runtime.race.kind === 'quick-race' && racer.progress.finishTime === null ? '' : 'none';
       });
-    }, 100);
-    return () => window.clearInterval(timer);
+    };
+    update(); const timer = window.setInterval(update, 100); return () => window.clearInterval(timer);
   }, [runtime]);
-  return <div className="map-card" aria-label={`${runtime.race.track.definition.name} course map`}>
-    <span className="micro-label">FIND YOUR FLOW</span>
+  return <div className="hud-map" aria-label={`${runtime.race.track.definition.name} course map`}>
     <svg viewBox={`${minX} ${minZ} ${width} ${height}`} aria-hidden="true">
-      <path d={path} fill="none" stroke="currentColor" strokeWidth="10" strokeLinejoin="round" />
-      <circle cx={runtime.simulation.track.spawn.x} cy={runtime.simulation.track.spawn.z} r="8" fill="#b9ccc5" />
-      {runtime.race.opponents.map((racer, index) => <circle key={racer.id} ref={node => { opponents.current[index] = node; }} r="8" fill={racer.color} stroke="#fff7df" strokeWidth="3" />)}
-      <circle ref={marker} cx={runtime.simulation.current.x} cy={runtime.simulation.current.z} r="10" fill="#ff7654" stroke="#fff7df" strokeWidth="4" />
+      <path d={path} fill="none" stroke="#153946" strokeOpacity=".38" strokeWidth="16" strokeLinejoin="round" />
+      <path d={path} fill="none" stroke="#fff9e5" strokeOpacity=".86" strokeWidth="8" strokeLinejoin="round" />
+      <circle cx={runtime.simulation.track.spawn.x} cy={runtime.simulation.track.spawn.z} r="6" fill="#fff9e5" />
+      {runtime.race.opponents.map((racer, index) => <circle key={racer.id} ref={node => { opponents.current[index] = node; }} r="8" fill={racer.color} stroke="#173c48" strokeWidth="3" />)}
+      <circle ref={marker} cx={runtime.simulation.current.x} cy={runtime.simulation.current.z} r="11" fill="#ffda86" stroke="#fff9e5" strokeWidth="5" />
     </svg>
-    <span className="map-caption">{runtime.race.track.definition.name.toUpperCase()}</span>
+    <span>THE CIRCUIT</span>
   </div>;
 }
 
-export function HUD({ runtime, onPause, onReset }: { runtime: GameRuntime; onPause: () => void; onReset: () => void }) {
-  const speed = useRef<HTMLOutputElement>(null);
-  const gear = useRef<HTMLSpanElement>(null);
-  const bar = useRef<HTMLDivElement>(null);
+export function HUD({ runtime, onPause }: { runtime: GameRuntime; onPause: () => void }) {
+  const speed = useRef<HTMLOutputElement>(null), gear = useRef<HTMLSpanElement>(null);
   useEffect(() => {
-    const timer = window.setInterval(() => {
+    const update = () => {
       const value = runtime.simulation.current.forwardSpeed;
       if (speed.current) speed.current.value = String(Math.round(Math.abs(value) * 3.6)).padStart(2, '0');
-      if (gear.current) gear.current.textContent = value < -0.15 ? 'REVERSE' : raceKindNames[runtime.race.kind];
-      if (bar.current) bar.current.style.transform = `scaleX(${Math.min(1, Math.abs(value) / 20)})`;
-    }, 100);
-    return () => window.clearInterval(timer);
+      if (gear.current) gear.current.textContent = value < -0.15 ? 'REV' : 'km/h';
+    };
+    update(); const timer = window.setInterval(update, 100); return () => window.clearInterval(timer);
   }, [runtime]);
-  return <>
-    <CircuitMap runtime={runtime} />
-    <RaceHUD runtime={runtime} />
-    <ItemHUD runtime={runtime} />
-    <DriftMeter runtime={runtime} />
-    <div className="speed-card"><span ref={gear} className="micro-label">FREE DRIVE</span>
-      <div className="speed-value"><output ref={speed} aria-label="Speed in kilometers per hour">00</output><span>km/h</span></div>
-      <div className="speed-track"><div ref={bar} /></div>
-    </div>
-    <div className="drive-toolbar"><span className="drive-hint"><kbd>W</kbd> GO <kbd>S</kbd> BRAKE <kbd>A</kbd><kbd>D</kbd> STEER <kbd>space</kbd> DRIFT</span>
-      <GameButton tone="surface" size="small" onClick={onReset}>Reset <kbd>R</kbd></GameButton>
-      <GameButton tone="surface" size="small" onClick={onPause} aria-label="Pause and controls">Pause <kbd>esc</kbd></GameButton>
-    </div>
-  </>;
+  return <div className="race-hud" aria-label="Race dashboard">
+    <CircuitMap runtime={runtime} /><RaceHUD runtime={runtime} /><ItemHUD runtime={runtime} /><DriftMeter runtime={runtime} />
+    <div className="hud-speed"><output ref={speed} aria-label="Speed in kilometers per hour">00</output><span ref={gear}>km/h</span></div>
+    <GameButton className="hud-pause" tone="quiet" size="small" onClick={onPause} aria-label="Pause and controls" title="Pause · Escape"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /></svg></GameButton>
+  </div>;
 }

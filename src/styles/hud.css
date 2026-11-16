@@ -1,0 +1,52 @@
+/* Open road, quiet corners. No full-screen tint or large timing panels. */
+.game-shell:is(.mode-playing,.mode-paused) { min-height: 0; }
+.race-hud { --hud-space: clamp(22px,3vw,42px); position: absolute; inset: 0; z-index: 3; pointer-events: none; color: #fff8e6; }
+.race-hud button, .race-hud input { pointer-events: auto; }
+.hud-timing { position: absolute; top: var(--hud-space); left: 50%; transform: translateX(-50%); text-align: center; text-shadow: 0 1px 5px #153842c9; }
+.hud-timing > span { display: block; font-size: 8px; font-weight: 800; letter-spacing: 2px; margin-bottom: 5px; }
+.hud-timing > output { font-size: 25px; font-weight: 850; font-variant-numeric: tabular-nums; letter-spacing: -.6px; }
+.hud-trial { display: flex; justify-content: center; align-items: baseline; gap: 9px; margin-top: 9px; font-size: 8px; font-weight: 800; letter-spacing: .8px; }
+.hud-trial output { font-size: 12px; font-variant-numeric: tabular-nums; color: #ffe1a0; }
+.race-hud button.hud-pause.game-button { position: absolute; top: var(--hud-space); right: var(--hud-space); width: 46px; min-height: 46px; padding: 0; border-radius: 14px; }
+.hud-map { position: absolute; top: 26%; right: var(--hud-space); width: 150px; height: 205px; opacity: .9; }
+.hud-map svg { display: block; width: 100%; height: 100%; filter: drop-shadow(0 2px 3px #183a4766); }
+.hud-map > span { display: none; }
+.hud-speed, .hud-lap { position: absolute; bottom: var(--hud-space); display: flex; align-items: center; gap: 10px; height: 58px; padding: 10px 17px; border: 1px solid #deecdc3b; border-radius: 16px; background: linear-gradient(140deg,#31515ce8,#193a46d9); box-shadow: inset 0 1px 0 #ffffff17,0 3px 12px #173c4815; backdrop-filter: blur(8px); }
+.hud-speed { left: var(--hud-space); min-width: 110px; }
+.hud-speed output { font-size: 32px; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: -1px; }
+.hud-speed > span { font-size: 9px; font-weight: 700; opacity: .8; }
+.hud-lap { left: calc(var(--hud-space) + 122px); min-width: 108px; }
+.hud-lap svg { color: #ffda86; flex-shrink: 0; }
+.hud-lap div > span { display: block; font-size: 7px; font-weight: 800; letter-spacing: 1.5px; opacity: .75; }
+.hud-lap output { font-size: 24px; font-weight: 850; line-height: 1.1; font-variant-numeric: tabular-nums; }.hud-lap small { font-size: 13px; font-weight: 650; opacity: .8; }
+.hud-position { position: absolute; right: var(--hud-space); bottom: var(--hud-space); text-align: right; text-shadow: 0 2px 5px #173c48; }
+.hud-position output { display: flex; align-items: baseline; gap: 5px; }
+.hud-position strong { font-size: 100px; font-weight: 950; font-style: italic; color: #ffda86; line-height: .9; letter-spacing: -7px; -webkit-text-stroke: 1px #29444b; text-shadow: 0 4px 0 #29444b,0 7px 16px #15333e3d; }
+.hud-position output > span { font-size: 19px; font-weight: 800; }
+.hud-position > small { display: block; font-size: 8px; font-weight: 850; letter-spacing: 2.5px; margin-top: 9px; }
+.hud-countdown { position: absolute; top: 37%; left: 50%; transform: translate(-50%,-50%); text-align: center; text-shadow: 0 3px 12px #173c4899; }
+.hud-countdown > span { font-size: 9px; font-weight: 850; letter-spacing: 4px; }
+.hud-countdown strong { display: block; font-size: clamp(100px,11vw,150px); font-weight: 950; font-style: italic; color: #ffda86; -webkit-text-stroke: 2px #29444b; line-height: 1.1; }
+.hud-wrong-way { position: absolute; top: 125px; left: 50%; transform: translateX(-50%); min-width: 190px; padding: 11px 18px; border: 1px solid #ffc09b; border-radius: 14px; background: #693d32e6; color: #fff1d8; text-align: center; font-size: 16px; font-weight: 850; }
+.hud-wrong-way span { display: block; font-size: 9px; font-weight: 650; margin-top: 4px; }
+.hud-drift { --ability-color: #a5ded4; position: absolute; left: 50%; bottom: var(--hud-space); transform: translateX(-50%); width: 185px; padding: 10px 15px; border: 1px solid #ffffff30; border-radius: 13px; background: #193b47de; color: var(--ability-color); text-align: center; }
+.hud-drift[hidden] { display: none; }
+.hud-drift output { display: block; font-size: 11px; font-weight: 850; margin-bottom: 6px; }
+.hud-drift progress { appearance: none; display: block; width: 100%; height: 4px; border: 0; border-radius: 4px; overflow: hidden; background: #ffffff20; accent-color: var(--ability-color); }
+.hud-drift progress::-webkit-progress-bar { background: #ffffff20; }.hud-drift progress::-webkit-progress-value { background: var(--ability-color); }.hud-drift progress::-moz-progress-bar { background: var(--ability-color); }
+.pause-scrim .pause-card { max-height: calc(100svh - 40px); overflow-y: auto; }
+.pause-card .pause-session { font-size: 10px; line-height: 1.6; }
+.pause-race-details, .pause-help { border-top: 1px solid #173c4820; padding: 13px 0; font-size: 11px; }
+.pause-race-details summary, .pause-help summary { cursor: pointer; font-weight: 800; padding: 4px 0; }
+.pause-race-details summary:focus-visible, .pause-help summary:focus-visible { outline: 2px solid #b27622; outline-offset: 3px; border-radius: 3px; }
+.pause-race-details dl { margin: 14px 0; }.pause-race-details dl > div { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; }.pause-race-details dd { margin: 0; font-weight: 800; font-variant-numeric: tabular-nums; }
+.pause-race-details ol { padding-left: 18px; line-height: 2; }.pause-help p { font-size: 10px; line-height: 1.7; }
+.pause-card .pause-actions { margin-top: 16px; margin-bottom: 18px; }.pause-utilities { display: flex; justify-content: center; padding-bottom: 20px; }
+@media(max-width:700px), (max-height:500px) {
+  .race-hud { --hud-space: 18px; }.hud-timing > output { font-size: 20px; }.hud-timing > span { font-size: 7px; letter-spacing: 1.4px; }
+  .hud-map { top: 29%; width: 105px; height: 150px; }.hud-position strong { font-size: 76px; letter-spacing: -5px; }.hud-position output > span { font-size: 15px; }
+  .hud-speed,.hud-lap { height: 46px; padding: 8px 12px; border-radius: 13px; min-width: 96px; }.hud-speed output { font-size: 26px; }.hud-lap { left: var(--hud-space); bottom: calc(var(--hud-space) + 54px); }.hud-lap output { font-size: 21px; }
+  .hud-drift { left: 50%; bottom: calc(var(--hud-space) + 4px); width: 145px; padding: 9px 12px; }
+  .race-hud button.hud-pause.game-button { width: 42px; min-height: 42px; border-radius: 12px; }
+}
+@media(max-width:520px) { .hud-drift { left: var(--hud-space); bottom: calc(var(--hud-space) + 112px); transform: none; }.hud-map { width: 94px; height: 140px; }.hud-position > small { font-size: 7px; }.hud-wrong-way { top: 120px; min-width: 170px; }.hud-trial { gap: 5px; font-size: 7px; }.hud-trial output { font-size: 10px; } }

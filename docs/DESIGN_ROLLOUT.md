@@ -9,7 +9,7 @@ The user chose a dark showroom with warm yellow accents on 2026-11-14 and reques
 | 1 | Home Menu, visual foundation, mode hierarchy and kart showroom | Implemented; verification below |
 | 2 | Racer and Kart Select: match the new shell, refine cards, previews and naming | Implemented; coastal selection verification below |
 | 3 | Track Select, cup itinerary, race options and final review | Implemented; verification below |
-| 4 | In-race HUD, item/drift feedback and pause/settings readability | Next visual pass |
+| 4 | In-race HUD, item/drift feedback and pause/settings readability | HUD/Pause implemented; settings actions preserved |
 | 5 | Results, podium, loading/error states and consistent transitions | Planned |
 | 6 | Environment/art direction, lighting and final cross-screen/device QA | Planned |
 
@@ -144,3 +144,9 @@ Browser QA: Home → Racer → Kart and Back retain Arnold/Boat Kart; Enter acti
 `npm run typecheck`, `npm run lint`, `npm run build` and `git diff --check` pass. Existing focused menu/results tests: **32 passed / 3 files**. Full regression suite: **395 tests / 33 files passed in 152.55 seconds**, with loopback access for existing phone tests. Build: 768 modules; App CSS 71.02 kB / 14.91 kB gzip, App JS 235.23 kB / 75.54 kB gzip.
 
 Captures: [Home buttons](design-qa/buttons/home.png), [selection actions](design-qa/buttons/selection.png).
+
+## Pass 4 — open-road HUD
+
+The user's gameplay reference guides the spatial hierarchy: one held item top-left, a floating course map on the right, speed/lap bottom-left and a strong gold position bottom-right. The timer stays small at the top; drift/turbo feedback appears only when active. Original symbols, typography, colors and shapes are used; no reference artwork or branded HUD asset was imported. Large standings/timing panels, branding and the permanent driving tutorial no longer cover the road. Timing, controls, recovery and sound/controller/phone utilities remain in Pause.
+
+This pass changes React/CSS presentation only. Models, environment, camera, handling, collisions, AI, race/checkpoint rules, records, item logic and loading ownership are unchanged. See [file list, browser observations, commands and limits](GAMEPLAY_HUD.md). Captures: [gameplay](design-qa/hud/gameplay.png), [pause](design-qa/hud/pause.png). The next visual pass is results/podium/loading consistency, followed by the separate environment/lighting pass.

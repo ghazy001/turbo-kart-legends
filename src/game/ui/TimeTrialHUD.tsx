@@ -14,10 +14,11 @@ function trialView(runtime: GameRuntime) {
   return { reference: trial.reference, invalid: trial.invalid, phase: race.phase,
     delta: race.phase === 'racing' && race.player.progress.started ? trial.delta(race.elapsed, race.player.progress.distance) : null };
 }
-export function TimeTrialHUD({ runtime }: { runtime: GameRuntime }) {
+export function TimeTrialHUD({ runtime, compact = false }: { runtime: GameRuntime; compact?: boolean }) {
   const [view, setView] = useState(() => trialView(runtime)), [visible, setVisible] = useState(runtime.trialGhostVisible);
   useEffect(() => { const timer = window.setInterval(() => setView(trialView(runtime)), 100); return () => window.clearInterval(timer); }, [runtime]);
   const record = view.reference;
+  if (compact) return <div className="hud-trial" aria-label="Time Trial personal best"><span>{view.invalid ? 'PRACTICE RUN' : record ? 'VS BEST' : 'FIRST RUN'}</span><output aria-label="Time difference to ghost">{view.invalid ? '—' : formatTrialDelta(view.delta)}</output></div>;
   return <div className="trial-hud" aria-label="Time Trial personal best">
     <div className="race-time"><span>PB RACE</span><output aria-label="Personal best race">{formatTime(record?.bestRace ?? null)}</output></div>
     <div className="race-time"><span>PB LAP</span><output aria-label="Personal best lap">{formatTime(record?.bestLap ?? null)}</output></div>
