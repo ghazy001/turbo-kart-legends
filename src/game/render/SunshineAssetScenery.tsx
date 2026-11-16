@@ -61,4 +61,5 @@ export function SunshineAssetScenery({ placements, statusFor }: { placements: En
     });
   })}</group>;
 }
-export const sunshineAssetSlots = ['environment:stylized-tree', 'environment:stylized-tree:far', 'environment:gas-station', 'environment:spectators', 'environment:tire-wall'];
+export const sunshineAssetSlots = (Object.keys(environmentAssets) as EnvironmentAssetId[]).flatMap(id =>
+  id === 'stylized-tree' ? [`environment:${id}`, `environment:${id}:far`] : [`environment:${id}`]);

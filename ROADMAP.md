@@ -125,3 +125,8 @@ The user's track-specific enhancement request adds the original coastal venue, a
 ## Sunshine supplied-model scenery pass
 
 The supplied tree replaces primitive palms, with curated groves and source-derived LODs. Supplied static spectators populate three viewing lawns, two supplied fuel dispensers form a harbor pit stop, and supplied tire runs back the existing collision rails. Shared instancing, static material merging, distance/frustum culling and model readiness preserve the race flow. Handling, camera, items/jumps/boosts and other courses remain unchanged. See docs/SUNSHINE_ENVIRONMENT_ASSETS.md for asset provenance, budgets, checks and remaining release/device limits.
+
+
+## Sunshine settlement follow-up
+
+Replaced primitive buildings with 14 supplied timber tower houses, added 62 supplied cacti in spaced gardens/verges and relocated both fuel dispensers onto two shared-definition paved service areas. All six source models retain credits and checked-in optimized derivatives. Existing races, controls, physics/camera and other courses are preserved. See docs/SUNSHINE_ENVIRONMENT_ASSETS.md.

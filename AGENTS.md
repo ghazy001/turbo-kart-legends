@@ -51,6 +51,8 @@ The user authorized a Sunshine Circuit-only graphics/gameplay upgrade: refine th
 
 The user supplied `gas_station.glb`, `race_track_tire_wall.glb`, `spectators.glb` and `stylized_tree.glb` to replace Sunshine's basic vegetation/crowds and enrich its scenery. Preserve source files/credits, use fitted static shared GLB batches with tree LODs and curated off-road placements, and keep existing rails as the collision face. The station source is one fuel dispenser, and all four assets have no clips/skins. Source licensing metadata is recorded, not independently verified. Preserve every gameplay/camera/other-track rule. See docs/SUNSHINE_ENVIRONMENT_ASSETS.md.
 
+The user's house/cactus follow-up replaces Sunshine's primitive buildings with multiple supplied Viking Houses, relocates the two fuel dispensers with shared paving definitions, and fills open roadside areas with supplied cacti. Preserve original sources/credits, static instancing, source-envelope spacing and road/lagoon clearance. Both new sources are static with no clips/skins. Keep gameplay, camera and other tracks unchanged. See docs/SUNSHINE_ENVIRONMENT_ASSETS.md.
+
 ## Preferred technology
 
 

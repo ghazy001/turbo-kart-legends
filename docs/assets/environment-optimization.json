@@ -168,5 +168,63 @@
     "afterTriangles": 11611,
     "simplifiedPrimitives": 3,
     "maxRelativeError": 0.03931346535682678
+  },
+  {
+    "source": "viking-house",
+    "output": "viking-house",
+    "sourceSha256": "636e31c40f7624b6987de118914a925364029eb9473a122ee8eda1dd8eb694c3",
+    "sourceBytes": 3921332,
+    "outputBytes": 3425160,
+    "textureCap": 1024,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 1223395,
+        "sha256": "c2edadbca2ecc64a20c40e27a02fbfa48e2954e4d247bc11fe05860a43e7036a"
+      }
+    ],
+    "beforeTriangles": 47814,
+    "afterTriangles": 34640,
+    "simplifiedPrimitives": 2,
+    "maxRelativeError": 0.001997817074880004
+  },
+  {
+    "source": "cactus",
+    "output": "cactus",
+    "sourceSha256": "c2a4297fff4ae0447ae5c84dc33cb3a4687cdaaf4a311dfd93aeabe369ecba4f",
+    "sourceBytes": 1058188,
+    "outputBytes": 470952,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 104974,
+        "sha256": "a4ea95f87f9ef032ef7d9b7ad53aed47446aaa8d1f046432d340a0edc85ad180"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 202203,
+        "sha256": "3d94fb28add4bf418d62d881c747d7209f42de9e1e2cf666eb4949b7f0e93eef"
+      }
+    ],
+    "beforeTriangles": 3780,
+    "afterTriangles": 3780,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
   }
 ]

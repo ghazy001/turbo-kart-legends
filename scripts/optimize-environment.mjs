@@ -9,6 +9,8 @@ const definitions = [
   ['spectators', 'spectators', 1, 0.001, 1024],
   ['stylized-tree', 'stylized-tree', 0.08, 0.025, 512],
   ['stylized-tree', 'stylized-tree-far', 0.025, 0.06, 256],
+  ['viking-house', 'viking-house', 0.5, 0.002, 1024],
+  ['cactus', 'cactus', 1, 0.001, 512],
 ];
 const report = [];
 for (const [source, output, ratio, error, textureCap] of definitions) {

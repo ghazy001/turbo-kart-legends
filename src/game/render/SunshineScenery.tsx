@@ -1,12 +1,11 @@
 import { sunshineAssetLayout } from '../tracks/sunshineAssetLayout';
 import { SunshineAssetScenery } from './SunshineAssetScenery';
 import type { AssetStatusReporter } from './models/RaceAssetLoading';
-import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { useLayoutEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Color, InstancedMesh, MeshStandardMaterial, Object3D, Group } from 'three';
 import type { SampledTrack } from '../core/types';
 import { sunshineScenery, type ScenicInstance } from '../tracks/sunshineScenery';
-import { paintedTexture } from './paintedTexture';
 
 function ScenicBatch({ instances, shape }: { instances: ScenicInstance[]; shape: 'box' | 'rock' }) {
   const mesh = useRef<InstancedMesh>(null);
@@ -57,14 +56,9 @@ function Lagoon({ runtime }: { runtime: { mode: string } }) {
 export function SunshineScenery({ track, runtime, statusFor }: { track: SampledTrack; runtime: { mode: string }; statusFor: (id: string) => AssetStatusReporter }) {
   const layout = useMemo(() => sunshineScenery(track), [track]);
   const placements = useMemo(() => sunshineAssetLayout(track), [track]);
-  const sign = useMemo(() => paintedTexture('SUNSHINE COAST', '#37676f', '#fff2cd', 'H A R B O R   /   R A C E   C L U B'), []);
-  useEffect(() => () => sign.dispose(), [sign]);
   return <group name="sunshine-coastal-venue">
     <ScenicBatch instances={layout.boxes} shape="box" /><ScenicBatch instances={layout.rocks} shape="rock" />
     <SunshineAssetScenery placements={placements} statusFor={statusFor} />
     <Lagoon runtime={runtime} />
-    <group position={[track.spawn.x, 0, track.spawn.z]} rotation={[0, track.spawn.heading, 0]}>
-      <mesh position={[19, 6.2, 0]} rotation={[0, -Math.PI / 2, 0]}><planeGeometry args={[12, 1.8]} /><meshStandardMaterial map={sign} /></mesh>
-    </group>
   </group>;
 }

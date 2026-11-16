@@ -8,6 +8,10 @@ import { placementClearance, sunshineAssetLayout } from '../tracks/sunshineAsset
 import { sunshineCircuit } from '../tracks/sunshineCircuit';
 import { trackCatalog } from '../tracks/trackCatalog';
 import { sceneConfig } from '../config/kartConfig';
+import { sunshineServiceAreas } from '../tracks/sunshineServiceAreas';
+import { sunshineScenery } from '../tracks/sunshineScenery';
+import { pointAtDistance } from '../race/trackProgress';
+import { nearestRoadPoint, offsetSample } from '../tracks/trackSampling';
 import report from '../../../docs/assets/environment-optimization.json';
 import audit from '../../../docs/assets/environment-audit.json';
 
@@ -40,11 +44,49 @@ describe('supplied Sunshine environment composition', () => {
     const face = sunshineCircuit.definition.roadWidth / 2 + sceneConfig.railCenterOffset - sceneConfig.railWidth / 2;
     for (const placement of sunshineAssetLayout(sunshineCircuit)) expect(placementClearance(sunshineCircuit, placement), placement.id).toBeGreaterThanOrEqual(face + 0.16);
   });
+  it('moves both pumps and their paving together into separated roadside service areas', () => {
+    const pumps = sunshineAssetLayout(sunshineCircuit).filter(p => p.asset === 'gas-station');
+    const pads = sunshineScenery(sunshineCircuit).boxes.filter(p => p.color === '#c6c4b3');
+    expect(pumps).toHaveLength(sunshineServiceAreas.length); expect(pads).toHaveLength(pumps.length);
+    for (const [index, area] of sunshineServiceAreas.entries()) {
+      const p = pointAtDistance(sunshineCircuit, sunshineCircuit.length * area.fraction), expected = offsetSample(p, area.offset);
+      expect(pumps[index].position).toEqual([expected.x, 0, expected.z]);
+      expect(pads[index].position).toEqual([expected.x, 0.015, expected.z]);
+      expect(pads[index].rotation[1]).toBe(pumps[index].yaw);
+    }
+    expect(Math.hypot(pumps[0].position[0] - pumps[1].position[0], pumps[0].position[2] - pumps[1].position[2])).toBeGreaterThan(100);
+  });
+  it('keeps the entire paved service footprints clear of the racing corridor', () => {
+    const face = sunshineCircuit.definition.roadWidth / 2 + sceneConfig.railCenterOffset - sceneConfig.railWidth / 2;
+    for (const pad of sunshineScenery(sunshineCircuit).boxes.filter(p => p.color === '#c6c4b3')) {
+      const yaw = pad.rotation[1];
+      for (const x of [-0.5, 0, 0.5]) for (const z of [-0.5, 0, 0.5]) {
+        const distance = nearestRoadPoint(sunshineCircuit, {
+          x: pad.position[0] + x * pad.scale[0] * Math.cos(yaw) + z * pad.scale[2] * Math.sin(yaw),
+          z: pad.position[2] + z * pad.scale[2] * Math.cos(yaw) - x * pad.scale[0] * Math.sin(yaw),
+        }).distance;
+        expect(distance).toBeGreaterThan(face + 0.16);
+      }
+    }
+  });
   it('does not add scenery or alter source definitions on other circuits', () => {
     for (const { track } of trackCatalog.slice(1)) expect(sunshineAssetLayout(track)).toEqual([]);
   });
+  it('replaces block buildings with repeated supplied houses and spaced cactus gardens', () => {
+    const layout = sunshineAssetLayout(sunshineCircuit), houses = layout.filter(p => p.asset === 'viking-house'), cacti = layout.filter(p => p.asset === 'cactus');
+    expect(houses).toHaveLength(14); expect(cacti.length).toBeGreaterThan(40); expect(cacti.length).toBeLessThan(90);
+    expect(new Set(houses.map(p => p.scale)).size).toBe(houses.length);
+    // The support batch contains only reflectors, paving and viewing terraces, no buildings.
+    expect(sunshineScenery(sunshineCircuit).boxes.every(p => p.scale[1] <= 0.94)).toBe(true);
+    const radius = (p: typeof layout[number]) => { const [x, , z] = environmentSize(p.asset); return Math.hypot(x, z) * p.scale / 2; };
+    for (const prop of [...houses, ...cacti]) for (const other of layout) {
+      if (prop === other) continue;
+      expect(Math.hypot(prop.position[0] - other.position[0], prop.position[2] - other.position[2]), `${prop.id} / ${other.id}`).toBeGreaterThanOrEqual(radius(prop) + radius(other) + 1);
+      expect((prop.position[0] / 63) ** 2 + ((prop.position[2] - 12) / 76) ** 2).toBeGreaterThanOrEqual(1.15);
+    }
+  });
   it('records real static capabilities, preserves credits, and budgets mesh/texture derivatives', async () => {
-    expect(audit).toHaveLength(4);
+    expect(audit).toHaveLength(6);
     for (const source of audit) { expect(source.skins).toBe(0); expect(source.clips).toEqual([]); expect(source.metadata.extras.author).toBeTruthy(); }
     for (const asset of report) {
       const bytes = readFileSync(new URL(`../../../public/assets/optimized/environment/${asset.output}.glb`, import.meta.url));
@@ -54,6 +96,8 @@ describe('supplied Sunshine environment composition', () => {
     }
     expect(report.find(asset => asset.output === 'stylized-tree')!.afterTriangles).toBeLessThan(45000);
     expect(report.find(asset => asset.output === 'stylized-tree-far')!.afterTriangles).toBeLessThan(14000);
+    expect(report.find(asset => asset.output === 'viking-house')!.afterTriangles).toBeLessThan(35000);
+    expect(report.find(asset => asset.output === 'cactus')!.afterTriangles).toBe(3780);
   });
   it('keeps near/far tree anchors and source envelopes identical', async () => {
     const source = await loadGeometry(environmentAssets['stylized-tree'].url), far = await loadGeometry(environmentAssets['stylized-tree'].farUrl);
@@ -78,7 +122,7 @@ describe('supplied Sunshine environment composition', () => {
     const expected = environmentSize(id), size = box.getSize(new Vector3());
     expect(size.x).toBeLessThanOrEqual(expected[0] + 0.001); expect(size.x).toBeGreaterThan(expected[0] * 0.93);
     expect(size.z).toBeLessThanOrEqual(expected[2] + 0.001); expect(size.z).toBeGreaterThan(expected[2] * 0.93);
-    expect(model.parts.length).toBeLessThanOrEqual(id === 'stylized-tree' ? 2 : 1);
+    expect(model.parts.length).toBeLessThanOrEqual(id === 'stylized-tree' || id === 'viking-house' ? 2 : 1);
     expect(prepareEnvironmentModel(loaded.scene, id)).toBe(model);
     expect(new Box3().setFromObject(loaded.scene).equals(before)).toBe(true);
     for (const part of model.parts) expect(sourceMeshes.some(mesh => mesh.geometry === part.geometry || mesh.material === part.material)).toBe(false);

@@ -222,3 +222,11 @@ The user's four supplied GLBs are preserved byte-for-byte under `assets/environm
 CC BY 4.0: https://creativecommons.org/licenses/by/4.0/ · Standard: https://sketchfab.com/licenses
 
 Modifications: offline runtime derivatives under `assets/optimized/environment/` cap textures and simplify geometry. Tree LODs retain deterministic whole source leaf cards with coverage compensation and simplify branches, preserving the original silhouette envelope and UVs. Originals and embedded credit blocks remain intact. Runtime buffers bake exporter transforms, center/ground models using shared source bounds, merge compatible material parts, and apply restrained matte/alpha-cutout settings. The gas-station file is a single retro fuel dispenser, not a complete station building. Spectators are static posed meshes; none of these assets includes a skeleton or animation clip. See `docs/assets/environment-audit.json`, `docs/assets/environment-optimization.json` and `docs/SUNSHINE_ENVIRONMENT_ASSETS.md`.
+
+
+## Supplied Sunshine houses and cactus (2026-11-16)
+
+- **Viking House** — Roman_Nilikovskii ([author](https://sketchfab.com/Roman_Nilikovskii), [embedded model source](https://sketchfab.com/3d-models/viking-house-cea7cbebcd3842e5b08d72b237ca830a)). Preserved at `assets/environment/viking-house.glb`.
+- **Cactus** — ThymKruijt ([author](https://sketchfab.com/superkiller080), [embedded model source](https://sketchfab.com/3d-models/cactus-add594bc9bfc465488bf76badfdd82cb)). Preserved at `assets/environment/cactus.glb`.
+- Both sources declare [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). These are embedded uploader declarations, not independently verified public-release rights.
+- Modifications: source-relative centering, grounding/scaling and instance transforms; offline house mesh simplification and cactus texture resizing. Runtime derivatives live under `assets/optimized/environment/`. House baked unlit/outline materials, source UVs, cactus normal/base-color maps and both embedded credit blocks are retained. No animation or skeleton exists in either source. Original hashes, bounds and processing results are in `docs/assets/environment-audit.json` and `environment-optimization.json`.

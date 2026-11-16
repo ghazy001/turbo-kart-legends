@@ -370,5 +370,101 @@
         "triangles": 40896
       }
     ]
+  },
+  {
+    "id": "viking-house",
+    "metadata": {
+      "extras": {
+        "author": "Roman_Nilikovskii (https://sketchfab.com/Roman_Nilikovskii)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/viking-house-cea7cbebcd3842e5b08d72b237ca830a",
+        "title": "Viking House"
+      },
+      "generator": "Sketchfab-16.12.0",
+      "version": "2.0"
+    },
+    "sha256": "636e31c40f7624b6987de118914a925364029eb9473a122ee8eda1dd8eb694c3",
+    "bytes": 3921332,
+    "min": [
+      -21.656129837036133,
+      -0.043072998523713935,
+      -8.015466690063477
+    ],
+    "max": [
+      20.643095016479492,
+      32.019561767578125,
+      8.015468597412116
+    ],
+    "size": [
+      42.299224853515625,
+      32.06263476610184,
+      16.030935287475593
+    ],
+    "skins": 0,
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Object_2",
+        "triangles": 21064
+      },
+      {
+        "name": "Object_3",
+        "triangles": 26750
+      }
+    ]
+  },
+  {
+    "id": "cactus",
+    "metadata": {
+      "extras": {
+        "author": "ThymKruijt (https://sketchfab.com/superkiller080)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/cactus-add594bc9bfc465488bf76badfdd82cb",
+        "title": "Cactus"
+      },
+      "generator": "Sketchfab-12.67.0",
+      "version": "2.0"
+    },
+    "sha256": "c2a4297fff4ae0447ae5c84dc33cb3a4687cdaaf4a311dfd93aeabe369ecba4f",
+    "bytes": 1058188,
+    "min": [
+      -0.6096242545567776,
+      0,
+      -0.24986296028709276
+    ],
+    "max": [
+      0.6104554610986668,
+      1.9847015429033377,
+      0.1362210640411332
+    ],
+    "size": [
+      1.2200797156554444,
+      1.9847015429033377,
+      0.38608402432822597
+    ],
+    "skins": 0,
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "pCylinder4_lambert1_0",
+        "triangles": 3780
+      }
+    ]
   }
 ]
