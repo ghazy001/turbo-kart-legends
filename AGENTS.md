@@ -47,6 +47,8 @@ The user supplied five racer portraits and requested face cards while retaining 
 
 The latest Racer Select update uses the user's five square studio portraits, adds mouse/touch 360° subject-only rotation with no separate name panel below the preview; racer names remain on cards and in accessible labels. Preserve the coastal stage and full-body/skin grounding fix. Rotation is menu-local, clears gestures on blur/visibility/unmount and never rotates the gameplay actor or camera. Existing Enter/Space/back and grid navigation remain; focused preview arrows rotate, Home resets. See docs/RACER_PREVIEW_ROTATION.md.
 
+The user authorized a Sunshine Circuit-only graphics/gameplay upgrade: refine the original loop, road detail, original coastal venue, atmosphere, turbo pads and a raised jump roller. Optional shared surface/feature definitions may extend existing grounding/jump ownership and add capped pad entry boosts. Preserve other courses, planar handling/drift/AI/scoring tuning, controls and capsule dimensions. Raise road/rails/decoration, reset and items from the same surface; obsolete Sunshine trial records must fail compatibility, without invalidating other tracks. Branch shortcuts and moving hazards remain deferred. See docs/SUNSHINE_CIRCUIT_UPGRADE.md.
+
 ## Preferred technology
 
 

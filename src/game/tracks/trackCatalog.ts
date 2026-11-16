@@ -5,8 +5,8 @@ import { volcanoSprint } from './volcanoSprint';
 
 export const trackCatalog = [
   { id: 'sunshine-circuit', name: 'Sunshine Circuit', track: sunshineCircuit, region: 'THE SUNSHINE COAST',
-    description: 'Wide bends, bright skies and a ribbon of road made for finding your flow.', difficulty: 'Easy to learn', laps: 3,
-    theme: { candy: false, winter: false, volcanic: false, sky: '#b3e2e5', ground: '#a2c76b', road: '#536878', rail: '#21797c', rock: '#a7bba5',
+    description: 'A sunlit harbor, palm-lined bends, two turbo straights and a coastal jump.', difficulty: 'Easy to learn', laps: 3,
+    theme: { candy: false, winter: false, volcanic: false, sky: '#b8dee5', ground: '#a6bc7c', road: '#59666b', rail: '#477b7b', rock: '#a7bba5',
       leaves: ['#277f62', '#368e60', '#56a967', '#1d8c78'], hills: ['#91c4a1', '#8cba7d'], map: '#78a997', sign: 'SUNSHINE', subtitle: 'C I R C U I T' } },
   { id: 'sugar-rush-valley', name: 'Sugar Rush Valley', track: sugarRushValley, region: 'THE PASTEL HIGHLANDS',
     description: 'Candy groves, sherbet hills and a flowing chicane. Keep a sweet line through the valley.', difficulty: 'Flowing chicane', laps: 3,

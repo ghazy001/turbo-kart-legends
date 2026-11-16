@@ -1,5 +1,5 @@
 import { kartConfig as config } from '../config/kartConfig';
-import type { KartInput, KartState } from '../core/types';
+import type { KartInput, KartState, Vec2 } from '../core/types';
 import { boostTiers, driftConfig } from '../config/driftConfig';
 import { advanceDrift } from './driftController';
 import { advanceJump } from './jumpController';
@@ -26,9 +26,9 @@ export function integrateSpeed(speed: number, input: KartInput, dt: number, boos
   return clamp(speed, -config.maxReverseSpeed, maxSpeed);
 }
 
-export function moveKart(state: KartState, input: KartInput, dt: number): KartState {
-  const abilities = advanceDrift(state, input, dt);
-  const jumping = advanceJump(abilities, dt);
+export function moveKart(state: KartState, input: KartInput, dt: number, surface?: { height: number; at: (point: Vec2) => number }): KartState {
+  const ground = surface?.height ?? 0;
+  const abilities = advanceDrift(state, input, dt, ground);
   const forwardSpeed = integrateSpeed(state.forwardSpeed, input, dt, abilities.boostTier);
   const steering = state.steering + (clamp(input.steer, -1, 1) - state.steering) * (1 - Math.exp(-config.steeringResponse * dt));
   const drifting = abilities.driftDirection !== 0;
@@ -44,11 +44,12 @@ export function moveKart(state: KartState, input: KartInput, dt: number): KartSt
   const slip = drifting ? driftConfig.slipFactor : config.slipFactor;
   const lateralSpeed = clamp((state.lateralSpeed - yawRate * forwardSpeed * slip * dt)
     * Math.exp(-grip * dt), -driftConfig.maxLateralSpeed, driftConfig.maxLateralSpeed);
-  return {
-    ...jumping,
+  const moved = {
+    ...abilities,
     x: state.x + (Math.sin(heading) * forwardSpeed + Math.cos(heading) * lateralSpeed) * dt,
     z: state.z + (Math.cos(heading) * forwardSpeed - Math.sin(heading) * lateralSpeed) * dt,
     heading, forwardSpeed, lateralSpeed, yawRate, steering,
     wheelSpin: state.wheelSpin + forwardSpeed * dt / config.wheelRadius,
   };
+  return advanceJump(moved, dt, surface?.at(moved) ?? 0, state.y <= ground + 0.001 && state.verticalSpeed === 0);
 }

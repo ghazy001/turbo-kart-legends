@@ -1,3 +1,4 @@
+import { surfaceHeightAt } from '../tracks/trackSurface';
 import { itemBalance } from '../config/itemBalance';
 import { guardThreat, shouldDropTrap, shouldShootBolt, shouldUseTurbo } from './itemAI';
 import { nextItemRoll, pickWeightedItem, racerItemSeed, type RewardContext, type RewardPicker } from './itemRewards';
@@ -12,9 +13,9 @@ import { activateTurbo, canActivateTurbo, turboBoost } from './turboCharge';
 
 export interface ItemRacer { id: string; simulation: { current: KartState; previous: KartState }; progress: { finishTime: number | null; distance?: number } }
 export interface ItemSlot { held: ItemId | null; cooldown: number; slowRemaining: number; immunity: number; shieldRemaining: number; turboRemaining: number; heldSince: number; hitWindow: number; hitChain: number; slowLimit: number; wasUsing: boolean }
-export interface Pickup { id: string; x: number; z: number; respawn: number }
+export interface Pickup { id: string; x: number; z: number; respawn: number; ground?: number }
 export interface SparkProjectile { id: number; owner: string; x: number; z: number; previousX: number; previousZ: number; y: number; dx: number; dz: number; life: number }
-export interface BananaHazard { id: number; owner: string; x: number; z: number; heading: number; life: number; armRemaining: number; ownerGrace: number }
+export interface BananaHazard { id: number; owner: string; x: number; z: number; heading: number; life: number; armRemaining: number; ownerGrace: number; ground?: number }
 export interface ItemEvent { id: number; kind: 'pickup' | 'fire' | 'drop' | 'hit' | 'wall' | 'blocked' | 'guard' | 'guard-break' | 'guard-expire' | 'turbo'; time: number; x: number; z: number; source: string; target?: string; item?: ItemId; position?: number }
 const emptySlot = (): ItemSlot => ({ held: null, cooldown: 0, slowRemaining: 0, immunity: 0, shieldRemaining: 0, turboRemaining: 0, heldSince: 0, hitWindow: 0, hitChain: 0, slowLimit: itemConfig.slowSpeed, wasUsing: true });
 
@@ -41,7 +42,10 @@ export class ItemSystem {
     this.rewardPicker = options.rewardPicker ?? pickWeightedItem;
     this.pickups = itemConfig.rows.flatMap((fraction, row) => {
       const point = pointAtDistance(track, (track.definition.startDistance ?? 0) + track.length * fraction);
-      return itemConfig.lanes.map((lane, column) => ({ id: `pickup-${row}-${column}`, ...offsetSample(point, lane), respawn: 0 }));
+      return itemConfig.lanes.map((lane, column) => {
+        const position = offsetSample(point, lane);
+        return { id: `pickup-${row}-${column}`, ...position, ground: surfaceHeightAt(track, position), respawn: 0 };
+      });
     });
   }
   slot(id: string): Readonly<ItemSlot> | undefined { return this.slots.get(id); }
@@ -65,7 +69,7 @@ export class ItemSystem {
     if (this.events.length > itemConfig.maxEvents) this.events.shift();
   }
   private dropPoint(state: KartState): { x: number; z: number } | null {
-    if (state.y > itemConfig.trapMaxDropHeight) return null;
+    if (state.y - surfaceHeightAt(this.track, state) > itemConfig.trapMaxDropHeight) return null;
     const offset = kartConfig.collisionHalfLength + itemConfig.trapRadius + itemConfig.trapDropSkin;
     const point = { x: state.x - Math.sin(state.heading) * offset, z: state.z - Math.cos(state.heading) * offset };
     return sweepRail(this.track, state, point, itemConfig.trapRadius) === null ? point : null;
@@ -104,7 +108,7 @@ export class ItemSystem {
     if (slot.held === 'banana-trap') {
       const point = this.dropPoint(owner.simulation.current);
       return !!point && this.traps.length < itemConfig.maxTraps && owner.simulation.current.forwardSpeed >= 4
-        && shouldDropTrap(owner, racers, point, id => this.slot(id));
+        && shouldDropTrap(owner, racers, point, id => this.slot(id), surfaceHeightAt(this.track, point));
     }
     return this.projectiles.length < itemConfig.maxProjectiles && shouldShootBolt(owner, racers, id => this.slot(id), this.track);
   }
@@ -153,7 +157,7 @@ export class ItemSystem {
         } else if (slot.held === 'banana-trap') {
           const point = this.dropPoint(state);
           if (point && this.traps.length < itemConfig.maxTraps) {
-            this.traps.push({ ...point, id: ++this.projectileSerial, owner: racer.id, heading: state.heading, life: itemConfig.trapLife,
+            this.traps.push({ ...point, ground: surfaceHeightAt(this.track, point), id: ++this.projectileSerial, owner: racer.id, heading: state.heading, life: itemConfig.trapLife,
               armRemaining: itemConfig.trapArmSeconds, ownerGrace: itemConfig.trapOwnerGrace });
             this.stats.drops++; this.emit('drop', point.x, point.z, racer.id, undefined, slot.held); used = true;
           }
@@ -200,7 +204,7 @@ export class ItemSystem {
         const t = sweepKart(trap, trap, racer.simulation.previous, racer.simulation.current, itemConfig.trapRadius);
         if (t === null || t >= first) continue;
         const y = racer.simulation.previous.y + (racer.simulation.current.y - racer.simulation.previous.y) * t;
-        if (y + itemConfig.kartHitBottom > itemConfig.trapHeight) continue;
+        if (y + itemConfig.kartHitBottom > (trap.ground ?? 0) + itemConfig.trapHeight) continue;
         first = t; victim = racer;
       }
       if (victim) { this.hit(victim, trap.x, trap.z, trap.owner, 'banana-trap'); this.traps.splice(index, 1); }
@@ -214,7 +218,7 @@ export class ItemSystem {
         const t = sweepKart(pickup, pickup, racer.simulation.previous, racer.simulation.current, itemConfig.pickupRadius);
         if (t === null || t >= first) continue;
         const y = racer.simulation.previous.y + (racer.simulation.current.y - racer.simulation.previous.y) * t;
-        if (y + itemConfig.kartHitBottom > itemConfig.pickupHeight + itemConfig.pickupRadius || y + itemConfig.kartHitTop < itemConfig.pickupHeight - itemConfig.pickupRadius) continue;
+        if (y + itemConfig.kartHitBottom > (pickup.ground ?? 0) + itemConfig.pickupHeight + itemConfig.pickupRadius || y + itemConfig.kartHitTop < (pickup.ground ?? 0) + itemConfig.pickupHeight - itemConfig.pickupRadius) continue;
         winner = racer; first = t;
       }
       if (winner) {

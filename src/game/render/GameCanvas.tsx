@@ -1,3 +1,5 @@
+import { surfaceHeightAt } from '../tracks/trackSurface';
+import { TrackFeaturesVisual } from './TrackFeaturesVisual';
 import { RenderStats, type RenderSample } from '../dev/RenderStats';
 import { driverAssets, kartAssets } from '../config/visualAssets';
 import { Component, Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore, type ErrorInfo, type ReactNode } from 'react';
@@ -38,7 +40,7 @@ function GameLoop({ runtime, onFinish, assets }: { runtime: GameRuntime; onFinis
       ? waypointInput(runtime.simulation.current, runtime.race.track, { id: 'player', lane: runtime.demoLane ?? 0, targetSpeed: runtime.demoSpeed ?? 18.2 }, runtime.race.racers.filter(racer => racer.progress.finishTime === null).map(racer => ({ id: racer.id, state: racer.simulation.current }))) : human;
     if (import.meta.env.DEV && runtime.demoDriving) input.useItem = !!runtime.demoItems && runtime.race.items.shouldFire('player', runtime.race.racers) || !!human.useItem;
     runtime.race.advance(delta, input, runtime.mode === 'playing');
-    runtime.audio.update(runtime.simulation.current, runtime.mode === 'playing' && runtime.race.phase !== 'countdown');
+    runtime.audio.update(runtime.simulation.current, runtime.mode === 'playing' && runtime.race.phase !== 'countdown', surfaceHeightAt(runtime.simulation.track, runtime.simulation.current));
     runtime.audio.updateItems(runtime.race.items, runtime.mode === 'playing' && runtime.race.phase === 'racing');
     if (runtime.mode === 'playing' && runtime.race.phase === 'finished') onFinish();
   }, -3);
@@ -84,6 +86,7 @@ export function GameCanvas({ runtime, onError, onFinish, suspended = false, scen
         <GameLoop runtime={runtime} onFinish={onFinish} assets={assets} />
         <Environment track={runtime.simulation.track} runtime={runtime} />
         <TrackVisual track={runtime.simulation.track} />
+        <TrackFeaturesVisual track={runtime.simulation.track} active={runtime.mode === 'playing'} />
         <RaceTrackVisual runtime={runtime} />
         <OpponentVisuals runtime={runtime} statusFor={assets.reporter} />
         <TimeTrialGhost runtime={runtime} />

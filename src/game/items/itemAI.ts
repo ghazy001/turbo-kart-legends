@@ -1,3 +1,4 @@
+import { surfaceHeightAt } from '../tracks/trackSurface';
 import { itemBalance } from '../config/itemBalance';
 import { itemConfig } from '../config/itemConfig';
 import { kartConfig } from '../config/kartConfig';
@@ -15,7 +16,7 @@ function projected(state: KartState, seconds: number): KartState {
 export function shouldUseTurbo(owner: ItemRacer, racers: readonly ItemRacer[], track: SampledTrack): boolean {
   const state = owner.simulation.current, horizon = itemBalance.aiTurboLookAhead;
   if (state.forwardSpeed < itemConfig.turboMinSpeed || state.boostRemaining > 0 || state.driftDirection !== 0
-    || state.y > 0 || Math.abs(state.steering) > itemBalance.aiTurboMaxSteer || Math.abs(state.yawRate) > itemBalance.aiTurboMaxYaw) return false;
+    || state.y > surfaceHeightAt(track, state) + 0.01 || Math.abs(state.steering) > itemBalance.aiTurboMaxSteer || Math.abs(state.yawRate) > itemBalance.aiTurboMaxYaw) return false;
   const future = projected({ ...state, forwardSpeed: turboBoost.maxSpeed }, horizon);
   if (sweepRail(track, state, future, kartConfig.collisionRadius) !== null) return false;
   return !racers.some(racer => racer.id !== owner.id && racer.progress.finishTime === null
@@ -45,12 +46,12 @@ export function shouldShootBolt(owner: ItemRacer, racers: readonly ItemRacer[], 
   const wall = sweepRail(track, start, { x: start.x + (end.x - start.x) * first, z: start.z + (end.z - start.z) * first }, itemConfig.projectileRadius);
   return wall === null;
 }
-export function shouldDropTrap(owner: ItemRacer, racers: readonly ItemRacer[], point: { x: number; z: number }, slot: (id: string) => Readonly<ItemSlot> | undefined): boolean {
+export function shouldDropTrap(owner: ItemRacer, racers: readonly ItemRacer[], point: { x: number; z: number }, slot: (id: string) => Readonly<ItemSlot> | undefined, ground = 0): boolean {
   const state = owner.simulation.current, sin = Math.sin(state.heading), cos = Math.cos(state.heading);
   return racers.some(racer => {
     if (racer.id === owner.id || racer.progress.finishTime !== null) return false;
     const other = racer.simulation.current, ahead = (other.x - state.x) * sin + (other.z - state.z) * cos;
-    if (ahead >= -4 || ahead <= -itemConfig.aiTrapRange || other.y + itemConfig.kartHitBottom > itemConfig.trapHeight) return false;
+    if (ahead >= -4 || ahead <= -itemConfig.aiTrapRange || other.y + itemConfig.kartHitBottom > ground + itemConfig.trapHeight) return false;
     const at = sweepKart(point, point, other, projected(other, itemBalance.aiTrapLookAhead), itemConfig.trapRadius);
     const impact = at === null ? -1 : at * itemBalance.aiTrapLookAhead;
     return impact >= itemConfig.trapArmSeconds && (slot(racer.id)?.immunity ?? 0) <= impact;
@@ -69,7 +70,7 @@ export function guardThreat(owner: ItemRacer, projectiles: readonly SparkProject
   for (const trap of traps) {
     const at = sweepKart(trap, trap, state, future, itemConfig.trapRadius);
     if (at === null || trap.armRemaining > at * horizon || trap.life <= at * horizon
-      || trap.owner === owner.id && trap.ownerGrace > at * horizon || state.y + itemConfig.kartHitBottom > itemConfig.trapHeight) continue;
+      || trap.owner === owner.id && trap.ownerGrace > at * horizon || state.y + itemConfig.kartHitBottom > (trap.ground ?? 0) + itemConfig.trapHeight) continue;
     const contact = projected(state, at * horizon);
     if (sweepRail(track, state, contact, itemConfig.trapRadius) === null) return true;
   }

@@ -1,3 +1,5 @@
+import type { RoadRise, TrackFeature } from '../tracks/trackSurface';
+
 export interface Vec2 { x: number; z: number }
 
 /** Positive steer turns right. Forward is +Z at heading zero. */
@@ -35,6 +37,8 @@ export interface TrackDefinition {
   roadWidth: number;
   startDistance?: number;
   points: readonly Vec2[];
+  rises?: readonly RoadRise[];
+  features?: readonly TrackFeature[];
 }
 
 export interface TrackSample extends Vec2 { tx: number; tz: number; distance: number }

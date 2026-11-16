@@ -1,3 +1,4 @@
+import { surfacePitch } from '../tracks/trackSurface';
 import { Component, Suspense, useEffect, useRef, type ReactNode } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Group } from 'three';
@@ -36,6 +37,7 @@ function MovingKart({ runtime, kart, driver, onStatus }: { runtime: KartVisualRu
     const pose = runtime.simulation.pose;
     if (rig.current) { rig.current.position.set(pose.x, 0.055 + pose.y, pose.z); rig.current.rotation.y = pose.heading; }
     if (body.current) {
+      body.current.rotation.x = surfacePitch(runtime.simulation.track, pose);
       body.current.rotation.z = -pose.yawRate * pose.forwardSpeed * 0.0016;
       body.current.rotation.y = pose.driftDirection * 0.18;
       body.current.scale.y = 1 - pose.landingCompression;

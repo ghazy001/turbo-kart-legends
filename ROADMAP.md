@@ -117,3 +117,7 @@ Implemented the fourth pickup using the existing 1.5-second Flare boost, with on
 ## Step-by-step design rollout
 
 The user selected a dark showroom / warm yellow direction. Pass 1 implements a cleaner Home Menu and cosmetic showroom while preserving mode/state/input/race ownership. The coastal minimalist Racer and Kart Select pass is now implemented. The track/cup/options/review pass is also implemented. Next: HUD/pause/settings, then results/loading and environment polish. The remaining screens retain their existing styling until reviewed individually. See docs/DESIGN_ROLLOUT.md.
+
+## Sunshine Circuit gameplay and environment pass
+
+The user's track-specific enhancement request adds the original coastal venue, asphalt/edge treatment, refined loop, a continuous raised roller, two turbo strips and crest jump, with shared surface queries and ordinary AI/player fixed-step inputs. Other tracks and core handling/race systems remain. Branched shortcuts and moving collision hazards remain future work; validate this simpler course before expanding topology. See docs/SUNSHINE_CIRCUIT_UPGRADE.md for verification and limits.

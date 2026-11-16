@@ -1,5 +1,7 @@
-import { useEffect, useMemo } from 'react';
-import { BufferGeometry, Float32BufferAttribute } from 'three';
+import { roadHeight } from '../tracks/trackSurface';
+import { makeAsphaltTextures } from './roadTexture';
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { BufferGeometry, Float32BufferAttribute, InstancedMesh, Object3D } from 'three';
 import { sceneConfig } from '../config/kartConfig';
 import type { SampledTrack } from '../core/types';
 import { pointAtDistance } from '../race/trackProgress';
@@ -7,15 +9,21 @@ import { trackDefinition } from '../tracks/trackCatalog';
 import { offsetSample } from '../tracks/trackSampling';
 
 /** Closed strips use the exact same offset samples as collision's road corridor. */
-function makeBand(track: SampledTrack, inner: number, outer: number, y: number, alternating = false) {
+export function makeBand(track: SampledTrack, inner: number, outer: number, y: number, alternating = false) {
   const vertices: number[] = [];
   const colors: number[] = [];
+  const uvs: number[] = [];
   const indices: number[] = [];
   for (let i = 0; i < track.samples.length; i++) {
     const a = track.samples[i];
     const b = track.samples[(i + 1) % track.samples.length];
     const points = [offsetSample(a, inner), offsetSample(a, outer), offsetSample(b, inner), offsetSample(b, outer)];
-    points.forEach(p => vertices.push(p.x, y, p.z));
+    points.forEach((p, j) => {
+      const offset = j % 2 ? outer : inner;
+      const taper = Math.max(0, Math.min(1, (track.definition.roadWidth / 2 + 5 - Math.abs(offset)) / 4));
+      vertices.push(p.x, y + roadHeight(track, j < 2 ? a.distance : b.distance) * taper, p.z);
+      uvs.push(p.x * 0.65, p.z * 0.65);
+    });
     const base = i * 4;
     // +Y winding, valid for positive and negative offsets after ordering below.
     indices.push(base, base + 2, base + 1, base + 1, base + 2, base + 3);
@@ -25,30 +33,35 @@ function makeBand(track: SampledTrack, inner: number, outer: number, y: number, 
   }
   const geometry = new BufferGeometry();
   geometry.setAttribute('position', new Float32BufferAttribute(vertices, 3));
+  geometry.setAttribute('uv', new Float32BufferAttribute(uvs, 2));
   geometry.setAttribute('color', new Float32BufferAttribute(colors, 3));
   geometry.setIndex(indices);
   geometry.computeVertexNormals();
   return geometry;
 }
 
-function Band({ track, inner, outer, y, color, alternating = false }: {
-  track: SampledTrack; inner: number; outer: number; y: number; color?: string; alternating?: boolean;
+function Band({ track, inner, outer, y, color, alternating = false, asphalt = false }: {
+  track: SampledTrack; inner: number; outer: number; y: number; color?: string; alternating?: boolean; asphalt?: boolean;
 }) {
   const geometry = useMemo(() => makeBand(track, inner, outer, y, alternating), [track, inner, outer, y, alternating]);
+  const textures = useMemo(() => asphalt ? makeAsphaltTextures() : null, [asphalt]);
+  useEffect(() => () => { textures?.map.dispose(); textures?.bumpMap.dispose(); }, [textures]);
   useEffect(() => () => geometry.dispose(), [geometry]);
   return <mesh geometry={geometry} receiveShadow>
-    <meshStandardMaterial color={color ?? 'white'} vertexColors={alternating} roughness={0.94} />
+    <meshStandardMaterial color={color ?? 'white'} vertexColors={alternating} roughness={0.94} map={textures?.map} bumpMap={textures?.bumpMap} bumpScale={0.025} />
   </mesh>;
 }
 
 export function TrackVisual({ track }: { track: SampledTrack }) {
   const theme = trackDefinition(track.definition.id).theme;
+  const sunshine = track.definition.id === 'sunshine-circuit';
   const half = track.definition.roadWidth / 2;
   const spawn = track.spawn;
   const finish = pointAtDistance(track, track.definition.startDistance ?? 0);
   return <group>
+    {sunshine && [-1, 1].map(side => <Band key={side} track={track} inner={side < 0 ? -half - 5 : half + 1} outer={side < 0 ? -half - 1 : half + 5} y={0.008} color="#a4bb78" />)}
     <Band track={track} inner={-half - 1} outer={half + 1} y={0.01} color="#d5bf88" />
-    <Band track={track} inner={-half} outer={half} y={sceneConfig.roadY} color={theme.road} />
+    <Band track={track} inner={-half} outer={half} y={sceneConfig.roadY} color={theme.road} asphalt={sunshine} />
     {[-1, 1].map(side => <group key={side}>
       <Band track={track} inner={side * half - 0.3} outer={side * half + 0.3} y={0.055} alternating />
       <Band track={track} inner={side * (half - 0.48) - 0.055} outer={side * (half - 0.48) + 0.055} y={0.058} color="#ffedb3" />
@@ -60,6 +73,7 @@ export function TrackVisual({ track }: { track: SampledTrack }) {
         <planeGeometry args={[1, 0.7]} /><meshStandardMaterial color={(i + Math.floor(i / 10)) % 2 ? '#183e48' : '#fff6db'} />
       </mesh>)}
     </group>
+    {sunshine && <RoadDashes track={track} />}
     <group position={[spawn.x, 0.075, spawn.z]} rotation={[0, spawn.heading, 0]}>
       {[12, 28, 44].map(z => <group key={z} position={[0, 0, z]}>
         {[-1, 1].map(side => <mesh key={side} position={[side * 0.4, 0, 0]} rotation={[-Math.PI / 2, 0, -side * 0.6]}>
@@ -77,7 +91,8 @@ function RailSide({ track, offset }: { track: SampledTrack; offset: number }) {
     track.samples.forEach((sample, i) => {
       const p = offsetSample(sample, offset);
       const q = offsetSample(track.samples[(i + 1) % track.samples.length], offset);
-      positions.push(p.x, 0.04, p.z, q.x, 0.04, q.z, p.x, sceneConfig.railHeight, p.z, q.x, sceneConfig.railHeight, q.z);
+      const h = roadHeight(track, sample.distance), k = roadHeight(track, track.samples[(i + 1) % track.samples.length].distance);
+      positions.push(p.x, h + 0.04, p.z, q.x, k + 0.04, q.z, p.x, h + sceneConfig.railHeight, p.z, q.x, k + sceneConfig.railHeight, q.z);
       const b = i * 4;
       indices.push(b, b + 1, b + 2, b + 1, b + 3, b + 2);
     });
@@ -87,4 +102,22 @@ function RailSide({ track, offset }: { track: SampledTrack; offset: number }) {
   }, [track, offset]);
   useEffect(() => () => geometry.dispose(), [geometry]);
   return <mesh geometry={geometry} receiveShadow><meshStandardMaterial color={trackDefinition(track.definition.id).theme.rail} side={2} roughness={0.8} /></mesh>;
+}
+
+function RoadDashes({ track }: { track: SampledTrack }) {
+  const mesh = useRef<InstancedMesh>(null);
+  const count = Math.floor(track.length / 9);
+  useLayoutEffect(() => {
+    const object = new Object3D();
+    for (let i = 0; i < count; i++) {
+      const p = pointAtDistance(track, i * 9 + 4);
+      object.position.set(p.x, roadHeight(track, p.distance) + 0.065, p.z);
+      object.rotation.set(-Math.PI / 2, 0, -Math.atan2(p.tx, p.tz)); object.updateMatrix();
+      mesh.current?.setMatrixAt(i, object.matrix);
+    }
+    if (mesh.current) { mesh.current.instanceMatrix.needsUpdate = true; mesh.current.computeBoundingSphere(); }
+  }, [track, count]);
+  return <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
+    <planeGeometry args={[0.14, 2.3]} /><meshStandardMaterial color="#ecedda" transparent opacity={0.6} />
+  </instancedMesh>;
 }

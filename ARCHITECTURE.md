@@ -317,3 +317,7 @@ Racer preview rotation is menu-local `PreviewRotation` state, owned by the keyed
 
 
 `ui/GameButton.tsx` wraps a native button, forwarding existing handlers/ARIA/navigation attributes and defaulting to `type="button"`. `styles/buttons.css` owns accent/quiet/surface variants and tactile interaction states. Home mode choices keep their existing roving-navigation component with matching faces in home.css. Selection cards and touch-driving pads retain their own layouts. This presentation layer has no store, simulation, input or asset-loading ownership. See docs/DESIGN_ROLLOUT.md.
+
+## Sunshine surface and track features
+
+Optional `TrackDefinition.rises` and `features` add a shared pure height surface and swept directional track triggers, used only by Sunshine Circuit. Road/rails/checkpoint decorations, reset, grounded drift/hop checks, vertical landing, items and cosmetic kart pitch read that surface. Planar handling, capsule dimensions, navigation and race validation keep their owners. Turbo pads grant the existing Surge state plus a capped entry kick; the roller lip grants a ballistic impulse. Feature definitions/tuning invalidate obsolete Sunshine replay fingerprints without changing other courses' record inputs. Coastal scenery/dashes use static instancing and a small generated asphalt texture; additional FOV response is Sunshine-only and honors reduced motion. See docs/SUNSHINE_CIRCUIT_UPGRADE.md.

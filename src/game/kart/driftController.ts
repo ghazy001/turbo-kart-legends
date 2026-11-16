@@ -13,7 +13,7 @@ export function cancelDrift(state: KartState): KartState {
   return { ...state, driftDirection: 0, driftCharge: 0, driftGrace: 0 };
 }
 
-export function advanceDrift(state: KartState, input: KartInput, dt: number): KartState {
+export function advanceDrift(state: KartState, input: KartInput, dt: number, ground = 0): KartState {
   let next: KartState = { ...state,
     driftHeld: input.drift,
     actionCooldown: Math.max(0, state.actionCooldown - dt),
@@ -41,13 +41,13 @@ export function advanceDrift(state: KartState, input: KartInput, dt: number): Ka
     const steering = Math.abs(input.steer) >= config.minSteer;
     next.driftGrace = steering ? 0 : state.driftGrace + dt;
     if (next.driftGrace >= config.steerGrace) return { ...cancelDrift(next), actionCooldown: config.releaseCooldown };
-    if (steering && state.y === 0) {
+    if (steering && state.y <= ground + 0.001) {
       next.driftCharge = Math.min(boostTiers[2].charge, state.driftCharge + dt);
     } else if (!steering) next.driftCharge = Math.max(0, state.driftCharge - config.chargeDecay * dt);
     return next;
   }
   const pressed = input.drift && !state.driftHeld;
-  if (pressed && moving && state.y === 0 && next.actionCooldown === 0 && next.boostRemaining === 0) {
+  if (pressed && moving && state.y <= ground + 0.001 && next.actionCooldown === 0 && next.boostRemaining === 0) {
     next.verticalSpeed = config.hopImpulse;
     next.jumpSerial++;
     next.actionCooldown = config.releaseCooldown;

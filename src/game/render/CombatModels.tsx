@@ -16,9 +16,9 @@ function CombatBatch({ runtime, kind, geometry, material, transform }: { runtime
     scratch.frustum.setFromProjectionMatrix(scratch.projection.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
     let count = 0;
     if (trap) for (const hazard of items.traps) {
-      scratch.sphere.center.set(hazard.x, 0.4, hazard.z);
+      scratch.sphere.center.set(hazard.x, (hazard.ground ?? 0) + 0.4, hazard.z);
       if (!scratch.frustum.intersectsSphere(scratch.sphere)) continue;
-      scratch.matrix.makeTranslation(hazard.x, geometry ? 0.03 : 0.35, hazard.z).multiply(scratch.rotation.makeRotationY(hazard.heading));
+      scratch.matrix.makeTranslation(hazard.x, (hazard.ground ?? 0) + (geometry ? 0.03 : 0.35), hazard.z).multiply(scratch.rotation.makeRotationY(hazard.heading));
       if (transform) scratch.matrix.multiply(transform);
       mesh.current.setMatrixAt(count++, scratch.matrix);
     } else for (const bolt of items.projectiles) {

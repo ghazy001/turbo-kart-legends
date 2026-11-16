@@ -1,3 +1,4 @@
+import { roadHeight } from '../tracks/trackSurface';
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Group } from 'three';
@@ -15,13 +16,13 @@ export function RaceTrackVisual({ runtime }: { runtime: GameRuntime }) {
     if (group.current) group.current.visible = runtime.mode !== 'menu' && race.kind !== 'free-drive';
     const gate = race.checkpoints[race.player.progress.nextCheckpoint];
     if (nextGate.current) {
-      nextGate.current.position.set(gate.x, 0.075, gate.z);
+      nextGate.current.position.set(gate.x, roadHeight(race.track, gate.distance) + 0.075, gate.z);
       nextGate.current.rotation.y = Math.atan2(gate.tx, gate.tz);
       nextGate.current.visible = race.phase === 'racing';
     }
   }, -1);
   return <group ref={group} visible={false}>
-    {race.checkpoints.slice(1).map(gate => <group key={gate.id} position={[gate.x, 0.065, gate.z]} rotation={[0, Math.atan2(gate.tx, gate.tz), 0]}>
+    {race.checkpoints.slice(1).map(gate => <group key={gate.id} position={[gate.x, roadHeight(race.track, gate.distance) + 0.065, gate.z]} rotation={[0, Math.atan2(gate.tx, gate.tz), 0]}>
       {[-1, 1].map(side => <group key={side} position={[side * (gate.halfWidth + 0.7), 0, 0]}>
         <mesh position={[0, 0.8, 0]} castShadow><cylinderGeometry args={[0.09, 0.12, 1.6, 6]} /><meshStandardMaterial color="#ffedbc" /></mesh>
         <mesh position={[side * 0.35, 1.35, 0]}><boxGeometry args={[0.7, 0.45, 0.04]} /><meshStandardMaterial color={gate.id % 4 === 0 ? '#ffb84d' : '#45a9a3'} /></mesh>

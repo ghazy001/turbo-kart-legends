@@ -1,3 +1,4 @@
+import { surfaceHeightAt } from '../tracks/trackSurface';
 import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { AdditiveBlending, Color, Group, InstancedMesh, Mesh, MeshBasicMaterial, Object3D } from 'three';
@@ -20,7 +21,7 @@ export function KartEffects({ runtime }: { runtime: KartVisualRuntime }) {
     if (runtime.mode === 'playing') elapsed.current += Math.min(delta, 0.1);
     const tier = chargeTier(pose.driftCharge);
     if (sparks.current) {
-      sparks.current.visible = pose.driftDirection !== 0 && pose.y < 0.02;
+      sparks.current.visible = pose.driftDirection !== 0 && pose.y - surfaceHeightAt(runtime.simulation.track, pose) < 0.02;
       helpers.color.set(tier ? boostTiers[tier - 1].color : '#ffebbd');
       for (let i = 0; i < 24; i++) {
         const phase = (elapsed.current * 2.8 + i / 24) % 1;

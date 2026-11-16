@@ -1,3 +1,4 @@
+import { applyTrackFeatures, surfaceHeightAt } from '../tracks/trackSurface';
 import { kartConfig } from '../config/kartConfig';
 import { driftConfig } from '../config/driftConfig';
 import { constrainKart } from '../kart/kartCollision';
@@ -11,14 +12,15 @@ export function createKart(track: SampledTrack): KartState {
   return { ...track.spawn, forwardSpeed: 0, lateralSpeed: 0, yawRate: 0, wheelSpin: 0, steering: 0,
     driftDirection: 0, driftCharge: 0, driftGrace: 0, driftHeld: false, actionCooldown: 0,
     boostRemaining: 0, boostTier: 0, boostSerial: 0,
-    y: 0, verticalSpeed: 0, landingCompression: 0, jumpSerial: 0, landingSerial: 0,
+    y: surfaceHeightAt(track, track.spawn), verticalSpeed: 0, landingCompression: 0, jumpSerial: 0, landingSerial: 0,
   };
 }
 
 export function stepKart(state: KartState, input: KartInput, dt: number, track: SampledTrack): KartState {
   if (!Number.isFinite(state.x + state.z + state.heading + state.forwardSpeed + state.lateralSpeed + state.y + state.verticalSpeed)
     || nearestRoadPoint(track, state).distance > kartConfig.recoveryDistance) return createKart(track);
-  const moved = moveKart(state, input, dt);
+  const surface = track.definition.rises?.length ? { height: surfaceHeightAt(track, state), at: (point: { x: number; z: number }) => surfaceHeightAt(track, point) } : undefined;
+  const moved = applyTrackFeatures(track, state, moveKart(state, input, dt, surface), input);
   const constrained = constrainKart(moved, track);
   return constrained === moved ? moved : {
     ...cancelDrift(constrained), boostRemaining: 0, boostTier: 0, actionCooldown: driftConfig.boostRecovery,
@@ -39,7 +41,8 @@ export class Simulation {
   }
 
   reset(spawn: Pick<KartState, 'x' | 'z' | 'heading'> = this.track.spawn): void {
-    this.current = { ...createKart(this.track), ...spawn };
+    this.current = { ...createKart(this.track), x: spawn.x, z: spawn.z, heading: spawn.heading };
+    this.current.y = surfaceHeightAt(this.track, this.current);
     this.previous = { ...this.current };
     Object.assign(this.pose, this.current);
     this.clock.reset();

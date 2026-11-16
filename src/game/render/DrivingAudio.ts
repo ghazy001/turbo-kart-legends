@@ -72,11 +72,11 @@ export class DrivingAudio {
     this.celebrationGain?.disconnect(); this.celebrationGain = null;
   }
 
-  update(state: KartState, playing: boolean): void {
+  update(state: KartState, playing: boolean, ground = 0): void {
     const context = this.context;
     if (!context) return;
     this.setMaster(playing && !this.muted ? 0.28 : 0);
-    this.setSkid(playing && state.driftDirection !== 0 && state.y === 0 ? 0.12 : 0);
+    this.setSkid(playing && state.driftDirection !== 0 && state.y <= ground + 0.01 ? 0.12 : 0);
     if (playing && !this.muted && context.state === 'running') {
       if (state.boostSerial > this.seenBoost && state.boostRemaining > 0) {
         const base = 220 + state.boostTier * 90;

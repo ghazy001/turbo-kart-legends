@@ -1,3 +1,4 @@
+import { SunshineScenery } from './SunshineScenery';
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Color, DirectionalLight, InstancedMesh, Object3D } from 'three';
@@ -104,6 +105,7 @@ function StartArea({ track }: { track: SampledTrack }) {
 
 export function Environment({ track, runtime }: { track: SampledTrack; runtime: GameRuntime }) {
   const theme = trackDefinition(track.definition.id).theme;
+  const sunshine = track.definition.id === 'sunshine-circuit';
   const light = useRef<DirectionalLight>(null);
   const lightTarget = useMemo(() => new Object3D(), []);
   useFrame(() => {
@@ -114,14 +116,14 @@ export function Environment({ track, runtime }: { track: SampledTrack; runtime: 
   }, -1);
   return <>
     <color attach="background" args={[theme.sky]} />
-    <fog attach="fog" args={[theme.sky, 100, 280]} />
-    <hemisphereLight args={[theme.volcanic ? '#ffe3cf' : theme.winter ? '#f6fbff' : '#fff8de', theme.volcanic ? '#695d77' : theme.winter ? '#7797b3' : '#5f9566', 2.1]} />
+    <fog attach="fog" args={[theme.sky, sunshine ? 145 : 100, sunshine ? 350 : 280]} />
+    <hemisphereLight args={[theme.volcanic ? '#ffe3cf' : theme.winter ? '#f6fbff' : '#fff8de', theme.volcanic ? '#695d77' : theme.winter ? '#7797b3' : '#5f9566', sunshine ? 1.7 : 2.1]} />
     <primitive object={lightTarget} />
-    <directionalLight ref={light} target={lightTarget} position={[-45, 70, -40]} intensity={2.6} color={theme.volcanic ? '#ffd2b2' : '#fff0cf'} castShadow
-      shadow-mapSize={[1024, 1024]} shadow-camera-left={-30} shadow-camera-right={30}
+    <directionalLight ref={light} target={lightTarget} position={[-45, 70, -40]} intensity={sunshine ? 2.8 : 2.6} color={theme.volcanic ? '#ffd2b2' : '#fff0cf'} castShadow
+      shadow-mapSize={[sunshine ? 2048 : 1024, sunshine ? 2048 : 1024]} shadow-normalBias={sunshine ? 0.025 : 0} shadow-camera-left={-30} shadow-camera-right={30}
       shadow-camera-top={30} shadow-camera-bottom={-30} shadow-camera-far={180} shadow-bias={-0.0005} />
     <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow><planeGeometry args={[1600, 1600]} /><meshStandardMaterial color={theme.ground} roughness={1} /></mesh>
-    {theme.volcanic ? <VolcanicScenery track={track} /> : <Forest track={track} />}
+    {sunshine ? <SunshineScenery track={track} runtime={runtime} /> : theme.volcanic ? <VolcanicScenery track={track} /> : <Forest track={track} />}
     <StartArea track={track} />
     {theme.winter && <AlpineScenery track={track} />}
     {!theme.winter && !theme.volcanic && Array.from({ length: 12 }, (_, i) => {

@@ -1,3 +1,4 @@
+import { surfaceHeightAt } from '../tracks/trackSurface';
 import { Component, Suspense, useMemo, useRef, type ReactNode } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
@@ -18,7 +19,7 @@ function PickupBatch({ geometry, material, transform, runtime }: { geometry?: Bu
     let count = 0;
     for (const [index, pickup] of runtime.race.items.pickups.entries()) {
       if (pickup.respawn > 0) continue;
-      const y = itemConfig.pickupHeight + Math.sin(runtime.race.items.time * 2.3 + index) * 0.1;
+      const y = (pickup.ground ?? 0) + itemConfig.pickupHeight + Math.sin(runtime.race.items.time * 2.3 + index) * 0.1;
       scratch.sphere.center.set(pickup.x, y, pickup.z);
       if (!scratch.frustum.intersectsSphere(scratch.sphere)) continue;
       scratch.matrix.makeTranslation(pickup.x, y, pickup.z).multiply(scratch.rotation.makeRotationY(runtime.race.items.time * 0.75 + index * 0.4));
@@ -66,7 +67,7 @@ function CombatEffects({ runtime }: { runtime: GameRuntime }) {
     trails.current.count = items.projectiles.length;
     for (const [index, trap] of items.traps.entries()) {
       const size = itemConfig.trapRadius * (trap.armRemaining > 0 ? 0.9 + Math.sin(items.time * 16) * 0.1 : 1);
-      scratch.matrix.makeTranslation(trap.x, 0.025, trap.z).multiply(scratch.rotation.makeRotationX(-Math.PI / 2)).multiply(scratch.scale.makeScale(size, size, 1));
+      scratch.matrix.makeTranslation(trap.x, (trap.ground ?? 0) + 0.025, trap.z).multiply(scratch.rotation.makeRotationX(-Math.PI / 2)).multiply(scratch.scale.makeScale(size, size, 1));
       warning.current.setMatrixAt(index, scratch.matrix);
     }
     warning.current.count = items.traps.length;
@@ -75,7 +76,7 @@ function CombatEffects({ runtime }: { runtime: GameRuntime }) {
       const event = items.events[i], age = items.time - event.time;
       if (!['hit', 'blocked', 'wall', 'pickup'].includes(event.kind) || age > 0.5) continue;
       const size = 0.2 + age * 4;
-      scratch.matrix.makeTranslation(event.x, 0.12 + age, event.z).multiply(scratch.rotation.makeRotationX(-Math.PI / 2)).multiply(scratch.scale.makeScale(size, size, 1));
+      scratch.matrix.makeTranslation(event.x, surfaceHeightAt(runtime.race.track, event) + 0.12 + age, event.z).multiply(scratch.rotation.makeRotationX(-Math.PI / 2)).multiply(scratch.scale.makeScale(size, size, 1));
       rings.current.setMatrixAt(ringCount++, scratch.matrix);
     }
     rings.current.count = ringCount;
