@@ -223,3 +223,5 @@ Sunshine's vegetation, pit-stop pumps, crowds and tire-wall backing now use the 
 Sugar Rush Valley now uses the supplied candy-market models: shop landmarks, cotton-candy stalls, parked ice-cream trucks, lollipop gardens, static mascots and a complete service station. Road markings follow the course ribbon; gameplay and controls are unchanged. See [integration, regeneration, verification and limitations](docs/SUGAR_RUSH_ENVIRONMENT.md).
 
 Volcano Sprint now uses the supplied cartoon calderas, rock gardens and static dragon/dinosaur landmarks, with textured road and aligned markings. Controls and racing rules are unchanged. See [asset capabilities, regeneration, credits and verification](docs/VOLCANO_ENVIRONMENT_ASSETS.md).
+
+Frostbite Peak now uses both supplied snowy tree models, intact cabin scenes, snowmen and static wolves, with blue/white curbs and road-aligned asphalt markings. Existing tunnels, racing systems and controls remain. See [winter assets, regeneration, credits and verification](docs/FROSTBITE_ENVIRONMENT_ASSETS.md).

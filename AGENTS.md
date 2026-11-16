@@ -61,6 +61,9 @@ The user requested the same supplied-asset scenery treatment for Sugar Rush Vall
 
 The user requested the supplied-model scenery pass for Volcano Sprint using the six GLBs from Downloads/vlocano. Fit calderas, rocks and static creature landmarks through the shared course-specific renderer/readiness barrier. Preserve source files/credits, distinguish actual rigging from absent clips, convert incompatible legacy materials only in derivatives, and keep wings/tails beyond the racing corridor/lava. No simulation, AI, camera, collider, item or race-rule changes. See docs/VOLCANO_ENVIRONMENT_ASSETS.md.
 
+
+The user requested the supplied-model scenery pass for Frostbite Peak using six GLBs from Downloads/snow. Use both distinct snowy trees, the intact decorated cabin scene, Witch House, static snowmen and wolves through course-scoped readiness/instancing. Preserve sources/credits, exact fitting and tunnel/mountain clearance; convert the wolf material in its derivative and preserve solid colors during static batching. Keep route, tunnels, physics, AI, camera, collider, item and race rules unchanged. All six supplied models are unrigged with no clips. See docs/FROSTBITE_ENVIRONMENT_ASSETS.md.
+
 ## Preferred technology
 
 

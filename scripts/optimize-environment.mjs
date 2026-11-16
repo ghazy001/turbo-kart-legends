@@ -25,6 +25,12 @@ const definitions = [
   ['dinosaur', 'dinosaur', 1, 0.001, 512],
   ['deadly-nadder', 'deadly-nadder', 0.16, 0.006, 1024],
   ['momma-dino', 'momma-dino', 0.45, 0.003, 512],
+  ['happy-snowman', 'happy-snowman', 1, 0.001, 512],
+  ['snow-wolf', 'snow-wolf', 1, 0.001, 512],
+  ['snow-pine', 'snow-pine', 1, 0.001, 512],
+  ['snow-fir', 'snow-fir', 1, 0.001, 512],
+  ['witch-house', 'witch-house', 0.8, 0.002, 1024],
+  ['winter-cabin', 'winter-cabin', 1, 0.001, 512],
 ];
 const report = [];
 for (const [source, output, ratio, error, textureCap] of definitions) {

@@ -339,3 +339,7 @@ Sunshine house/cactus placements share the existing static material-batch pipeli
 ## Volcano supplied scenery
 
 `volcanoAssetLayout` composes supplied calderas, rock gardens and posed creature landmarks with full-envelope road/prop/lava clearance. `VolcanicScenery` keeps existing lava fields and renders six course-scoped model batches/readiness slots. The shared preparation path explicitly freezes only Dinosaur’s independently cloned bound skeleton, and separates material batches by compatible vertex layouts for Momma Dino. Other sources remain static; no animation or collision ownership is introduced. Offline artistic matte conversion handles only the two inspected complex legacy sources. See docs/VOLCANO_ENVIRONMENT_ASSETS.md.
+
+## Frostbite supplied scenery
+
+`frostbiteAssetLayout` places mixed supplied trees, cabin scenes, snowmen and wolves with complete footprint checks around road/tunnels and circle separation from mountains/other props. `AlpineScenery` shares six course-specific loading/static batches while retaining its original tunnels, snowbanks and mountains. Inspected opaque untextured cabin/tree colors become linear vertex colors in one matte material per asset; no other source material path changes. Wolf legacy material conversion stays offline. Simulation and collision ownership remain unchanged. See docs/FROSTBITE_ENVIRONMENT_ASSETS.md.

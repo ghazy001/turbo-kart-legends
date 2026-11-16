@@ -269,3 +269,19 @@ All six supplied `Downloads/vlocano` originals are preserved byte-for-byte. Thes
 | `momma_dino_remake.glb` → `assets/environment/momma-dino.glb` | HenryIsRaptor (https://sketchfab.com/Sporx-Nightcall) | https://sketchfab.com/3d-models/momma-dino-remake-9d95ec6f09044c279705ef85e0a31d66 | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
 
 Modifications: offline limited mesh simplification and texture caps; precise centering/grounding/scaling and static instancing. Volcano and Dinosaur runtime derivatives use an explicit artistic matte nonmetal conversion of legacy specular/glossiness materials, retaining original diffuse/normal textures and credits. Dinosaur's bound skeleton is cloned and its supplied pose frozen once into static runtime buffers; original rig/bindings remain. No animation clips exist or are invented. Momma Dino retains authored vertex colors and UV layouts in compatible separate batches; its clear eye shell avoids scene transmission. Originals and embedded credits remain intact. See `docs/VOLCANO_ENVIRONMENT_ASSETS.md`, `docs/assets/environment-audit.json` and `environment-optimization.json`.
+
+
+## Supplied Frostbite Peak winter scenery (2026-11-16)
+
+All six originals from `Downloads/snow` are preserved byte-for-byte. The similarly named tree sources are distinct models by different authors, both integrated. All six declare CC BY 4.0; these embedded uploader declarations are recorded without independently verifying public-release rights.
+
+| Supplied filename → preserved path | Embedded author | Embedded source | Declared license |
+| --- | --- | --- | --- |
+| `happy_snowman.glb` → `assets/environment/happy-snowman.glb` | BojackArt (https://sketchfab.com/bojackart) | https://sketchfab.com/3d-models/happy-snowman-2fed541b551b4c7a85d9aa712ac09786 | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
+| `loup.glb` → `assets/environment/snow-wolf.glb` | alexandre.ltrgn (https://sketchfab.com/leturgea) | https://sketchfab.com/3d-models/loup-3af6d9d8a5e648939298a9c8cdbc0bc4 | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
+| `low_poly_snow_tree.glb` → `assets/environment/snow-pine.glb` | TWOG (https://sketchfab.com/TWOG) | https://sketchfab.com/3d-models/low-poly-snow-tree-b6555946289f4fc2be92d255daf20518 | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
+| `low-poly_snow_tree.glb` → `assets/environment/snow-fir.glb` | Jackmcm (https://sketchfab.com/Jackmcm) | https://sketchfab.com/3d-models/low-poly-snow-tree-38ca4cbb92194eebad237b2e063f6b6e | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
+| `witch_house.glb` → `assets/environment/witch-house.glb` | noortjeschuur (https://sketchfab.com/noortjeschuur) | https://sketchfab.com/3d-models/witch-house-b80354ec77004e36a872a1a7b220c758 | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
+| `x_house.glb` → `assets/environment/winter-cabin.glb` | Sba Stuff (https://sketchfab.com/sbastuff) | https://sketchfab.com/3d-models/x-house-ec7b39e705504e3cb3ddbaa560570dc3 | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
+
+Modifications: offline texture caps and runtime derivative repacking; explicit artistic matte nonmetal conversion of the wolf's legacy specular/glossiness material, retaining diffuse texture/UVs and original credits. Source-relative centering, grounding/scaling and static instance transforms. The cabin scene remains intact. The opaque untextured cabin/tree materials are baked into equivalent linear vertex colors and shared matte batches. Snowman materials use depth-writing alpha cutouts and restrained matte/emissive settings. Originals and embedded metadata remain unchanged. All six are unrigged with zero clips; no animation is claimed. See `docs/FROSTBITE_ENVIRONMENT_ASSETS.md` and the source/derivative JSON audits for details and budgets.

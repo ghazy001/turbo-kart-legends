@@ -54,22 +54,23 @@ function Band({ track, inner, outer, y, color, alternating = false, asphalt = fa
   </mesh>;
 }
 
+const frostbiteCurbs = ['#6997ae', '#f4fafc'] as const;
 const volcanoCurbs = ['#ce8b46', '#fff0d5'] as const;
 const sugarCurbs = ['#c995b9', '#fff0d5'] as const;
 export function TrackVisual({ track }: { track: SampledTrack }) {
   const theme = trackDefinition(track.definition.id).theme;
   const sunshine = track.definition.id === 'sunshine-circuit';
-  const detailedRoad = sunshine || theme.candy || theme.volcanic;
+  const detailedRoad = sunshine || theme.candy || theme.volcanic || theme.winter;
   const half = track.definition.roadWidth / 2;
   const spawn = track.spawn;
   const finish = pointAtDistance(track, track.definition.startDistance ?? 0);
   return <group>
     {sunshine && [-1, 1].map(side => <Band key={side} track={track} inner={side < 0 ? -half - 5 : half + 1} outer={side < 0 ? -half - 1 : half + 5} y={0.008} color="#a4bb78" />)}
     {theme.candy && <Band track={track} inner={-half - 3.5} outer={half + 3.5} y={0.008} color="#eadac2" />}
-    <Band track={track} inner={-half - 1} outer={half + 1} y={0.01} color="#d5bf88" />
+    <Band track={track} inner={-half - 1} outer={half + 1} y={0.01} color={theme.winter ? '#bdd1db' : '#d5bf88'} />
     <Band track={track} inner={-half} outer={half} y={sceneConfig.roadY} color={theme.road} asphalt={detailedRoad} />
     {[-1, 1].map(side => <group key={side}>
-      <Band track={track} inner={side * half - 0.3} outer={side * half + 0.3} y={0.055} alternating curbColors={theme.candy ? sugarCurbs : theme.volcanic ? volcanoCurbs : undefined} />
+      <Band track={track} inner={side * half - 0.3} outer={side * half + 0.3} y={0.055} alternating curbColors={theme.candy ? sugarCurbs : theme.volcanic ? volcanoCurbs : theme.winter ? frostbiteCurbs : undefined} />
       <Band track={track} inner={side * (half - 0.48) - 0.055} outer={side * (half - 0.48) + 0.055} y={0.058} color="#ffedb3" />
       <Band track={track} inner={side * (half + sceneConfig.railCenterOffset) - sceneConfig.railWidth / 2} outer={side * (half + sceneConfig.railCenterOffset) + sceneConfig.railWidth / 2} y={sceneConfig.railHeight} color="#fff5d5" />
       <RailSide track={track} offset={side * (half + sceneConfig.railCenterOffset - sceneConfig.railWidth / 2)} />

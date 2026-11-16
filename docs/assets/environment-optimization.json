@@ -818,5 +818,206 @@
     "afterTriangles": 33374,
     "simplifiedPrimitives": 2,
     "maxRelativeError": 0.0029795756563544273
+  },
+  {
+    "source": "happy-snowman",
+    "output": "happy-snowman",
+    "sourceSha256": "cd5d2c06969035e636abf797d96951b1e8b2b0cf11b91efb91fabdb642c0ea53",
+    "sourceBytes": 1928424,
+    "outputBytes": 879572,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 24289,
+        "sha256": "cf5696826c331721b418077839ac816c54853ca1d33a4aa549cbb62956461e2b"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 118232,
+        "sha256": "11f61bc17407d299db86435b45e4ad619d356d3c64d4f318a88511e696db8c5f"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/jpeg",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 4989,
+        "sha256": "8ff74fcf037bb1e4b8ac064a6dfff7db3d93daf4a735a374995da3c324f45633"
+      },
+      {
+        "index": 3,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 194814,
+        "sha256": "cc28f27b17051c70c1c0e2de3a942b55cdbce6fe09875c342d5f09658f51099f"
+      },
+      {
+        "index": 4,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 18213,
+        "sha256": "3a8a75e0ebed7df535f83831927887b5515cd99ac72dd7402fd964aa1cbfe072"
+      },
+      {
+        "index": 5,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 149209,
+        "sha256": "fe588315f1ff815e91a9869d28a8c9e8018e466061bee78572fa130d05206add"
+      },
+      {
+        "index": 6,
+        "mimeType": "image/jpeg",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 4989,
+        "sha256": "8ff74fcf037bb1e4b8ac064a6dfff7db3d93daf4a735a374995da3c324f45633"
+      },
+      {
+        "index": 7,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 194718,
+        "sha256": "ffe25ee91ea51041e27e05c78e007c7195a4659baed7bd482a9034048ede43fe"
+      }
+    ],
+    "beforeTriangles": 3612,
+    "afterTriangles": 3612,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "snow-wolf",
+    "output": "snow-wolf",
+    "sourceSha256": "cc0272501f991e5b18fe7efc4d586db75dea89c84119b1c376947e5ca673f6ad",
+    "sourceBytes": 1435264,
+    "outputBytes": 682852,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 344290,
+        "sha256": "660e7890c9eb985f9a62ca153709568337b072b560569a1b8f6ce8915b94678a"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 128,
+        "sourceHeight": 128,
+        "width": 128,
+        "height": 128,
+        "bytes": 230,
+        "sha256": "874f0c573ecbe8391fe9111bc251415494c9bc93db4ba81426dc86c408bf1e5b"
+      }
+    ],
+    "beforeTriangles": 2180,
+    "afterTriangles": 2180,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "snow-pine",
+    "output": "snow-pine",
+    "sourceSha256": "d11cd8893d7ce37b31e021a62bc7cad09088c88d4f5a303545f61ad271b1fc87",
+    "sourceBytes": 74280,
+    "outputBytes": 74464,
+    "textureCap": 512,
+    "images": [],
+    "beforeTriangles": 926,
+    "afterTriangles": 926,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "snow-fir",
+    "output": "snow-fir",
+    "sourceSha256": "8ee64f662945263021c056d417e554fa8adaf692bc3968139ebd191b6a051eb9",
+    "sourceBytes": 40732,
+    "outputBytes": 40984,
+    "textureCap": 512,
+    "images": [],
+    "beforeTriangles": 582,
+    "afterTriangles": 582,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "witch-house",
+    "output": "witch-house",
+    "sourceSha256": "7236b0f542b01b96309aa6fa35855ad5373ff05ec505a19456cb6708b8504b31",
+    "sourceBytes": 918464,
+    "outputBytes": 931320,
+    "textureCap": 1024,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 230111,
+        "sha256": "de6aa482b10e4c0f49fe2f5e8b6d0743143126fbf8a0fb05bd027548e8aed3e8"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 369060,
+        "sha256": "7aefc9bdf381508b8290b8d0cda0e014f6048049360f87c0377c093e5317bf9e"
+      }
+    ],
+    "beforeTriangles": 3902,
+    "afterTriangles": 3902,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "winter-cabin",
+    "output": "winter-cabin",
+    "sourceSha256": "8ea865619f12414557c872de49c8ac067dc9922db1903198659fdaba1f1b645a",
+    "sourceBytes": 455496,
+    "outputBytes": 463608,
+    "textureCap": 512,
+    "images": [],
+    "beforeTriangles": 6145,
+    "afterTriangles": 6145,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
   }
 ]

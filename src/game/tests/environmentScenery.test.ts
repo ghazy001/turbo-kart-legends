@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { Box3, Mesh, MeshPhysicalMaterial, SkinnedMesh, Vector3 } from 'three';
+import { Box3, Mesh, MeshPhysicalMaterial, MeshStandardMaterial, SkinnedMesh, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { describe, expect, it } from 'vitest';
 import { environmentAssets, environmentSize, sunshineEnvironmentIds, type EnvironmentAssetId } from '../config/environmentAssets';
@@ -101,7 +101,7 @@ describe('supplied Sunshine environment composition', () => {
     }
   });
   it('records real static capabilities, preserves credits, and budgets mesh/texture derivatives', async () => {
-    expect(audit).toHaveLength(19);
+    expect(audit).toHaveLength(25);
     for (const source of audit) { expect(source.skins).toBe(source.id === 'dinosaur' ? 21 : 0); expect(source.clips).toEqual([]); expect(source.metadata.extras.author).toBeTruthy(); }
     for (const asset of report) {
       const bytes = readFileSync(new URL(`../../../public/assets/optimized/environment/${asset.output}.glb`, import.meta.url));
@@ -148,6 +148,20 @@ describe('supplied Sunshine environment composition', () => {
     expect(model.parts.every(part => !(part.material instanceof MeshPhysicalMaterial) || part.material.transmission === 0)).toBe(true);
     disposeEnvironmentModels();
   });
+  it('batches snowy trees and the 39-material cabin into one draw each while preserving linear source colors and topology', async () => {
+    const colorKey = (values: number[]) => values.map(value => value.toFixed(5)).join('/');
+    for (const id of ['snow-pine', 'snow-fir', 'winter-cabin'] as const) {
+      const loaded = await loadGeometry(environmentAssets[id].url), colors = new Set<string>();
+      loaded.scene.traverse(node => { if (node instanceof Mesh && node.material instanceof MeshStandardMaterial) colors.add(colorKey(node.material.color.toArray())); });
+      const model = prepareEnvironmentModel(loaded.scene, id);
+      expect(model.parts).toHaveLength(1);
+      expect(model.parts[0].geometry.index!.count / 3).toBe(report.find(asset => asset.source === id)!.afterTriangles);
+      const vertexColors = model.parts[0].geometry.attributes.color;
+      for (let i = 0; i < vertexColors.count; i++) expect(colors.has(colorKey([vertexColors.getX(i), vertexColors.getY(i), vertexColors.getZ(i)]))).toBe(true);
+      expect((model.parts[0].material as MeshStandardMaterial).color.getHexString()).toBe('ffffff');
+      disposeEnvironmentModels();
+    }
+  });
   it.each(Object.keys(environmentAssets) as EnvironmentAssetId[])('%s: ground-aligns, centers and batches the real source without mutating cached geometry', async id => {
     const asset = environmentAssets[id], loaded = await loadGeometry(asset.url);
     loaded.scene.updateMatrixWorld(true); const before = new Box3().setFromObject(loaded.scene);
@@ -159,7 +173,7 @@ describe('supplied Sunshine environment composition', () => {
     const expected = environmentSize(id), size = box.getSize(new Vector3());
     expect(size.x).toBeLessThanOrEqual(expected[0] + 0.001); expect(size.x).toBeGreaterThan(expected[0] * 0.93);
     expect(size.z).toBeLessThanOrEqual(expected[2] + 0.001); expect(size.z).toBeGreaterThan(expected[2] * 0.93);
-    expect(model.parts.length).toBeLessThanOrEqual(id === 'momma-dino' ? 7 : id === 'charizard' ? 5 : id === 'cotton-candy-stall' ? 12 : id === 'lowpoly-gas-station' ? 5 : id === 'stylized-tree' || id === 'viking-house' || id === 'lollipops-pack' ? 2 : 1);
+    expect(model.parts.length).toBeLessThanOrEqual(id === 'witch-house' ? 4 : id === 'happy-snowman' ? 2 : id === 'momma-dino' ? 7 : id === 'charizard' ? 5 : id === 'cotton-candy-stall' ? 12 : id === 'lowpoly-gas-station' ? 5 : id === 'stylized-tree' || id === 'viking-house' || id === 'lollipops-pack' ? 2 : 1);
     expect(prepareEnvironmentModel(loaded.scene, id)).toBe(model);
     expect(new Box3().setFromObject(loaded.scene).equals(before)).toBe(true);
     for (const part of model.parts) expect(sourceMeshes.some(mesh => mesh.geometry === part.geometry || mesh.material === part.material)).toBe(false);

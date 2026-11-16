@@ -143,3 +143,7 @@ Integrated the five supplied candy-market GLBs and reused the complete station, 
 ## Volcano Sprint supplied-model scenery
 
 Replaced primitive calderas/pillars with supplied cartoon volcanoes and spaced rock gardens, adding a few static dragon/dinosaur landmarks at distinct bends. The six supplied assets have optimized derivatives, precise fitting, per-course readiness, shared instancing and preserved credits. Textured asphalt/aligned paint, amber curbs and softer dusk lighting preserve route, physics, AI, camera, items, records and cup rules. No animation clips or new hazards are invented. See docs/VOLCANO_ENVIRONMENT_ASSETS.md.
+
+## Frostbite Peak supplied-model scenery
+
+Replaced the primitive snowy forest with both supplied tree models, cabin clearings, static snowmen and wolves. The decorated X House scene is retained intact, and Witch House adds a different silhouette. Precise envelopes reserve road, tunnels and mountain bases; course-scoped static batches/readiness, texture caps, aligned asphalt paint and blue/white curbs preserve gameplay, controls, AI, camera and other tracks. See docs/FROSTBITE_ENVIRONMENT_ASSETS.md for assets, checks and remaining release/device limits.

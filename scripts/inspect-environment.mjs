@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { unpackGLB } from './optimize-assets.mjs';
 import { imageDimensions } from './glb-textures.mjs';
 import { createHash } from 'node:crypto';
-const names = ['gas-station', 'tire-wall', 'spectators', 'stylized-tree', 'viking-house', 'cactus', 'stylized-house', 'lowpoly-gas-station', 'cotton-candy-stall', 'ice-cream-truck', 'lollipops-pack', 'sugar-mascot', 'sugarcube-corner', 'cartoon-volcano', 'charizard', 'desert-rocks', 'dinosaur', 'deadly-nadder', 'momma-dino'];
+const names = ['gas-station', 'tire-wall', 'spectators', 'stylized-tree', 'viking-house', 'cactus', 'stylized-house', 'lowpoly-gas-station', 'cotton-candy-stall', 'ice-cream-truck', 'lollipops-pack', 'sugar-mascot', 'sugarcube-corner', 'cartoon-volcano', 'charizard', 'desert-rocks', 'dinosaur', 'deadly-nadder', 'momma-dino', 'happy-snowman', 'snow-wolf', 'snow-pine', 'snow-fir', 'witch-house', 'winter-cabin'];
 export async function environmentGeometry(bytes) {
   const length = bytes.readUInt32LE(12), document = JSON.parse(bytes.toString('utf8', 20, 20 + length));
   const strip = value => {

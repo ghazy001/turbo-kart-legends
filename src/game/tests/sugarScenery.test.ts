@@ -47,7 +47,7 @@ describe('Sugar Rush supplied scenery', () => {
     expect(environmentSlotsForTrack(track.definition.id)).toHaveLength(6);
     expect(environmentSlotsForTrack('sunshine-circuit')).toHaveLength(9);
     for (const { track: other } of trackCatalog.filter(entry => entry.id !== track.definition.id)) expect(sugarScenery(other)).toEqual({ placements: [], plots: [] });
-    expect(environmentSlotsForTrack('frostbite-peak')).toEqual([]); expect(environmentSlotsForTrack('volcano-sprint')).toHaveLength(6);
+    expect(environmentSlotsForTrack('frostbite-peak')).toHaveLength(6); expect(environmentSlotsForTrack('volcano-sprint')).toHaveLength(6);
     expect(environmentIdsForTrack('sunshine-circuit')).not.toContain('lollipops-pack');
   });
   it('waits for the candy scenery and safely settles a failed model without skipping the readiness barrier', () => {

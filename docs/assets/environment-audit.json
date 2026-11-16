@@ -1836,5 +1836,906 @@
         "triangles": 96
       }
     ]
+  },
+  {
+    "id": "happy-snowman",
+    "metadata": {
+      "extras": {
+        "author": "BojackArt (https://sketchfab.com/bojackart)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/happy-snowman-2fed541b551b4c7a85d9aa712ac09786",
+        "title": "Happy Snowman"
+      },
+      "generator": "Sketchfab-15.49.0",
+      "version": "2.0"
+    },
+    "sha256": "cd5d2c06969035e636abf797d96951b1e8b2b0cf11b91efb91fabdb642c0ea53",
+    "bytes": 1928424,
+    "min": [
+      -3709.424591064453,
+      -134.86725380687847,
+      -1357.481588945593
+    ],
+    "max": [
+      3598.3394622802734,
+      5787.159836813659,
+      1450.6496624179633
+    ],
+    "size": [
+      7307.764053344727,
+      5922.027090620538,
+      2808.1312513635567
+    ],
+    "preciseMin": [
+      -3709.424591064453,
+      -134.86709594726648,
+      -1357.4814310859922
+    ],
+    "preciseSize": [
+      7307.764053344727,
+      5922.026824951209,
+      2808.1310831642577
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "defaultMaterial",
+        "triangles": 292
+      },
+      {
+        "name": "defaultMaterial_1",
+        "triangles": 192
+      },
+      {
+        "name": "defaultMaterial_2",
+        "triangles": 192
+      },
+      {
+        "name": "defaultMaterial_3",
+        "triangles": 192
+      },
+      {
+        "name": "defaultMaterial_4",
+        "triangles": 56
+      },
+      {
+        "name": "defaultMaterial_5",
+        "triangles": 192
+      },
+      {
+        "name": "defaultMaterial_6",
+        "triangles": 384
+      },
+      {
+        "name": "defaultMaterial_7",
+        "triangles": 384
+      },
+      {
+        "name": "defaultMaterial_8",
+        "triangles": 384
+      },
+      {
+        "name": "defaultMaterial_9",
+        "triangles": 384
+      },
+      {
+        "name": "defaultMaterial_10",
+        "triangles": 384
+      },
+      {
+        "name": "defaultMaterial_11",
+        "triangles": 192
+      },
+      {
+        "name": "defaultMaterial_12",
+        "triangles": 192
+      },
+      {
+        "name": "defaultMaterial_13",
+        "triangles": 192
+      }
+    ]
+  },
+  {
+    "id": "snow-wolf",
+    "metadata": {
+      "extras": {
+        "author": "alexandre.ltrgn (https://sketchfab.com/leturgea)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/loup-3af6d9d8a5e648939298a9c8cdbc0bc4",
+        "title": "Loup"
+      },
+      "generator": "Sketchfab-12.68.0",
+      "version": "2.0"
+    },
+    "sha256": "cc0272501f991e5b18fe7efc4d586db75dea89c84119b1c376947e5ca673f6ad",
+    "bytes": 1435264,
+    "min": [
+      -0.3179785466645981,
+      -0.02432847445469033,
+      -1.1658160139810434
+    ],
+    "max": [
+      0.27107425083799086,
+      1.4192161242839063,
+      1.2050632207454015
+    ],
+    "size": [
+      0.589052797502589,
+      1.4435445987385966,
+      2.370879234726445
+    ],
+    "preciseMin": [
+      -0.3179785466645981,
+      -0.02432847445469033,
+      -1.1658160139810434
+    ],
+    "preciseSize": [
+      0.589052797502589,
+      1.4435445987385966,
+      2.370879234726445
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [
+      "KHR_materials_pbrSpecularGlossiness"
+    ],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 128,
+        "height": 128
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Object_5",
+        "triangles": 2180
+      }
+    ]
+  },
+  {
+    "id": "snow-pine",
+    "metadata": {
+      "extras": {
+        "author": "TWOG (https://sketchfab.com/TWOG)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/low-poly-snow-tree-b6555946289f4fc2be92d255daf20518",
+        "title": "Low poly snow tree"
+      },
+      "generator": "Sketchfab-12.66.0",
+      "version": "2.0"
+    },
+    "sha256": "d11cd8893d7ce37b31e021a62bc7cad09088c88d4f5a303545f61ad271b1fc87",
+    "bytes": 74280,
+    "min": [
+      -1.6057965977074118,
+      -0.3097630739212036,
+      -1.0943851470947266
+    ],
+    "max": [
+      1.0371094271152708,
+      3.665705385405045,
+      1.0951191186904907
+    ],
+    "size": [
+      2.6429060248226826,
+      3.975468459326249,
+      2.1895042657852173
+    ],
+    "preciseMin": [
+      -1.071547317093107,
+      -0.3097630739212036,
+      -1.0943851470947266
+    ],
+    "preciseSize": [
+      2.0853982634663417,
+      3.866441029344908,
+      2.1895042657852173
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
+    "clips": [],
+    "images": [],
+    "meshes": [
+      {
+        "name": "Object_4",
+        "triangles": 162
+      },
+      {
+        "name": "Object_6",
+        "triangles": 534
+      },
+      {
+        "name": "Object_7",
+        "triangles": 230
+      }
+    ]
+  },
+  {
+    "id": "snow-fir",
+    "metadata": {
+      "extras": {
+        "author": "Jackmcm (https://sketchfab.com/Jackmcm)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/low-poly-snow-tree-38ca4cbb92194eebad237b2e063f6b6e",
+        "title": "low-poly snow tree"
+      },
+      "generator": "Sketchfab-12.68.0",
+      "version": "2.0"
+    },
+    "sha256": "8ee64f662945263021c056d417e554fa8adaf692bc3968139ebd191b6a051eb9",
+    "bytes": 40732,
+    "min": [
+      -0.7134060263633728,
+      -0.009855999611318127,
+      -0.7134060263633728
+    ],
+    "max": [
+      0.7134060263633728,
+      1.4777539968490603,
+      0.7134060263633731
+    ],
+    "size": [
+      1.4268120527267456,
+      1.4876099964603784,
+      1.426812052726746
+    ],
+    "preciseMin": [
+      -0.7134060263633728,
+      -0.009855999611318127,
+      -0.7134060263633728
+    ],
+    "preciseSize": [
+      1.4268120527267456,
+      1.4876099964603782,
+      1.4268120527267456
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
+    "clips": [],
+    "images": [],
+    "meshes": [
+      {
+        "name": "Object_2",
+        "triangles": 28
+      },
+      {
+        "name": "Object_3",
+        "triangles": 143
+      },
+      {
+        "name": "Object_4",
+        "triangles": 411
+      }
+    ]
+  },
+  {
+    "id": "witch-house",
+    "metadata": {
+      "extras": {
+        "author": "noortjeschuur (https://sketchfab.com/noortjeschuur)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/witch-house-b80354ec77004e36a872a1a7b220c758",
+        "title": "witch house"
+      },
+      "generator": "Sketchfab-12.68.0",
+      "version": "2.0"
+    },
+    "sha256": "7236b0f542b01b96309aa6fa35855ad5373ff05ec505a19456cb6708b8504b31",
+    "bytes": 918464,
+    "min": [
+      -155.75079345703125,
+      -1.5048681497573853,
+      -125.57371520996094
+    ],
+    "max": [
+      118.82341003417969,
+      223.38856506347656,
+      125.57367706298828
+    ],
+    "size": [
+      274.57420349121094,
+      224.89343321323395,
+      251.14739227294922
+    ],
+    "preciseMin": [
+      -155.75079345703125,
+      -1.5048681497573853,
+      -125.57371520996094
+    ],
+    "preciseSize": [
+      274.57420349121094,
+      224.89343321323395,
+      251.14739227294922
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "pCylinder2_huis_2_0",
+        "triangles": 160
+      },
+      {
+        "name": "pCylinder3_huis_1_0",
+        "triangles": 280
+      },
+      {
+        "name": "pSphere1_lambert1_0",
+        "triangles": 40
+      },
+      {
+        "name": "pCube4_huis_1_0",
+        "triangles": 116
+      },
+      {
+        "name": "pCube7_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube8_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube9_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube10_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube11_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube12_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube13_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube14_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube15_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube16_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube17_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube18_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube19_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube20_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube21_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube22_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube23_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube24_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube25_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube26_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube27_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube28_huis_1_0",
+        "triangles": 12
+      },
+      {
+        "name": "pCube29_huis_1_0",
+        "triangles": 12
+      },
+      {
+        "name": "pCube42_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube43_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube44_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube45_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube46_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube47_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube48_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube49_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube50_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube51_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube52_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube53_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube54_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube55_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube56_huis_1_0",
+        "triangles": 60
+      },
+      {
+        "name": "pCube57_huis_1_0",
+        "triangles": 12
+      },
+      {
+        "name": "pCube58_huis_1_0",
+        "triangles": 12
+      },
+      {
+        "name": "pCylinder4_lambert3_0",
+        "triangles": 148
+      },
+      {
+        "name": "pCone1_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone2_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone3_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone4_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone5_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone6_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone7_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone8_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone9_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone10_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone11_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone12_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone13_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone14_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone15_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone16_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone17_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone18_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone19_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone20_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone21_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone22_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone23_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone24_huis_2_0",
+        "triangles": 38
+      },
+      {
+        "name": "pCone25_huis_2_0",
+        "triangles": 38
+      }
+    ]
+  },
+  {
+    "id": "winter-cabin",
+    "metadata": {
+      "extras": {
+        "author": "Sba Stuff (https://sketchfab.com/sbastuff)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/x-house-ec7b39e705504e3cb3ddbaa560570dc3",
+        "title": "X House"
+      },
+      "generator": "Sketchfab-12.68.0",
+      "version": "2.0"
+    },
+    "sha256": "8ea865619f12414557c872de49c8ac067dc9922db1903198659fdaba1f1b645a",
+    "bytes": 455496,
+    "min": [
+      -3.0110436623716357,
+      -0.036562999406494164,
+      -2.4534005433845523
+    ],
+    "max": [
+      2.756763662371636,
+      1.8673300134849549,
+      2.055440543384552
+    ],
+    "size": [
+      5.767807324743272,
+      1.903893012891449,
+      4.508841086769104
+    ],
+    "preciseMin": [
+      -3.0110436623716357,
+      -0.036562999406494164,
+      -2.4534005433845523
+    ],
+    "preciseSize": [
+      5.767807324743272,
+      1.903893012891449,
+      4.508841086769104
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
+    "clips": [],
+    "images": [],
+    "meshes": [
+      {
+        "name": "lightpostHanging_0",
+        "triangles": 148
+      },
+      {
+        "name": "lightpostHanging_1",
+        "triangles": 12
+      },
+      {
+        "name": "frame_0",
+        "triangles": 136
+      },
+      {
+        "name": "frame_1",
+        "triangles": 8
+      },
+      {
+        "name": "cabinWindow_0",
+        "triangles": 184
+      },
+      {
+        "name": "lightsRed_0",
+        "triangles": 680
+      },
+      {
+        "name": "lightsRed_1",
+        "triangles": 90
+      },
+      {
+        "name": "lightpost_0",
+        "triangles": 168
+      },
+      {
+        "name": "lightpost_1",
+        "triangles": 12
+      },
+      {
+        "name": "bench_0",
+        "triangles": 116
+      },
+      {
+        "name": "bench_1",
+        "triangles": 88
+      },
+      {
+        "name": "bench_2",
+        "triangles": 12
+      },
+      {
+        "name": "lid005_0",
+        "triangles": 477
+      },
+      {
+        "name": "lid005_1",
+        "triangles": 55
+      },
+      {
+        "name": "present_0",
+        "triangles": 48
+      },
+      {
+        "name": "present_1",
+        "triangles": 8
+      },
+      {
+        "name": "wreath_0",
+        "triangles": 100
+      },
+      {
+        "name": "wreath_1",
+        "triangles": 192
+      },
+      {
+        "name": "snowmanFancy_0",
+        "triangles": 52
+      },
+      {
+        "name": "snowmanFancy_1",
+        "triangles": 30
+      },
+      {
+        "name": "snowmanFancy_2",
+        "triangles": 86
+      },
+      {
+        "name": "snowmanFancy_3",
+        "triangles": 64
+      },
+      {
+        "name": "snowmanFancy_4",
+        "triangles": 10
+      },
+      {
+        "name": "snowPatch_0",
+        "triangles": 488
+      },
+      {
+        "name": "star_0",
+        "triangles": 52
+      },
+      {
+        "name": "treeDecorated_0",
+        "triangles": 28
+      },
+      {
+        "name": "treeDecorated_1",
+        "triangles": 90
+      },
+      {
+        "name": "treeDecorated_2",
+        "triangles": 24
+      },
+      {
+        "name": "treeDecorated_3",
+        "triangles": 24
+      },
+      {
+        "name": "cabinSide_0",
+        "triangles": 44
+      },
+      {
+        "name": "door_0",
+        "triangles": 161
+      },
+      {
+        "name": "door_1",
+        "triangles": 10
+      },
+      {
+        "name": "door_2",
+        "triangles": 8
+      },
+      {
+        "name": "cabinRoof_0",
+        "triangles": 56
+      },
+      {
+        "name": "cabinRoof_1",
+        "triangles": 16
+      },
+      {
+        "name": "cabinCorner_0",
+        "triangles": 286
+      },
+      {
+        "name": "cabinWall_0",
+        "triangles": 118
+      },
+      {
+        "name": "cabinDoor_0",
+        "triangles": 196
+      },
+      {
+        "name": "cabinDoor_1",
+        "triangles": 42
+      },
+      {
+        "name": "cabinWall002_0",
+        "triangles": 118
+      },
+      {
+        "name": "cabinCorner001_0",
+        "triangles": 286
+      },
+      {
+        "name": "cabinCorner002_0",
+        "triangles": 286
+      },
+      {
+        "name": "cabinCorner003_0",
+        "triangles": 286
+      },
+      {
+        "name": "cabinWall003_0",
+        "triangles": 118
+      },
+      {
+        "name": "cabinSide001_0",
+        "triangles": 44
+      },
+      {
+        "name": "lid000_0",
+        "triangles": 477
+      },
+      {
+        "name": "lid000_1",
+        "triangles": 55
+      },
+      {
+        "name": "present001_0",
+        "triangles": 48
+      },
+      {
+        "name": "present001_1",
+        "triangles": 8
+      }
+    ]
   }
 ]

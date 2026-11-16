@@ -1,3 +1,7 @@
+import { frostbiteAssetLayout } from '../tracks/frostbiteAssetLayout';
+import { frostbiteEnvironmentIds } from '../config/environmentAssets';
+import { EnvironmentAssetScenery } from './EnvironmentAssetScenery';
+import type { AssetStatusReporter } from './models/RaceAssetLoading';
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { DoubleSide, InstancedMesh, Object3D } from 'three';
 import type { SampledTrack } from '../core/types';
@@ -50,6 +54,7 @@ function Snowbanks({ track }: { track: SampledTrack }) {
   }, [banks]);
   return <instancedMesh ref={mesh} args={[undefined, undefined, banks.length]} receiveShadow><icosahedronGeometry args={[1, 1]} /><meshStandardMaterial color="#f7fcff" roughness={1} flatShading /></instancedMesh>;
 }
-export function AlpineScenery({ track }: { track: SampledTrack }) {
-  return <group name="frostbite-alpine-scenery"><Mountains track={track} /><Snowbanks track={track} />{alpineTunnels.map(tunnel => <Tunnel key={tunnel.name} track={track} tunnel={tunnel} />)}</group>;
+export function AlpineScenery({ track, statusFor }: { track: SampledTrack; statusFor: (id: string) => AssetStatusReporter }) {
+  const placements = useMemo(() => frostbiteAssetLayout(track), [track]);
+  return <group name="frostbite-alpine-scenery"><EnvironmentAssetScenery placements={placements} assetIds={frostbiteEnvironmentIds} statusFor={statusFor} /><Mountains track={track} /><Snowbanks track={track} />{alpineTunnels.map(tunnel => <Tunnel key={tunnel.name} track={track} tunnel={tunnel} />)}</group>;
 }

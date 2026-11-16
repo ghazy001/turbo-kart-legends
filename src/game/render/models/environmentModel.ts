@@ -17,6 +17,7 @@ export function prepareEnvironmentModel(source: Object3D, id: EnvironmentAssetId
   const center = bounds.getCenter(new Vector3()), size = bounds.getSize(new Vector3()), scale = asset.height / size.y;
   const normalize = new Matrix4().makeScale(scale, scale, scale).multiply(new Matrix4().makeTranslation(-center.x, -bounds.min.y, -center.z));
   const groups = new Map<string, { original: Material; geometries: BufferGeometry[] }>();
+  const solidColors = id === 'winter-cabin' || id === 'snow-pine' || id === 'snow-fir';
   root.traverse(node => {
     if (!(node instanceof Mesh)) return;
     if (Array.isArray(node.material)) throw new Error('Environment batches require single-material primitives.');
@@ -32,10 +33,16 @@ export function prepareEnvironmentModel(source: Object3D, id: EnvironmentAssetId
       geometry.deleteAttribute('skinIndex'); geometry.deleteAttribute('skinWeight'); geometry.deleteAttribute('tangent'); geometry.computeVertexNormals();
     }
     geometry.applyMatrix4(new Matrix4().multiplyMatrices(normalize, node.matrixWorld));
+    if (solidColors) {
+      if (!(node.material instanceof MeshStandardMaterial) || node.material.map || node.material.transparent || node.material.opacity !== 1) throw new Error('Solid scenery color batching requires opaque untextured materials.');
+      const colors = new Float32Array(geometry.attributes.position.count * 3);
+      for (let i = 0; i < geometry.attributes.position.count; i++) node.material.color.toArray(colors, i * 3);
+      geometry.setAttribute('color', new Float32BufferAttribute(colors, 3));
+    }
     // Preserve authored vertex colors/UV channels. Incompatible layouts sharing
     // a material form separate batches instead of losing data or failing merge.
     const layout = Object.keys(geometry.attributes).map(name => { const attribute = geometry.getAttribute(name); return `${name}:${attribute.itemSize}:${attribute.normalized}`; }).sort().join('|');
-    const key = `${node.material.uuid}/${layout}`;
+    const key = `${solidColors ? id : node.material.uuid}/${layout}`;
     if (!groups.has(key)) groups.set(key, { original: node.material, geometries: [] }); groups.get(key)!.geometries.push(geometry);
   });
   const parts: EnvironmentPart[] = [];
@@ -46,6 +53,8 @@ export function prepareEnvironmentModel(source: Object3D, id: EnvironmentAssetId
     geometry.computeBoundingBox(); geometry.computeBoundingSphere();
     const material = original.clone();
     if (material instanceof MeshStandardMaterial) {
+      if (solidColors) { material.color.set('#ffffff'); material.vertexColors = true; }
+      if (id === 'happy-snowman') { material.transparent = false; material.alphaTest = 0.15; material.depthWrite = true; }
       const service = id === 'gas-station' || id === 'lowpoly-gas-station';
       if (!material.transparent) material.roughness = Math.max(material.roughness, service ? 0.55 : 0.8);
       if (service) { material.metalness = Math.min(material.metalness, 0.3); material.aoMapIntensity = 0.6; }
@@ -53,6 +62,7 @@ export function prepareEnvironmentModel(source: Object3D, id: EnvironmentAssetId
       if (id === 'ice-cream-truck' || id === 'sugar-mascot' || id === 'sugarcube-corner') material.metalness = Math.min(material.metalness, 0.12);
       if (id === 'lollipops-pack' && material.opacity > 0.97) { material.transparent = false; material.opacity = 1; material.depthWrite = true; }
       if (id === 'charizard' || id === 'desert-rocks' || id === 'dinosaur' || id === 'deadly-nadder' || id === 'momma-dino') material.metalness = Math.min(material.metalness, 0.08);
+      if (id === 'happy-snowman' || id === 'snow-wolf' || id === 'witch-house') material.metalness = Math.min(material.metalness, 0.05);
       // Preserve the visible eye under a light clear shell, without an expensive
       // full-scene transmission pass for a tiny distant creature detail.
       if (id === 'momma-dino' && material instanceof MeshPhysicalMaterial && material.transmission > 0) {

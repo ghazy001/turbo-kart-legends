@@ -1,11 +1,11 @@
 import { unpackGLB } from './optimize-assets.mjs';
 
-/** Art-directed matte conversion for these two inspected legacy sources only.
+/** Art-directed matte conversion for these inspected legacy sources only.
  * Preserves diffuse/normal/UV data and original embedded credits. This is not
  * an exact physical specular/glossiness conversion; unused specular images remain.
  */
 export function modernizeEnvironment(bytes, id) {
-  if (id !== 'cartoon-volcano' && id !== 'dinosaur') return bytes;
+  if (id !== 'cartoon-volcano' && id !== 'dinosaur' && id !== 'snow-wolf') return bytes;
   const { document, binary } = unpackGLB(bytes);
   for (const material of document.materials ?? []) {
     const legacy = material.extensions?.KHR_materials_pbrSpecularGlossiness;

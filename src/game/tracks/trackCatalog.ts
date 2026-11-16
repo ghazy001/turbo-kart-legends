@@ -13,7 +13,7 @@ export const trackCatalog = [
     theme: { candy: true, winter: false, volcanic: false, sky: '#d8e5ec', ground: '#dec9ba', road: '#686273', rail: '#a35f98', rock: '#faf0ce',
       leaves: ['#fa91b3', '#91dac9', '#f9d282', '#b6a0e5'], hills: ['#b4d9cb', '#e3a9c8'], map: '#c997ba', sign: 'SUGAR RUSH', subtitle: 'V A L L E Y' } },
   { id: 'frostbite-peak', name: 'Frostbite Peak', track: frostbitePeak, region: 'THE SNOWCAP SUMMIT',
-    description: 'Snow pines, glacier tunnels and sweeping alpine bends. Find your line beneath the peaks.', difficulty: 'Alpine esses', laps: 3,
+    description: 'Snowy woodland, cozy cabin clearings and glacier tunnels beneath the alpine peaks.', difficulty: 'Alpine esses', laps: 3,
     theme: { candy: false, winter: true, volcanic: false, sky: '#b8d9ef', ground: '#e5f0f6', road: '#3d607b', rail: '#3772a5', rock: '#a4bbce',
       leaves: ['#397c81', '#316977', '#478a8c', '#2d6270'], hills: ['#8aa9c1', '#b2cadb'], map: '#a7c6da', sign: 'FROSTBITE', subtitle: 'P E A K' } },
   { id: 'volcano-sprint', name: 'Volcano Sprint', track: volcanoSprint, region: 'THE EMBER CALDERA',
