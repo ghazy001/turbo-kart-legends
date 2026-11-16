@@ -1,5 +1,11 @@
 # Supplied model credits — local prototype
 
+## Original generated track-selection illustrations
+
+`assets/track-cards/{sunshine-circuit,sugar-rush-valley,frostbite-peak,volcano-sprint}.jpg` and their `-thumb.jpg` versions were generated specifically for this project with the built-in OpenAI image generation tool on 2026-11-16, at the user's request. These are original themed environment illustrations, not gameplay screenshots or copies of a third-party circuit. No franchise characters, logos or UI artwork were requested or used as references. Prompts are preserved in `docs/assets/track-artwork-prompts.json`. Final JPEGs are 1536×1024 and 768×512; original PNGs remain in the local generation archive. This provenance entry is separate from the supplied GLB license declarations below.
+
+## Supplied 3D model provenance
+
 The user confirmed permission for local use on 2026-11-05. The following are embedded uploader declarations, preserved verbatim where practical; they do not independently establish franchise or redistribution rights. Public release still needs appropriate permission or replacement art. No source GLB has been changed.
 
 Runtime modifications: visual scale/orientation/seat fitting; approximate static racer vertex poses; independent skeleton clones; centered/split wheel pivots; static mesh merging; textures capped to 1024 px on the GPU. Crash’s zero-specular diffuse legacy material is mapped to its modern PBR equivalent. No animation clips were added.

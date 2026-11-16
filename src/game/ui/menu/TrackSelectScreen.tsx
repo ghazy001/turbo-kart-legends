@@ -5,7 +5,8 @@ import { lapLabel } from '../../config/raceOptions';
 import { pointAtDistance } from '../../race/trackProgress';
 import { trackCatalog, trackDefinition, sunshineCup } from '../../tracks/trackCatalog';
 import type { RaceFlowStore } from './raceFlowStore';
-import type { ReactNode } from 'react';
+import { useState, type CSSProperties, type ReactNode } from 'react';
+import { trackArtwork, trackArtworkUrl, trackGridColumns } from './trackArtwork';
 import { lavaPools } from '../../tracks/volcanoScenery';
 
 type Course = typeof trackCatalog[number];
@@ -30,14 +31,59 @@ export function CourseMap({ compact = false, course = trackCatalog[0] }: { compa
 export function PreviewPanel({ label, name, description, region, children }: { label: string; name: string; description: string; region: string; children: ReactNode }) {
   return <section className="selection-preview course-preview" aria-label={`${name} preview`}><div className="selection-preview-top"><span><i /> COURSE SHOWCASE</span><span>{region}</span></div><div className="course-preview-image">{children}</div><div className="selection-nameplate" key={name}><div><span>{label}</span><h3>{name}</h3></div><span className="selection-name-arrow" aria-hidden="true">↗</span></div><p className="selection-description">{description}</p></section>;
 }
+/** A failed illustration leaves the actual sampled course visible and selectable. */
+function TrackArtwork({ course, thumbnail = false }: { course: Course; thumbnail?: boolean }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) return <CourseMap compact course={course} />;
+  return <img src={trackArtworkUrl(course.id, thumbnail)} alt={thumbnail ? '' : trackArtwork[course.id].alt}
+    width={thumbnail ? 768 : 1536} height={thumbnail ? 512 : 1024} decoding="async" draggable={false}
+    style={{ objectPosition: trackArtwork[course.id].position }} onError={() => setFailed(true)} />;
+}
+
+function TrackSelectionGrid({ store }: { store: RaceFlowStore }) {
+  const state = store.getSnapshot();
+  return <div className="selection-grid track-art-grid" style={{ '--selection-columns': trackGridColumns } as CSSProperties} role="radiogroup" aria-label="Choose track">
+    {trackCatalog.map((course, index) => {
+      const selected = course.id === state.selectedTrack;
+      return <button key={course.id} type="button" className="selection-card track-art-card" role="radio" aria-label={course.name}
+        aria-checked={selected} data-menu-current={selected} data-selected={selected} data-selection-index={index} data-artwork="true"
+        tabIndex={selected ? 0 : -1} onClick={() => store.choose(index)}>
+        <span className="selection-card-art" aria-hidden="true"><TrackArtwork course={course} thumbnail /></span>
+        <span className="selection-card-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <span className="selection-card-picked" aria-hidden="true">✓</span>
+        <span className="selection-card-label">{course.name}</span>
+      </button>;
+    })}
+  </div>;
+}
+
+function TrackPreview({ course, laps }: { course: Course; laps: number }) {
+  return <section className="selection-preview track-art-preview" aria-label={`${course.name} preview`}>
+    <div className="track-hero-art" key={course.id}>
+      <TrackArtwork course={course} />
+      <span className="track-region">{course.region}</span>
+      <div className="track-route-inset"><CourseMap compact course={course} /></div>
+    </div>
+    <div className="coastal-preview-name track-preview-copy" key={`${course.id}:copy`}>
+      <h3>{course.name}</h3>
+      <div className="track-preview-meta" aria-label="Circuit details">
+        <span>{Math.round(course.track.length)} m</span><span>{lapLabel(laps)}</span><span>{course.difficulty}</span>
+      </div>
+      <p>{course.description}</p>
+    </div>
+  </section>;
+}
+
 export function TrackSelectScreen({ store, records, cup = false }: { store: RaceFlowStore; records?: TrialRecords; cup?: boolean }) {
   const state = store.getSnapshot(), championship = cup || state.currentMode === 'grand-prix';
   const track = trackDefinition(state.selectedTrack);
-  return <><section className="track-roster"><div className="selection-roster-heading"><span>{championship ? 'YOUR CHAMPIONSHIP' : 'FIND YOUR FAVORITE LINE'}</span><span>{championship ? '01 CUP' : `${String(trackCatalog.length).padStart(2, '0')} COURSES`}</span></div>
-    {championship ? <div className="cup-itinerary"><span className="cup-emblem" aria-hidden="true">♜</span><h3>{sunshineCup.name}</h3><p>{sunshineCup.description}</p><p className="cup-format">3 laps per race · 3 CPU rivals</p><p className="cup-points">{cupPoints.map((points, index) => `${index + 1}${['st', 'nd', 'rd', 'th'][index]}: ${points}`).join(' · ')} points</p></div> :
-      <div className="track-list" role="radiogroup" aria-label="Choose track">{trackCatalog.map((entry, index) => <button key={entry.id} className="track-select-card" role="radio" aria-checked={entry.id === state.selectedTrack} data-menu-current={entry.id === state.selectedTrack} tabIndex={entry.id === state.selectedTrack ? 0 : -1} onClick={() => store.choose(index)}><CourseMap compact course={entry} /><span className="track-select-card-copy"><small>{entry.region}</small><strong>{entry.name}</strong><span>{lapLabel(state.currentMode === 'vs-race' ? state.vsOptions.laps : entry.laps)} · {Math.round(entry.track.length)} m · {entry.difficulty}</span></span>{entry.id === state.selectedTrack && <span className="track-check" aria-hidden="true">✓</span>}</button>)}</div>}
-    {state.currentMode === 'time-trial' && records && <TimeTrialRecordSummary records={records} track={track.track} />}</section>
-    <PreviewPanel label={championship ? 'YOUR CHAMPIONSHIP' : 'YOUR CIRCUIT'} name={championship ? sunshineCup.name : track.name} region={championship ? 'COAST TO CALDERA' : track.region} description={championship ? 'Points carry between races. The highest total takes the cup. Ties use finishing-place countback, then the final race.' : track.description}>
-      {championship ? <div className="cup-route-preview" role="list" aria-label="Cup race order">{sunshineCup.tracks.map((id, index) => <div key={id} role="listitem"><CourseMap compact course={trackDefinition(id)} /><span>RACE {index + 1} / {trackDefinition(id).name}</span></div>)}</div> : <CourseMap key={track.id} course={track} />}
-    </PreviewPanel></>;
+  return <><section className={`track-roster${championship ? '' : ' track-art-roster'}`} aria-label={championship ? 'Championship' : 'Track collection'}>
+    <div className="selection-roster-heading"><span>{championship ? 'YOUR CHAMPIONSHIP' : 'FIND YOUR FAVORITE LINE'}</span><span>{championship ? '01 CUP' : `${String(trackCatalog.length).padStart(2, '0')} COURSES`}</span></div>
+    {championship ? <div className="cup-itinerary"><span className="cup-emblem" aria-hidden="true">♜</span><h3>{sunshineCup.name}</h3><p>{sunshineCup.description}</p><p className="cup-format">3 laps per race · 3 CPU rivals</p><p className="cup-points">{cupPoints.map((points, index) => `${index + 1}${['st', 'nd', 'rd', 'th'][index]}: ${points}`).join(' · ')} points</p></div> : <TrackSelectionGrid store={store} />}
+    {state.currentMode === 'time-trial' && records && <TimeTrialRecordSummary records={records} track={track.track} />}
+  </section>
+    {championship ? <PreviewPanel label="YOUR CHAMPIONSHIP" name={sunshineCup.name} region="COAST TO CALDERA" description="Points carry between races. The highest total takes the cup. Ties use finishing-place countback, then the final race.">
+      <div className="cup-route-preview" role="list" aria-label="Cup race order">{sunshineCup.tracks.map((id, index) => <div key={id} role="listitem"><CourseMap compact course={trackDefinition(id)} /><span>RACE {index + 1} / {trackDefinition(id).name}</span></div>)}</div>
+    </PreviewPanel> : <TrackPreview course={track} laps={state.currentMode === 'vs-race' ? state.vsOptions.laps : track.laps} />}
+  </>;
 }

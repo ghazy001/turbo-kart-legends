@@ -58,6 +58,19 @@ describe('Home and mode setup flow', () => {
     expect(loadMenuPreferences({ getItem: () => JSON.stringify({ version: 1, mode: '__proto__', selectedTrack: 'missing', audioEnabled: 'yes' }) })).toEqual(preferences);
     expect(saveMenuPreferences(flow.getSnapshot(), { setItem: () => { throw new Error('denied'); } })).toBe(false);
   });
+  it('navigates the two-column track collection and retains the course through back, review and commit', () => {
+    const flow = store(); flow.begin('quick-race'); flow.next(); flow.next();
+    flow.move('down'); expect(flow.getSnapshot().selectedTrack).toBe('frostbite-peak');
+    flow.move('right'); expect(flow.getSnapshot().selectedTrack).toBe('volcano-sprint');
+    flow.move('up'); expect(flow.getSnapshot().selectedTrack).toBe('sugar-rush-valley');
+    flow.move('left'); expect(flow.getSnapshot().selectedTrack).toBe('sunshine-circuit');
+    flow.move('up'); expect(flow.getSnapshot().selectedTrack).toBe('frostbite-peak');
+    flow.back(); flow.next(); expect(flow.getSnapshot().trackIndex).toBe(2);
+    flow.next(); expect(flow.getSnapshot().currentStep).toBe('ready');
+    expect(flow.launch().trackId).toBe('frostbite-peak');
+    flow.commit(); flow.home(); flow.begin('vs-race');
+    expect(flow.getSnapshot()).toMatchObject({ selectedTrack: 'frostbite-peak', trackIndex: 2 });
+  });
   it('launches either selected course and restores its index after committing, returning home, and reloading preferences', () => {
     const flow = store(); flow.begin('quick-race'); flow.next(); flow.next(); flow.choose(1);
     expect(flow.launch().trackId).toBe('sugar-rush-valley'); flow.commit(); flow.home(); flow.begin('time-trial');

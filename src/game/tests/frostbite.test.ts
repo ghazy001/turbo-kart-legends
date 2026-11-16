@@ -15,7 +15,7 @@ describe('Frostbite Peak scenery and selection', () => {
     expect(index).toBe(2); expect(new Set(trackCatalog.map(course => course.id)).size).toBe(trackCatalog.length);
     for (const mode of ['quick-race', 'time-trial', 'vs-race'] as const) {
       const flow = createRaceFlowStore(defaultSelection, { audioEnabled: true, selectedTrack: 'sunshine-circuit', mode });
-      flow.begin(mode); flow.next(); flow.next(); flow.move('down'); flow.move('down');
+      flow.begin(mode); flow.next(); flow.next(); flow.move('down');
       expect(flow.launch()).toMatchObject({ trackId: 'frostbite-peak', mode });
       flow.commit(); flow.home(); flow.begin(mode); expect(flow.getSnapshot().trackIndex).toBe(index);
     }

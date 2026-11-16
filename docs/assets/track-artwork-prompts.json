@@ -1,0 +1,31 @@
+{
+  "tool": "Built-in image_gen",
+  "purpose": "Original menu illustrations based on implemented track themes, not gameplay screenshots or exact layouts.",
+  "generated": "2026-11-16",
+  "assets": [
+    {
+      "id": "sunshine-circuit",
+      "full": "public/assets/track-cards/sunshine-circuit.jpg",
+      "thumbnail": "public/assets/track-cards/sunshine-circuit-thumb.jpg",
+      "prompt": "Use case: stylized-concept. Asset type: landscape track-selection artwork for an original colorful arcade kart game. Create a polished 3D cartoon environment illustration, landscape 3:2 composition. A smooth readable asphalt kart circuit curves through the foreground into a beautiful scenic environment. Slightly elevated three-quarter view, rounded stylized forms, carefully composed scenery, soft sunlight and ambient shadows, premium but simple art direction, clear focal point, tasteful surface detail. No text, letters, numbers, UI, logos, watermarks, franchise characters, vehicles or racers. Artwork fills the frame. Sunny coastal circuit beside a turquoise lagoon, lush rounded trees and palms, mixed small pastel seaside cottages, a distant white lighthouse, cream and teal road barriers, subtle white road markings, warm golden afternoon sunshine, pale blue sky. Welcoming Mediterranean harbor atmosphere."
+    },
+    {
+      "id": "sugar-rush-valley",
+      "full": "public/assets/track-cards/sugar-rush-valley.jpg",
+      "thumbnail": "public/assets/track-cards/sugar-rush-valley-thumb.jpg",
+      "prompt": "Use case: stylized-concept. Asset type: landscape track-selection artwork for an original colorful arcade kart game. Create a polished 3D cartoon environment illustration, landscape 3:2 composition. A smooth readable asphalt kart circuit curves through the foreground into a beautiful scenic environment. Slightly elevated three-quarter view, rounded stylized forms, carefully composed scenery, soft sunlight and ambient shadows, premium but simple art direction, clear focal point, tasteful surface detail. No text, letters, numbers, UI, logos, watermarks, franchise characters, vehicles or racers. Artwork fills the frame. Original pastel candy highland circuit: flowing lavender-gray road, pink and cream curbs, rolling peach and mint hills, charming original gingerbread village cottages, a small pink ice cream truck parked safely off-road, striped candy stalls, restrained giant lollipop gardens. Sweet, airy, soft warm afternoon light, no recognizable franchise architecture."
+    },
+    {
+      "id": "frostbite-peak",
+      "full": "public/assets/track-cards/frostbite-peak.jpg",
+      "thumbnail": "public/assets/track-cards/frostbite-peak-thumb.jpg",
+      "prompt": "Use case: stylized-concept. Asset type: landscape track-selection artwork for an original colorful arcade kart game. Create a polished 3D cartoon environment illustration, landscape 3:2 composition. A smooth readable asphalt kart circuit curves through the foreground into a beautiful scenic environment. Slightly elevated three-quarter view, rounded stylized forms, carefully composed scenery, soft sunlight and ambient shadows, premium but simple art direction, clear focal point, tasteful surface detail. No text, letters, numbers, UI, logos, watermarks, franchise characters, vehicles or racers. Artwork fills the frame. Alpine snow circuit: blue-gray road winding through snowy evergreen woodland, cozy timber cabins with warm amber windows, a friendly small snowman beside a cabin, a broad natural translucent glacier arch over a distant section of road, majestic snowy mountain peaks, powder-blue sky, crisp winter sunlight with warm highlights. Readable road without ice on driving surface."
+    },
+    {
+      "id": "volcano-sprint",
+      "full": "public/assets/track-cards/volcano-sprint.jpg",
+      "thumbnail": "public/assets/track-cards/volcano-sprint-thumb.jpg",
+      "prompt": "Use case: stylized-concept. Asset type: landscape track-selection artwork for an original colorful arcade kart game. Create a polished 3D cartoon environment illustration, landscape 3:2 composition. A smooth readable asphalt kart circuit curves through the foreground into a beautiful scenic environment. Slightly elevated three-quarter view, rounded stylized forms, carefully composed scenery, soft sunlight and ambient shadows, premium but simple art direction, clear focal point, tasteful surface detail. No text, letters, numbers, UI, logos, watermarks, franchise characters, vehicles or racers. Artwork fills the frame. Dramatic but cheerful volcanic caldera circuit: dark gray sweeping asphalt, cream and amber curbs, sculpted ochre rock gardens, dark rounded volcanoes with glowing orange lava streams far beyond the track, off-road lava pools, a few prehistoric fern silhouettes. Warm peach twilight sky, amber rim light and subtle volcanic haze, clear road, adventurous rather than frightening."
+    }
+  ]
+}
