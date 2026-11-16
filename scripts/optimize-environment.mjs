@@ -13,6 +13,11 @@ const definitions = [
   ['cactus', 'cactus', 1, 0.001, 512],
   ['stylized-house', 'stylized-house', 0.8, 0.001, 1024],
   ['lowpoly-gas-station', 'lowpoly-gas-station', 0.7, 0.002, 1024],
+  ['cotton-candy-stall', 'cotton-candy-stall', 1, 0.001, 512],
+  ['ice-cream-truck', 'ice-cream-truck', 0.7, 0.001, 1024],
+  ['lollipops-pack', 'lollipops-pack', 1, 0.001, 512],
+  ['sugar-mascot', 'sugar-mascot', 1, 0.001, 512],
+  ['sugarcube-corner', 'sugarcube-corner', 0.8, 0.001, 1024],
 ];
 const report = [];
 for (const [source, output, ratio, error, textureCap] of definitions) {

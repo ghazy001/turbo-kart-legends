@@ -7,6 +7,7 @@ import { capGLBTextures } from './glb-textures.mjs';
 
 const components = { SCALAR: 1, VEC2: 2, VEC3: 3, VEC4: 4, MAT4: 16 };
 const arrays = { 5120: Int8Array, 5121: Uint8Array, 5122: Int16Array, 5123: Uint16Array, 5125: Uint32Array, 5126: Float32Array };
+const triangles = (count, mode = 4) => mode === 4 ? count / 3 : mode === 5 || mode === 6 ? Math.max(0, count - 2) : 0;
 export function unpackGLB(bytes) {
   if (bytes.toString('utf8', 0, 4) !== 'glTF') throw new Error('Expected GLB 2.0');
   const length = bytes.readUInt32LE(12);
@@ -54,7 +55,7 @@ export async function optimizeGLB(bytes, ratio = 0.55, error = 0.0015, sceneScal
     const originalIndices = primitive.indices;
     const indices = originalIndices === undefined ? null : Uint32Array.from(readAccessor(doc, binary, originalIndices));
     const count = indices?.length ?? doc.accessors[primitive.attributes.POSITION].count;
-    report.beforeTriangles += count / 3;
+    report.beforeTriangles += triangles(count, primitive.mode);
     // Skins, morph targets and small parts retain their complete topology/bindings.
     const preserveLeaves = simplifyOptions.preserveLeaves && /leaf/i.test(doc.materials?.[primitive.material]?.name ?? '');
     const canSimplify = !preserveLeaves && indices && (primitive.mode ?? 4) === 4 && count >= 3600 && !primitive.targets && primitive.attributes.JOINTS_0 === undefined;
@@ -92,12 +93,12 @@ export async function optimizeGLB(bytes, ratio = 0.55, error = 0.0015, sceneScal
       }
       const IndexArray = arrays[doc.accessors[originalIndices].componentType];
       primitive.indices = addAccessor(originalIndices, IndexArray.from(simplified), 34963);
-      report.afterTriangles += simplified.length / 3; if (simplified.length < count) report.simplifiedPrimitives++;
+      report.afterTriangles += triangles(simplified.length, primitive.mode); if (simplified.length < count) report.simplifiedPrimitives++;
     } else {
       for (const [key, index] of Object.entries(primitive.attributes)) primitive.attributes[key] = copyAccessor(index);
       if (originalIndices !== undefined) primitive.indices = copyAccessor(originalIndices);
       for (const target of primitive.targets ?? []) for (const [key, index] of Object.entries(target)) target[key] = copyAccessor(index);
-      report.afterTriangles += count / 3;
+      report.afterTriangles += triangles(count, primitive.mode);
     }
   }
   for (const skin of output.skins ?? []) if (skin.inverseBindMatrices !== undefined) skin.inverseBindMatrices = copyAccessor(skin.inverseBindMatrices);

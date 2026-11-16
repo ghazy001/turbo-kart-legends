@@ -1,4 +1,4 @@
-import { sunshineAssetSlots } from './SunshineAssetScenery';
+import { environmentSlotsForTrack } from '../config/environmentAssets';
 import { surfaceHeightAt } from '../tracks/trackSurface';
 import { TrackFeaturesVisual } from './TrackFeaturesVisual';
 import { RenderStats, type RenderSample } from '../dev/RenderStats';
@@ -71,7 +71,7 @@ export function GameCanvas({ runtime, onError, onFinish, suspended = false, scen
     const choices = opponentSelections(selection);
     return [{ id: 'player', selection }, ...(kind === 'quick-race' ? race.opponents.map((racer, i) => ({ id: racer.id, selection: choices[i] })) : [])];
   }, [race, kind, selection]);
-  const assets = useMemo(() => new RaceAssetLoading([...lineup.map(entry => entry.id), ...(race.track.definition.id === 'sunshine-circuit' ? sunshineAssetSlots : [])]), [lineup, race.track]);
+  const assets = useMemo(() => new RaceAssetLoading([...lineup.map(entry => entry.id), ...environmentSlotsForTrack(race.track.definition.id)]), [lineup, race.track]);
   const assetStatus = useSyncExternalStore(assets.subscribe, assets.getSnapshot);
   useLayoutEffect(() => { runtime.assetsReady = assetStatus.ready; }, [runtime, assetStatus.ready]);
   useEffect(() => { for (const entry of lineup) preloadAssembly(kartAssets[entry.selection.kartId], driverAssets[entry.selection.racerId]); }, [lineup]);

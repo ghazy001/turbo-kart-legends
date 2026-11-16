@@ -2,7 +2,8 @@ import { readFileSync } from 'node:fs';
 import { Box3, Mesh, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { describe, expect, it } from 'vitest';
-import { environmentAssets, environmentSize, type EnvironmentAssetId } from '../config/environmentAssets';
+import { environmentAssets, environmentSize, sunshineEnvironmentIds, type EnvironmentAssetId } from '../config/environmentAssets';
+import { adaptDiffuseLegacyMaterials } from '../render/models/assetLoader';
 import { prepareEnvironmentModel, disposeEnvironmentModels } from '../render/models/environmentModel';
 import { placementClearance, sunshineAssetLayout } from '../tracks/sunshineAssetLayout';
 import { sunshineCircuit } from '../tracks/sunshineCircuit';
@@ -22,7 +23,10 @@ async function loadGeometry(url: string) {
     if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).filter(([key]) => !key.endsWith('Texture') && !['images', 'textures'].includes(key)).map(([key, v]) => [key, strip(v)]));
     return value;
   };
-  const document = JSON.parse(bytes.subarray(20, 20 + length).toString()) as { asset: unknown; animations?: unknown[]; skins?: unknown[] };
+  const document = JSON.parse(bytes.subarray(20, 20 + length).toString()) as { asset: unknown; animations?: unknown[]; skins?: unknown[]; materials?: Parameters<typeof adaptDiffuseLegacyMaterials>[0]['materials']; extensionsUsed?: string[] };
+  adaptDiffuseLegacyMaterials(document);
+  // Legacy materials above now use the real compatible modern representation.
+  document.extensionsUsed = document.extensionsUsed?.filter(extension => extension !== 'KHR_materials_pbrSpecularGlossiness');
   const json = Buffer.from(JSON.stringify(strip(document))), padded = Buffer.alloc(Math.ceil(json.length / 4) * 4, 32); json.copy(padded);
   const binary = bytes.subarray(20 + length), glb = Buffer.alloc(20 + padded.length + binary.length); bytes.copy(glb, 0, 0, 20);
   glb.writeUInt32LE(glb.length, 8); glb.writeUInt32LE(padded.length, 12); padded.copy(glb, 20); binary.copy(glb, 20 + padded.length);
@@ -33,7 +37,8 @@ describe('supplied Sunshine environment composition', () => {
   it('uses every supplied asset with deterministic bounded placement and varied trees', () => {
     const layout = sunshineAssetLayout(sunshineCircuit);
     expect(layout).toEqual(sunshineAssetLayout(sunshineCircuit));
-    for (const id of Object.keys(environmentAssets)) expect(layout.filter(p => p.asset === id).length).toBeGreaterThan(0);
+    for (const id of sunshineEnvironmentIds) expect(layout.filter(p => p.asset === id).length).toBeGreaterThan(0);
+    expect(layout.every(p => (sunshineEnvironmentIds as readonly EnvironmentAssetId[]).includes(p.asset))).toBe(true);
     const trees = layout.filter(p => p.asset === 'stylized-tree');
     expect(trees.length).toBeGreaterThan(25); expect(trees.length).toBeLessThanOrEqual(50);
     expect(new Set(trees.map(p => p.scale)).size).toBeGreaterThan(20);
@@ -96,7 +101,7 @@ describe('supplied Sunshine environment composition', () => {
     }
   });
   it('records real static capabilities, preserves credits, and budgets mesh/texture derivatives', async () => {
-    expect(audit).toHaveLength(8);
+    expect(audit).toHaveLength(13);
     for (const source of audit) { expect(source.skins).toBe(0); expect(source.clips).toEqual([]); expect(source.metadata.extras.author).toBeTruthy(); }
     for (const asset of report) {
       const bytes = readFileSync(new URL(`../../../public/assets/optimized/environment/${asset.output}.glb`, import.meta.url));
@@ -132,7 +137,7 @@ describe('supplied Sunshine environment composition', () => {
     const expected = environmentSize(id), size = box.getSize(new Vector3());
     expect(size.x).toBeLessThanOrEqual(expected[0] + 0.001); expect(size.x).toBeGreaterThan(expected[0] * 0.93);
     expect(size.z).toBeLessThanOrEqual(expected[2] + 0.001); expect(size.z).toBeGreaterThan(expected[2] * 0.93);
-    expect(model.parts.length).toBeLessThanOrEqual(id === 'lowpoly-gas-station' ? 5 : id === 'stylized-tree' || id === 'viking-house' ? 2 : 1);
+    expect(model.parts.length).toBeLessThanOrEqual(id === 'cotton-candy-stall' ? 12 : id === 'lowpoly-gas-station' ? 5 : id === 'stylized-tree' || id === 'viking-house' || id === 'lollipops-pack' ? 2 : 1);
     expect(prepareEnvironmentModel(loaded.scene, id)).toBe(model);
     expect(new Box3().setFromObject(loaded.scene).equals(before)).toBe(true);
     for (const part of model.parts) expect(sourceMeshes.some(mesh => mesh.geometry === part.geometry || mesh.material === part.material)).toBe(false);

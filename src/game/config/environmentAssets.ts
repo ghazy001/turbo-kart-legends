@@ -8,8 +8,21 @@ export const environmentAssets = {
   cactus: { name: 'Cactus', url: '/assets/optimized/environment/cactus.glb', sourceUrl: '/assets/environment/cactus.glb', height: 2.8, yaw: 0, sourceMin: [-0.6096242545567776, 0, -0.24986296028709276], sourceSize: [1.2200797156554444, 1.9847015429033377, 0.38608402432822597], distance: 110 },
   'stylized-house': { name: 'Stylized House', url: '/assets/optimized/environment/stylized-house.glb', sourceUrl: '/assets/environment/stylized-house.glb', height: 6.3, yaw: 0, sourceMin: [-11.135761012082668, -0.0044662000306778535, -8.196626793021373], sourceSize: [15.404638899759071, 13.63300705728793, 15.088425612788486], distance: 150 },
   'lowpoly-gas-station': { name: 'Lowpoly Gas Station', url: '/assets/optimized/environment/lowpoly-gas-station.glb', sourceUrl: '/assets/environment/lowpoly-gas-station.glb', height: 5.8, yaw: 0, sourceMin: [-11.973219260575931, -0.2060140945163198, -8.33133564446861], sourceSize: [31.11282576636613, 10.16966102757317, 19.65383768020932], distance: 155 },
+  'cotton-candy-stall': { name: 'Cotton Candy Stall', url: '/assets/optimized/environment/cotton-candy-stall.glb', sourceUrl: '/assets/environment/cotton-candy-stall.glb', height: 3.4, yaw: 0, sourceMin: [-0.2617140811140506, -0.14151437774413103, -0.14390910174016305], sourceSize: [0.5227590199098464, 0.37509311057963246, 0.2879743656949637], distance: 125 },
+  'ice-cream-truck': { name: 'Ice Cream Truck', url: '/assets/optimized/environment/ice-cream-truck.glb', sourceUrl: '/assets/environment/ice-cream-truck.glb', height: 4, yaw: 0, sourceMin: [-1.6179191442298446, -0.0000006769763692, -3.551144333709357], sourceSize: [3.2358380443190526, 4.47778589204265, 6.020556191265982], distance: 135 },
+  'lollipops-pack': { name: 'Lollipop Garden', url: '/assets/optimized/environment/lollipops-pack.glb', sourceUrl: '/assets/environment/lollipops-pack.glb', height: 4.8, yaw: 0, sourceMin: [-0.8521265983581543, -0.0000000292792159, -0.6794696588928566], sourceSize: [3.377467393875122, 1.503595024966852, 0.8271073898888394], distance: 125 },
+  'sugar-mascot': { name: 'Sugar Mascot', url: '/assets/optimized/environment/sugar-mascot.glb', sourceUrl: '/assets/environment/sugar-mascot.glb', height: 6.2, yaw: 0, sourceMin: [-64.65005114859798, -4.286244319656265, -27.787161500224833], sourceSize: [115.42426337109356, 194.2857088789833, 65.79175598617815], distance: 145 },
+  'sugarcube-corner': { name: 'Sugarcube Corner', url: '/assets/optimized/environment/sugarcube-corner.glb', sourceUrl: '/assets/environment/sugarcube-corner.glb', height: 9, yaw: 0, sourceMin: [-4.589658559471104, -0.005317234900064846, -1.4030286487604258], sourceSize: [8.930437843101913, 9.046356158527704, 3.842131491298576], distance: 155 },
 } as const;
 export type EnvironmentAssetId = keyof typeof environmentAssets;
+export const sunshineEnvironmentIds = ['stylized-tree', 'gas-station', 'spectators', 'tire-wall', 'viking-house', 'cactus', 'stylized-house', 'lowpoly-gas-station'] as const satisfies readonly EnvironmentAssetId[];
+export const sugarEnvironmentIds = ['cotton-candy-stall', 'ice-cream-truck', 'lollipops-pack', 'sugar-mascot', 'sugarcube-corner', 'lowpoly-gas-station'] as const satisfies readonly EnvironmentAssetId[];
+export function environmentIdsForTrack(trackId: string): readonly EnvironmentAssetId[] {
+  return trackId === 'sunshine-circuit' ? sunshineEnvironmentIds : trackId === 'sugar-rush-valley' ? sugarEnvironmentIds : [];
+}
+export function environmentSlotsForTrack(trackId: string): string[] {
+  return environmentIdsForTrack(trackId).flatMap(id => id === 'stylized-tree' ? [`environment:${id}`, `environment:${id}:far`] : [`environment:${id}`]);
+}
 export interface EnvironmentPlacement { id: string; asset: EnvironmentAssetId; position: [number, number, number]; yaw: number; scale: number; tint: string }
 export function environmentSize(id: EnvironmentAssetId): [number, number, number] {
   const asset = environmentAssets[id], [x, y, z] = asset.sourceSize, scale = asset.height / y;

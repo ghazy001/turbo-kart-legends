@@ -314,5 +314,265 @@
     "afterTriangles": 27786,
     "simplifiedPrimitives": 4,
     "maxRelativeError": 0.001982159912586212
+  },
+  {
+    "source": "cotton-candy-stall",
+    "output": "cotton-candy-stall",
+    "sourceSha256": "5d51d9ad6e0397836f72c360afa376ced6011359e79c9cb4c7bc60088a13e941",
+    "sourceBytes": 608076,
+    "outputBytes": 644068,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 20357,
+        "sha256": "bd5fa8feac050b39df98ec24acfe841e5886ac6a2bc1f1450055df75ef26f630"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 8062,
+        "sha256": "e3e1457fa7b1cb3a988474df4594b5e697df54d1ff235e22ff58da0bee0d7ea9"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 67887,
+        "sha256": "28cf801785158fbf326adc7fec090b285963f96b42bed1ae760ab049c75ff642"
+      },
+      {
+        "index": 3,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 5615,
+        "sha256": "3c8a9b18e76fa46d3740296b44e2a61f5458116431a453fe474b4b31a6703819"
+      },
+      {
+        "index": 4,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 6484,
+        "sha256": "ed42a43034ecf0d7684f86b17aca8b47735b02e8e23a468433955f5b05f97d7a"
+      },
+      {
+        "index": 5,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 14286,
+        "sha256": "c2fa82ff54c4d3d4b83a34cabf738449792b1406f5ed85e91dce36f6a7452db2"
+      },
+      {
+        "index": 6,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 6074,
+        "sha256": "780465ec22d7f40a207da95225e59a38d117b0b927d3c40485f9b17df76871d1"
+      },
+      {
+        "index": 7,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 4501,
+        "sha256": "cdc2e5133390b9a148c8f1b0f55dd23bd4c038d0b970e33741f1936e243b69ef"
+      },
+      {
+        "index": 8,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 5257,
+        "sha256": "db8161f25fe9d3f24ff7d45376f44bb519047d6a76056022eafc64706805ecb1"
+      },
+      {
+        "index": 9,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 47384,
+        "sha256": "3ded43a4bfed49158f1b72d6c7443d986b4b9da6cc7e831c9b139c7508e9b004"
+      }
+    ],
+    "beforeTriangles": 4378,
+    "afterTriangles": 4378,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "ice-cream-truck",
+    "output": "ice-cream-truck",
+    "sourceSha256": "5bff5c01572fb7d57bc3640c8a1efcf537d5c36945abed4f3740b4526e8a24b2",
+    "sourceBytes": 775520,
+    "outputBytes": 707304,
+    "textureCap": 1024,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 190229,
+        "sha256": "d744a4ac6507e84268ac56bbc27a7db925de34d928c491e4b7f7e9b34f635656"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 7615,
+        "sha256": "46dbe08e636d71d02b49930483a989704d14b51d116a1083a238da3b412b9e8a"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 4064,
+        "sha256": "adcce4386327e4cbdd8f4337b106753113a3d0d003f8041332b8ba2036b38e0d"
+      }
+    ],
+    "beforeTriangles": 13852,
+    "afterTriangles": 11914,
+    "simplifiedPrimitives": 1,
+    "maxRelativeError": 0.000996313290670514
+  },
+  {
+    "source": "lollipops-pack",
+    "output": "lollipops-pack",
+    "sourceSha256": "8060dedc8c7592078999fd269ffff24ea47b8a729883e1bac1785bdd3d27b87a",
+    "sourceBytes": 814892,
+    "outputBytes": 347076,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 223435,
+        "sha256": "be9285b425254ae304a56af836f6de110e59e2888e8b907bcca31c40dd99d38c"
+      }
+    ],
+    "beforeTriangles": 2640,
+    "afterTriangles": 2640,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "sugar-mascot",
+    "output": "sugar-mascot",
+    "sourceSha256": "56daef5523557ade2828d6a9b94dd1f6988cab973faeec8264c82a18ab4520fd",
+    "sourceBytes": 2196948,
+    "outputBytes": 872380,
+    "textureCap": 512,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/jpeg",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 39614,
+        "sha256": "797831613aae09f8257b6cf1bdc0c6883d44861cea75938b7581127c5812a3d5"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 227279,
+        "sha256": "f517e0955c60dff4291726829aed1f6c6c86f130ee6d9c07871ee86ce3606a39"
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 512,
+        "height": 512,
+        "bytes": 353200,
+        "sha256": "9d516ed756f09f2fa77ff5270c469100022c99ba12d9b7bd41176fefae83b9ae"
+      }
+    ],
+    "beforeTriangles": 5392,
+    "afterTriangles": 5392,
+    "simplifiedPrimitives": 0,
+    "maxRelativeError": 0
+  },
+  {
+    "source": "sugarcube-corner",
+    "output": "sugarcube-corner",
+    "sourceSha256": "24064b1c49fc20f8c9d2c7ff16eed2a25b00c03caf394a708ed3cfe0370ce58d",
+    "sourceBytes": 2105184,
+    "outputBytes": 2099104,
+    "textureCap": 1024,
+    "images": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 842425,
+        "sha256": "6b60547a77f8b21355c1c7efe9a51a25cf4c595c6b41984bddc762f989ad1df0"
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "sourceWidth": 1024,
+        "sourceHeight": 1024,
+        "width": 1024,
+        "height": 1024,
+        "bytes": 756198,
+        "sha256": "827bb573a9e86664955ddd4f92245e68a34c073be478fa0c934b9280163059c5"
+      }
+    ],
+    "beforeTriangles": 10639,
+    "afterTriangles": 10457,
+    "simplifiedPrimitives": 2,
+    "maxRelativeError": 0.000997654628008604
   }
 ]

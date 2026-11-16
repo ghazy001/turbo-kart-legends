@@ -64,7 +64,7 @@ Six original examples: Spark Bolt (straight projectile), Bubble Guard (temporary
 
 ## 5. Tracks
 1. **Sunshine Circuit** — an original 743 m coastal beginner loop with a harbor club, tree-lined bends, lagoon/lighthouse, textured road, two automatic turbo strips and a continuous 1.4 m raised jump roller. The driving corridor remains 11 m wide. No branched shortcut or moving collision hazard is implemented in this pass; see docs/SUNSHINE_CIRCUIT_UPGRADE.md.
-2. **Sugar Rush Valley** — dessert-colored hills, giant sweets, gentle jumps and colorful shortcuts.
+2. **Sugar Rush Valley** — a flat 714 m candy-market loop with supplied shop landmarks, cotton-candy stalls, parked ice-cream trucks, lollipop gardens, static mascots and a service stop. Pastel curbs and aligned road paint frame the flowing chicane. Jumps and branch shortcuts remain future ideas; this scenery pass preserves handling and course geometry. See docs/SUGAR_RUSH_ENVIRONMENT.md.
 3. **Frostbite Peak** — implemented as a flat alpine loop with snowbanks, snow pines, distant peaks, two open glacier tunnels and flowing bends. It uses the same grip/handling as the other courses; lower-grip ice and elevated roads remain future ideas.
 4. **Volcano Sprint** — implemented as a flat caldera loop with linked bends, basalt columns, dusk lighting and glowing scenic lava pools/crater seams. Lava stays beyond the solid rails and does not apply damage; no new surface or hazard rules.
 Every course uses the same centerline + width + checkpoints + spawn markers track schema; no hard-coded scene-specific race rules.

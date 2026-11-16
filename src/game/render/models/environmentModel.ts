@@ -34,6 +34,8 @@ export function prepareEnvironmentModel(source: Object3D, id: EnvironmentAssetId
       if (!material.transparent) material.roughness = Math.max(material.roughness, service ? 0.55 : 0.8);
       if (service) { material.metalness = Math.min(material.metalness, 0.3); material.aoMapIntensity = 0.6; }
       if (id === 'stylized-house') { material.metalness = Math.min(material.metalness, 0.05); material.aoMapIntensity = 0.75; }
+      if (id === 'ice-cream-truck' || id === 'sugar-mascot' || id === 'sugarcube-corner') material.metalness = Math.min(material.metalness, 0.12);
+      if (id === 'lollipops-pack' && material.opacity > 0.97) { material.transparent = false; material.opacity = 1; material.depthWrite = true; }
       material.emissiveIntensity = id === 'gas-station' ? 0.35 : 0;
       if (id === 'stylized-tree' && /leaf/i.test(material.name)) {
         material.transparent = false; material.alphaTest = 0.15; material.depthWrite = true; material.alphaToCoverage = true;

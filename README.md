@@ -219,3 +219,5 @@ Home now shows a sunset coastal starting line with an original procedural road, 
 Sunshine Circuit now features an original coastal race venue, textured asphalt, two automatic turbo strips and a continuous raised jump roller. Controls are unchanged; see [Sunshine upgrade and verification](docs/SUNSHINE_CIRCUIT_UPGRADE.md).
 
 Sunshine's vegetation, pit-stop pumps, crowds and tire-wall backing now use the supplied GLBs. See [environment integration, credits and regeneration](docs/SUNSHINE_ENVIRONMENT_ASSETS.md); no gameplay controls changed.
+
+Sugar Rush Valley now uses the supplied candy-market models: shop landmarks, cotton-candy stalls, parked ice-cream trucks, lollipop gardens, static mascots and a complete service station. Road markings follow the course ribbon; gameplay and controls are unchanged. See [integration, regeneration, verification and limitations](docs/SUGAR_RUSH_ENVIRONMENT.md).

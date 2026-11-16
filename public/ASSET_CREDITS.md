@@ -238,3 +238,18 @@ Modifications: offline runtime derivatives under `assets/optimized/environment/`
 - **Lowpoly Gas Station** — AspectStudios ([author](https://sketchfab.com/AspectStudio), [embedded source](https://sketchfab.com/3d-models/lowpoly-gas-station-02a11319cb744999adddd7236a46bf8e)). User file `lowpoly_gas_station.glb` is preserved at `assets/environment/lowpoly-gas-station.glb`.
 - Both uploaders declare [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). These embedded declarations are recorded without independently verifying public-release rights.
 - Modifications: offline mesh simplification/texture caps, source-relative ground alignment/centering/scaling, static per-material merging and instance transforms. House cloned runtime materials use matte wood/stone settings; station window transparency and authored roughness remain. Original UVs, image content/color spaces and embedded metadata/credits are preserved. No character rig or animation is claimed. Source hashes and derivative budgets are in `docs/assets/environment-audit.json` and `environment-optimization.json`.
+
+
+## Supplied Sugar Rush Valley scenery (2026-11-16)
+
+All five new originals below are preserved byte-for-byte. The supplied `lowpoly_gas_station.glb` matches the existing credited AspectStudios station above and is reused. Embedded declarations are recorded without independently verifying public/commercial-release rights.
+
+| Supplied filename → preserved path | Embedded author | Embedded source | Declared license |
+| --- | --- | --- | --- |
+| `cotton_candy_stall.glb` → `assets/environment/cotton-candy-stall.glb` | [Steph](https://sketchfab.com/StephC.Art) | https://sketchfab.com/3d-models/cotton-candy-stall-f8e292cc275f4d6e8bdb04c218f2360b | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) |
+| `ice_cream_truck.glb` → `assets/environment/ice-cream-truck.glb` | [Bogdan Streletskiy](https://sketchfab.com/streletskiy) | https://sketchfab.com/3d-models/ice-cream-truck-b8b1294228044e64af8bfbae82c80ac0 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| `lollipops_pack.glb` → `assets/environment/lollipops-pack.glb` | [Contemplator](https://sketchfab.com/contemplatorr) | https://sketchfab.com/3d-models/lollipops-pack-d30320c2e355461388b9ed5b3c3f051f | [SKETCHFAB Standard](https://sketchfab.com/licenses) |
+| `sugar_sugar_doo_doo_doo_doo_doo_dooo.glb` → `assets/environment/sugar-mascot.glb` | [Duznot](https://sketchfab.com/duz_vr) | https://sketchfab.com/3d-models/sugar-sugar-doo-doo-doo-doo-doo-dooo-a91f25a21c08484788648a8337a4dee5 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| `sugarcube_corner.glb` → `assets/environment/sugarcube-corner.glb` | [Olivia Sabatka](https://sketchfab.com/discopears) | https://sketchfab.com/3d-models/sugarcube-corner-1a70d3380d534ae589c452ada453f7a4 | [SKETCHFAB Standard](https://sketchfab.com/licenses) |
+
+Modifications: offline texture resizing/limited triangle simplification in `assets/optimized/environment/`, source-transform baking, precise grounding/scaling, static per-material batching, instance transforms and restrained matte/near-opaque material adjustments. Original UVs and embedded credit blocks are retained. The mascot's skeleton is unused by its visible mesh; no rigging or animation is invented. Sugarcube's two source line segments are preserved in files but omitted by the runtime mesh batch. See `docs/SUGAR_RUSH_ENVIRONMENT.md` and the source/derivative audit JSON files for details and budgets.

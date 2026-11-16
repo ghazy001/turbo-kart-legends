@@ -331,3 +331,7 @@ Sunshine house/cactus placements share the existing static material-batch pipeli
 ## Sunshine road paint and scenery variety
 
 `surfacePaint` builds static material batches in course-distance/lateral coordinates using interpolated rendered ribbon edges/heights. `featurePaint` reads existing triggers, dresses turbo strips and the roller approach, and never writes simulation state. Dashes reserve feature/start gaps. The eight-asset registry supplies nine readiness slots; mixed houses and the complete western service station reuse static instancing/source-envelope spacing, with per-area asset/yaw/paving definitions. See docs/SUNSHINE_ROAD_POLISH.md.
+
+## Sugar Rush supplied scenery
+
+`EnvironmentAssetScenery` generalizes the existing Sunshine static renderer without changing simulation ownership. Registry course lists supply only each track’s model/readiness IDs. `sugarScenery` generates deterministic candy-market placements and matching paved supports with whole-envelope road/prop separation; `SugarScenery` renders them through material batches and one paving instance batch. Sugar road paint reuses sampled ribbon geometry and asphalt, with a dedicated pastel curb palette. See docs/SUGAR_RUSH_ENVIRONMENT.md.

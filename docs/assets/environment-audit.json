@@ -29,6 +29,11 @@
       0.8176635382388376
     ],
     "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [
+      "KHR_materials_specular"
+    ],
     "clips": [],
     "images": [
       {
@@ -245,6 +250,9 @@
       1.1034108996391299
     ],
     "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
     "clips": [],
     "images": [
       {
@@ -297,6 +305,9 @@
       10.70541000366211
     ],
     "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
     "clips": [],
     "images": [
       {
@@ -341,6 +352,9 @@
       0.3890091037640264
     ],
     "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
     "clips": [],
     "images": [
       {
@@ -401,6 +415,12 @@
       16.030935287475593
     ],
     "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [
+      "KHR_materials_unlit",
+      "KHR_texture_transform"
+    ],
     "clips": [],
     "images": [
       {
@@ -449,6 +469,9 @@
       0.38608402432822597
     ],
     "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
     "clips": [],
     "images": [
       {
@@ -497,6 +520,9 @@
       15.088425612788486
     ],
     "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
     "clips": [],
     "images": [
       {
@@ -549,6 +575,11 @@
       19.65383768020932
     ],
     "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [
+      "KHR_materials_specular"
+    ],
     "clips": [],
     "images": [
       {
@@ -700,6 +731,404 @@
       {
         "name": "Door2_Palette001_0",
         "triangles": 8
+      }
+    ]
+  },
+  {
+    "id": "cotton-candy-stall",
+    "metadata": {
+      "extras": {
+        "author": "Steph (https://sketchfab.com/StephC.Art)",
+        "license": "CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)",
+        "source": "https://sketchfab.com/3d-models/cotton-candy-stall-f8e292cc275f4d6e8bdb04c218f2360b",
+        "title": "Cotton Candy Stall"
+      },
+      "generator": "Sketchfab-12.65.0",
+      "version": "2.0"
+    },
+    "sha256": "5d51d9ad6e0397836f72c360afa376ced6011359e79c9cb4c7bc60088a13e941",
+    "bytes": 608076,
+    "min": [
+      -0.2617140811140506,
+      -0.22836778916449177,
+      -0.20610484671939983
+    ],
+    "max": [
+      0.2610449387957958,
+      0.23357873283550143,
+      0.17428866023667006
+    ],
+    "size": [
+      0.5227590199098464,
+      0.4619465219999932,
+      0.3803935069560699
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [
+      "KHR_materials_pbrSpecularGlossiness"
+    ],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Cube_0",
+        "triangles": 82
+      },
+      {
+        "name": "Cube019_0",
+        "triangles": 170
+      },
+      {
+        "name": "Cube028_0",
+        "triangles": 56
+      },
+      {
+        "name": "Cylinder001_0",
+        "triangles": 210
+      },
+      {
+        "name": "Cylinder_0",
+        "triangles": 1890
+      },
+      {
+        "name": "Cube001_0",
+        "triangles": 12
+      },
+      {
+        "name": "Cone004_0",
+        "triangles": 373
+      },
+      {
+        "name": "Cube002_0",
+        "triangles": 22
+      },
+      {
+        "name": "Cube003_0",
+        "triangles": 22
+      },
+      {
+        "name": "Cube004_0",
+        "triangles": 22
+      },
+      {
+        "name": "Cube005_0",
+        "triangles": 22
+      },
+      {
+        "name": "Cone000_0",
+        "triangles": 811
+      },
+      {
+        "name": "Cube006_0",
+        "triangles": 106
+      },
+      {
+        "name": "Cylinder002_0",
+        "triangles": 74
+      },
+      {
+        "name": "Cylinder003_0",
+        "triangles": 74
+      },
+      {
+        "name": "Sphere_0",
+        "triangles": 96
+      },
+      {
+        "name": "Sphere001_0",
+        "triangles": 96
+      },
+      {
+        "name": "Sphere002_0",
+        "triangles": 96
+      },
+      {
+        "name": "Cylinder004_0",
+        "triangles": 9
+      },
+      {
+        "name": "Sphere004_0",
+        "triangles": 96
+      },
+      {
+        "name": "Cylinder006_0",
+        "triangles": 9
+      },
+      {
+        "name": "Cylinder005_0",
+        "triangles": 10
+      },
+      {
+        "name": "Cylinder007_0",
+        "triangles": 10
+      },
+      {
+        "name": "Cylinder008_0",
+        "triangles": 10
+      }
+    ]
+  },
+  {
+    "id": "ice-cream-truck",
+    "metadata": {
+      "extras": {
+        "author": "Bogdan Streletskiy (https://sketchfab.com/streletskiy)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/ice-cream-truck-b8b1294228044e64af8bfbae82c80ac0",
+        "title": "Ice Cream Truck"
+      },
+      "generator": "Sketchfab-14.64.0",
+      "version": "2.0"
+    },
+    "sha256": "5bff5c01572fb7d57bc3640c8a1efcf537d5c36945abed4f3740b4526e8a24b2",
+    "bytes": 775520,
+    "min": [
+      -1.6179191442298446,
+      -6.769763692404673e-7,
+      -3.551144333709357
+    ],
+    "max": [
+      1.617918900089208,
+      4.477785215066281,
+      2.4694118575566244
+    ],
+    "size": [
+      3.2358380443190526,
+      4.47778589204265,
+      6.020556191265982
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [
+      "KHR_materials_emissive_strength",
+      "KHR_materials_specular"
+    ],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Car_Ice_Material_#1389_0",
+        "triangles": 13852
+      }
+    ]
+  },
+  {
+    "id": "lollipops-pack",
+    "metadata": {
+      "extras": {
+        "author": "Contemplator (https://sketchfab.com/contemplatorr)",
+        "license": "SKETCHFAB Standard (https://sketchfab.com/licenses)",
+        "source": "https://sketchfab.com/3d-models/lollipops-pack-d30320c2e355461388b9ed5b3c3f051f",
+        "title": "Lollipops_Pack"
+      },
+      "generator": "Sketchfab-0.17.0",
+      "version": "2.0"
+    },
+    "sha256": "8060dedc8c7592078999fd269ffff24ea47b8a729883e1bac1785bdd3d27b87a",
+    "bytes": 814892,
+    "min": [
+      -0.8521265983581543,
+      -2.92792159081853e-8,
+      -0.6794696588928566
+    ],
+    "max": [
+      2.5253407955169678,
+      1.503594995687636,
+      0.14763773099598276
+    ],
+    "size": [
+      3.377467393875122,
+      1.503595024966852,
+      0.8271073898888394
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [
+      "KHR_materials_pbrSpecularGlossiness"
+    ],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Rainbow_StarLollipop004_Plastic_stick_0",
+        "triangles": 400
+      },
+      {
+        "name": "Rainbow_StarLollipop004_Lollipop_BaseColor_0",
+        "triangles": 2240
+      }
+    ]
+  },
+  {
+    "id": "sugar-mascot",
+    "metadata": {
+      "extras": {
+        "author": "Duznot (https://sketchfab.com/duz_vr)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/sugar-sugar-doo-doo-doo-doo-doo-dooo-a91f25a21c08484788648a8337a4dee5",
+        "title": "Sugar Sugar (doo doo doo doo doo dooo)"
+      },
+      "generator": "Sketchfab-12.68.0",
+      "version": "2.0"
+    },
+    "sha256": "56daef5523557ade2828d6a9b94dd1f6988cab973faeec8264c82a18ab4520fd",
+    "bytes": 2196948,
+    "min": [
+      -80.74800980416944,
+      -7.535578665754946,
+      -34.015651397848586
+    ],
+    "max": [
+      60.345042844311536,
+      201.00489985230092,
+      39.64109374843722
+    ],
+    "size": [
+      141.09305264848098,
+      208.54047851805586,
+      73.6567451462858
+    ],
+    "skins": 0,
+    "declaredSkins": 1,
+    "bones": 56,
+    "extensions": [],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Body_Ice_Cream_0",
+        "triangles": 5392
+      }
+    ]
+  },
+  {
+    "id": "sugarcube-corner",
+    "metadata": {
+      "extras": {
+        "author": "Olivia Sabatka (https://sketchfab.com/discopears)",
+        "license": "SKETCHFAB Standard (https://sketchfab.com/licenses)",
+        "source": "https://sketchfab.com/3d-models/sugarcube-corner-1a70d3380d534ae589c452ada453f7a4",
+        "title": "Sugarcube Corner"
+      },
+      "generator": "Sketchfab-15.58.0",
+      "version": "2.0"
+    },
+    "sha256": "24064b1c49fc20f8c9d2c7ff16eed2a25b00c03caf394a708ed3cfe0370ce58d",
+    "bytes": 2105184,
+    "min": [
+      -4.589658559471104,
+      -0.005317234900064846,
+      -1.4030286487604258
+    ],
+    "max": [
+      4.340779283630809,
+      9.041038923627639,
+      2.43910284253815
+    ],
+    "size": [
+      8.930437843101913,
+      9.046356158527704,
+      3.842131491298576
+    ],
+    "skins": 0,
+    "declaredSkins": 0,
+    "bones": 0,
+    "extensions": [],
+    "clips": [],
+    "images": [
+      {
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "meshes": [
+      {
+        "name": "Object_3",
+        "triangles": 7147
+      },
+      {
+        "name": "Object_4",
+        "triangles": 3492
       }
     ]
   }

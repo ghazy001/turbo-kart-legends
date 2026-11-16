@@ -135,3 +135,7 @@ Replaced primitive buildings with 14 supplied timber tower houses, added 62 supp
 ## Sunshine road presentation and scenery variety
 
 Mixed 10 supplied Stylized Houses with four Viking Houses, fitted the supplied complete western gas station, and replaced incorrectly rotated dashes/flat pad pieces with road-following paint. Turbo pads and the existing jump roller gain clear forward chevrons, borders and aligned activation stripes. Core features/physics/camera and other courses remain unchanged. See docs/SUNSHINE_ROAD_POLISH.md.
+
+## Sugar Rush Valley supplied-model scenery
+
+Integrated the five supplied candy-market GLBs and reused the complete station, replacing the primitive candy-tree field with spaced shops, stalls, parked trucks, static mascots and varied lollipop gardens. Road-aligned paint, asphalt, pastel curbs and softer atmosphere preserve the existing sampled circuit and every gameplay rule. Shared per-course instancing/loading keeps other circuits isolated. See docs/SUGAR_RUSH_ENVIRONMENT.md for capabilities, provenance, checks and limits.
