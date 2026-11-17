@@ -1,7 +1,7 @@
 import { BufferGeometry, Float32BufferAttribute, BoxGeometry, Group, Mesh, MeshPhysicalMaterial, MeshStandardMaterial, Texture, Vector3 } from 'three';
 import { describe, expect, it } from 'vitest';
 import { driverAssets, karts, racers } from '../config/visualAssets';
-import { driverFitOptions } from '../render/models/driverFit';
+import { driverFitOptions, resolveDriverMount } from '../render/models/driverFit';
 import { createStaticPose } from '../render/models/staticPose';
 import { applyPaletteBatch } from '../render/models/paletteBatch';
 import { protectedPoseVertices } from '../render/models/poseRegions';
@@ -12,14 +12,16 @@ import { applyRacerSurface } from '../render/models/racerPresentation';
 
 function mount(point: Vector3, driver: typeof racers[number], kart: typeof karts[number]) {
   // Registry defaults are centered and unrotated; assert this before using the simple transform.
-  expect(driver.transform.rotation).toEqual([0, 0, 0]); expect(kart.seat.rotation).toEqual([0, 0, 0]);
-  return point.multiplyScalar(driver.transform.scale).add(new Vector3(...driver.transform.position)).multiplyScalar(kart.seat.scale).add(new Vector3(...kart.seat.position));
+  const resolved = resolveDriverMount(kart, driver);
+  expect(resolved.rotation).toEqual([0, 0, 0]); expect(kart.seat.rotation).toEqual([0, 0, 0]);
+  return point.multiplyScalar(resolved.scale).add(new Vector3(...resolved.position)).multiplyScalar(kart.seat.scale).add(new Vector3(...kart.seat.position));
 }
 describe('cockpit fitting', () => {
-  for (const kart of karts) for (const racer of racers.filter(driver => driver.staticPose)) it(`${racer.id}/${kart.id}: wrists reach the configured wheel grips`, () => {
+  for (const kart of karts) for (const racer of racers.filter(driver => driver.staticPose)) it(`${racer.id}/${kart.id}: palms reach the configured wheel grips`, () => {
     const options = driverFitOptions(kart, racer);
     expect(options.staticPose).toBeDefined();
-    const point = new Vector3(...racer.staticPose!.wrist).add(new Vector3(...(racer.staticPose!.origin ?? [0, 0, 0])));
+    const pose = racer.staticPose!;
+    const point = new Vector3(...pose.wrist).addScaledVector(new Vector3(...pose.wrist).sub(new Vector3(...pose.elbow)).normalize(), pose.palmReach ?? 0).add(new Vector3(...(pose.origin ?? [0, 0, 0])));
     createStaticPose(options.staticPose!)(point, racer.staticPose!.armMeshes?.[0]);
     expect(mount(point, racer, kart).distanceTo(new Vector3(...kart.steeringGrip))).toBeLessThan(1e-5);
     expect(racer.staticPose!.fittedWrist).not.toBe(options.staticPose!.fittedWrist);

@@ -1,14 +1,12 @@
 import { Box3, BufferAttribute, Group, Mesh, SkinnedMesh, Vector3, type BufferGeometry, type Object3D } from 'three';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
-import { createSuppliedStaticPose } from './staticDriverPose';
-import { protectedPoseVertices } from './poseRegions';
-import { createStaticPose } from './staticPose';
+import { fitStaticMeshes } from './staticCockpitFit';
 import type { RigSeatDefinition, StaticPoseDefinition, WheelDefinition } from '../../config/visualAssets';
 import { applyRigSeatPose } from './rigSeatPose';
 
 export interface WheelRig { steer: Group; spin: Group; front: boolean }
 export interface PreparedModel { root: Group; wheels: WheelRig[]; dispose: () => void; releaseUnusedGeometry: () => void }
-export interface ModelOptions { surface?: 'racer-matte'; staticDriver?: boolean; handTarget?: [number, number, number]; hiddenNodes?: readonly string[]; staticPose?: StaticPoseDefinition; rigSeat?: RigSeatDefinition; wheels?: readonly WheelDefinition[] }
+export interface ModelOptions { surface?: 'racer-matte'; staticDriver?: boolean; handTarget?: [number, number, number]; footFloor?: number; hiddenNodes?: readonly string[]; staticPose?: StaticPoseDefinition; rigSeat?: RigSeatDefinition; wheels?: readonly WheelDefinition[] }
 
 /** Split a joined left/right tire pair without cutting triangles or changing source buffers. */
 function wheelSide(source: BufferGeometry, side: -1 | 1): BufferGeometry {
@@ -29,25 +27,20 @@ function wheelSide(source: BufferGeometry, side: -1 | 1): BufferGeometry {
 /** Preserve skeletons and the cached GLTF. Bake only static meshes that need fitting/pivots. */
 export function prepareModel(source: Object3D, options: ModelOptions = {}): PreparedModel {
   const root = new Group(), instance = clone(source);
-  if (options.rigSeat) applyRigSeatPose(instance, options.rigSeat, options.handTarget ?? [0.2, 0.55, 0.35]);
+  if (options.rigSeat) applyRigSeatPose(instance, options.rigSeat, options.handTarget ?? [0.2, 0.55, 0.35], options.footFloor);
   for (const name of options.hiddenNodes ?? []) instance.getObjectByName(name)?.removeFromParent(); const wheels: WheelRig[] = [], owned: BufferGeometry[] = [];
   instance.traverse(node => { if (node instanceof Mesh) { node.castShadow = true; node.receiveShadow = true; } });
   if (!options.staticDriver && !options.staticPose && !options.wheels?.length) root.add(instance);
   else {
     instance.updateMatrixWorld(true); const meshes: Mesh[] = [];
     instance.traverse(node => { if (node instanceof Mesh) meshes.push(node); });
-    const fit: ((point: Vector3, meshName: string, allowPose?: boolean) => void) | null = options.staticPose ? createStaticPose(options.staticPose) : options.staticDriver ? createSuppliedStaticPose(options.handTarget) : null;
+    const bakedMeshes = new Map(meshes.filter(mesh => !(mesh instanceof SkinnedMesh)).map(mesh => [mesh, mesh.geometry.clone().applyMatrix4(mesh.matrixWorld)]));
+    owned.push(...bakedMeshes.values());
+    fitStaticMeshes(bakedMeshes, options);
     const parts = new Map<WheelDefinition, Mesh[]>();
     for (const mesh of meshes) {
       if (mesh instanceof SkinnedMesh) continue; // Keep joints, inverse binds and hierarchy intact.
-      const baked = mesh.geometry.clone().applyMatrix4(mesh.matrixWorld); owned.push(baked);
-      if (fit) {
-        const protectedVertices = options.staticPose?.protectComponentsAbove === undefined ? null : protectedPoseVertices(baked, options.staticPose.protectComponentsAbove);
-        const position = baked.getAttribute('position'), point = new Vector3();
-        for (let i = 0; i < position.count; i++) { point.fromBufferAttribute(position, i); fit(point, mesh.name, !protectedVertices?.[i]); position.setXYZ(i, point.x, point.y, point.z); }
-        position.needsUpdate = true; baked.computeVertexNormals();
-        if (baked.index && baked.hasAttribute('tangent') && baked.hasAttribute('uv')) baked.computeTangents();
-      }
+      const baked = bakedMeshes.get(mesh)!;
       const definitions = options.wheels?.filter(item => (item.nodes ?? [item.node]).includes(mesh.name)) ?? [];
       if (definitions.length) for (const definition of definitions) {
         const geometry = definition.side ? wheelSide(baked, definition.side) : baked;

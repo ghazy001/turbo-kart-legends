@@ -13,7 +13,7 @@ const sourceHeights = {
   sonic: { crown: 1.007082, pelvis: 0.37572 },
   arnold: { crown: 2.226009, pelvis: 0.61 },
   spongebob: { crown: 3.156794, pelvis: 0.82 },
-  crash: { crown: 1.39055, pelvis: 0.42 },
+  crash: { crown: 1.386504, pelvis: 0.42 }, // Seated fit omits the overlapping inverted outline shell.
 } as const;
 
 export function seatedRacerScale(id: keyof typeof sourceHeights): number {

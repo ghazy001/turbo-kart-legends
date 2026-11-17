@@ -352,3 +352,8 @@ Sunshine house/cactus placements share the existing static material-batch pipeli
 ## Ability visual polish
 
 `abilityVisualConfig` contains presentation-only tuning. `BubbleGuardVisuals` shares a texture-free Fresnel/lattice shader and instanced orbit arcs. `CombatEffects` reads live projectiles/traps/slots, while `AbilityBursts` samples all existing ItemEvent kinds into a fixed eight-event pool at simulation time. No event callbacks alter the race. `KartEffects` compacts tier-colored sparks/jets/wake/collars into four instance draws per actor. Counts clear from current state, clocks freeze on pause and local kart clocks reset on simulation revision. Media-query reduced motion suppresses travel while retaining state cues. Models, simulation, hit queries, AI and camera are unchanged. See docs/ABILITY_VISUAL_POLISH.md for budgets and verification.
+
+
+## Measured cockpit fitting
+
+`resolveDriverMount` derives each decorative driver root from the kart cushion and racer-specific hip clearance. `driverFitOptions` converts palm and footwell targets through that same resolved seat/mount matrix. `staticCockpitFit` fits cloned buffers once and settles both feet with a shared support correction; `rigSeatPose` retains independent Sonic joints, with static grip/foot fitting. Crash face masks and seated-only outline removal prevent source-region artifacts. KartAssembly adds an original cosmetic Boat wheel and retains the unchanged common body/seat/driver motion parent. No simulation or per-frame posing owner is introduced. See docs/COCKPIT_FITTING_FIX.md.

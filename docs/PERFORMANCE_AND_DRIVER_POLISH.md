@@ -1,5 +1,7 @@
 # Performance and driver polish — 2026-11-06
 
+Historical 2026-11-06 report. Current roster/fit facts supersede the original unrigged-only roster below: see [Sonic](SONIC_INTEGRATION.md), [SpongeBob](SPONGEBOB_REPLACEMENT.md) and [measured cockpit fitting](COCKPIT_FITTING_FIX.md).
+
 This maintenance pass changes decorative models and their preparation only. Handling, the shared collision capsule, drifting, boost, AI navigation, checkpoints, race rules, input composition and chase camera remain unchanged.
 
 ## What changed

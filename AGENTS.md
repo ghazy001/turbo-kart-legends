@@ -68,6 +68,8 @@ The user's competitive-AI request authorizes revising opponent racing lines, pre
 
 The user requested a special-ability graphics polish pass. Improve Bubble Guard, Spark Bolt, Banana Trap and existing turbo/drift presentation using bounded original procedural shaders/instances. Preserve all ability timing, damage, hitboxes, controls, AI, cameras and race rules. Keep road/kart readability and reduced-motion behavior; no new weapons or postprocessing dependency. See docs/ABILITY_VISUAL_POLISH.md.
 
+The user reported glitched racer seating and requested all racer/kart fits corrected. Measured decorative cushion/footwell data, body-specific mounts, palm targets, safe static region fitting, Sonic joint/extremity/finger fitting and an original visible Boat steering wheel are authorized. Preserve source assets, animation capability facts, shared motion parenting, physics/colliders, AI, cameras and race rules. See docs/COCKPIT_FITTING_FIX.md.
+
 ## Preferred technology
 
 

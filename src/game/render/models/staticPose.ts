@@ -29,7 +29,10 @@ export function createStaticPose(config: StaticPoseDefinition): (point: Vector3,
       point.lerp(scratch, MathUtils.smoothstep(original.x, elbow.x - 0.04, elbow.x + 0.04));
       scratch.copy(original).sub(wrist).applyQuaternion(fore).add(fittedWrist);
       point.lerp(scratch, MathUtils.smoothstep(original.x, wrist.x - 0.04, wrist.x + 0.04));
-      point.lerp(original, 1 - MathUtils.smoothstep(original.x, shoulder.x * 0.9, shoulder.x * 1.35));
+      const start = config.armStartX ?? shoulder.x * 0.9;
+      const armWeight = MathUtils.smoothstep(original.x, start, Math.max(start + 0.05, shoulder.x * 1.35));
+      const depthWeight = config.armMaxZ === undefined ? 1 : 1 - MathUtils.smoothstep(original.z, config.armMaxZ - 0.04, config.armMaxZ + 0.04);
+      point.lerp(original, 1 - armWeight * depthWeight);
       point.x *= side;
     }
     point.y -= config.hip;

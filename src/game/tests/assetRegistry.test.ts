@@ -10,7 +10,7 @@ import { prepareModel } from '../render/models/prepareModel';
 import { instantiateModel, disposeModelCache } from '../render/models/modelInstances';
 import { adaptDiffuseLegacyMaterials } from '../render/models/assetLoader';
 import { createDriverAnimator } from '../render/models/driverAnimation';
-import { driverFitOptions } from '../render/models/driverFit';
+import { driverFitOptions, resolveDriverMount } from '../render/models/driverFit';
 import { kartConfig } from '../config/kartConfig';
 import { racerStyle } from '../config/racerStyle';
 import { placePreviewOnFloor, racerPortraitFit } from '../render/models/racerPresentation';
@@ -93,11 +93,12 @@ describe('Milestone 3.5 registry and real assets', () => {
   for (const [ki, kart] of karts.entries()) for (const [ri, racer] of racers.entries()) it(`${racer.id} + ${kart.id}: finite fitted bounds, no floor penetration, attachment follows parent motion`, () => {
     const source = racerModels[ri].scene, before = new Box3().setFromObject(source, true);
     const model = prepareModel(source, driverFitOptions(kart, racer));
-    const driver = mounted(model.root, racer.transform), seat = mounted(driver, kart.seat), motion = new Group(); motion.add(seat); motion.updateMatrixWorld(true);
+    const driver = mounted(model.root, resolveDriverMount(kart, racer)), seat = mounted(driver, kart.seat), motion = new Group(); motion.add(seat); motion.updateMatrixWorld(true);
     const box = new Box3().setFromObject(motion, true);
     expect(box.min.y, `${racer.id}/${kart.id} feet`).toBeGreaterThan(0);
+    expect(box.min.y, `${racer.id}/${kart.id} actual footwell contact`).toBeCloseTo(kart.cockpit.footFloor, 2);
     expect(box.max.y).toBeLessThan(2.3); expect(box.getSize(new Vector3()).x).toBeLessThan(1.5);
-    expect((box.max.y - kart.seat.position[1]) / kart.seat.scale, 'common crown height above the same seat').toBeCloseTo(racerStyle.seatedCrownHeight, 3);
+    expect((box.max.y - kart.seat.position[1]) / kart.seat.scale - resolveDriverMount(kart, racer).position[1], 'common crown height above the fitted pelvis').toBeCloseTo(racerStyle.seatedCrownHeight, 3);
     const local = driver.getWorldPosition(new Vector3()); motion.position.set(11, 2, -8); motion.rotation.set(0, 1.1, 0.12); motion.scale.y = 0.9; motion.updateMatrixWorld(true);
     expect(driver.getWorldPosition(new Vector3()).distanceTo(motion.localToWorld(local))).toBeLessThan(1e-5);
     expect(new Box3().setFromObject(source, true).equals(before)).toBe(true); expect(kartModels[ki].scene).toBeDefined(); model.dispose();
@@ -117,6 +118,45 @@ describe('Milestone 3.5 registry and real assets', () => {
     }
     expect(unchanged).toBeGreaterThan(1000); expect(error).toBeLessThan(1e-6); expect(moved).toBeGreaterThan(100);
     geometry.dispose(); model.dispose();
+  });
+  it('preserves Crash’s face and removes only the overlapping outline from seated clones', () => {
+    const driver = driverAssets.crash, source = racerModels[racers.findIndex(racer => racer.id === 'crash')].scene;
+    source.updateMatrixWorld(true);
+    const original = source.getObjectByName('CRASH_Material_0') as Mesh;
+    const baked = original.geometry.clone().applyMatrix4(original.matrixWorld), positions = baked.getAttribute('position');
+    for (const kart of karts) {
+      const model = prepareModel(source, driverFitOptions(kart, driver)), fitted = (model.root.getObjectByName(original.name) as Mesh).geometry.getAttribute('position');
+      let face = 0, movedArms = 0;
+      for (let i = 0; i < positions.count; i++) {
+        const distance = Math.hypot(fitted.getX(i) - positions.getX(i), fitted.getY(i) + driver.staticPose.hip - positions.getY(i), fitted.getZ(i) - positions.getZ(i));
+        if ((positions.getY(i) > 0.78 && positions.getZ(i) > 0.07) || positions.getY(i) > 1.1) { expect(distance).toBeLessThan(1e-6); face++; }
+        if (Math.abs(positions.getX(i)) > 0.5 && positions.getY(i) > 0.74 && distance > 0.05) movedArms++;
+      }
+      expect(face).toBeGreaterThan(500); expect(movedArms).toBeGreaterThan(100);
+      expect(model.root.getObjectByName('CRASH001_Material_0')).toBeUndefined(); model.dispose();
+    }
+    expect(source.getObjectByName('CRASH001_Material_0')).toBeDefined(); baked.dispose();
+  });
+  it('rests SpongeBob’s actual pants on all four cushions instead of mounting the body in midair', () => {
+    const driver = driverAssets.spongebob, source = racerModels[racers.findIndex(racer => racer.id === 'spongebob')].scene;
+    for (const kart of karts) {
+      const model = prepareModel(source, driverFitOptions(kart, driver));
+      const assembly = mounted(mounted(model.root, resolveDriverMount(kart, driver)), kart.seat);
+      const pants = assembly.getObjectByName('defaultMaterial_22')!;
+      const support = new Box3().setFromObject(pants, true).min.y - kart.cockpit.cushion[1];
+      expect(support).toBeGreaterThanOrEqual(-0.005); expect(support).toBeLessThan(0.012);
+      model.dispose();
+    }
+  });
+  it('fits Sonic’s existing fingers and extremity scales without changing the source rig or inventing clips', () => {
+    const driver = driverAssets.sonic, sourceModel = racerModels[racers.findIndex(racer => racer.id === 'sonic')], source = sourceModel.scene;
+    const sourceFinger = source.getObjectByName('L_FingerMiddle_B_018')!, rotation = sourceFinger.quaternion.clone();
+    const model = prepareModel(source, driverFitOptions(karts[0], driver));
+    const hand = model.root.getObjectByName('L_Hand_013')!, foot = model.root.getObjectByName('L_Foot_A_049')!;
+    expect(hand.scale.x).toBeCloseTo(driver.rigSeat.handScale); expect(foot.scale.x).toBeCloseTo(driver.rigSeat.footScale);
+    expect(model.root.getObjectByName(sourceFinger.name)!.quaternion.equals(rotation)).toBe(false);
+    expect(sourceFinger.quaternion.equals(rotation)).toBe(true); expect(sourceModel.animations).toHaveLength(0);
+    model.dispose();
   });
   it('preserves the latest SpongeBob face/clothing meshes and UVs while fitting only its named limbs', () => {
     const driver = driverAssets.spongebob, source = racerModels[racers.findIndex(racer => racer.id === driver.id)].scene;
@@ -171,10 +211,10 @@ describe('Milestone 3.5 registry and real assets', () => {
     for (const kart of karts) {
       const options = driverFitOptions(kart, driver);
       const first = instantiateModel(source, 'sonic-rig-test', options), second = instantiateModel(source, 'sonic-rig-test', options);
-      const seat = mounted(mounted(first.root, driver.transform), kart.seat);
+      const seat = mounted(mounted(first.root, resolveDriverMount(kart, driver)), kart.seat);
       for (const [index, side] of [1, -1].entries()) {
         const hand = first.root.getObjectByName(driver.rigSeat.arms[index][2])!;
-        const palm = hand.getWorldPosition(new Vector3()).add(new Vector3(0, 0, driver.rigSeat.palmOffset * kart.seat.scale * driver.transform.scale));
+        const palm = hand.getWorldPosition(new Vector3()).add(new Vector3(0, 0, driver.rigSeat.palmOffset * driver.rigSeat.handScale * kart.seat.scale * driver.transform.scale));
         expect(palm.distanceTo(new Vector3(side * kart.steeringGrip[0], kart.steeringGrip[1], kart.steeringGrip[2]))).toBeLessThan(1e-5);
         const otherHand = second.root.getObjectByName(hand.name)!;
         expect(hand).not.toBe(otherHand);

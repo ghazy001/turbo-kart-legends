@@ -229,3 +229,5 @@ Volcano Sprint now uses the supplied cartoon calderas, rock gardens and static d
 Frostbite Peak now uses both supplied snowy tree models, intact cabin scenes, snowmen and static wolves, with blue/white curbs and road-aligned asphalt markings. Existing tunnels, racing systems and controls remain. See [winter assets, regeneration, credits and verification](docs/FROSTBITE_ENVIRONMENT_ASSETS.md).
 
 Ability graphics: Bubble Guard now uses a translucent energy lattice and orbit arcs; Spark Bolt has electric filaments, traps have close-fitting arming cues, and boosts have layered exhausts/wake ribbons. Original pooled activation/hit/shatter effects respect pause and reduced motion. Gameplay and controls are unchanged. See [Ability visual polish](docs/ABILITY_VISUAL_POLISH.md).
+
+Racer fitting: all 20 racer/kart combinations now use measured cushion/footwell support and palm alignment, with a visible Boat steering wheel and static Sonic finger fitting. The supplied racers have no driving clips. Development `/?asset-preview` includes contact markers and bank/jump/landing attachment presets. See [Cockpit fitting](docs/COCKPIT_FITTING_FIX.md).
