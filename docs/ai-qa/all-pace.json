@@ -1,0 +1,362 @@
+[
+  {
+    "track": "sunshine-circuit",
+    "difficulty": "easy",
+    "racer": "breeze",
+    "time": 46.098561551346684,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 1
+  },
+  {
+    "track": "sunshine-circuit",
+    "difficulty": "easy",
+    "racer": "nova",
+    "time": 45.22345009502958,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 1
+  },
+  {
+    "track": "sunshine-circuit",
+    "difficulty": "easy",
+    "racer": "moss",
+    "time": 44.65991487900681,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 1
+  },
+  {
+    "track": "sunshine-circuit",
+    "difficulty": "normal",
+    "racer": "breeze",
+    "time": 40.12623298203387,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 2
+  },
+  {
+    "track": "sunshine-circuit",
+    "difficulty": "normal",
+    "racer": "nova",
+    "time": 39.32203234359201,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 3,
+    "jumps": 3
+  },
+  {
+    "track": "sunshine-circuit",
+    "difficulty": "normal",
+    "racer": "moss",
+    "time": 38.95433535243607,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 3,
+    "jumps": 3
+  },
+  {
+    "track": "sunshine-circuit",
+    "difficulty": "hard",
+    "racer": "breeze",
+    "time": 38.915543057402616,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 3,
+    "jumps": 3
+  },
+  {
+    "track": "sunshine-circuit",
+    "difficulty": "hard",
+    "racer": "nova",
+    "time": 38.31789562771744,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 3,
+    "jumps": 3
+  },
+  {
+    "track": "sunshine-circuit",
+    "difficulty": "hard",
+    "racer": "moss",
+    "time": 38.343363605585026,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 3,
+    "jumps": 3
+  },
+  {
+    "track": "sugar-rush-valley",
+    "difficulty": "easy",
+    "racer": "breeze",
+    "time": 47.15040125464462,
+    "maxSpeed": 16.269701233137447,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "sugar-rush-valley",
+    "difficulty": "easy",
+    "racer": "nova",
+    "time": 46.28278357864995,
+    "maxSpeed": 16.567317719109493,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "sugar-rush-valley",
+    "difficulty": "easy",
+    "racer": "moss",
+    "time": 45.823046305892724,
+    "maxSpeed": 16.86493420508151,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "sugar-rush-valley",
+    "difficulty": "normal",
+    "racer": "breeze",
+    "time": 40.32740055787514,
+    "maxSpeed": 24,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 4
+  },
+  {
+    "track": "sugar-rush-valley",
+    "difficulty": "normal",
+    "racer": "nova",
+    "time": 39.90364192734302,
+    "maxSpeed": 24,
+    "scrapes": 0,
+    "boosts": 1,
+    "jumps": 4
+  },
+  {
+    "track": "sugar-rush-valley",
+    "difficulty": "normal",
+    "racer": "moss",
+    "time": 39.607310752477154,
+    "maxSpeed": 24,
+    "scrapes": 0,
+    "boosts": 1,
+    "jumps": 4
+  },
+  {
+    "track": "sugar-rush-valley",
+    "difficulty": "hard",
+    "racer": "breeze",
+    "time": 38.65957577799613,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 4
+  },
+  {
+    "track": "sugar-rush-valley",
+    "difficulty": "hard",
+    "racer": "nova",
+    "time": 38.16963363501775,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 4
+  },
+  {
+    "track": "sugar-rush-valley",
+    "difficulty": "hard",
+    "racer": "moss",
+    "time": 38.162270038566035,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 4
+  },
+  {
+    "track": "frostbite-peak",
+    "difficulty": "easy",
+    "racer": "breeze",
+    "time": 54.19828679834306,
+    "maxSpeed": 16.269701233137447,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "frostbite-peak",
+    "difficulty": "easy",
+    "racer": "nova",
+    "time": 53.11107289717853,
+    "maxSpeed": 16.567317719109493,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "frostbite-peak",
+    "difficulty": "easy",
+    "racer": "moss",
+    "time": 52.39260671478077,
+    "maxSpeed": 16.86493420508151,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "frostbite-peak",
+    "difficulty": "normal",
+    "racer": "breeze",
+    "time": 46.45302853681705,
+    "maxSpeed": 24,
+    "scrapes": 0,
+    "boosts": 1,
+    "jumps": 3
+  },
+  {
+    "track": "frostbite-peak",
+    "difficulty": "normal",
+    "racer": "nova",
+    "time": 45.65958424071157,
+    "maxSpeed": 24,
+    "scrapes": 0,
+    "boosts": 1,
+    "jumps": 3
+  },
+  {
+    "track": "frostbite-peak",
+    "difficulty": "normal",
+    "racer": "moss",
+    "time": 45.17817793601035,
+    "maxSpeed": 24,
+    "scrapes": 0,
+    "boosts": 1,
+    "jumps": 3
+  },
+  {
+    "track": "frostbite-peak",
+    "difficulty": "hard",
+    "racer": "breeze",
+    "time": 44.517389763112625,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 3
+  },
+  {
+    "track": "frostbite-peak",
+    "difficulty": "hard",
+    "racer": "nova",
+    "time": 44.01447576053852,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 4
+  },
+  {
+    "track": "frostbite-peak",
+    "difficulty": "hard",
+    "racer": "moss",
+    "time": 44.03293030082377,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 3
+  },
+  {
+    "track": "volcano-sprint",
+    "difficulty": "easy",
+    "racer": "breeze",
+    "time": 50.14345748075231,
+    "maxSpeed": 16.269701233137447,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "volcano-sprint",
+    "difficulty": "easy",
+    "racer": "nova",
+    "time": 49.11478416540314,
+    "maxSpeed": 16.567317719109493,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "volcano-sprint",
+    "difficulty": "easy",
+    "racer": "moss",
+    "time": 48.70043155478995,
+    "maxSpeed": 16.86493420508151,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "volcano-sprint",
+    "difficulty": "normal",
+    "racer": "breeze",
+    "time": 43.29027174383064,
+    "maxSpeed": 24,
+    "scrapes": 0,
+    "boosts": 1,
+    "jumps": 4
+  },
+  {
+    "track": "volcano-sprint",
+    "difficulty": "normal",
+    "racer": "nova",
+    "time": 42.49717975281104,
+    "maxSpeed": 24,
+    "scrapes": 0,
+    "boosts": 1,
+    "jumps": 4
+  },
+  {
+    "track": "volcano-sprint",
+    "difficulty": "normal",
+    "racer": "moss",
+    "time": 42.305196233234625,
+    "maxSpeed": 24,
+    "scrapes": 0,
+    "boosts": 1,
+    "jumps": 4
+  },
+  {
+    "track": "volcano-sprint",
+    "difficulty": "hard",
+    "racer": "breeze",
+    "time": 41.73639870477356,
+    "maxSpeed": 24,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 5
+  },
+  {
+    "track": "volcano-sprint",
+    "difficulty": "hard",
+    "racer": "nova",
+    "time": 40.74530224471908,
+    "maxSpeed": 26,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 5
+  },
+  {
+    "track": "volcano-sprint",
+    "difficulty": "hard",
+    "racer": "moss",
+    "time": 41.178607669525135,
+    "maxSpeed": 24,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 5
+  }
+]

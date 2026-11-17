@@ -35,7 +35,7 @@ function ReadyScreen({ store, records }: { store: RaceFlowStore; records?: Trial
   const details = [
     ['Racer', driver.name], ['Kart', kart.name],
     ['Race length', championship ? `${sunshineCup.tracks.length} races · 3 laps each` : lapLabel(state.currentMode === 'vs-race' ? state.vsOptions.laps : 3)],
-    ['Rivals', state.currentMode === 'time-trial' ? 'Solo' : state.currentMode === 'vs-race' ? `3 CPU · ${difficultyDefinition(state.vsOptions.difficulty).name}` : '3 CPU · Normal'],
+    ['Rivals', state.currentMode === 'time-trial' ? 'Solo' : state.currentMode === 'vs-race' ? `3 CPU · ${difficultyDefinition(state.vsOptions.difficulty).name}` : '3 CPU · Medium'],
   ];
   return <><section className="race-ready" aria-label="Race setup summary">
     <h3>{championship ? sunshineCup.name : trackDefinition(state.selectedTrack).name}</h3>

@@ -35,6 +35,8 @@ Exit: drift mechanics reward skilled cornering; boosts cannot be spammed at zero
 Implementation status (2026-11-05): drift/turbo, drift-entry hops and landing, effects/audio, and standard gamepad support are implemented. See `docs/MILESTONE_2.md` for verified checks and remaining manual handling, hardware and browser validation. Historical M1 manual checks remain open.
 
 ## Milestone 3 — Real race and AI
+
+Competitive-AI follow-up (2026-11-17): the user's racing challenge request adds predictive corner/braking plans, cached racing lines, committed passing/single-move defense, skill-aware real drift/feature use and Easy/Medium/Hard behavior. Shared physics, colliders, camera and race rules stay intact; the previous player-gap speed adjustment is removed. See docs/COMPETITIVE_AI.md for before/after pace, implementation and tests.
 Add checkpoints/laps, countdown, finish line, split times and ranking; 3–5 waypoint-based AI karts; obstacle behavior, catch-up logic with limits, reset/recovery; Quick Race and Time Trial.
 Exit: 3-lap races work; no skipped-checkpoint exploits; AI completes races without chronic wall collisions.
 

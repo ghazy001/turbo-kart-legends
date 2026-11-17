@@ -127,6 +127,8 @@ Unit tests: clamp behavior, accelerate/decelerate, reversing, steering, dt depen
 
 ## Milestone 3 race ownership
 
+The 2026-11-17 competitive-AI pass supersedes the original pursuit/catch-up details below: `ai/racingLine` caches sampled curvature/lines and plans braking; `trafficPlanner` owns independent committed tactical memory; `waypointInput` outputs ordinary controls with skill-aware drift and feature alignment. RaceSession passes that state on fixed ticks and resets it on start/recovery. Player-gap speed adjustment is removed. All actors still use the same Simulation, collisions, speed/boost ceilings and race validation. See docs/COMPETITIVE_AI.md for tuning, measured pace and regression evidence.
+
 `RaceSession` owns the race phase, ordered checkpoint progress, grid, standings and all racer simulations. One fixed 60 Hz clock advances the player and three AI simulations together. `Simulation.step` still calls the existing kart/drift/jump/road-boundary controller; `Simulation.interpolate` renders those snapshots. The original standalone `Simulation.advance` remains available and tested. No second physics engine or rendering-driven movement was introduced.
 
 `trackProgress.ts` interpolates the sampled road, including the closing segment; the track definition's `startDistance` anchors both the painted finish and validation gate. Swept crossings must be forward, within road width, short enough to be a physical tick and in the expected order. `raceProgress.ts` owns lap/split times and validated arc-distance ranking. Recovery rewinds to the last validated gate with zero motion and does not reset the clock or award checkpoints.

@@ -1,37 +1,64 @@
-import { raceConfig } from '../config/raceConfig';
+import { aiConfig, aiSkills } from '../config/aiConfig';
+import { boostTiers, driftConfig } from '../config/driftConfig';
+import { kartConfig, loopConfig } from '../config/kartConfig';
+import type { AIDifficulty } from '../config/raceOptions';
 import type { KartInput, KartState, SampledTrack } from '../core/types';
 import { wrapAngle } from '../kart/kartController';
 import { nearestRoadPoint, offsetSample } from '../tracks/trackSampling';
-import { pointAtDistance } from '../race/trackProgress';
+import { pointAtDistance, wrapDistance } from '../race/trackProgress';
+import { roadHeight } from '../tracks/trackSurface';
+import { plannedSpeed, racingLane, roadCurvature } from './racingLine';
+import { createAIDriverState, planTraffic, type AIDriverState, type AITraffic } from './trafficPlanner';
+export { createAIDriverState, type AIDriverState, type AITraffic } from './trafficPlanner';
 
-export interface AITraffic { id: string; state: KartState }
+export interface AIDrivingContext { brain: AIDriverState; difficulty: AIDifficulty; dt: number }
+const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
 
-/** Deterministic pursuit and local traffic avoidance. Outputs the human input shape. */
+/** Only normalized driver inputs: no position, speed, grip or item grants. Gap is retained for callers, never used for rubber-banding. */
 export function waypointInput(state: KartState, track: SampledTrack, profile: { id: string; targetSpeed: number; lane: number },
-  traffic: readonly AITraffic[], gapToPlayer = 0): KartInput {
-  const road = nearestRoadPoint(track, state);
-  const lookAhead = 7 + Math.max(0, state.forwardSpeed) * 0.45;
+  traffic: readonly AITraffic[], gapToPlayer = 0, context?: AIDrivingContext): KartInput {
+  void gapToPlayer;
+  const difficulty = context?.difficulty ?? 'normal', skill = aiSkills[difficulty];
+  const road = nearestRoadPoint(track, state), speed = Math.max(0, state.forwardSpeed);
+  const offset = (state.x - road.x) * road.tz - (state.z - road.z) * road.tx;
+  const wideLine = clamp((Math.abs(offset) - aiConfig.lineLimit) / (aiConfig.laneLimit - aiConfig.lineLimit), 0, 1);
+  const lookAhead = (aiConfig.lookAheadBase + speed * aiConfig.lookAheadSpeed) * (1 - wideLine * aiConfig.wideLineLookAheadReduction);
   const targetRoad = pointAtDistance(track, road.progress + lookAhead);
-  const futureRoad = pointAtDistance(track, road.progress + 35);
-  const bend = Math.abs(wrapAngle(Math.atan2(futureRoad.tx, futureRoad.tz) - Math.atan2(road.tx, road.tz)));
-  let lane = profile.lane;
-  let followingSpeed = Infinity;
-  for (const other of traffic) {
-    if (other.id === profile.id) continue;
-    const dx = other.state.x - state.x; const dz = other.state.z - state.z;
-    const ahead = dx * road.tx + dz * road.tz;
-    const sideways = dx * road.tz - dz * road.tx;
-    if (ahead > 0 && ahead < 18 && Math.abs(sideways) < 3.3) {
-      const otherLane = (other.state.x - road.x) * road.tz - (other.state.z - road.z) * road.tx;
-      lane = otherLane >= 0 ? -1.9 : 1.9;
-      if (ahead < 7) followingSpeed = Math.max(3, other.state.forwardSpeed - 1);
+  const curve = roadCurvature(track, road.progress + lookAhead);
+  let idealLane = context ? racingLane(track, road.progress + lookAhead) * skill.lineStrength + profile.lane * 0.12 : profile.lane;
+  // Line up for actual feature gates. There are no branched shortcuts in the current courses.
+  const approachingFeature = track.definition.features?.some(feature => wrapDistance(feature.fraction * track.length - road.progress, track.length) < aiConfig.featureApproach);
+  if (approachingFeature) idealLane *= 0.25;
+  idealLane = clamp(idealLane, -aiConfig.laneLimit, aiConfig.laneLimit);
+  const brain = context?.brain ?? createAIDriverState(offset);
+  const trafficPlan = planTraffic(state, track, profile.id, traffic, brain, idealLane, curve, difficulty, context?.dt ?? loopConfig.step, road);
+  const target = offsetSample(targetRoad, trafficPlan.lane), dx = target.x - state.x, dz = target.z - state.z;
+  const error = wrapAngle(Math.atan2(dx, dz) - state.heading);
+  const curvature = 2 * (dx * Math.cos(state.heading) - dz * Math.sin(state.heading)) / Math.max(1, dx * dx + dz * dz);
+  const normalSteer = clamp(-Math.atan(kartConfig.wheelBase * curvature) * (1 + speed / kartConfig.maxForwardSpeed * kartConfig.highSpeedSteerReduction) / kartConfig.maxSteerAngle, -1, 1);
+  // A legitimately earned boost may exceed cruise pace; the same corner/braking envelope still applies.
+  const ceiling = state.boostRemaining > 0 && state.boostTier > 0 ? boostTiers[state.boostTier - 1].maxSpeed
+    : Math.max(Math.min(kartConfig.maxForwardSpeed, profile.targetSpeed), speed > kartConfig.maxForwardSpeed ? speed : 0);
+  let targetSpeed = Math.min(plannedSpeed(track, road.progress, ceiling, skill.cornerMargin, skill.braking, trafficPlan.lane), trafficPlan.following);
+  if (Math.abs(offset) > aiConfig.edgeSlowdownStart) targetSpeed = Math.min(targetSpeed, Math.max(aiConfig.edgeMinimumSpeed,
+    kartConfig.maxForwardSpeed - (Math.abs(offset) - aiConfig.edgeSlowdownStart) * aiConfig.edgeSpeedFalloff));
+  if (Math.abs(error) > 0.6) targetSpeed = Math.min(targetSpeed, 10);
+  const excess = speed - targetSpeed;
+  const brake = speed > 0.5 && excess > 0.65 ? clamp(excess / 5, 0, 1) : 0;
+  const throttle = brake > 0 ? 0 : clamp((targetSpeed - speed) / 0.8 + 0.5, 0, 1);
+  let steer = normalSteer, drift = false;
+  const driftSafe = !!context && skill.driftCharge > 0 && !trafficPlan.crowded && brain.maneuver === 'line'
+    && !approachingFeature && Math.abs(offset) < aiConfig.driftMaxOffset && Math.abs(error) < aiConfig.driftMaxHeadingError && brake === 0;
+  if (state.driftDirection !== 0) {
+    const sameTurn = Math.sign(normalSteer) === state.driftDirection;
+    drift = driftSafe && sameTurn && Math.abs(normalSteer) < aiConfig.driftMaxSteer && Math.abs(normalSteer) > 0.14 && state.driftCharge < skill.driftCharge;
+    if (drift) {
+      const counterSteer = (normalSteer / driftConfig.yawMultiplier - state.driftDirection * driftConfig.lockedSteer) / driftConfig.inputSteer;
+      steer = clamp(Math.abs(counterSteer) < 0.18 ? state.driftDirection * 0.18 : counterSteer, -1, 1);
     }
+  } else if (driftSafe && brain.driftCooldown === 0 && state.y <= roadHeight(track, road.progress) + 0.001 && state.actionCooldown === 0 && state.boostRemaining === 0
+    && speed >= aiConfig.driftMinSpeed && speed <= aiConfig.driftMaxSpeed && Math.abs(normalSteer) >= aiConfig.driftMinSteer && Math.abs(normalSteer) < aiConfig.driftMaxSteer) {
+    drift = true; brain.driftCooldown = aiConfig.driftRetrySeconds;
   }
-  const target = offsetSample(targetRoad, lane);
-  const error = wrapAngle(Math.atan2(target.x - state.x, target.z - state.z) - state.heading);
-  const catchUp = Math.max(-raceConfig.maxSlowdownSpeed, Math.min(raceConfig.maxCatchUpSpeed, gapToPlayer * 0.015));
-  const targetSpeed = Math.min(profile.targetSpeed + catchUp, 19 - bend * 6, followingSpeed);
-  return { throttle: state.forwardSpeed < targetSpeed ? 1 : 0,
-    brake: state.forwardSpeed > targetSpeed + 1.5 ? 0.3 : 0,
-    steer: Math.max(-1, Math.min(1, -error * 1.5)), drift: false };
+  return { throttle, brake, steer, drift };
 }

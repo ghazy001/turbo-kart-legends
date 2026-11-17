@@ -73,6 +73,8 @@ Every course uses the same centerline + width + checkpoints + spawn markers trac
 Start with an original neutral driver and one compact kart. Later expand to six distinct original drivers and six kart models, with visual identity separated from balanced stats. Proposed stat dimensions: speed, acceleration, handling, drift and recovery. No paid upgrades in initial scope.
 
 ## 7. AI competitors
+
+Competitive-AI update (2026-11-17): Easy / Medium / Hard differ in braking margin, racing-line ambition, passing/defense decisions and real drift charging. Medium replaces the visible Normal label while keeping the saved `normal` ID. Opponents cruise up to the same 20 m/s cap and use ordinary earned boosts; there is no player-gap rubber-banding. Quick Race/cup use Medium, VS exposes all skills. Current courses have no branched shortcuts; opponents target the existing Sunshine pads/jump. See docs/COMPETITIVE_AI.md.
 Milestone 3 bots follow a sampled centerline with look-ahead steering, target speed by curvature, obstacle avoidance, overtaking offsets, rubber-banding constrained within fair limits, and stuck recovery. AI uses the same kart movement API as the player; it submits virtual controller inputs, not teleports.
 
 ## 8. HUD and accessibility

@@ -1,0 +1,110 @@
+[
+  {
+    "track": "sunshine-circuit",
+    "racer": "breeze",
+    "time": 50.38301258214908,
+    "maxSpeed": 19.695659422597686,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 1
+  },
+  {
+    "track": "sunshine-circuit",
+    "racer": "nova",
+    "time": 47.47656449394661,
+    "maxSpeed": 20.443730327617253,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 1
+  },
+  {
+    "track": "sunshine-circuit",
+    "racer": "moss",
+    "time": 47.7420191637365,
+    "maxSpeed": 21.11512483462635,
+    "scrapes": 0,
+    "boosts": 2,
+    "jumps": 1
+  },
+  {
+    "track": "sugar-rush-valley",
+    "racer": "breeze",
+    "time": 51.35782178058692,
+    "maxSpeed": 15.791191822282107,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "sugar-rush-valley",
+    "racer": "nova",
+    "time": 49.022724311078896,
+    "maxSpeed": 16.490373716678146,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "sugar-rush-valley",
+    "racer": "moss",
+    "time": 49.822733827464056,
+    "maxSpeed": 17.189507422306555,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "frostbite-peak",
+    "racer": "breeze",
+    "time": 58.660548610530064,
+    "maxSpeed": 15.791104699350075,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "frostbite-peak",
+    "racer": "nova",
+    "time": 55.71292206533431,
+    "maxSpeed": 16.490327164155026,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "frostbite-peak",
+    "racer": "moss",
+    "time": 55.93387589046593,
+    "maxSpeed": 17.189524899402794,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "volcano-sprint",
+    "racer": "breeze",
+    "time": 54.20986297639762,
+    "maxSpeed": 15.791199803416886,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "volcano-sprint",
+    "racer": "nova",
+    "time": 51.55633503741872,
+    "maxSpeed": 16.49006304639843,
+    "scrapes": 23,
+    "boosts": 0,
+    "jumps": 0
+  },
+  {
+    "track": "volcano-sprint",
+    "racer": "moss",
+    "time": 52.43867279643147,
+    "maxSpeed": 17.189507422306555,
+    "scrapes": 0,
+    "boosts": 0,
+    "jumps": 0
+  }
+]

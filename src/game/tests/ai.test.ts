@@ -13,11 +13,14 @@ import { sunshineCircuit as track } from '../tracks/sunshineCircuit';
 import { nearestRoadPoint, offsetSample } from '../tracks/trackSampling';
 
 describe('AI and kart traffic', () => {
-  it('uses normalized input and bounded catch-up target speeds', () => {
+  it('uses normalized input and identical decisions regardless of player gap', () => {
     const kart = { ...createKart(track), forwardSpeed: 19 };
+    const reference = waypointInput(kart, track, aiProfiles[0], [], 0);
     for (const gap of [-10000, 0, 10000]) {
       const input = waypointInput(kart, track, aiProfiles[0], [], gap);
-      expect(input.throttle).toBe(0); expect(input.brake).toBeGreaterThan(0);
+      expect(input).toEqual(reference);
+      expect(input.throttle).toBeGreaterThanOrEqual(0); expect(input.throttle).toBeLessThanOrEqual(1);
+      expect(input.brake).toBeGreaterThanOrEqual(0); expect(input.brake).toBeLessThanOrEqual(1);
       expect(Math.abs(input.steer)).toBeLessThanOrEqual(1); expect(input.drift).toBe(false);
     }
   });

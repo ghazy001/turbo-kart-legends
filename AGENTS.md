@@ -64,6 +64,8 @@ The user requested the supplied-model scenery pass for Volcano Sprint using the 
 
 The user requested the supplied-model scenery pass for Frostbite Peak using six GLBs from Downloads/snow. Use both distinct snowy trees, the intact decorated cabin scene, Witch House, static snowmen and wolves through course-scoped readiness/instancing. Preserve sources/credits, exact fitting and tunnel/mountain clearance; convert the wolf material in its derivative and preserve solid colors during static batching. Keep route, tunnels, physics, AI, camera, collider, item and race rules unchanged. All six supplied models are unrigged with no clips. See docs/FROSTBITE_ENVIRONMENT_ASSETS.md.
 
+The user's competitive-AI request authorizes revising opponent racing lines, predictive corner/braking plans, traffic passing/defense, drift/turbo decisions and Easy/Medium/Hard skill tuning. Preserve the common kart physics, speed/boost limits, collisions, controls, checkpoints, race/cup rules and cameras. AI must submit ordinary KartInput with independent per-racer decision memory; no gap-based speed grants, position injection, extra grip or invented shortcuts. Keep the stored `normal` ID compatible while displaying Medium. Quick Race/cup use Medium; VS exposes the three skills. See docs/COMPETITIVE_AI.md for measured pace, fairness, verification and limits.
+
 ## Preferred technology
 
 

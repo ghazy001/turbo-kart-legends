@@ -1,5 +1,5 @@
 import { ItemSystem, type ItemSystemOptions } from '../items/ItemSystem';
-import { waypointInput } from '../ai/waypointController';
+import { createAIDriverState, waypointInput, type AIDriverState } from '../ai/waypointController';
 import { aiProfiles, raceConfig, type AIProfile } from '../config/raceConfig';
 import { defaultRaceOptions, difficultyDefinition, normalizeRaceOptions, type RaceOptions } from '../config/raceOptions';
 import type { KartInput, SampledTrack } from '../core/types';
@@ -10,14 +10,14 @@ import { createRaceProgress, advanceRaceProgress, type RaceProgress } from './ra
 import { createCheckpoints, pointAtDistance, type Checkpoint } from './trackProgress';
 import { resolveRacerContacts } from './racerCollision';
 import { TrialRun } from '../timeTrial/TrialRun';
-import { loopConfig } from '../config/kartConfig';
+import { kartConfig, loopConfig } from '../config/kartConfig';
 
 export type RaceKind = 'quick-race' | 'time-trial' | 'free-drive';
 export type RacePhase = 'free-drive' | 'countdown' | 'racing' | 'finished';
 export const raceKindNames: Record<RaceKind, string> = { 'quick-race': 'QUICK RACE', 'time-trial': 'TIME TRIAL', 'free-drive': 'FREE DRIVE' };
 export interface Racer {
   id: string; name: string; color: string; simulation: Simulation; progress: RaceProgress;
-  profile: AIProfile | null; stuckTime: number;
+  profile: AIProfile | null; stuckTime: number; ai: AIDriverState | null;
 }
 
 /** One bounded fixed clock advances every racer, race time and validation together. */
@@ -42,9 +42,9 @@ export class RaceSession {
     this.options = Object.freeze(normalizeRaceOptions(options));
     this.trial = new TrialRun(track, this.options.laps);
     const speedOffset = difficultyDefinition(this.options.difficulty).speedOffset;
-    this.player = { id: 'player', name: 'You', color: '#ff7654', simulation: new Simulation(track), progress: createRaceProgress(), profile: null, stuckTime: 0 };
+    this.player = { id: 'player', name: 'You', color: '#ff7654', simulation: new Simulation(track), progress: createRaceProgress(), profile: null, stuckTime: 0, ai: null };
     this.opponents = aiProfiles.map(profile => ({ id: profile.id, name: profile.name, color: profile.color,
-      simulation: new Simulation(track), progress: createRaceProgress(), profile: { ...profile, targetSpeed: profile.targetSpeed + speedOffset }, stuckTime: 0 }));
+      simulation: new Simulation(track), progress: createRaceProgress(), profile: { ...profile, targetSpeed: Math.min(kartConfig.maxForwardSpeed, profile.targetSpeed + speedOffset) }, stuckTime: 0, ai: createAIDriverState(profile.lane) }));
     this.checkpoints = createCheckpoints(track);
   }
   get racers(): readonly Racer[] { return this.kind === 'quick-race' ? [this.player, ...this.opponents] : [this.player]; }
@@ -59,6 +59,7 @@ export class RaceSession {
       const position = offsetSample(point, kind === 'quick-race' ? (index % 2 ? 1 : -1) * raceConfig.gridLane : 0);
       racer.simulation.reset(kind === 'free-drive' ? this.track.spawn : { ...position, heading: Math.atan2(point.tx, point.tz) });
       racer.progress = createRaceProgress(-behind); racer.stuckTime = 0;
+      racer.ai = racer.profile ? createAIDriverState(kind === 'quick-race' ? (index % 2 ? 1 : -1) * raceConfig.gridLane : 0) : null;
     }
     this.trial.reset(kind === 'time-trial', this.player.simulation.current, this.player.progress.distance);
   }
@@ -87,6 +88,7 @@ export class RaceSession {
       racer.progress.distance = racer.progress.completedLaps * this.track.length + last / this.checkpoints.length * this.track.length;
     }
     racer.progress.wrongWayTime = 0; racer.progress.recoveries++; racer.stuckTime = 0;
+    if (racer.profile) racer.ai = createAIDriverState();
   }
   standings(): Racer[] {
     return [...this.racers].sort((a, b) => {
@@ -118,7 +120,7 @@ export class RaceSession {
       const itemInputs = new Map<string, KartInput>();
       for (const racer of racers) {
         const baseControls = racer.progress.finishTime !== null ? NEUTRAL_INPUT : racer.profile
-          ? waypointInput(racer.simulation.current, this.track, racer.profile, traffic, this.player.progress.distance - racer.progress.distance) : input;
+          ? waypointInput(racer.simulation.current, this.track, racer.profile, traffic, 0, { brain: racer.ai!, difficulty: this.options.difficulty, dt }) : input;
         const controls = { ...baseControls, useItem: racer.profile ? this.items.shouldFire(racer.id, racers) : !!input.useItem || this.itemPending };
         itemInputs.set(racer.id, controls);
         if (racer.progress.finishTime === null) racer.simulation.step(dt, controls);

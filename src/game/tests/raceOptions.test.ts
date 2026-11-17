@@ -65,7 +65,7 @@ describe('validated VS options and preferences', () => {
 });
 
 describe('per-session race configuration', () => {
-  it('freezes a validated snapshot, changes only opponent target pace, and preserves the original Normal profiles', () => {
+  it('freezes a validated snapshot, applies skill pace and preserves the default Medium profiles', () => {
     const requested: { laps: RaceOptions['laps']; difficulty: RaceOptions['difficulty'] } = { laps: 5, difficulty: 'hard' };
     const hard = new RaceSession(trackCatalog[0].track, requested); requested.laps = 1;
     expect(hard.options.laps).toBe(5); expect(Object.isFrozen(hard.options)).toBe(true);
