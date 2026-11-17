@@ -2,6 +2,8 @@
 
 Historical implementation record. Current pickup weights, recovery tuning and AI timing supersede the original fixed-box distribution below; see [Item balance](ITEM_BALANCE.md).
 
+Current visual presentation supersedes the original three-pool implementation below; see [Ability visual polish](ABILITY_VISUAL_POLISH.md). Protection rules and timings remain unchanged.
+
 ## Delivered behavior
 
 Bubble Guard is an original procedural defensive item. Collect it, then use **E / either Shift**, standard gamepad **X / square**, the HUD card or phone **ITEM** to activate. It lasts **five simulation seconds or one Spark Bolt / Banana Trap contact**, whichever comes first. Each course now has three rewards of each type; row/column assignment remains deterministic, not weighted roulette. Only Quick Race, VS and cup races use items. Time Trial and Free Drive remain item-free.

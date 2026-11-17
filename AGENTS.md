@@ -66,6 +66,8 @@ The user requested the supplied-model scenery pass for Frostbite Peak using six 
 
 The user's competitive-AI request authorizes revising opponent racing lines, predictive corner/braking plans, traffic passing/defense, drift/turbo decisions and Easy/Medium/Hard skill tuning. Preserve the common kart physics, speed/boost limits, collisions, controls, checkpoints, race/cup rules and cameras. AI must submit ordinary KartInput with independent per-racer decision memory; no gap-based speed grants, position injection, extra grip or invented shortcuts. Keep the stored `normal` ID compatible while displaying Medium. Quick Race/cup use Medium; VS exposes the three skills. See docs/COMPETITIVE_AI.md for measured pace, fairness, verification and limits.
 
+The user requested a special-ability graphics polish pass. Improve Bubble Guard, Spark Bolt, Banana Trap and existing turbo/drift presentation using bounded original procedural shaders/instances. Preserve all ability timing, damage, hitboxes, controls, AI, cameras and race rules. Keep road/kart readability and reduced-motion behavior; no new weapons or postprocessing dependency. See docs/ABILITY_VISUAL_POLISH.md.
+
 ## Preferred technology
 
 

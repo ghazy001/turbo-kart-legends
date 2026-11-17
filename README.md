@@ -227,3 +227,5 @@ Sugar Rush Valley now uses the supplied candy-market models: shop landmarks, cot
 Volcano Sprint now uses the supplied cartoon calderas, rock gardens and static dragon/dinosaur landmarks, with textured road and aligned markings. Controls and racing rules are unchanged. See [asset capabilities, regeneration, credits and verification](docs/VOLCANO_ENVIRONMENT_ASSETS.md).
 
 Frostbite Peak now uses both supplied snowy tree models, intact cabin scenes, snowmen and static wolves, with blue/white curbs and road-aligned asphalt markings. Existing tunnels, racing systems and controls remain. See [winter assets, regeneration, credits and verification](docs/FROSTBITE_ENVIRONMENT_ASSETS.md).
+
+Ability graphics: Bubble Guard now uses a translucent energy lattice and orbit arcs; Spark Bolt has electric filaments, traps have close-fitting arming cues, and boosts have layered exhausts/wake ribbons. Original pooled activation/hit/shatter effects respect pause and reduced motion. Gameplay and controls are unchanged. See [Ability visual polish](docs/ABILITY_VISUAL_POLISH.md).

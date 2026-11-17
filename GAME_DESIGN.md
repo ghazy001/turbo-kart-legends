@@ -153,3 +153,8 @@ Turbo Charge is the fourth implemented pickup. It grants the existing 1.5 s Flar
 ## Step-by-step visual redesign
 
 The user chose a dark showroom with warm yellow accents for the menu redesign. The first pass gives Home a clear mode hierarchy, larger live kart display, restrained surfaces and readable keyboard focus. The cheerful track environments and gameplay presentation remain in place. Racer/kart setup, track/review, HUD/pause/settings, results and environment polish follow as separate reviewed passes. See docs/DESIGN_ROLLOUT.md.
+
+
+## Ability visual language
+
+The ability graphics pass uses translucent cyan/ice energy for defense/electric attacks, amber trap/hit cues and the existing three drift-tier colors for earned boosts. Thin arcs, tapered streaks and short event bursts add impact without covering the road or changing combat envelopes. Reduced motion removes continuous travel while keeping active-state cues. See docs/ABILITY_VISUAL_POLISH.md.

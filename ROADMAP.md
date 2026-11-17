@@ -151,3 +151,8 @@ Replaced primitive calderas/pillars with supplied cartoon volcanoes and spaced r
 ## Frostbite Peak supplied-model scenery
 
 Replaced the primitive snowy forest with both supplied tree models, cabin clearings, static snowmen and wolves. The decorated X House scene is retained intact, and Witch House adds a different silhouette. Precise envelopes reserve road, tunnels and mountain bases; course-scoped static batches/readiness, texture caps, aligned asphalt paint and blue/white curbs preserve gameplay, controls, AI, camera and other tracks. See docs/FROSTBITE_ENVIRONMENT_ASSETS.md for assets, checks and remaining release/device limits.
+
+
+## Ability graphics follow-up
+
+Bubble Guard, Spark Bolt, Banana Trap and existing turbo/drift now share bounded original energy effects: translucent lattice shields, electric filaments, event pulses/shards and soft layered exhausts. Live racer/item state owns visibility, reduced motion retains quiet state cues, and gameplay tuning remains unchanged. See docs/ABILITY_VISUAL_POLISH.md.
