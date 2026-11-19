@@ -27,30 +27,31 @@ function ReadyAssembly({ entry, onReady }: { entry: PodiumEntry; onReady: (id: s
   useEffect(() => { onReady(entry.id); }, [entry.id, onReady]);
   return <KartAssembly kart={kartAssets[entry.selection.kartId]} driver={driverAssets[entry.selection.racerId]} celebrating />;
 }
-function Plinth({ entry, elapsed, reduced, onReady, onUnavailable }: {
-  entry: PodiumEntry; elapsed: { current: number }; reduced: boolean; onReady: (id: string) => void; onUnavailable: () => void;
+function Plinth({ entry, elapsed, reduced, solo, onReady, onUnavailable }: {
+  solo: boolean; entry: PodiumEntry; elapsed: { current: number }; reduced: boolean; onReady: (id: string) => void; onUnavailable: () => void;
 }) {
   const platform = useRef<Group>(null), kart = useRef<Group>(null);
   const style = podiumConfig.places[entry.place - 1];
+  const platformHeight = solo ? 0.6 : style.height;
   const label = useMemo(() => paintedTexture(String(entry.place).padStart(2, '0'), '#234b58', style.color, entry.id === 'player' ? 'Y O U' : entry.name.toUpperCase()), [entry.place, entry.id, entry.name, style.color]);
   useEffect(() => () => label.dispose(), [label]);
   useFrame(() => {
     const t = elapsed.current;
     const progress = reduced ? 1 : Math.max(0, Math.min(1, (t - (entry.place - 1) * podiumConfig.stagger) / podiumConfig.riseDuration));
-    const height = style.height * (1 - (1 - progress) ** 3);
-    if (platform.current) { platform.current.scale.y = Math.max(0.001, height / style.height); platform.current.position.y = height / 2; }
+    const height = platformHeight * (1 - (1 - progress) ** 3);
+    if (platform.current) { platform.current.scale.y = Math.max(0.001, height / platformHeight); platform.current.position.y = height / 2; }
     if (kart.current) {
       kart.current.position.y = height + 0.08;
       kart.current.rotation.y = -0.2 + (reduced ? 0 : Math.sin(Math.min(t, podiumConfig.duration) * 0.8) * 0.07);
     }
   }, -1);
   return <group position={[style.x, 0, 0]}>
-    <group ref={platform} position={[0, style.height / 2, 0]}>
-      <mesh receiveShadow><boxGeometry args={[3.9, style.height, 3.5]} /><meshStandardMaterial color="#2b5360" roughness={0.65} /></mesh>
-      <mesh position={[0, style.height / 2 + 0.03, 0]}><boxGeometry args={[3.94, 0.06, 3.54]} /><meshStandardMaterial color={style.color} metalness={0.25} roughness={0.4} /></mesh>
-      <mesh position={[0, 0, 1.756]}><planeGeometry args={[1.8, Math.min(0.8, style.height * 0.85)]} /><meshBasicMaterial map={label} /></mesh>
+    <group ref={platform} position={[0, platformHeight / 2, 0]}>
+      <mesh receiveShadow><boxGeometry args={[3.9, platformHeight, 3.5]} /><meshStandardMaterial color="#2b5360" roughness={0.65} /></mesh>
+      <mesh position={[0, platformHeight / 2 + 0.03, 0]}><boxGeometry args={[3.94, 0.06, 3.54]} /><meshStandardMaterial color={style.color} metalness={0.25} roughness={0.4} /></mesh>
+      <mesh position={[0, 0, 1.756]}><planeGeometry args={[1.8, Math.min(0.8, platformHeight * 0.85)]} /><meshBasicMaterial map={label} /></mesh>
     </group>
-    <group ref={kart} position={[0, style.height + 0.08, 0]} scale={0.85}>
+    <group ref={kart} position={[0, platformHeight + 0.08, 0]} scale={0.95}>
       <mesh position={[0, -0.015, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[0.9, 1.35, 1]}><circleGeometry args={[1, 24]} /><meshBasicMaterial color="#102f39" transparent opacity={0.18} depthWrite={false} /></mesh>
       <PodiumModelBoundary color={entry.color} onUnavailable={onUnavailable}>
         <Suspense fallback={<DisplayFallback color={entry.color} />}><ReadyAssembly entry={entry} onReady={onReady} /></Suspense>
@@ -91,6 +92,7 @@ function Stage({ entries, reduced, visible, celebrate, onReady, onUnavailable }:
   onReady: (id: string) => void; onUnavailable: () => void;
 }) {
   const elapsed = useRef(0), invalidate = useThree(state => state.invalidate);
+  const stageRadius = entries.length === 1 ? 3.3 : 7.1;
   useEffect(() => { invalidate(); }, [reduced, visible, invalidate]);
   useFrame((state, delta) => {
     if (reduced || !visible) return;
@@ -99,12 +101,11 @@ function Stage({ entries, reduced, visible, celebrate, onReady, onUnavailable }:
   }, -2);
   return <>
     <StageCamera solo={entries.length === 1} />
-    <color attach="background" args={['#173e4c']} /><fog attach="fog" args={['#173e4c', 24, 48]} />
     <hemisphereLight args={['#fff2d1', '#72a9b1', 2.3]} /><directionalLight position={[-5, 8, 7]} intensity={3} color="#fff0d5" />
     <directionalLight position={[5, 5, -3]} intensity={1.6} color="#a6ece6" />
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.05, 0]}><circleGeometry args={[25, 48]} /><meshStandardMaterial color="#234e58" roughness={1} /></mesh>
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.04, 0]}><ringGeometry args={[7.9, 8, 64]} /><meshBasicMaterial color="#558581" /></mesh>
-    {entries.map(entry => <Plinth key={entry.id} entry={entry} elapsed={elapsed} reduced={reduced} onReady={onReady} onUnavailable={onUnavailable} />)}
+    <mesh position={[0, -0.16, 0]} scale={[1, 1, 0.6]}><cylinderGeometry args={[stageRadius, stageRadius + 0.05, 0.22, 64]} /><meshStandardMaterial color="#355e64" roughness={0.9} /></mesh>
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.04, 0]} scale={[1, 0.6, 1]}><ringGeometry args={[stageRadius - 0.15, stageRadius - 0.12, 64]} /><meshBasicMaterial color="#aabda3" transparent opacity={0.35} /></mesh>
+    {entries.map(entry => <Plinth key={entry.id} entry={entry} solo={entries.length === 1} elapsed={elapsed} reduced={reduced} onReady={onReady} onUnavailable={onUnavailable} />)}
     {celebrate && <Trophy elapsed={elapsed} reduced={reduced} solo={entries.length === 1} />}
     {celebrate && !reduced && <Confetti elapsed={elapsed} />}
   </>;
@@ -113,7 +114,7 @@ function StageCamera({ solo }: { solo: boolean }) {
   const { camera, size, invalidate } = useThree();
   useLayoutEffect(() => {
     const tangent = Math.tan(38 * Math.PI / 360), aspect = Math.max(0.5, size.width / Math.max(1, size.height));
-    const distance = Math.max((solo ? 3.1 : 7.6) / (tangent * aspect), (solo ? 2.4 : 3) / tangent);
+    const distance = Math.max((solo ? 3.6 : 7.6) / (tangent * aspect), (solo ? 2.4 : 3) / tangent);
     camera.position.set(distance * 0.18, 1.5 + distance * 0.28, distance * 0.94); camera.lookAt(0, 1.5, 0); camera.updateProjectionMatrix(); invalidate();
   }, [camera, size.width, size.height, solo, invalidate]);
   return null;
@@ -121,7 +122,7 @@ function StageCamera({ solo }: { solo: boolean }) {
 export function PodiumScene(props: Parameters<typeof Stage>[0]) {
   const solo = props.entries.length === 1;
   return <Canvas frameloop="demand" dpr={[1, podiumConfig.dprMax]} camera={{ position: solo ? [4.8, 4.5, 9] : [7, 7.5, 18], fov: 38, near: 0.1, far: 60 }}
-    onCreated={({ camera }) => camera.lookAt(0, solo ? 1.25 : 1.5, 0)} gl={{ antialias: true, alpha: false }}
+    onCreated={({ camera }) => camera.lookAt(0, solo ? 1.25 : 1.5, 0)} gl={{ antialias: true, alpha: true }}
     aria-label={solo ? 'Your racer on the finish stage' : 'Top three classified racers on the podium'}>
     <Stage {...props} />
   </Canvas>;

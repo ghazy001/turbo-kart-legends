@@ -12,7 +12,7 @@ type Scenario = 'race' | 'fourth' | 'record' | 'practice' | 'round' | 'champion'
 /** Explicitly fabricated visual fixtures. No records are written and no App race is mounted. */
 function fixture(scenario: Scenario, round: number) {
   const cup = ['round', 'champion', 'runner-up'].includes(scenario) ? new CupSession(sunshineCup) : null;
-  const race = cup?.race ?? new RaceSession(trackCatalog[0].track, { laps: scenario === 'record' || scenario === 'practice' ? 3 : 1, difficulty: 'normal' });
+  const race = cup?.race ?? new RaceSession(trackCatalog[0].track, { laps: 3, difficulty: 'normal' });
   race.start(scenario === 'record' || scenario === 'practice' ? 'time-trial' : 'quick-race');
   const finish = (session: RaceSession, lose: boolean) => {
     session.phase = 'finished'; session.player.progress.finishTime = 142.75;

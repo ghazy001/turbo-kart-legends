@@ -10,7 +10,7 @@ The user chose a dark showroom with warm yellow accents on 2026-11-14 and reques
 | 2 | Racer and Kart Select: match the new shell, refine cards, previews and naming | Implemented; coastal selection verification below |
 | 3 | Track Select, cup itinerary, race options and final review | Implemented; verification below |
 | 4 | In-race HUD, item/drift feedback and pause/settings readability | HUD/Pause implemented; settings actions preserved |
-| 5 | Results, podium, loading/error states and consistent transitions | Planned |
+| 5 | Results, podium, loading/error states and consistent transitions | Results/podium refreshed; existing loading/error handling retained |
 | 6 | Environment/art direction, lighting and final cross-screen/device QA | Planned |
 
 These are visual passes. Existing modes, settings, selections, controls, racing systems, records and phone pairing remain the functional foundation. This delivery updates Home only; setup and settings panels retain their previous visual theme until their own pass.
@@ -150,3 +150,26 @@ Captures: [Home buttons](design-qa/buttons/home.png), [selection actions](design
 The user's gameplay reference guides the spatial hierarchy: one held item top-left, a floating course map on the right, speed/lap bottom-left and a strong gold position bottom-right. The timer stays small at the top; drift/turbo feedback appears only when active. Original symbols, typography, colors and shapes are used; no reference artwork or branded HUD asset was imported. Large standings/timing panels, branding and the permanent driving tutorial no longer cover the road. Timing, controls, recovery and sound/controller/phone utilities remain in Pause.
 
 This pass changes React/CSS presentation only. Models, environment, camera, handling, collisions, AI, race/checkpoint rules, records, item logic and loading ownership are unchanged. See [file list, browser observations, commands and limits](GAMEPLAY_HUD.md). Captures: [gameplay](design-qa/hud/gameplay.png), [pause](design-qa/hud/pause.png). The next visual pass is results/podium/loading consistency, followed by the separate environment/lighting pass.
+
+
+## Minimal results lounge — 2026-11-19
+
+The finish screen now follows the approved coastal teal, cream and warm yellow direction. This is a presentation-only pass shared by Quick/VS race results, Time Trial and cup results.
+
+- Removed the large victory tile, stage headings, duplicate podium timing cards, zero-recovery/checkpoint diagnostics and permanent keyboard/gamepad tutorial footer. A small outlined status badge and two existing actions remain.
+- The transparent 3D stage blends into the menu surface. An original elliptical display base replaces the clipped ground plane; karts are slightly larger, and solo Time Trial uses a lower plinth and its own framing. No gameplay camera or model fit changes.
+- Total time leads the summary, best lap stays secondary, and compact lap splits identify the fastest lap in text. One full classification lists actual position, racer and time/current lap. Unfinished rivals still have no fabricated finish time; the progress-classification explanation remains visible.
+- Podium names use simple text instead of extra bordered cards. Championship points, per-round scores, countback explanation, round recap and expandable finishing order remain accessible. Long content scrolls behind a fixed-in-layout action row, while the desktop podium stays in view. Narrow windows stack the stage and details.
+- Existing loading/model/canvas fallbacks, independent GLB instances, demand rendering, reduced-motion/visibility handling, original celebration cues, focus trapping and keyboard/gamepad navigation remain. No assets, dependencies, animation clips, shadows, postprocessing, state stores or simulation systems were added.
+
+### Files and verification
+
+Changed `ResultsShell.tsx`, `ResultsMenu.tsx`, `PodiumScene.tsx` and `styles/results.css`; the existing development ResultsPreview now uses representative three-lap race fixtures. RaceSession, CupSession, checkpoint/record scoring, AI, physics, collision, controls, abilities and gameplay cameras are untouched.
+
+`npm run typecheck`, `npm run lint` (zero warnings), `npm run build` and `git diff --check` passed. Full `npm run test`: **500/500 tests, 42 files, 175.51 seconds**, with loopback access for the existing phone tests. No tests or assertions were weakened.
+
+Browser checks used explicitly labeled `/?results-preview` fixtures: victory, fourth place (player remains outside the top three), personal best, recovered practice run, cup round and final championship. Enter invoked replay; Enter advanced the cup fixture from round one to two; Left selected Home and Enter invoked the fixture’s root-route return. The existing pause-menu Back to menu action also displayed the real Home screen. Expandable cup details remained reachable. These are presentation/callback checks, not newly driven complete races or saved records.
+
+At the default desktop size the three-lap race details fit without internal scrolling or horizontal overflow. At the narrow breakpoint (observed **433 × 938 CSS pixels**, with browser scaling) championship details scroll, both actions remain inside the viewport, and document width does not overflow. Temporary viewport overrides were reset. Console had no render errors; the existing upstream Three.Clock deprecation warning remains. Physical gamepad/phone, additional browser engines, OS reduced-motion toggling and human audio checks were not repeated.
+
+Captures (all visibly marked development fixtures): [race](design-qa/results/race.jpg), [Time Trial](design-qa/results/time-trial.jpg), [championship](design-qa/results/championship.jpg), [narrow championship](design-qa/results/narrow-championship.jpg).

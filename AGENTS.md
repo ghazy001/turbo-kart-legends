@@ -70,6 +70,8 @@ The user requested a special-ability graphics polish pass. Improve Bubble Guard,
 
 The user reported glitched racer seating and requested all racer/kart fits corrected. Measured decorative cushion/footwell data, body-specific mounts, palm targets, safe static region fitting, Sonic joint/extremity/finger fitting and an original visible Boat steering wheel are authorized. Preserve source assets, animation capability facts, shared motion parenting, physics/colliders, AI, cameras and race rules. See docs/COCKPIT_FITTING_FIX.md.
 
+The user requested a minimalist results-screen redesign matching the coastal theme. Shared race/Time Trial/cup presentation, podium staging and responsive spacing may change; retain actual classification, record/points explanations, loading fallbacks, keyboard/gamepad actions and reduced-motion behavior. No simulation, model fitting, gameplay camera or race-rule changes. See the results-lounge section in docs/DESIGN_ROLLOUT.md.
+
 ## Preferred technology
 
 
