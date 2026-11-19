@@ -72,6 +72,8 @@ The user reported glitched racer seating and requested all racer/kart fits corre
 
 The user requested a minimalist results-screen redesign matching the coastal theme. Shared race/Time Trial/cup presentation, podium staging and responsive spacing may change; retain actual classification, record/points explanations, loading fallbacks, keyboard/gamepad actions and reduced-motion behavior. No simulation, model fitting, gameplay camera or race-rule changes. See the results-lounge section in docs/DESIGN_ROLLOUT.md.
 
+The user supplied trophy.glb to replace the procedural finish-stage cup and requested a better position. Preserve its original source/embedded credits, fit an independent GLB clone on a separate cosmetic stand beside the winner, and keep plaques/racers clear. Existing celebration eligibility, demand rendering, reduced motion, controls and race rules remain unchanged. See docs/DESIGN_ROLLOUT.md.
+
 ## Preferred technology
 
 

@@ -291,3 +291,14 @@ All six originals from `Downloads/snow` are preserved byte-for-byte. The similar
 | `x_house.glb` → `assets/environment/winter-cabin.glb` | Sba Stuff (https://sketchfab.com/sbastuff) | https://sketchfab.com/3d-models/x-house-ec7b39e705504e3cb3ddbaa560570dc3 | CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/) |
 
 Modifications: offline texture caps and runtime derivative repacking; explicit artistic matte nonmetal conversion of the wolf's legacy specular/glossiness material, retaining diffuse texture/UVs and original credits. Source-relative centering, grounding/scaling and static instance transforms. The cabin scene remains intact. The opaque untextured cabin/tree materials are baked into equivalent linear vertex colors and shared matte batches. Snowman materials use depth-writing alpha cutouts and restrained matte/emissive settings. Originals and embedded metadata remain unchanged. All six are unrigged with zero clips; no animation is claimed. See `docs/FROSTBITE_ENVIRONMENT_ASSETS.md` and the source/derivative JSON audits for details and budgets.
+
+## Trophy — supplied finish-stage cup (2026-11-19)
+
+- Preserved source: `assets/props/trophy.glb` (959,164 bytes; original supplied file, unchanged).
+- Embedded title: Trophy.
+- Author/uploader: MrPuppet (https://sketchfab.com/MrPuppet).
+- Embedded source: https://sketchfab.com/3d-models/trophy-52b72b155d7c44ed9cb302afada003a4
+- Declared license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/).
+- Inspection: three static material meshes, 30,226 triangles, no skins, animation clips or textures. Exporter transforms produce an upright 0.373793-unit model with its base at zero.
+- Runtime changes: cloned scene/materials, centered/grounded uniform scale, reduced metallic response and a roughness floor for the existing stage lights, dark teal lettering. Original geometry, wood/gold base colors and embedded metadata are retained. An original low display stand is separate from the model. No new animation clip is claimed.
+- Attribution records the supplied file's embedded uploader declarations; source/rights have not been independently verified. Audit and source SHA-256: `docs/assets/trophy-audit.json`.

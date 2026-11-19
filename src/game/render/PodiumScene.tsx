@@ -1,11 +1,12 @@
 import { Component, Suspense, useEffect, useLayoutEffect, useMemo, useRef, type ReactNode } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Group, InstancedMesh, Object3D, Vector2 } from 'three';
+import { Group, InstancedMesh, Object3D } from 'three';
 import { podiumConfig } from '../config/podiumConfig';
 import { driverAssets, kartAssets } from '../config/visualAssets';
 import type { PodiumEntry } from '../ui/results/resultsPresentation';
 import { KartAssembly } from './KartAssembly';
 import { paintedTexture } from './paintedTexture';
+import { TrophyVisual } from './TrophyVisual';
 
 /** A small original display kart keeps the podium usable if an imported model fails. */
 function DisplayFallback({ color }: { color: string }) {
@@ -59,17 +60,6 @@ function Plinth({ entry, elapsed, reduced, solo, onReady, onUnavailable }: {
     </group>
   </group>;
 }
-function Trophy({ elapsed, reduced, solo }: { elapsed: { current: number }; reduced: boolean; solo: boolean }) {
-  const root = useRef<Group>(null);
-  const profile = useMemo(() => [[0.12, 0], [0.12, 0.2], [0.4, 0.35], [0.62, 0.65], [0.72, 1.05], [0.7, 1.18]].map(([x, y]) => new Vector2(x, y)), []);
-  useFrame(() => { if (root.current) root.current.rotation.y = reduced ? 0 : Math.sin(elapsed.current * 0.8) * 0.25; }, -1);
-  return <group ref={root} position={solo ? [2.55, 0.23, 0.5] : [0, 0.23, 2.8]} scale={solo ? 0.55 : 0.7}>
-    <mesh position={[0, 0.05, 0]}><cylinderGeometry args={[0.65, 0.7, 0.15, 16]} /><meshStandardMaterial color="#183e4c" /></mesh>
-    <mesh position={[0, 0.3, 0]}><cylinderGeometry args={[0.13, 0.2, 0.5, 12]} /><meshStandardMaterial color="#efbf58" metalness={0.6} roughness={0.3} /></mesh>
-    <mesh position={[0, 0.45, 0]}><latheGeometry args={[profile, 20]} /><meshStandardMaterial color="#ffd376" metalness={0.55} roughness={0.3} side={2} /></mesh>
-    {[-1, 1].map(side => <mesh key={side} position={[side * 0.7, 1.2, 0]} scale={[0.7, 1, 1]}><torusGeometry args={[0.36, 0.075, 6, 18]} /><meshStandardMaterial color="#ffd376" metalness={0.55} roughness={0.3} /></mesh>)}
-  </group>;
-}
 function Confetti({ elapsed }: { elapsed: { current: number } }) {
   const mesh = useRef<InstancedMesh>(null);
   const dummy = useMemo(() => new Object3D(), []);
@@ -92,7 +82,7 @@ function Stage({ entries, reduced, visible, celebrate, onReady, onUnavailable }:
   onReady: (id: string) => void; onUnavailable: () => void;
 }) {
   const elapsed = useRef(0), invalidate = useThree(state => state.invalidate);
-  const stageRadius = entries.length === 1 ? 3.3 : 7.1;
+  const stageRadius = entries.length === 1 ? 3.6 : 7.1;
   useEffect(() => { invalidate(); }, [reduced, visible, invalidate]);
   useFrame((state, delta) => {
     if (reduced || !visible) return;
@@ -106,7 +96,7 @@ function Stage({ entries, reduced, visible, celebrate, onReady, onUnavailable }:
     <mesh position={[0, -0.16, 0]} scale={[1, 1, 0.6]}><cylinderGeometry args={[stageRadius, stageRadius + 0.05, 0.22, 64]} /><meshStandardMaterial color="#355e64" roughness={0.9} /></mesh>
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.04, 0]} scale={[1, 0.6, 1]}><ringGeometry args={[stageRadius - 0.15, stageRadius - 0.12, 64]} /><meshBasicMaterial color="#aabda3" transparent opacity={0.35} /></mesh>
     {entries.map(entry => <Plinth key={entry.id} entry={entry} solo={entries.length === 1} elapsed={elapsed} reduced={reduced} onReady={onReady} onUnavailable={onUnavailable} />)}
-    {celebrate && <Trophy elapsed={elapsed} reduced={reduced} solo={entries.length === 1} />}
+    {celebrate && <TrophyVisual elapsed={elapsed} reduced={reduced} solo={entries.length === 1} />}
     {celebrate && !reduced && <Confetti elapsed={elapsed} />}
   </>;
 }
@@ -114,7 +104,7 @@ function StageCamera({ solo }: { solo: boolean }) {
   const { camera, size, invalidate } = useThree();
   useLayoutEffect(() => {
     const tangent = Math.tan(38 * Math.PI / 360), aspect = Math.max(0.5, size.width / Math.max(1, size.height));
-    const distance = Math.max((solo ? 3.6 : 7.6) / (tangent * aspect), (solo ? 2.4 : 3) / tangent);
+    const distance = Math.max((solo ? 3.6 : 7.6) / (tangent * aspect), (solo ? 3 : 4.2) / tangent);
     camera.position.set(distance * 0.18, 1.5 + distance * 0.28, distance * 0.94); camera.lookAt(0, 1.5, 0); camera.updateProjectionMatrix(); invalidate();
   }, [camera, size.width, size.height, solo, invalidate]);
   return null;

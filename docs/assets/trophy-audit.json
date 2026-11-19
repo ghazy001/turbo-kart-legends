@@ -1,0 +1,31 @@
+{
+  "file": "public/assets/props/trophy.glb",
+  "sha256": "78b8fce327c21f710e89bcc33bc47a66eff7f35dadef0b38155fc40f9e3e8c03",
+  "bytes": 959164,
+  "metadata": {
+    "extras": {
+      "author": "MrPuppet (https://sketchfab.com/MrPuppet)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/trophy-52b72b155d7c44ed9cb302afada003a4",
+      "title": "Trophy"
+    },
+    "generator": "Sketchfab-13.7.0",
+    "version": "2.0"
+  },
+  "triangles": 30226,
+  "meshes": 3,
+  "skins": 0,
+  "clips": 0,
+  "images": 0,
+  "worldMin": [
+    -0.195791354571476,
+    0,
+    -0.1154171059559932
+  ],
+  "worldSize": [
+    0.391582709142952,
+    0.3737930977241746,
+    0.2308342119119864
+  ],
+  "inspectedOn": "2026-11-19"
+}
