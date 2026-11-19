@@ -1,4 +1,4 @@
-import { Component, Suspense, useMemo, useRef, type ReactNode } from 'react';
+import { Component, Suspense, useEffect, useLayoutEffect, useMemo, useRef, type ReactNode } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { Box3, Frustum, InstancedMesh, Matrix4, Mesh, Sphere, Vector3, type BufferGeometry, type Material } from 'three';
@@ -10,9 +10,14 @@ import { CombatModels } from './CombatModels';
 import { BubbleGuardVisuals } from './BubbleGuardVisuals';
 import { CombatEffects } from './CombatEffects';
 import { AbilityBursts } from './AbilityBursts';
+import type { AssetStatusReporter } from './models/RaceAssetLoading';
 
 function PickupBatch({ geometry, material, transform, runtime }: { geometry?: BufferGeometry; material?: Material | Material[]; transform?: Matrix4; runtime: GameRuntime }) {
   const mesh = useRef<InstancedMesh>(null);
+  useLayoutEffect(() => {
+    const instance = mesh.current;
+    if (geometry) return () => instance?.dispose();
+  }, [geometry, material]);
   const scratch = useMemo(() => ({ matrix: new Matrix4(), rotation: new Matrix4(), frustum: new Frustum(), projection: new Matrix4(), sphere: new Sphere(new Vector3(), 1.5) }), []);
   useFrame(({ camera }) => {
     if (!mesh.current) return;
@@ -33,7 +38,7 @@ function PickupBatch({ geometry, material, transform, runtime }: { geometry?: Bu
     {!geometry && <octahedronGeometry args={[0.65]} />}{!material && <meshStandardMaterial color="#51d5d8" emissive="#176c78" roughness={0.3} />}
   </instancedMesh>;
 }
-function ImportedPickups({ runtime }: { runtime: GameRuntime }) {
+function ImportedPickups({ runtime, report }: { runtime: GameRuntime; report: AssetStatusReporter }) {
   const gltf = useGLTF(itemBoxAsset.url, false, false, configureAssetLoader);
   const parts = useMemo(() => {
     const model = instantiateModel(gltf.scene, 'item-box', {}); model.root.updateMatrixWorld(true);
@@ -45,18 +50,19 @@ function ImportedPickups({ runtime }: { runtime: GameRuntime }) {
     model.root.traverse(node => { if (node instanceof Mesh) meshes.push({ geometry: node.geometry, material: node.material, transform: normalize.clone().multiply(node.matrixWorld) }); });
     return meshes;
   }, [gltf.scene]);
+  useEffect(() => { report('ready'); }, [report]);
   return <>{parts.map((part, index) => <PickupBatch key={index} {...part} runtime={runtime} />)}</>;
 }
-class PickupBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { failed: boolean }> {
+class PickupBoundary extends Component<{ children: ReactNode; fallback: ReactNode; report: AssetStatusReporter }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
-  componentDidCatch(error: Error) { console.warn('Pickup model unavailable; using the procedural pickup.', error); }
+  componentDidCatch(error: Error) { console.warn('Pickup model unavailable; using the procedural pickup.', error); this.props.report('error'); }
   render() { return this.state.failed ? this.props.fallback : this.props.children; }
 }
-export function ItemVisuals({ runtime }: { runtime: GameRuntime }) {
+export function ItemVisuals({ runtime, statusFor }: { runtime: GameRuntime; statusFor: (id: string) => AssetStatusReporter }) {
   const group = useRef<import('three').Group>(null);
   useFrame(() => { if (group.current) group.current.visible = runtime.race.items.enabled && runtime.race.phase !== 'finished'; });
   if (!runtime.race.items.enabled) return null;
   const fallback = <PickupBatch runtime={runtime} />;
-  return <group ref={group} name="race-items"><PickupBoundary fallback={fallback}><Suspense fallback={fallback}><ImportedPickups runtime={runtime} /></Suspense></PickupBoundary><CombatModels runtime={runtime} /><CombatEffects runtime={runtime} /><AbilityBursts runtime={runtime} /><BubbleGuardVisuals runtime={runtime} /></group>;
+  return <group ref={group} name="race-items"><PickupBoundary fallback={fallback} report={statusFor('items:pickup')}><Suspense fallback={null}><ImportedPickups runtime={runtime} report={statusFor('items:pickup')} /></Suspense></PickupBoundary><CombatModels runtime={runtime} statusFor={statusFor} /><CombatEffects runtime={runtime} /><AbilityBursts runtime={runtime} /><BubbleGuardVisuals runtime={runtime} /></group>;
 }

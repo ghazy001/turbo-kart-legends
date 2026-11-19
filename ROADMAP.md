@@ -156,3 +156,8 @@ Replaced the primitive snowy forest with both supplied tree models, cabin cleari
 ## Ability graphics follow-up
 
 Bubble Guard, Spark Bolt, Banana Trap and existing turbo/drift now share bounded original energy effects: translucent lattice shields, electric filaments, event pulses/shards and soft layered exhausts. Live racer/item state owns visibility, reduced motion retains quiet state cues, and gameplay tuning remains unchanged. See docs/ABILITY_VISUAL_POLISH.md.
+
+
+## Rendering and loading follow-up
+
+Deferred first race-scene mounting, unified per-source model cache keys, course/lineup/item prefetch and full asset/GPU readiness gates improve session transitions. Shared static-culling results, conditional instance uploads, bounded shadows and conservative adaptive DPR reduce unnecessary rendering work while retaining scenery and gameplay. See docs/PERFORMANCE_LOADING.md for actual verification, timing limits and target-hardware profiling still needed.

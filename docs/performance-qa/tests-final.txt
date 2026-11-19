@@ -1,0 +1,12 @@
+
+> turbo-kart-legends@0.1.0 test
+> vitest run --maxWorkers=2
+
+
+ RUN  v4.1.12 /Users/ghazi.saoudi/Downloads/turbo-kart-legends
+
+
+ Test Files  44 passed (44)
+      Tests  519 passed (519)
+   Start at  10:26:50
+   Duration  146.00s (transform 1.14s, setup 0ms, import 3.67s, tests 281.54s, environment 5ms)

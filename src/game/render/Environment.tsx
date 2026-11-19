@@ -1,3 +1,4 @@
+import { sceneConfig } from '../config/kartConfig';
 import type { AssetStatusReporter } from './models/RaceAssetLoading';
 import { SunshineScenery } from './SunshineScenery';
 import { SugarScenery } from './SugarScenery';
@@ -123,7 +124,7 @@ export function Environment({ track, runtime, statusFor }: { track: SampledTrack
     <hemisphereLight args={[theme.volcanic ? '#ffe3cf' : theme.winter ? '#f6fbff' : '#fff8de', theme.volcanic ? '#695d77' : theme.winter ? '#7797b3' : sugar ? '#a18891' : '#5f9566', detailed ? 1.7 : 2.1]} />
     <primitive object={lightTarget} />
     <directionalLight ref={light} target={lightTarget} position={[-45, 70, -40]} intensity={sunshine ? 2.8 : 2.6} color={theme.volcanic ? '#ffd2b2' : '#fff0cf'} castShadow
-      shadow-mapSize={[detailed ? 2048 : 1024, detailed ? 2048 : 1024]} shadow-normalBias={detailed ? 0.025 : 0} shadow-camera-left={-30} shadow-camera-right={30}
+      shadow-mapSize={[sceneConfig.shadowSize, sceneConfig.shadowSize]} shadow-normalBias={detailed ? 0.025 : 0} shadow-camera-left={-30} shadow-camera-right={30}
       shadow-camera-top={30} shadow-camera-bottom={-30} shadow-camera-far={180} shadow-bias={-0.0005} />
     <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow><planeGeometry args={[1600, 1600]} /><meshStandardMaterial color={theme.ground} roughness={1} /></mesh>
     {sunshine ? <SunshineScenery track={track} runtime={runtime} statusFor={statusFor} /> : sugar ? <SugarScenery track={track} statusFor={statusFor} /> : theme.volcanic ? <VolcanicScenery track={track} statusFor={statusFor} /> : theme.winter ? <AlpineScenery track={track} statusFor={statusFor} /> : <Forest track={track} />}

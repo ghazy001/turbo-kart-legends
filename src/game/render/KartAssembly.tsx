@@ -12,18 +12,23 @@ import type { KartVisualRuntime } from './runtime';
 
 export interface KartAssemblyProps { kart?: KartAssetDefinition; driver?: DriverAssetDefinition; runtime?: KartVisualRuntime; showAnchors?: boolean; showDriver?: boolean; driverMount?: VisualTransform; fitting?: ModelOptions; celebrating?: boolean }
 export function preloadAssembly(kart: KartAssetDefinition, driver: DriverAssetDefinition) {
-  // Match the paired useGLTF cache key used by KartAssembly, not two unrelated keys.
-  useGLTF.preload([kart.url, driver.url], false, false, configureAssetLoader);
+  // Cache each source once across portraits, menus and every kart/driver combination.
+  useGLTF.preload(kart.url, false, false, configureAssetLoader);
+  useGLTF.preload(driver.url, false, false, configureAssetLoader);
 }
 /** Shared by player, AI and fitting tools. The seat is under the SAME visual motion parent. */
 export function KartAssembly({ kart = defaultKart, driver = defaultDriver, runtime, showAnchors = false, showDriver = true, driverMount, fitting, celebrating = false }: KartAssemblyProps) {
-  const [kartGLTF, driverGLTF] = useGLTF([kart.url, driver.url], false, false, configureAssetLoader);
+  preloadAssembly(kart, driver); // Start both requests before either hook can suspend.
+  const kartGLTF = useGLTF(kart.url, false, false, configureAssetLoader);
+  const driverGLTF = useGLTF(driver.url, false, false, configureAssetLoader);
   const kartModel = useMemo(() => instantiateModel(kartGLTF.scene, kart.id, { wheels: kart.wheels }), [kartGLTF.scene, kart.id, kart.wheels]);
   const mount = useMemo(() => driverMount ?? resolveDriverMount(kart, driver), [driverMount, kart, driver]);
   const fit = useMemo(() => fitting ?? driverFitOptions(kart, driver, mount), [fitting, kart, driver, mount]);
   const driverModel = useMemo(() => instantiateModel(driverGLTF.scene, `${driver.id}:${driver.pose}`, fit), [driverGLTF.scene, driver.id, driver.pose, fit]);
   const animator = useMemo(() => createDriverAnimator(driverModel.root, driver.pose === 'authored' ? driverGLTF.animations : [], driver.clips), [driverModel, driverGLTF.animations, driver.clips, driver.pose]);
   useEffect(() => () => animator.dispose(), [animator]);
+  useEffect(() => () => kartModel.dispose(), [kartModel]);
+  useEffect(() => () => driverModel.dispose(), [driverModel]);
   useFrame(({ invalidate }, delta) => {
     const pose = runtime?.simulation.pose;
     if (pose) for (const wheel of kartModel.wheels) {

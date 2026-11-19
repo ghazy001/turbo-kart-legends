@@ -18,7 +18,9 @@ import { lazy, Suspense, useCallback, useEffect, useRef, useState, useSyncExtern
 import { ActionInput } from '../game/controls/actionInput';
 import { createKeyboard } from '../game/controls/keyboard';
 import type { GameMode } from '../game/core/types';
-import { GameCanvas } from '../game/render/GameCanvas';
+import { createPortal } from 'react-dom';
+import { LoadingScreen } from '../game/ui/LoadingScreen';
+const GameCanvas = lazy(() => import('../game/render/GameCanvas').then(module => ({ default: module.GameCanvas })));
 import type { GameRuntime } from '../game/render/runtime';
 import { sunshineCircuit } from '../game/tracks/sunshineCircuit';
 import { trackDefinition, sunshineCup } from '../game/tracks/trackCatalog';
@@ -56,6 +58,7 @@ export function App() {
   const [menuStore] = useState(() => createRaceFlowStore(runtime.selection));
   const menu = useSyncExternalStore(menuStore.subscribe, menuStore.getSnapshot);
   const [mode, setMode] = useState<GameMode>('menu');
+  const [sceneRequested, setSceneRequested] = useState(false);
   const [cup, setCup] = useState<CupSession | null>(null);
   const [sceneRevision, setSceneRevision] = useState(0);
   const [panelOrigin, setPanelOrigin] = useState<HTMLElement | null>(null);
@@ -81,12 +84,14 @@ export function App() {
     if (runtime.mode === 'playing' && document.activeElement instanceof HTMLElement) document.activeElement.blur();
   }, [runtime]);
   const start = useCallback((kind: RaceKind) => {
+    setSceneRequested(true);
     runtime.keyboard?.clear(); runtime.gamepad?.clear(); runtime.phone.clear(); runtime.uiInput.clear(); runtime.audio.reset();
     runtime.race.start(kind);
     runtime.race.trial.reference = kind === 'time-trial' ? runtime.records.get(runtime.race.track, runtime.race.options.laps) : null;
     changeMode('playing');
   }, [runtime, changeMode]);
   const installRace = useCallback((race: RaceSession) => {
+    setSceneRequested(true); runtime.assetsReady = false;
     runtime.race = race; runtime.simulation = race.player.simulation;
     race.trial.reference = race.kind === 'time-trial' ? runtime.records.get(race.track, race.options.laps) : null;
     setSceneRevision(value => value + 1); runtime.audio.reset(); changeMode('playing');
@@ -154,13 +159,13 @@ export function App() {
     return () => runtime.phone.dispose();
   }, [runtime, pause, changeMode]);
   useEffect(() => {
-    if (mode === 'playing' && document.activeElement instanceof HTMLElement) document.activeElement.blur();
-  }, [mode]);
+    if (mode === 'playing' && runtime.assetsReady && document.activeElement instanceof HTMLElement) document.activeElement.blur();
+  }, [mode, runtime]);
 
   const tools = <MenuTools audioEnabled={menu.audioEnabled} phoneConnected={phoneStatus.link.state === 'connected'} onSound={toggleSound} onController={() => openPanel('controller')} onPhone={() => openPanel('phone')} />;
   const sessionName = runtime.race.kind === 'free-drive' ? raceKindNames['free-drive'] : cup ? `${cup.definition.name} · RACE ${cup.round + 1}/${cup.definition.tracks.length}` : modeDefinition(menu.currentMode).name + (menu.currentMode === 'vs-race' ? ` · ${difficultyDefinition(runtime.race.options.difficulty).name.toUpperCase()} CPU` : '');
   return <main className={`game-shell mode-${mode}${mode === 'menu' || setupOpen ? ' selecting' : ''}`} data-race={runtime.race.kind} data-track={runtime.race.track.definition.id}>
-    <div className="scene"><GameCanvas sceneRevision={sceneRevision} runtime={runtime} onError={sceneError} onFinish={finish} suspended={mode === 'menu' || mode === 'results' || setupOpen || panelOpen} /></div>
+    <div className="scene">{sceneRequested && <Suspense fallback={mode === 'menu' ? null : createPortal(<LoadingScreen description="Opening the circuit" onCancel={backToMenu} />, document.body)}><GameCanvas onSuspend={pause} onCancel={backToMenu} sceneRevision={sceneRevision} runtime={runtime} onError={sceneError} onFinish={finish} suspended={mode === 'menu' || mode === 'results' || setupOpen || panelOpen} /></Suspense>}</div>
     {!sceneFailed && <>
       {mode !== 'menu' && <div inert={setupOpen || panelOpen} className={setupOpen || panelOpen ? 'selection-underlay' : undefined}>
         {mode !== 'results' && <HUD key={`${sceneRevision}:${runtime.race.revision}`} runtime={runtime} onPause={pause} />}

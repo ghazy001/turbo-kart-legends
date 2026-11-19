@@ -1,0 +1,52 @@
+- main:
+  - generic "Sunshine Circuit 3D kart game"
+  - status: "Render: DPR 1.50 · 163 calls · 533 927 triangles · 307 geometries · 60 textures · median 18.0 ms · p95 26.4 ms"
+  - dialog "Across the line.":
+    - generic: SUNSHINE CIRCUIT · 1 LAP · HARD CPU
+    - heading "Across the line." [level=2]
+    - paragraph: You finished 4 of 4.
+    - generic: RACE COMPLETE
+    - region "Finish podium":
+      - generic "Top three classified racers on the podium"
+      - list "Podium classification":
+        - generic: "01"
+        - strong: Breeze
+        - generic: "02"
+        - strong: Moss
+        - generic: "03"
+        - strong: Nova
+    - region "Results details":
+      - generic: TOTAL TIME
+      - strong: 0:49.617
+      - generic: BEST LAP
+      - strong: 0:49.617
+      - list "Completed lap times":
+        - text: Lap 01
+        - generic: Best
+        - strong: 0:49.617
+      - region "Classification":
+        - heading "Classification" [level=3]
+        - generic: 4 racers
+        - list "Race results":
+          - generic: "01"
+          - generic: Breeze
+          - strong: 0:39.430
+          - generic: "02"
+          - generic: Moss
+          - strong: 0:39.736
+          - generic: "03"
+          - generic: Nova
+          - strong: 0:41.380
+          - generic: "04"
+          - generic: You
+          - strong: 0:49.617
+    - button "Home"
+    - button "Race again" [active]
+  - complementary:
+    - generic: DEVELOPMENT · RACE QA
+    - checkbox "Autodrive with normal inputs" [checked]
+    - text: Autodrive with normal inputs
+    - checkbox "Auto-use collected items" [checked]
+    - text: Auto-use collected items
+    - status "Item QA counters": 8 pickups · 1 shots · 0 traps · 4 guards · 1 turbos · 0 blocks · 1 hits · rewards 2/1/4/1
+    - status "Track feature QA counters": "player: 3 boosts / 1 jumps / 1 landings / 0.00 m airborne · breeze: 2 boosts / 1 jumps / 1 landings / 0.00 m airborne · nova: 3 boosts / 3 jumps / 3 landings / 0.00 m airborne · moss: 2 boosts / 1 jumps / 1 landings / 0.00 m airborne"

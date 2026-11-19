@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { View } from '@react-three/drei';
+import { PCFShadowMap } from 'three';
 import { CanvasFrames } from '../selection/CanvasFrames';
 import { GameButton } from '../GameButton';
 import { stepNames, type FlowStep } from './menuCatalog';
@@ -24,6 +25,6 @@ export function RaceFlowShell({ navigation, revision, home = false, coastal = fa
 }) {
   return <div ref={navigation.ref} onKeyDownCapture={navigation.onKeyDownCapture} data-flow-step={step} className={`selection-screen flow-screen${home ? ' flow-home' : ''}${coastal ? ' flow-coastal' : ''}`} role={home ? 'region' : 'dialog'} aria-modal={home ? undefined : true} aria-labelledby={home ? 'home-title' : 'flow-title'} inert={inert}>
     <div className="flow-backdrop" aria-hidden="true" /><div className="selection-atmosphere" aria-hidden="true" />{header}<div className="selection-content flow-content">{children}</div>
-    <div className="selection-webgl" aria-hidden="true"><Canvas shadows={home || coastal} frameloop="demand" dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }} eventSource={navigation.ref}><CanvasFrames revision={revision} /><View.Port /></Canvas></div>{footer}
+    <div className="selection-webgl" aria-hidden="true"><Canvas shadows={home || coastal ? { type: PCFShadowMap } : false} frameloop="demand" dpr={[1, 1.5]} gl={{ alpha: true, antialias: true }} eventSource={navigation.ref}><CanvasFrames revision={revision} /><View.Port /></Canvas></div>{footer}
   </div>;
 }

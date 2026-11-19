@@ -4,6 +4,7 @@ const App = lazy(() => import('./app/App').then(module => ({ default: module.App
 const Phone = lazy(() => import('./phone/PhoneController').then(module => ({ default: module.PhoneController })));
 const phoneRoute = window.location.pathname === '/controller';
 import './styles/game.css';
+import { LoadingScreen } from './game/ui/LoadingScreen';
 
 const inspection = import.meta.env.DEV && new URLSearchParams(window.location.search).has('asset-inspect');
 const Preview = import.meta.env.DEV && new URLSearchParams(window.location.search).has('results-preview')
@@ -14,6 +15,6 @@ const Preview = import.meta.env.DEV && new URLSearchParams(window.location.searc
   ? lazy(() => import('./game/dev/AssetPreview').then(module => ({ default: module.AssetPreview })))
   : null;
 
-createRoot(document.getElementById('root')!).render(<StrictMode><Suspense fallback={<p>Loading Turbo Kart Legends…</p>}>{phoneRoute ? <Phone /> : Preview
-  ? <Suspense fallback={<p>Loading development preview…</p>}><Preview /></Suspense>
+createRoot(document.getElementById('root')!).render(<StrictMode><Suspense fallback={<LoadingScreen />}>{phoneRoute ? <Phone /> : Preview
+  ? <Suspense fallback={<LoadingScreen description="Opening the development preview" />}><Preview /></Suspense>
   : <App />}</Suspense></StrictMode>);

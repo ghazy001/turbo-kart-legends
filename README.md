@@ -67,7 +67,7 @@ Textures retain GLTFLoader color-space settings and are capped at 1024 px for GP
 
 Racers share consistent portrait height, seat-to-crown proportions and a matte finish across previews and gameplay. Natural silhouette differences remain; the source models have not been remodelled into one identical art style. See [racer consistency measurements and verification](docs/RACER_STYLE.md).
 
-Starting a race waits for the player and all CPU kart/driver assemblies behind a loading screen before releasing the countdown. Original procedural karts appear only if a model actually fails, with a visible notice. See [race asset loading behavior and verification](docs/RACE_ASSET_LOADING.md).
+Starting a race waits for player/CPU assemblies, course scenery and enabled item models, then prepares textures, shaders and geometry behind a coastal loading screen before releasing the countdown. Home defers the full race scene until launch; shared source caches, static-batch upload reuse, bounded shadows and adaptive pixel density reduce rendering/loading work without removing scenery. Back to menu cancels preparation safely. See [performance/loading details, verification and limits](docs/PERFORMANCE_LOADING.md). Original procedural karts appear only if a model actually fails, with a visible notice. See [race asset loading behavior and verification](docs/RACE_ASSET_LOADING.md).
 
 Development tools:
 
@@ -160,7 +160,7 @@ Collision maintenance: see [wall/opponent fix and regression evidence](docs/COLL
 
 ### Model performance and cockpit fitting
 
-Runtime models now use generated lower-detail GLBs; original files remain in place for inspection. `npm run assets:optimize` regenerates all kart/driver and item derivatives without adding runtime simplification. Per-kart grip targets and protected driver mesh regions improve static cockpit fitting; the workshop at `/?asset-preview` displays those targets. All drivers are still unrigged static meshes. See [performance, fitting, verification and authoring notes](docs/PERFORMANCE_AND_DRIVER_POLISH.md) for measured budgets, the 20-combination gallery and remaining artist/device work.
+Runtime models now use generated lower-detail GLBs; original files remain in place for inspection. `npm run assets:optimize` regenerates all kart/driver and item derivatives without adding runtime simplification. Per-kart grip targets and protected driver mesh regions improve static cockpit fitting; the workshop at `/?asset-preview` displays those targets. All five drivers have zero authored animation clips; Sonic uses a fitted skeleton and the other four use static fits. See [performance, fitting, verification and authoring notes](docs/PERFORMANCE_AND_DRIVER_POLISH.md) for measured budgets, the 20-combination gallery and remaining artist/device work.
 
 
 ## Pickups and items

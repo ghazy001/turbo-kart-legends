@@ -14,13 +14,15 @@ export function RacerModel({ driver }: { driver: DriverAssetDefinition }) {
   const model = useMemo(() => {
     const instance = instantiateModel(gltf.scene, `${driver.id}:portrait`, { surface: 'racer-matte', hiddenNodes: driver.hideWhileDriving });
     instance.root.updateMatrixWorld(true);
-    return { root: instance.root, ...racerPortraitFit(new Box3().setFromObject(instance.root, true)) };
+    return { ...instance, ...racerPortraitFit(new Box3().setFromObject(instance.root, true)) };
   }, [gltf.scene, driver.id, driver.hideWhileDriving]);
+  useEffect(() => () => model.dispose(), [model]);
   return <group rotation={driver.transform.rotation}><group scale={model.scale} position={model.position}><primitive object={model.root} dispose={null} /></group></group>;
 }
 function KartModel({ kart }: { kart: KartAssetDefinition }) {
   const gltf = useGLTF(kart.url, false, false, configureAssetLoader);
   const model = useMemo(() => instantiateModel(gltf.scene, kart.id, { wheels: kart.wheels }), [gltf.scene, kart.id, kart.wheels]);
+  useEffect(() => () => model.dispose(), [model]);
   return <group {...kart.transform}><primitive object={model.root} dispose={null} /></group>;
 }
 export function SelectionModel({ driver, kart, kind, thumbnail = false, animate = false, presentation = 'selection', onReady }: {

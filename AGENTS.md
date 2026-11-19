@@ -74,6 +74,8 @@ The user requested a minimalist results-screen redesign matching the coastal the
 
 The user supplied trophy.glb to replace the procedural finish-stage cup and requested a better position. Preserve its original source/embedded credits, fit an independent GLB clone on a separate cosmetic stand beside the winner, and keep plaques/racers clear. Existing celebration eligibility, demand rendering, reduced motion, controls and race rules remain unchanged. See docs/DESIGN_ROLLOUT.md.
 
+The user requested a rendering/performance and professional loading pass. Deferred initial race-scene mounting, shared per-source GLTF keys, selected-course prefetch, complete item/scenery readiness, abortable GPU preparation, accessible loading/cancel/error UI, shared static visibility/upload caching, bounded shadows, conservative adaptive DPR and safe WebGL interruption handling are authorized. Preserve all source assets, scene placements/content, simulation, controls, AI, collision dimensions, cameras and race/record rules. Commit verified work locally; do not push. See docs/PERFORMANCE_LOADING.md for checks and hardware limits.
+
 ## Preferred technology
 
 

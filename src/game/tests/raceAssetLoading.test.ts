@@ -1,7 +1,14 @@
 import { describe, expect, it, vi } from 'vitest';
-import { RaceAssetLoading } from '../render/models/RaceAssetLoading';
+import { RaceAssetLoading, itemVisualSlots } from '../render/models/RaceAssetLoading';
 
 describe('race grid asset loading', () => {
+  it('holds the grid for item visuals, including weapons not yet used', () => {
+    const grid = new RaceAssetLoading(['player', ...itemVisualSlots(true)]);
+    grid.reporter('player')('ready'); grid.reporter('items:pickup')('ready');
+    grid.reporter('items:spark-bolt')('ready'); expect(grid.getSnapshot().ready).toBe(false);
+    grid.reporter('items:banana-trap')('error'); expect(grid.getSnapshot()).toEqual({ ready: true, total: 4, settled: 4, failed: 1 });
+    expect(itemVisualSlots(false)).toEqual([]);
+  });
   it('waits for the player and every CPU assembly, regardless of load order', () => {
     const grid = new RaceAssetLoading(['player', 'breeze', 'nova', 'moss']);
     expect(grid.getSnapshot()).toEqual({ ready: false, settled: 0, total: 4, failed: 0 });

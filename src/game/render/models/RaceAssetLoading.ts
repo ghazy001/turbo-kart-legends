@@ -1,6 +1,7 @@
 export type AssetStatus = 'loading' | 'ready' | 'error';
 export type AssetStatusReporter = (status: AssetStatus) => void;
 export interface RaceAssetSnapshot { ready: boolean; settled: number; total: number; failed: number }
+export const itemVisualSlots = (enabled: boolean): string[] => enabled ? ['items:pickup', 'items:spark-bolt', 'items:banana-trap'] : [];
 
 /** Per-lineup loading barrier. Errors settle through the existing visual fallback. */
 export class RaceAssetLoading {

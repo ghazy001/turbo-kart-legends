@@ -1,4 +1,4 @@
-import { Component, Suspense, useMemo, useRef, type ReactNode } from 'react';
+import { Component, Suspense, useEffect, useLayoutEffect, useMemo, useRef, type ReactNode } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { Frustum, Matrix4, Sphere, Vector3, type BufferGeometry, type InstancedMesh, type Material } from 'three';
@@ -6,9 +6,14 @@ import { combatAssets, itemConfig, type CombatModelId } from '../config/itemConf
 import type { GameRuntime } from './runtime';
 import { configureAssetLoader } from './models/assetLoader';
 import { combatModelParts } from './models/itemModel';
+import type { AssetStatusReporter } from './models/RaceAssetLoading';
 
 function CombatBatch({ runtime, kind, geometry, material, transform }: { runtime: GameRuntime; kind: CombatModelId; geometry?: BufferGeometry; material?: Material | Material[]; transform?: Matrix4 }) {
   const mesh = useRef<InstancedMesh>(null), trap = kind === 'banana-trap';
+  useLayoutEffect(() => {
+    const instance = mesh.current;
+    if (geometry) return () => instance?.dispose(); // Shared parts survive; private instance buffers do not.
+  }, [geometry, material, trap]);
   const scratch = useMemo(() => ({ matrix: new Matrix4(), rotation: new Matrix4(), spin: new Matrix4(), frustum: new Frustum(), projection: new Matrix4(), sphere: new Sphere(new Vector3(), 1) }), []);
   useFrame(({ camera }) => {
     if (!mesh.current) return;
@@ -35,20 +40,21 @@ function CombatBatch({ runtime, kind, geometry, material, transform }: { runtime
     {!material && <meshStandardMaterial color={trap ? '#ffdc5c' : '#65e3ed'} emissive={trap ? '#564008' : '#174a59'} roughness={0.45} />}
   </instancedMesh>;
 }
-function ImportedCombatModel({ runtime, kind }: { runtime: GameRuntime; kind: CombatModelId }) {
+function ImportedCombatModel({ runtime, kind, report }: { runtime: GameRuntime; kind: CombatModelId; report: AssetStatusReporter }) {
   const gltf = useGLTF(combatAssets[kind].url, false, false, configureAssetLoader);
   const parts = useMemo(() => combatModelParts(gltf.scene, kind), [gltf.scene, kind]);
+  useEffect(() => { report('ready'); }, [report]);
   return <>{parts.map((part, index) => <CombatBatch key={index} runtime={runtime} kind={kind} {...part} />)}</>;
 }
-class CombatModelBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { failed: boolean }> {
+class CombatModelBoundary extends Component<{ children: ReactNode; fallback: ReactNode; report: AssetStatusReporter }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
-  componentDidCatch(error: Error) { console.warn('Combat model unavailable; using its procedural fallback.', error); }
+  componentDidCatch(error: Error) { console.warn('Combat model unavailable; using its procedural fallback.', error); this.props.report('error'); }
   render() { return this.state.failed ? this.props.fallback : this.props.children; }
 }
-export function CombatModels({ runtime }: { runtime: GameRuntime }) {
+export function CombatModels({ runtime, statusFor }: { runtime: GameRuntime; statusFor: (id: string) => AssetStatusReporter }) {
   return <>{(['spark-bolt', 'banana-trap'] as const).map(kind => {
     const fallback = <CombatBatch runtime={runtime} kind={kind} />;
-    return <CombatModelBoundary key={kind} fallback={fallback}><Suspense fallback={fallback}><ImportedCombatModel runtime={runtime} kind={kind} /></Suspense></CombatModelBoundary>;
+    return <CombatModelBoundary key={kind} fallback={fallback} report={statusFor(`items:${kind}`)}><Suspense fallback={null}><ImportedCombatModel runtime={runtime} kind={kind} report={statusFor(`items:${kind}`)} /></Suspense></CombatModelBoundary>;
   })}</>;
 }

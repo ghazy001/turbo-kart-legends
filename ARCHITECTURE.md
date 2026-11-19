@@ -290,7 +290,7 @@ All RaceSetupScreen steps opt into the same coastal shell and quiet header. Trac
 
 ## Race grid asset barrier
 
-`GameCanvas` owns a `RaceAssetLoading` store for its actual player/CPU lineup. Committed KartVisual assemblies report ready; loading draws no kart, and only actual errors use the procedural fallback. A hidden Canvas plus a DOM loading portal prevents partial grids from becoming visible. GameLoop holds the existing clock/inputs/audio until settlement and drops the first ready delta; `runtime.assetsReady` gates human driving/reset. Paired preloading uses KartAssembly's exact useGLTF key. No simulation rule or camera tuning changes. See docs/RACE_ASSET_LOADING.md.
+`GameCanvas` owns a `RaceAssetLoading` store for its actual player/CPU lineup. Committed KartVisual assemblies report ready; loading draws no kart, and only actual errors use the procedural fallback. A hidden Canvas plus a DOM loading portal prevents partial grids from becoming visible. GameLoop holds the existing clock/inputs/audio until settlement and drops the first ready delta; `runtime.assetsReady` gates human driving/reset. Single-source preloading uses KartAssembly's exact URL cache keys, shared with portraits/previews. Readiness now includes enabled item visuals and course scenery, followed by abortable texture/shader/buffer preparation before reveal (see docs/PERFORMANCE_LOADING.md). No simulation rule or camera tuning changes. See docs/RACE_ASSET_LOADING.md.
 
 ### Minimal gameplay HUD
 
@@ -357,3 +357,8 @@ Sunshine house/cactus placements share the existing static material-batch pipeli
 ## Measured cockpit fitting
 
 `resolveDriverMount` derives each decorative driver root from the kart cushion and racer-specific hip clearance. `driverFitOptions` converts palm and footwell targets through that same resolved seat/mount matrix. `staticCockpitFit` fits cloned buffers once and settles both feet with a shared support correction; `rigSeatPose` retains independent Sonic joints, with static grip/foot fitting. Crash face masks and seated-only outline removal prevent source-region artifacts. KartAssembly adds an original cosmetic Boat wheel and retains the unchanged common body/seat/driver motion parent. No simulation or per-frame posing owner is introduced. See docs/COCKPIT_FITTING_FIX.md.
+
+
+## Rendering budgets and prepared race transitions
+
+App creates its retained GameCanvas only on the first actual launch. Setup review prefetches confirmed course/lineup assets. GameCanvas owns per-race settlement, preparation/reveal generations and runtime.assetsReady; SceneWarmup uses unique texture uploads, asynchronous compilation and a restored hidden buffer draw. LoadingScreen owns only DOM presentation/focus/cancel, never simulation. Context loss clears inputs and pauses; restoring prepares again before user resume. SceneryVisibility shares one asset/LOD camera query across immutable static material batches, uploading only changed membership. Explicit unmount cleanup releases private instance buffers and cloned skeleton textures while shared geometry/material/source caches remain owned by their existing cache lifetime. AdaptiveResolution samples active-race frame medians with hysteresis; AdaptiveQuality updates Canvas's declared DPR, without changing simulation, visibility or object budgets. See docs/PERFORMANCE_LOADING.md for measurements and limits.

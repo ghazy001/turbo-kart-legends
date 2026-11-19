@@ -1,0 +1,52 @@
+- main:
+  - generic "Sugar Rush Valley 3D kart game"
+  - status: "Render: DPR 1.50 · 191 calls · 416 848 triangles · 273 geometries · 88 textures · median 18.2 ms · p95 33.8 ms"
+  - dialog "Across the line.":
+    - generic: SUGAR RUSH VALLEY · 1 LAP · HARD CPU
+    - heading "Across the line." [level=2]
+    - paragraph: You finished 4 of 4.
+    - generic: RACE COMPLETE
+    - region "Finish podium":
+      - generic "Top three classified racers on the podium"
+      - list "Podium classification":
+        - generic: "01"
+        - strong: Nova
+        - generic: "02"
+        - strong: Breeze
+        - generic: "03"
+        - strong: Moss
+    - region "Results details":
+      - generic: TOTAL TIME
+      - strong: 0:41.627
+      - generic: BEST LAP
+      - strong: 0:41.627
+      - list "Completed lap times":
+        - text: Lap 01
+        - generic: Best
+        - strong: 0:41.627
+      - region "Classification":
+        - heading "Classification" [level=3]
+        - generic: 4 racers
+        - list "Race results":
+          - generic: "01"
+          - generic: Nova
+          - strong: 0:38.583
+          - generic: "02"
+          - generic: Breeze
+          - strong: 0:39.587
+          - generic: "03"
+          - generic: Moss
+          - strong: 0:40.399
+          - generic: "04"
+          - generic: You
+          - strong: 0:41.627
+    - button "Home"
+    - button "Race again" [active]
+  - complementary:
+    - generic: DEVELOPMENT · RACE QA
+    - checkbox "Autodrive with normal inputs" [checked]
+    - text: Autodrive with normal inputs
+    - checkbox "Auto-use collected items" [checked]
+    - text: Auto-use collected items
+    - status "Item QA counters": 5 pickups · 1 shots · 2 traps · 1 guards · 0 turbos · 1 blocks · 2 hits · rewards 1/3/1/0
+    - status "Track feature QA counters": "player: 0 boosts / 0 jumps / 0 landings / 0.00 m airborne · breeze: 0 boosts / 1 jumps / 1 landings / 0.00 m airborne · nova: 0 boosts / 0 jumps / 0 landings / 0.00 m airborne · moss: 0 boosts / 1 jumps / 1 landings / 0.00 m airborne"

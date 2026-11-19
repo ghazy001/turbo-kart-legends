@@ -8,7 +8,11 @@ The loading fallback is now empty. `GameCanvas` builds a per-lineup `RaceAssetLo
 
 Readiness is isolated per race/selection. Stable status reporters update a small external store only when status changes; old callbacks cannot unlock a new grid. A real model error settles its slot through the existing procedural error fallback and shows a failure notice. Pending models never display that fallback. Reload remains the retry action; there is no fabricated asset or change to the Time Trial hologram.
 
-## Verification
+## Subsequent performance/loading pass
+
+The original paired cache/barrier description above records the earlier fix. The current implementation uses one URL cache key per source across portraits and kart combinations, also waits for course/item models, then prepares textures, shaders and geometry before revealing the grid. Home defers the full race scene until launch. See [current loading/performance ownership and verification](PERFORMANCE_LOADING.md).
+
+## Original verification
 
 - Five new loading-state regressions cover out-of-order player/CPU readiness, solo races, explicit errors versus pending requests, stable snapshots/subscription cleanup, and late previous-grid callbacks.
 - Focused loading + real-model suite: **43 tests passed**. Typecheck, lint and production build passed. Final build: 766 modules; App JS 235.51 kB / 75.55 kB gzip.

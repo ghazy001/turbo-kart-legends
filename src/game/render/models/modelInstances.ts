@@ -1,4 +1,4 @@
-import { Group, Material, Mesh, MeshStandardMaterial, SkinnedMesh, Texture, type BufferGeometry, type Object3D } from 'three';
+import { Group, Material, Mesh, MeshStandardMaterial, SkinnedMesh, Texture, type BufferGeometry, type Object3D, type Skeleton } from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { applyPaletteBatch } from './paletteBatch';
@@ -81,7 +81,10 @@ export function instantiateModel(source: Object3D, key: string, options: ModelOp
   }
   const root = clone(template.root) as Group;
   const wheels = template.wheels.map(wheel => ({ front: wheel.front, steer: root.getObjectByName(wheel.steer.name) as Group, spin: root.getObjectByName(wheel.spin.name) as Group }));
-  return { root, wheels, dispose: () => undefined, releaseUnusedGeometry: () => undefined }; // Shared template buffers live for the bounded asset cache lifetime.
+  const skeletons = new Set<Skeleton>();
+  root.traverse(node => { if (node instanceof SkinnedMesh) skeletons.add(node.skeleton); });
+  // Only these cloned skeleton textures belong to the actor. Templates/materials stay cached.
+  return { root, wheels, dispose: () => skeletons.forEach(skeleton => skeleton.dispose()), releaseUnusedGeometry: () => undefined };
 }
 export function disposeModelCache() {
   for (const entries of templates.values()) for (const template of entries.values()) template.dispose();

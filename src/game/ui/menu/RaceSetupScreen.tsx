@@ -6,6 +6,7 @@ import { cupPoints } from '../../race/CupSession';
 import { useEffect, useSyncExternalStore } from 'react';
 import { driverAssets, kartAssets } from '../../config/visualAssets';
 import { preloadAssembly } from '../../render/KartAssembly';
+import { preloadRaceAssets } from '../../render/models/racePreload';
 import { SelectionGrid } from '../selection/SelectionGrid';
 import type { RaceFlowStore } from './raceFlowStore';
 import { RaceFlowShell, StepFooter, StepHeader } from './RaceFlowShell';
@@ -54,6 +55,11 @@ export function RaceSetupScreen({ store, records, onComplete, onClose, returnFoc
   const kart = kartAssets[state.selectedKart], driver = driverAssets[state.selectedRacer];
   const sceneryOnly = step === 'track' || step === 'cup' || step === 'options';
   useEffect(() => { preloadAssembly(kart, driver); }, [kart, driver]);
+  useEffect(() => {
+    if (state.intent !== 'race' || (step !== 'ready' && step !== 'options')) return;
+    const timer = window.setTimeout(() => preloadRaceAssets({ racerId: state.selectedRacer, kartId: state.selectedKart }, state.currentMode === 'grand-prix' ? sunshineCup.tracks[0] : state.selectedTrack, state.currentMode !== 'time-trial'), 150);
+    return () => window.clearTimeout(timer);
+  }, [step, state.selectedRacer, state.selectedKart, state.intent, state.currentMode, state.selectedTrack]);
   const back = () => { const steps = setupSteps(state.currentMode, state.intent === 'cosmetic'); if (step === steps[0]) onClose(); else store.back(); };
   const confirm = () => { const action = store.next(); if (action) onComplete(action); };
   const navigation = useMenuNavigation(action => {
