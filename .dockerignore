@@ -12,4 +12,5 @@ dist-server
 *.local
 .DS_Store
 coverage
-docs
+# TypeScript imports docs/assets/*.json; keep these build inputs in the context.
+# The final image still copies only dist and dist-server, excluding development docs.
