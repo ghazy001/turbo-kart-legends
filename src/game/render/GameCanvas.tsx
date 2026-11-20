@@ -47,7 +47,7 @@ function GameLoop({ runtime, onFinish }: { runtime: GameRuntime; onFinish: () =>
       ? waypointInput(runtime.simulation.current, runtime.race.track, { id: 'player', lane: runtime.demoLane ?? 0, targetSpeed: runtime.demoSpeed ?? 18.2 }, runtime.race.racers.filter(racer => racer.progress.finishTime === null).map(racer => ({ id: racer.id, state: racer.simulation.current }))) : human;
     if (import.meta.env.DEV && runtime.demoDriving) input.useItem = !!runtime.demoItems && runtime.race.items.shouldFire('player', runtime.race.racers) || !!human.useItem;
     runtime.race.advance(delta, input, runtime.mode === 'playing');
-    runtime.audio.update(runtime.simulation.current, runtime.mode === 'playing' && runtime.race.phase !== 'countdown', surfaceHeightAt(runtime.simulation.track, runtime.simulation.current));
+    runtime.audio.update(runtime.simulation.current, runtime.mode === 'playing' && runtime.race.phase !== 'countdown', surfaceHeightAt(runtime.simulation.track, runtime.simulation.current), input);
     runtime.audio.updateItems(runtime.race.items, runtime.mode === 'playing' && runtime.race.phase === 'racing');
     if (runtime.mode === 'playing' && runtime.race.phase === 'finished') onFinish();
   }, -3);

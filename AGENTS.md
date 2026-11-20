@@ -80,6 +80,8 @@ The user requested Cup Select to match the other selection pages. The existing s
 
 The user approved using the generated logo in the game. Integrate the preserved original through a shared accessible DOM logo and small transparent display derivatives in Home/setup/legacy selection, startup/race loading and the phone header. Preserve the minimal UI, existing controls/loading/focus/phone behavior, source PNG and all gameplay/camera/race systems; no extra gameplay toolbar or backend. See docs/BRANDING_LOGO.md for assets, checks and pending live browser review.
 
+The user requested audible engine acceleration. Add an original synthesized motor driven by actual kart speed and the existing normalized throttle/brake input, with bounded voice/automation costs and existing mute, pause, focus and loading lifecycle. Preserve sound preferences, controls, simulation, AI, camera and race rules. No downloaded audio or new dependency is required. Document automated audio lifecycle checks separately from real listening/device verification. See the engine audio follow-up in docs/MILESTONE_2.md.
+
 ## Preferred technology
 
 

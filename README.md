@@ -106,7 +106,7 @@ During a race, **R / Reset** returns to the last validated checkpoint with zero 
 
 Reset and pause/help buttons are also available. Tab navigates buttons, Enter/Space activates them, and the pause dialog contains keyboard focus. The game requests pause and clears held keys on window blur or document visibility loss; resume is explicit. After a head-on impact, reverse away or reset. Race recovery returns to the last validated gate; Free Drive reset returns to the initial spawn.
 
-Use the sound icon or Settings to mute or enable synthesized driving cues. Audio unlocks when starting a race or toggling sound.
+Use **Settings → Game sound → ON** to enable sound; the preference is saved locally. Audio unlocks when starting a race or toggling sound. The original synthesized kart motor idles quietly, revs with throttle and real speed, eases off when coasting/braking, and responds to reverse and boosts. Keyboard, gamepad and phone acceleration all use the same sound path. Engine audio fades out on pause, focus loss, loading and results, alongside the existing drift/item cues; no audio files download. See the [engine audio follow-up](docs/MILESTONE_2.md#acceleration-engine-audio-follow-up) for verification and listening limits.
 
 The HUD reports **km/h**, using one world unit as one meter (normal top speed: 72 km/h). The course map shows the player and active rivals. Race modes also show validated laps, position and timing.
 

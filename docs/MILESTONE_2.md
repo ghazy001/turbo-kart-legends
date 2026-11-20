@@ -45,3 +45,24 @@ Executed in the in-app browser against an isolated local QA server:
 - The upstream R3F/Three.js Clock deprecation warning remains unsuppressed.
 
 Next: finish the manual checks, tune grip/charge thresholds, then proceed to M3 checkpoints/laps/racing/AI.
+
+## Acceleration engine audio follow-up
+
+Date: 2026-11-20. The user requested audible car acceleration. This sound-only addition preserves all completed gameplay milestones.
+
+- Added an original continuous synthesized kart motor: quiet idle, immediate throttle load, speed-dependent revs/brightness, softer coasting/braking, reverse acceleration and a bounded boost lift. No external audio assets or new dependencies.
+- `engineAudioConfig.ts` owns sound tuning; `render/audio/engineSound.ts` owns the seamless waveform and pure target calculation; `KartEngineSound.ts` owns two shared-buffer loop voices with smoothed Web Audio playback/filter/gain parameters.
+- `GameCanvas.tsx` passes its already-resolved normalized input to `DrivingAudio`; there is no new input or movement owner. Keyboard, gamepad and phone use that same input. Only the player's motor is synthesized, keeping opponent counts from multiplying audio cost.
+- Engine and skid loops are explicitly stopped/disconnected on disposal. Mute, pause, reset, focus loss, loading and results use the existing lifecycle. Sound remains gesture-unlocked and saved sound preferences remain authoritative. Enable **Settings → Game sound → ON** if previously muted.
+- One 1,024-sample mono cycle is shared by two engine loops (about 4 KB of sample data). Targets sample at most 30 Hz using the audio clock; unchanged targets schedule nothing. No motor nodes are created per frame and no audio network request is added.
+
+Verification: focused synthesis/lifecycle tests cover waveform continuity/headroom, throttle/speed/coast/reverse/boost response, malformed input clamping, unchanged simulation data, unlock, mute/pause/reset/focus silence, suspended contexts, bounded automation, steady targets and idempotent cleanup. Existing one-shot/celebration tests remain included.
+
+- `npm run typecheck`: passed.
+- `npm run lint`: passed, zero warnings.
+- Focused audio tests: 16 passed in two files.
+- `npm run test` (with caffeinate/local relay access): **538 tests in 47 files passed**, 147.10 seconds. Existing simulation/AI/item/race/phone regressions remain passing. Upstream Three.js CommonJS deprecation/Node experimental warnings remain visible, unsuppressed.
+- `npm run build`: passed, 822 modules. App chunk is 67.51 KB gzip (previous branding build: 66.46 KB); initial entry remains 2.79 KB gzip. No new dependency or audio download.
+- `git diff --check`: passed.
+
+Manual limitation: the available browser service reports `Trusted RPC service is not configured: browser`; live browser playback and speaker/headphone volume/timbre were not verified. Listen on a real browser with sound enabled: accelerate with W/Up, release to coast, brake/reverse with S/Down, drift/boost, pause/resume, switch tabs, reset and return Home. Confirm a smooth motor response, no lingering sound and readable item/result cues. Physical phone/gamepad and cross-browser audio behavior still need device checks.
