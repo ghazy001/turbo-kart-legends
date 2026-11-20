@@ -78,6 +78,8 @@ The user requested a rendering/performance and professional loading pass. Deferr
 
 The user requested Cup Select to match the other selection pages. The existing single Sunshine Cup may use a matching selected artwork card, ordered course thumbnails and the supplied trophy in the shared coastal terrace preview, including the later fixed cup itinerary. Preserve the existing cup ID, order, scoring/defaults, state/input/launch pipeline, source assets, results behavior and demand rendering; do not invent extra cups. See the Cup collection section in docs/DESIGN_ROLLOUT.md, including pending browser visual checks.
 
+The user approved using the generated logo in the game. Integrate the preserved original through a shared accessible DOM logo and small transparent display derivatives in Home/setup/legacy selection, startup/race loading and the phone header. Preserve the minimal UI, existing controls/loading/focus/phone behavior, source PNG and all gameplay/camera/race systems; no extra gameplay toolbar or backend. See docs/BRANDING_LOGO.md for assets, checks and pending live browser review.
+
 ## Preferred technology
 
 

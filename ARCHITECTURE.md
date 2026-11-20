@@ -367,3 +367,8 @@ App creates its retained GameCanvas only on the first actual launch. Setup revie
 ## Cup selection presentation
 
 `CupSelectScreen` owns the new card/gallery/preview presentation for the cup step and fixed Grand Prix itinerary. `CupCollection` projects existing cup/course/points/default-lap definitions into accessible markup; it adds no store or race ownership. `TrackArtwork` is shared with normal Track Select, while its existing `PreviewPanel` remains available to VS settings. `CupPreview` mounts an independent `TrophyModel` as a cosmetic child of the existing terrace `HomeScene` view. Optional shadow/readiness props reuse the fitted source without changing results behavior; cloned material cleanup and source geometry ownership remain intact. All views retain the existing shared demand-rendered Canvas, focus/input shell and final launch descriptor. See the Cup collection section in docs/DESIGN_ROLLOUT.md for checks and pending visual QA.
+
+
+## Shared game branding
+
+`ui/GameLogo` and `config/branding` serve responsive checked-in transparent WebP derivatives of the approved generated PNG. The pure DOM component provides reserved sizing, one accessible brand label, prioritized Home/loading fetches and a text error fallback. Shared/legacy selection headers, LoadingScreen and the phone header consume it without importing rendering/simulation state. CSS size profiles and existing headers own layout; no canvas, frame loop, navigation action or gameplay ownership was added. See docs/BRANDING_LOGO.md for source preservation, encoding commands and verification limits.

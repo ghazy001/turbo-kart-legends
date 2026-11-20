@@ -1,4 +1,5 @@
 import { useEffect, useRef, type KeyboardEvent } from 'react';
+import { GameLogo } from './GameLogo';
 import '../../styles/loading.css';
 
 export function LoadingScreen({ title = 'A great race awaits.', description = 'Opening Turbo Kart Legends', progress, stage = 'load', detail, error, onCancel }: {
@@ -25,7 +26,7 @@ export function LoadingScreen({ title = 'A great race awaits.', description = 'O
     else if (!event.shiftKey && document.activeElement === buttons[buttons.length - 1]) { event.preventDefault(); buttons[0].focus(); }
   };
   return <div ref={ref} onKeyDownCapture={navigate} className="loading-screen" data-stage={stage} data-error={!!error} role={onCancel ? 'dialog' : error ? 'alert' : 'status'} aria-modal={onCancel ? true : undefined} aria-labelledby="loading-title" aria-live="polite" aria-busy={!error && stage !== 'ready'}>
-    <div className="loading-content"><span className="loading-brand">TURBO KART <span>LEGENDS</span></span>
+    <div className="loading-content"><div className="loading-brand"><GameLogo variant="loading" /></div>
       <div className="loading-emblem" aria-hidden="true"><i /><i /><i /></div>
       <span className="loading-eyebrow">{error ? 'LET’S TRY THAT AGAIN' : stage === 'ready' ? 'READY TO ROLL' : 'YOUR NEXT ADVENTURE'}</span>
       <h2 id="loading-title">{title}</h2><p>{error ?? description}</p>

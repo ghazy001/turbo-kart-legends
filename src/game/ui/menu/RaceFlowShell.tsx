@@ -4,6 +4,7 @@ import { View } from '@react-three/drei';
 import { PCFShadowMap } from 'three';
 import { CanvasFrames } from '../selection/CanvasFrames';
 import { GameButton } from '../GameButton';
+import { GameLogo } from '../GameLogo';
 import { stepNames, type FlowStep } from './menuCatalog';
 import type { useMenuNavigation } from './useMenuNavigation';
 import '../../../styles/selection.css';
@@ -13,7 +14,7 @@ export function StepHeader({ title, subtitle, mode, steps, step, tools, home = f
   title: string; subtitle: string; mode: string; steps: readonly FlowStep[]; step: FlowStep; tools: ReactNode; home?: boolean; quiet?: boolean;
 }) {
   const index = steps.indexOf(step);
-  return <header className="selection-header flow-header"><div className="selection-wordmark"><span aria-hidden="true">T↗</span><strong>TURBO KART<small>{home || quiet ? 'LEGENDS' : 'LEGENDS / YOUR LINE. YOUR LITTLE LEGEND.'}</small></strong></div>{tools}
+  return <header className="selection-header flow-header"><div className="selection-wordmark"><GameLogo variant={home ? 'home' : 'compact'} /></div>{tools}
     {!home && <><div className="flow-heading"><span className="flow-mode-tag">{mode}</span><h2 id="flow-title" key={title}>{title}<em>.</em></h2>{!quiet && <p>{subtitle}</p>}</div><ol className="selection-steps" aria-label="Race setup">{steps.map((entry, i) => <li key={entry} aria-current={entry === step ? 'step' : undefined} data-complete={i < index}>{!quiet && <span>{i < index ? '✓' : String(i + 1).padStart(2, '0')}</span>}{stepNames[entry]}</li>)}</ol></>}
   </header>;
 }

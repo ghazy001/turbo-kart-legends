@@ -1,9 +1,8 @@
 .loading-screen { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 28px; color: #fff8e8; background: radial-gradient(ellipse at 20% 15%, #789e8e66, transparent 60%), linear-gradient(135deg, #345b62, #193d4a); text-align: center; transition: opacity .22s ease; }
 .loading-screen[data-stage=ready] { opacity: 0; pointer-events: none; }
 .loading-content { width: min(440px, 100%); max-height: 100%; overflow-y: auto; padding: 6px; }
-.loading-brand { display: block; font-size: 11px; font-weight: 750; letter-spacing: 2px; }
-.loading-brand > span { display: block; margin-top: 6px; font-size: 8px; font-weight: 500; letter-spacing: 5px; color: #c6d8cd; }
-.loading-emblem { display: flex; justify-content: center; gap: 7px; margin: 56px auto 34px; }
+.loading-brand { display: flex; justify-content: center; }
+.loading-emblem { display: flex; justify-content: center; gap: 7px; margin: 28px auto 30px; }
 .loading-emblem i { width: 12px; height: 26px; border-radius: 4px; background: #ffda86; transform: skew(-16deg); animation: loading-pulse 1.4s ease-in-out infinite; }
 .loading-emblem i:nth-child(2) { animation-delay: .15s; }.loading-emblem i:nth-child(3) { animation-delay: .3s; }
 .loading-eyebrow { color: #c5d6cc; font-size: 9px; font-weight: 600; letter-spacing: 1.8px; }

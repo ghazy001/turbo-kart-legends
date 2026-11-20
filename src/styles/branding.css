@@ -1,0 +1,12 @@
+.game-logo { position: relative; display: block; width: 160px; max-width: 100%; aspect-ratio: 768 / 302; flex-shrink: 0; }
+.game-logo__image { display: block; width: 100%; height: 100%; object-fit: contain; user-select: none; }
+.game-logo--home, .game-logo--loading { width: 280px; }
+.game-logo--phone { width: 140px; }
+.game-logo__fallback { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; color: #ffda86; font: 800 22px/1.1 'Avenir Next', Avenir, 'Segoe UI', sans-serif; letter-spacing: -.5px; white-space: nowrap; }
+.game-logo__fallback small { margin-top: 5px; color: #fff2d6; font-size: .35em; letter-spacing: .35em; text-transform: uppercase; }
+.game-logo--home .game-logo__fallback, .game-logo--loading .game-logo__fallback { font-size: 34px; }
+.game-logo--phone .game-logo__fallback { font-size: 18px; color: #234651; }
+.game-logo--phone .game-logo__fallback small { color: #234651; }
+@media (max-width: 760px) { .game-logo--home { width: 220px; }.game-logo--compact { width: 136px; } }
+@media (max-width: 600px) { .game-logo--phone { width: 116px; } }
+@media (max-width: 480px) { .game-logo--loading { width: 240px; } }

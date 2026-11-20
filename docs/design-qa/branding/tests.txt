@@ -1,0 +1,17 @@
+
+> turbo-kart-legends@0.1.0 test
+> vitest run --maxWorkers=2
+
+
+ RUN  v4.1.12 /Users/ghazi.saoudi/Downloads/turbo-kart-legends
+
+(node:55579) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:55579) ExperimentalWarning: CommonJS module /Users/ghazi.saoudi/Downloads/turbo-kart-legends/node_modules/three/build/three.cjs is loading ES Module /Users/ghazi.saoudi/Downloads/turbo-kart-legends/node_modules/three/build/three.module.js using require().
+Support for loading ES Module in require() is an experimental feature and might change at any time
+
+ Test Files  46 passed (46)
+      Tests  529 passed (529)
+   Start at  03:57:29
+   Duration  139.77s (transform 1.12s, setup 0ms, import 4.17s, tests 266.62s, environment 5ms)
