@@ -86,3 +86,7 @@ Focused checks: 26 tests in three audio files passed. Added cases cover score bo
 - `git diff --check`: passed.
 
 Manual verification: a fresh browser runtime check again returned `Trusted RPC service is not configured: browser`. Live browser playback, acoustic balance, perceived loop seam and iPhone/Android/speaker/headphone behavior remain unverified. With Game sound ON, start a race, wait for GO, drive with the motor/effects, pause/resume, mute/unmute, switch tabs, recover, restart and finish; confirm music follows those transitions and leaves result cues readable. The same instrumental currently plays on all four courses; course-specific arrangements and separate music/effects volume controls are possible later refinements.
+
+### Engine mix correction — 2026-11-20
+
+The user reported that sustained revs overwhelmed other sounds. All four engine gain contributions (idle, speed, throttle and boost) now use 30% of their previous amplitude, about **−10.5 dB**. This changes only `engineAudioConfig.ts`; music/effect levels, engine pitch response, mute/pause behavior and gameplay remain unchanged. Typecheck, lint, production build, `git diff --check` and the existing 26 focused audio tests pass. The full gameplay suite was not repeated for this constant-only adjustment. Speaker/headphone listening remains required to assess the perceived balance; no new acoustic measurement is claimed.
