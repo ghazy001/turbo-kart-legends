@@ -1,0 +1,116 @@
+/* Phone-only presentation. The shared QR panel keeps its own layout in phone.css. */
+.phone-controller {
+  --controller-ink: #fff3d7;
+  --controller-muted: #bbd0cb;
+  --controller-gold: #ffda86;
+  position: fixed; inset: 0; isolation: isolate; display: flex; flex-direction: column;
+  gap: 10px; padding: max(12px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+  overflow: auto; overscroll-behavior: none; color: var(--controller-ink);
+  background: radial-gradient(ellipse at 88% -25%, #b8a27180, transparent 55%), linear-gradient(135deg, #204b55, #12303c 75%);
+  font: 14px/1.4 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+}
+.phone-controller *, .phone-controller *::before, .phone-controller *::after { box-sizing: border-box; }
+.controller-horizon { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
+.controller-horizon::before { content: ''; position: absolute; width: 90vw; height: 60vw; right: -32vw; bottom: -50vw; border-radius: 50%; background: #a2cab50b; box-shadow: 0 -30px 0 #a2cab506; transform: rotate(-12deg); }
+.phone-header { display: flex; align-items: center; gap: 18px; min-height: 48px; width: 100%; max-width: 1200px; margin: 0 auto; }
+.phone-brand { display: flex; align-items: center; gap: 16px; }
+.phone-brand .game-logo--phone { width: 118px; }
+.phone-brand > span { font-size: 8px; letter-spacing: 2.4px; color: var(--controller-muted); font-weight: 700; padding-left: 16px; border-left: 1px solid #fff3d725; }
+.phone-controller .game-logo__fallback, .phone-controller .game-logo__fallback small { color: var(--controller-gold); }
+.phone-link { display: flex; align-items: center; gap: 7px; margin-left: auto; color: #e5bc97; font-size: 11px; font-weight: 650; white-space: nowrap; }
+.phone-link[data-connected=true] { color: #b9dfc6; }
+.phone-link > i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px #fff3d708; }
+.phone-link > small { color: var(--controller-muted); font-size: 10px; font-weight: 500; margin-left: 5px; font-variant-numeric: tabular-nums; }
+.phone-tools { display: flex; gap: 8px; }
+.phone-tool { display: inline-flex; justify-content: center; align-items: center; gap: 7px; width: 44px; height: 44px; border: 1px solid #fff3d725; border-radius: 14px; color: var(--controller-ink); background: #fff3d709; cursor: pointer; touch-action: manipulation; }
+.phone-tool svg { width: 22px; height: 22px; }
+.phone-pause { width: auto; min-width: 88px; padding: 0 12px; font-size: 11px; font-weight: 700; }
+.phone-notice { display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%; max-width: 1200px; min-height: 24px; margin: 0 auto; font-size: 11px; color: var(--controller-muted); }
+.phone-notice[data-ready=true] > span::before { content: ''; display: inline-block; width: 4px; height: 4px; background: var(--controller-gold); border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+.phone-landscape-hint { display: none; white-space: nowrap; font-size: 10px; }
+.phone-controls { --steer: 0; display: grid; grid-template-columns: 1fr 1.12fr; align-items: stretch; gap: clamp(20px, 5vw, 72px); width: 100%; max-width: 1100px; min-height: 198px; max-height: 440px; margin: auto; flex: 1; }
+.phone-steering { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.phone-mode-picker { align-self: center; display: flex; gap: 4px; padding: 3px; border-radius: 16px; border: 1px solid #fff3d71c; background: #0d2e373d; }
+.phone-mode-picker button { display: flex; align-items: center; justify-content: center; gap: 7px; min-width: 92px; min-height: 38px; padding: 0 14px; border: 1px solid transparent; border-radius: 12px; color: var(--controller-muted); background: transparent; font-size: 11px; font-weight: 700; touch-action: manipulation; }
+.phone-mode-picker svg { width: 19px; height: 19px; }
+.phone-mode-picker button[aria-pressed=true] { color: var(--controller-ink); border-color: #fff3d724; background: #fff3d712; box-shadow: 0 2px 8px #061f2820; }
+.steering-pad, .motion-pad { position: relative; display: flex; align-items: center; justify-content: space-evenly; gap: 12px; flex: 1; min-height: 128px; border: 1px solid #fff3d728; border-radius: 38px; background: radial-gradient(ellipse at center, #fff3d708, transparent 70%), #0e2f3a55; box-shadow: inset 0 1px 0 #fff3d70a, 0 12px 30px #071f2815; touch-action: none; -webkit-touch-callout: none; cursor: ew-resize; }
+.steering-pad[aria-disabled=true] { cursor: default; }
+.steering-wheel { width: clamp(88px, 24vh, 180px); aspect-ratio: 1; color: var(--controller-ink); opacity: .9; transform: rotate(calc(var(--steer) * 45deg)); transition: transform 75ms linear; margin-bottom: 14px; pointer-events: none; }
+.steering-wheel svg { width: 100%; height: 100%; stroke-width: 1.1; }
+.steering-wheel svg path:last-child { stroke: var(--controller-gold); }
+.steering-direction { font: 300 36px/1 sans-serif; color: #bbd0cb80; pointer-events: none; }
+.steering-caption { position: absolute; bottom: 12px; left: 8px; right: 8px; text-align: center; color: var(--controller-muted); font-size: 10px; font-weight: 600; letter-spacing: .4px; pointer-events: none; }
+.steering-meter { display: flex; align-items: center; align-self: center; gap: 9px; height: 12px; width: 65%; max-width: 220px; color: #bbd0cb9c; font-size: 8px; font-weight: 700; }
+.steering-meter > div { position: relative; flex: 1; height: 3px; border-radius: 4px; background: #fff3d71c; }
+.steering-meter > div::before { content: ''; position: absolute; width: 1px; height: 7px; left: 50%; top: -2px; background: #fff3d73b; }
+.steering-meter i { position: absolute; top: -2px; left: calc(50% - 4px + var(--steer) * (50% - 4px)); width: 8px; height: 7px; border-radius: 4px; background: var(--controller-gold); transition: left 75ms linear; }
+.motion-pad { flex-direction: column; gap: 6px; padding: 10px 8px; cursor: default; }
+.motion-pad .steering-wheel { width: clamp(58px, 15vh, 112px); margin: 0; }
+.motion-pad .steering-caption { position: static; }
+.phone-calibrate { padding: 10px 18px; min-height: 40px; border: 1px solid #ffda8666; border-radius: 12px; background: #ffda8615; color: var(--controller-gold); font-size: 11px; font-weight: 750; touch-action: manipulation; }
+.phone-pedals { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.phone-action-row, .pedal-row { display: grid; grid-template-columns: .85fr 1.15fr; gap: 12px; }
+.phone-action-row { flex: 0 0 30%; min-height: 64px; }
+.pedal-row { flex: 1; }
+.drive-button { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-width: 0; min-height: 94px; padding: 12px; border: 1px solid #fff3d726; border-radius: 27px; border-bottom-width: 4px; color: var(--controller-ink); background: #2a535c; box-shadow: inset 0 1px 0 #fff3d70d, 0 8px 16px #071f2820; touch-action: none; -webkit-touch-callout: none; transition: background 100ms, box-shadow 100ms, transform 80ms; }
+.drive-button svg { width: 30px; height: 30px; pointer-events: none; }
+.drive-button strong { font-size: clamp(18px, 3vw, 26px); font-weight: 800; letter-spacing: -.6px; line-height: 1.1; }
+.drive-button small { font-size: 9px; font-weight: 550; opacity: .72; line-height: 1.3; }
+.drive-button.useItem, .drive-button.drift { flex-direction: row; gap: 10px; min-height: 64px; border-radius: 21px; text-align: left; padding: 10px 12px; }
+.phone-action-row .drive-button strong { display: block; font-size: clamp(16px, 2.5vw, 21px); letter-spacing: -.3px; }
+.phone-action-row .drive-button small { display: block; margin-top: 4px; font-size: 8px; }
+.drive-button.useItem { color: #ffe3a9; background: #73633d24; border-color: #ffda8640; }
+.drive-button.drift { color: #d5f0e7; background: #35726f45; border-color: #8dcec13d; }
+.drive-button.brake { background: #80685b30; border-color: #deb79e40; color: #f4d7c5; }
+.drive-button.throttle { background: linear-gradient(150deg, #ffe6ab, #f3c264); color: #173b46; border-color: #ffecb9; border-bottom-color: #b98b44; box-shadow: inset 0 1px 0 #fff7d8, 0 8px 25px #0c252a55; }
+.drive-button.throttle svg { width: 37px; height: 37px; }
+.drive-button.throttle strong { font-size: clamp(27px, 5vw, 42px); letter-spacing: -1.5px; }
+.pedal-grip { display: flex; gap: 5px; margin-top: 6px; }
+.pedal-grip i { width: 4px; height: 12px; border-radius: 2px; background: #173b4626; }
+.phone-controller button:hover { filter: none; }
+.drive-button[data-pressed=true]:not(:disabled), .drive-button:active:not(:disabled) { transform: translateY(2px); box-shadow: inset 0 3px 12px #092a3b35; background: #416f74; }
+.drive-button.throttle[data-pressed=true]:not(:disabled), .drive-button.throttle:active:not(:disabled) { background: #efba59; }
+.phone-controller button:disabled { opacity: .44; cursor: default; }
+.phone-controls[data-enabled=false] .steering-wheel { opacity: .45; }
+.phone-controller :focus-visible { outline: 3px solid var(--controller-gold); outline-offset: 3px; }
+.controller-settings-scrim { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); background: #071f2be8; }
+.controller-settings { width: min(600px, 100%); max-height: 100%; overflow: auto; padding: 24px; border: 1px solid #fff3d72b; border-radius: 26px; background: #21454f; box-shadow: 0 25px 60px #041a2b50; }
+.controller-settings header { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.controller-overline { font-size: 8px; font-weight: 700; color: var(--controller-muted); letter-spacing: 2px; }
+.controller-settings h2 { margin: 5px 0 0; font-size: 28px; line-height: 1.1; letter-spacing: -1px; }
+.controller-settings h2 span { color: var(--controller-gold); }
+.controller-sensor-message { margin: 12px 0 18px; color: var(--controller-muted); font-size: 11px; }
+.phone-setting-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 24px; }
+.phone-setting-grid label { display: flex; flex-direction: column; gap: 8px; font-size: 12px; }
+.phone-setting-grid label > span { display: flex; justify-content: space-between; gap: 8px; }
+.phone-setting-grid output { color: var(--controller-gold); font-variant-numeric: tabular-nums; }
+.phone-setting-grid input[type=range] { width: 100%; height: 30px; margin: 0; accent-color: var(--controller-gold); touch-action: pan-y; }
+.phone-setting-grid small { color: var(--controller-muted); font-size: 10px; }
+.phone-setting-grid select { min-height: 42px; width: 100%; padding: 8px 12px; border: 1px solid #fff3d72b; border-radius: 10px; background: #16343f; color: var(--controller-ink); font-size: 16px; }
+.phone-setting-grid .phone-invert { flex-direction: row; align-items: center; justify-content: space-between; min-height: 44px; }
+.phone-invert input { width: 24px; height: 24px; accent-color: var(--controller-gold); }
+.controller-settings footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 20px; padding-top: 18px; border-top: 1px solid #fff3d71c; }
+.controller-settings footer span { font-size: 11px; color: var(--controller-muted); }
+.controller-settings footer small { display: block; margin-top: 3px; font-size: 9px; }
+.phone-settings-done { min-height: 44px; padding: 10px 26px; border-radius: 13px; background: var(--controller-gold); color: #173b46; font-weight: 750; font-size: 13px; }
+@media (min-height: 600px) and (orientation: landscape) { .phone-controller { padding-top: max(24px, env(safe-area-inset-top)); padding-bottom: max(28px, env(safe-area-inset-bottom)); gap: 18px; }.phone-controls { max-height: 480px; } }
+@media (max-height: 420px) and (orientation: landscape) {
+  .phone-controller { gap: 6px; padding-top: max(8px, env(safe-area-inset-top)); padding-bottom: max(8px, env(safe-area-inset-bottom)); }
+  .phone-header { min-height: 44px; }.phone-notice { min-height: 20px; font-size: 10px; }
+  .phone-brand > span { display: none; }.phone-controls { gap: 24px; }.phone-pedals, .pedal-row, .phone-action-row { gap: 8px; }
+  .drive-button { border-radius: 22px; gap: 3px; padding: 8px; }.drive-button.throttle svg { width: 28px; height: 28px; }.pedal-grip { display: none; }
+  .phone-action-row .drive-button small { font-size: 7px; }.steering-pad, .motion-pad { border-radius: 28px; }
+  .controller-settings { padding: 18px 22px; }.controller-settings h2 { font-size: 24px; }.phone-setting-grid { gap: 8px 24px; }.controller-sensor-message { margin: 8px 0 10px; }
+  .phone-setting-grid label { gap: 4px; }.phone-setting-grid input[type=range] { height: 24px; }.phone-setting-grid small { font-size: 9px; }.controller-settings footer { margin-top: 10px; padding-top: 10px; }
+}
+@media (orientation: portrait) {
+  .phone-controller { padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+  .phone-brand > span { display: none; }.phone-header { gap: 10px; }.phone-link { gap: 6px; font-size: 10px; }.phone-link small { display: none; }.phone-pause { min-width: 44px; width: 44px; padding: 0; }.phone-pause > span { display: none; }
+  .phone-notice { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 6px; }.phone-landscape-hint { display: block; color: #bbd0cb99; }
+  .phone-controls { grid-template-columns: 1fr; min-height: 540px; max-height: none; gap: 22px; margin: 0 auto; grid-template-rows: minmax(230px, 1fr) minmax(260px, 1fr); }
+  .steering-wheel { width: 112px; }.steering-pad { min-height: 160px; }.phone-pedals { gap: 12px; }.phone-action-row { flex-basis: 28%; }
+  .phone-setting-grid { grid-template-columns: 1fr; gap: 18px; }.controller-settings { padding: 22px; }.controller-settings h2 { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) { .phone-controller *, .phone-controller *::before, .phone-controller *::after { transition: none !important; } }

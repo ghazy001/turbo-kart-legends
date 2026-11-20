@@ -84,6 +84,8 @@ The user requested audible engine acceleration. Add an original synthesized moto
 
 The user subsequently requested music during gameplay. Add an original instrumental through the existing gesture-unlocked sound master; render once offline into a cached loop, preserve sound preferences, pause/resume position and silence on loading/focus/results, and bound playback/fade voices with complete cleanup. Preserve all gameplay, camera and input ownership. Do not copy franchise music or claim speaker/device checks from audio mocks. See the music follow-up in docs/MILESTONE_2.md.
 
+The user requested a more attractive, easier phone controller. The handheld route may use a responsive coastal teal/gold deck, larger touch targets, live wheel/press feedback and a focused tuning dialog. Preserve normalized mappings, pairing/protocol/permissions, keyboard/gamepad and all gameplay rules; do not add automatic acceleration. Gate unavailable controls, neutralize on settings transitions, retain motion calibration and distinguish emulated Chrome checks from physical-device ergonomics. See the controller design follow-up in docs/PHONE_CONTROLLER.md.
+
 ## Preferred technology
 
 

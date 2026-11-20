@@ -5,6 +5,7 @@ export class TouchInput {
   private itemPending = false;
   private steeringPointer: number | null = null;
   steer = 0;
+  isHeld(action: TouchAction) { return this.holds[action].size > 0; }
   button(action: TouchAction, pointer: number, down: boolean) { if (down) { this.holds[action].add(pointer); if (action === 'useItem') this.itemPending = true; } else this.holds[action].delete(pointer); }
   steering(pointer: number, value: number, begin = false) { if (begin) this.steeringPointer = pointer; if (this.steeringPointer === pointer) this.steer = Math.max(-1, Math.min(1, value)); }
   releaseSteering(pointer: number) { if (this.steeringPointer === pointer) { this.steer = 0; this.steeringPointer = null; } }

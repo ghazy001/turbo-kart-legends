@@ -2,11 +2,18 @@ import { useEffect, useRef, type KeyboardEvent } from 'react';
 
 export function useDialogFocus(initialSelector = 'button', returnFocusElement?: HTMLElement | null) {
   const ref = useRef<HTMLDivElement>(null);
+  const returnTo = useRef<Element | null>(null), pendingRestore = useRef<number | null>(null);
   useEffect(() => {
-    const previous = returnFocusElement ?? document.activeElement;
+    // StrictMode replays effects: a simulated cleanup must not steal the dialog's focus.
+    if (pendingRestore.current !== null) { cancelAnimationFrame(pendingRestore.current); pendingRestore.current = null; }
+    const previous = returnFocusElement ?? returnTo.current ?? document.activeElement;
+    returnTo.current = previous;
     ref.current?.querySelector<HTMLElement>(initialSelector)?.focus();
     // Parent overlays may still be inert during unmount cleanup. Restore after that commit.
-    return () => { requestAnimationFrame(() => { if (previous instanceof HTMLElement && previous.isConnected) previous.focus(); }); };
+    return () => { pendingRestore.current = requestAnimationFrame(() => {
+      pendingRestore.current = null; returnTo.current = null;
+      if (previous instanceof HTMLElement && previous.isConnected) previous.focus();
+    }); };
   }, [initialSelector, returnFocusElement]);
   const trapFocus = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key !== 'Tab') return;

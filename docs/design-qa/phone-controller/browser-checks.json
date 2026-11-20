@@ -1,0 +1,46 @@
+{
+  "checks": [
+    "multitouch throttle + left steering",
+    "drag left to right, positive right sign",
+    "simultaneous steering + throttle + drift",
+    "touch cancellation clears input and visual press",
+    "item tap latched through transmit",
+    "pause disables driving actions",
+    "resume re-enables driving actions",
+    "settings pause, neutralize, and trap focus",
+    "Escape closes settings and restores focus",
+    "844x390, 667x375, 568x320 landscape fit; portrait fits horizontally; pedal targets >=44px",
+    "item-free mode disables only Item",
+    "disconnect disables and clears controls"
+  ],
+  "layouts": [
+    {
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "scrollHeight": 390
+    },
+    {
+      "width": 667,
+      "height": 375,
+      "scrollWidth": 667,
+      "scrollHeight": 375
+    },
+    {
+      "width": 568,
+      "height": 320,
+      "scrollWidth": 568,
+      "scrollHeight": 320
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 844
+    }
+  ],
+  "packets": 137,
+  "browser": "157.0.8103.80",
+  "pageErrors": [],
+  "physicalDeviceVerified": false
+}

@@ -63,8 +63,8 @@ npm run preview:phone
 Touch mode is the default and remains available. On the phone:
 
 1. Rotate to landscape and hold the phone in a comfortable driving position.
-2. Tap **Motion steering**. On browsers that require it, the button directly invokes `DeviceOrientationEvent.requestPermission()` from that user gesture. No permission request occurs on page load.
-3. Allow motion if desired, wait for readings, then tap **Calibrate neutral**. If permission is denied or no readings arrive, use Touch steering.
+2. Tap **Tilt**. On browsers that require it, the button directly invokes `DeviceOrientationEvent.requestPermission()` from that user gesture. No permission request occurs on page load.
+3. Allow motion if desired, wait for readings, then tap **Calibrate to drive**. If permission is denied or no readings arrive, use Touch. **Recalibrate** updates the neutral angle afterward.
 4. Tilt relative to the calibrated neutral. Sensitivity is expressed as the angle required for full steering lock (default 25°); smaller angles feel stronger. Tune the dead zone (default 6%), smoothing time (default 80 ms), and inversion in the settings section.
 5. Recalibrate after changing screen orientation or grip. Orientation changes clear inputs and invalidate calibration. Missing/stale sensor readings inhibit tilt driving; they do not leave a previous steering/throttle value active.
 
@@ -112,3 +112,24 @@ Bubble Guard uses the same ITEM action and protocol: collect it, then tap ITEM t
 
 
 Item balance follow-up: position-weighted rewards and recovery timers reuse the same **ITEM** action and existing host status. No protocol, pairing or sensor changes were required. See [item balance](ITEM_BALANCE.md).
+
+## Controller design follow-up — 2026-11-20
+
+The phone route now uses the game's coastal palette: deep teal, warm cream and a restrained gold accelerator. No new assets/dependencies or rendering canvas are required.
+
+- Large captured-pointer steering area with a rotating original SVG wheel, L/R meter, centered release and accurate accessible slider feedback. Touch/Tilt remain directly available.
+- Distinct Item/Drift row, Brake/reverse and a larger gold GO pedal. Pressed feedback follows actual holds, including more than one finger on the same button. Throttle/drift remain separate normalized actions; no automatic acceleration or new driving formula.
+- Compact logo, pairing/latency badge, Settings and Pause/Resume. No permanent tutorial footer or tuning form below the driving deck. Portrait stacks the same controls and suggests landscape without blocking play.
+- Existing sensitivity/dead-zone/smoothing/inversion/rate controls live in a keyboard-accessible dialog. Opening settings releases inputs and requests pause during active driving. Closing restores focus; resume remains explicit. Motion permission stays on the direct Tilt gesture, with denied/unavailable touch fallback.
+- Unpaired, host-disabled, uncalibrated-tilt and settings-open states disarm controls and outgoing activity. Existing blur/visibility/orientation/disconnect cleanup, safe rearming, item-free modes, token handling and relay validation remain.
+- Phone CSS is separated from shared desktop pairing CSS, reducing the desktop QR styling chunk. `viewport-fit=cover` lets the existing safe-area padding account for device cutouts; compact landscape controls fit without scrolling. Reduced-motion preferences disable cosmetic transitions.
+
+Files: `src/phone/{PhoneController,PhoneControlDeck,ControllerSettings,ControllerIcon}.tsx`, `controller.css`, shared `phone.css`, the read-only `TouchInput.isHeld` helper and viewport metadata. The browser test exposed an existing shared dialog focus issue under StrictMode: simulated cleanup restored focus outside the open dialog. `useDialogFocus` now cancels that stale restoration and retains the original return target until actual close.
+
+Browser checks used an isolated local Chrome 157 session and the actual Socket.IO relay (not the user's tab/profile). Verified simultaneous throttle/left/right, steering+throttle+drift, cancellation to neutral, item tap transmission, pause/resume, settings pause/focus trap/Escape restoration, item-free mode gating and disconnect. Four layouts passed: **844×390, 667×375, 568×320, 390×844**; landscape had no horizontal/vertical overflow, portrait had no horizontal overflow, and all four driving targets were at least 44×44 pixels. No page errors were reported. The test respects the relay's existing 500 ms pause-command debounce.
+
+Saved evidence: [browser report](design-qa/phone-controller/browser-checks.json), [landscape](design-qa/phone-controller/landscape-active.png), [portrait](design-qa/phone-controller/portrait.png), [settings](design-qa/phone-controller/settings.png).
+
+Verification: `npm run typecheck`, `npm run lint`, `npm run build` and `git diff --check` passed. Focused presentation/input tests: 14 passed. Full `npm run test`: **554 tests in 49 files passed**, 156.60 seconds, including existing gameplay, audio and relay regressions. Upstream Three.js CommonJS/Node experimental warnings remain unsuppressed. Final build: 830 modules; the phone-only presentation CSS is 3.37 KB gzip, phone page JS 6.54 KB gzip and shared PC pairing CSS 1.07 KB gzip. Six new unit tests cover accessible controls, inactive/item-free/calibration availability, retained settings and multi-finger pressed feedback. Existing simulation, collision, AI, camera, audio and server/protocol files were not modified.
+
+Remaining manual checks: actual iPhone Safari/Android Chrome comfort, simultaneous physical fingers, landscape cutouts/browser toolbars, motion permission/calibration/sign in both orientations and real Wi-Fi jitter/background recovery. Emulated touch and loopback latency do not establish physical-device performance. Separate music/audio changes are unaffected.
