@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { PerspectiveCamera, View, useGLTF } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import { type Group, type PerspectiveCamera as ThreeCamera } from 'three';
@@ -42,8 +42,8 @@ function CoastalCamera({ narrow, terrace }: { narrow: boolean; terrace: boolean 
     onUpdate={camera => camera.lookAt(targetX, targetY, 0)} />;
 }
 /** One view in the existing shared renderer, with an independently cloned parked assembly. */
-export function HomeScene({ driver, kart, kind = 'kart', scenery = 'road', className = 'home-scenery-view', tint = false, showSubject = true, rotation }: {
-  driver: DriverAssetDefinition; kart: KartAssetDefinition; kind?: 'racer' | 'kart'; scenery?: 'road' | 'terrace'; className?: string; tint?: boolean; showSubject?: boolean; rotation?: PreviewRotation;
+export function HomeScene({ driver, kart, kind = 'kart', scenery = 'road', className = 'home-scenery-view', tint = false, showSubject = true, rotation, children }: {
+  driver: DriverAssetDefinition; kart: KartAssetDefinition; kind?: 'racer' | 'kart'; scenery?: 'road' | 'terrace'; className?: string; tint?: boolean; showSubject?: boolean; rotation?: PreviewRotation; children?: ReactNode;
 }) {
   const narrow = useSyncExternalStore(subscribeScreen, narrowScreen);
   const [status, setStatus] = useState<AssetStatus>('loading'), [retry, setRetry] = useState(0);
@@ -54,7 +54,8 @@ export function HomeScene({ driver, kart, kind = 'kart', scenery = 'road', class
       {showSubject && <PreviewBoundary key={`${driver.id}:${kart.id}:${retry}`} onStatus={setStatus}><Suspense fallback={null}>
         <ParkedSubject driver={driver} kart={kart} kind={kind} terrace={scenery === 'terrace'} rotation={rotation} onReady={ready} />
       </Suspense></PreviewBoundary>}
-      {tint && (!narrow || !showSubject) && <mesh frustumCulled={false} renderOrder={10000}>
+      {children}
+      {tint && (!narrow || !(showSubject || children)) && <mesh frustumCulled={false} renderOrder={10000}>
         <planeGeometry args={[2, 2]} /><shaderMaterial transparent depthWrite={false} depthTest={false} toneMapped={false}
           vertexShader={'varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}'}
           fragmentShader={narrow

@@ -1,0 +1,50 @@
+/* Cup Select and the fixed GP itinerary share the approved artwork-card collection. */
+.flow-coastal:has(.cup-art-grid) .flow-content { grid-template-columns: minmax(340px, 1fr) minmax(0, 1.25fr); gap: clamp(32px, 5vw, 80px); }
+.cup-art-grid { grid-template-columns: 1fr; }
+.flow-coastal .cup-art-card[data-artwork=true] { height: clamp(170px, 25vh, 215px); text-align: left; }
+.cup-card-mosaic { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.cup-card-mosaic > span { overflow: hidden; min-width: 0; }
+.cup-card-mosaic img, .cup-card-mosaic svg { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cup-card-mosaic img { object-position: 50% 50%; }
+.flow-coastal .cup-art-card .selection-card-art::after { background: linear-gradient(180deg, #173b4a38, #153d4d30 28%, #102f49cf 100%); }
+.flow-coastal .cup-art-card[data-artwork=true] .selection-card-label { padding: 17px 20px; font-size: clamp(19px, 2vw, 27px); letter-spacing: -.7px; }
+.cup-card-emblem { position: absolute; z-index: 3; left: 19px; top: 38px; width: 67px; height: 67px; color: #ffdb88; filter: drop-shadow(0 3px 7px #17374655); }
+.cup-card-emblem svg { width: 100%; height: 100%; }
+.cup-collection-meta { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 19px 0 21px; font-size: 10px; color: #f4eedb; }
+.cup-collection-meta span + span::before { content: '·'; color: #ffda86; margin-right: 16px; }
+.cup-course-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; padding: 0; margin: 0; list-style: none; }
+.cup-course-gallery li { min-width: 0; }
+.cup-round-art { position: relative; aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden; border: 1px solid #e9eee53b; background: #315867; }
+.cup-round-art > img, .cup-round-art > svg { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cup-round-art > span { position: absolute; top: 6px; left: 6px; display: grid; place-items: center; min-width: 21px; height: 21px; padding: 0 4px; border-radius: 6px; background: #193d4be6; color: #ffdf96; font-size: 9px; font-weight: 750; }
+.cup-course-gallery li > span { display: block; margin-top: 9px; color: #f8f1de; font-size: 10px; font-weight: 600; line-height: 1.5; }
+.cup-format-copy { margin-top: 21px; padding-top: 17px; border-top: 1px solid #e9eee526; }
+.cup-format-copy p { margin: 0; max-width: 410px; color: #d6e0d9; font-size: 10px; line-height: 1.7; }
+.cup-format-copy strong { color: #ffdf96; font-weight: 650; letter-spacing: 1px; margin-right: 5px; }
+.cup-format-copy p + p { margin-top: 6px; }
+.flow-coastal .cup-art-preview { min-height: 440px; justify-content: center; }
+.flow-coastal .cup-trophy-stage { flex: 1 0 330px; }
+.flow-coastal .cup-preview-copy { padding-top: 20px; }
+.cup-preview-eyebrow { display: block; margin-bottom: 10px; font-size: 8px; font-weight: 650; color: #f5e0b1; letter-spacing: 2px; }
+.cup-art-preview .selection-preview-loading { pointer-events: none; }
+.cup-art-preview .selection-preview-loading button { pointer-events: auto; }
+@media (min-width: 761px) { .flow-coastal:has(.cup-art-grid) .flow-content { flex: 1 0 auto; } }
+@media (max-width: 1100px) and (min-width: 761px) {
+  .flow-coastal:has(.cup-art-grid) .flow-content { grid-template-columns: minmax(310px, 1fr) minmax(0, 1.1fr); gap: 24px; }
+  .cup-course-gallery { gap: 7px; }.cup-course-gallery li > span { font-size: 9px; }
+}
+@media (max-height: 760px) and (min-width: 761px) {
+  .flow-coastal .cup-art-card[data-artwork=true] { height: 170px; }
+  .flow-coastal .cup-art-preview { min-height: 370px; }.flow-coastal .cup-trophy-stage { flex-basis: 280px; }
+  .cup-collection-meta { margin-top: 15px; margin-bottom: 17px; }.cup-format-copy { margin-top: 16px; padding-top: 13px; }
+}
+@media (max-width: 760px) {
+  .flow-coastal:has(.cup-art-grid) .flow-content { grid-template-columns: 1fr; gap: 28px; }
+  .flow-coastal .cup-art-card[data-artwork=true] { height: clamp(165px, 43vw, 235px); }
+  .flow-coastal .cup-art-preview { min-height: 380px; height: auto; }
+  .flow-coastal .cup-trophy-stage { flex: 0 0 290px; }
+  .flow-coastal .cup-preview-copy { padding-top: 8px; }
+  .cup-collection-meta { font-size: 9px; gap: 8px 11px; }
+  .cup-collection-meta span + span::before { margin-right: 11px; }
+  .cup-course-gallery { gap: 8px; }.cup-course-gallery li > span { font-size: 9px; }
+}

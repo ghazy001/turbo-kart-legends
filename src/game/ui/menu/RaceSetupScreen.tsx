@@ -13,6 +13,7 @@ import { RaceFlowShell, StepFooter, StepHeader } from './RaceFlowShell';
 import { modeDefinition, setupSteps, sunshineCup, type FlowStep } from './menuCatalog';
 import { trackDefinition } from '../../tracks/trackCatalog';
 import { TrackSelectScreen } from './TrackSelectScreen';
+import { CupSelectScreen } from './CupSelectScreen';
 import { useMenuNavigation } from './useMenuNavigation';
 import { CoastalSelectionPreview } from './CoastalSelectionPreview';
 import { HomeScene } from './HomeScene';
@@ -21,6 +22,7 @@ import '../../../styles/coastalSetup.css';
 import '../../../styles/racerCards.css';
 import '../../../styles/kartCards.css';
 import '../../../styles/trackCards.css';
+import '../../../styles/cupCards.css';
 
 export function RacerSelectScreen({ store }: { store: RaceFlowStore }) {
   const state = store.getSnapshot();
@@ -53,7 +55,8 @@ const titles: Record<FlowStep, [string, string]> = {
 export function RaceSetupScreen({ store, records, onComplete, onClose, returnFocusElement }: { store: RaceFlowStore; records?: TrialRecords; onComplete: (action: 'start' | 'save') => void; onClose: () => void; returnFocusElement?: HTMLElement | null }) {
   const state = useSyncExternalStore(store.subscribe, store.getSnapshot), step = state.currentStep;
   const kart = kartAssets[state.selectedKart], driver = driverAssets[state.selectedRacer];
-  const sceneryOnly = step === 'track' || step === 'cup' || step === 'options';
+  const championship = step === 'cup' || step === 'track' && state.currentMode === 'grand-prix';
+  const sceneryOnly = step === 'options' || step === 'track' && !championship;
   useEffect(() => { preloadAssembly(kart, driver); }, [kart, driver]);
   useEffect(() => {
     if (state.intent !== 'race' || (step !== 'ready' && step !== 'options')) return;
@@ -73,7 +76,7 @@ export function RaceSetupScreen({ store, records, onComplete, onClose, returnFoc
     header={<StepHeader title={step === 'track' && state.currentMode === 'grand-prix' ? 'Cup itinerary' : titles[step][0]} subtitle={titles[step][1]} mode={state.intent === 'cosmetic' ? 'YOUR LINEUP' : modeDefinition(state.currentMode).name} steps={setupSteps(state.currentMode, state.intent === 'cosmetic')} step={step} tools={null} quiet />}
     footer={<StepFooter context={`${driver.name} / ${kart.name}`} confirm={confirmLabel} onBack={back} onConfirm={confirm} />}>
     {sceneryOnly && <HomeScene driver={driver} kart={kart} className="setup-scenery-view" showSubject={false} tint />}
-    <div className="flow-step-content" key={step}>{step === 'racer' ? <RacerSelectScreen store={store} /> : step === 'kart' ? <KartSelectScreen store={store} /> : step === 'options' ? <RaceOptionsScreen store={store} /> : step === 'ready' ? <ReadyScreen store={store} records={records} /> : <TrackSelectScreen store={store} records={records} cup={step === 'cup'} />}</div>
+    <div className="flow-step-content" key={step}>{step === 'racer' ? <RacerSelectScreen store={store} /> : step === 'kart' ? <KartSelectScreen store={store} /> : step === 'options' ? <RaceOptionsScreen store={store} /> : step === 'ready' ? <ReadyScreen store={store} records={records} /> : championship ? <CupSelectScreen store={store} /> : <TrackSelectScreen store={store} records={records} />}</div>
     <span className="selection-announcement" aria-live="polite">{titles[step][0]}. {step === 'racer' ? driver.name : step === 'kart' ? kart.name : step === 'options' ? `${lapLabel(state.vsOptions.laps)}, ${difficultyDefinition(state.vsOptions.difficulty).name} CPU` : state.currentMode === 'grand-prix' ? sunshineCup.name : trackDefinition(state.selectedTrack).name}.</span>
   </RaceFlowShell>;
 }

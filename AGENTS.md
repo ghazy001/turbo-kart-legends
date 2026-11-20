@@ -76,6 +76,8 @@ The user supplied trophy.glb to replace the procedural finish-stage cup and requ
 
 The user requested a rendering/performance and professional loading pass. Deferred initial race-scene mounting, shared per-source GLTF keys, selected-course prefetch, complete item/scenery readiness, abortable GPU preparation, accessible loading/cancel/error UI, shared static visibility/upload caching, bounded shadows, conservative adaptive DPR and safe WebGL interruption handling are authorized. Preserve all source assets, scene placements/content, simulation, controls, AI, collision dimensions, cameras and race/record rules. Commit verified work locally; do not push. See docs/PERFORMANCE_LOADING.md for checks and hardware limits.
 
+The user requested Cup Select to match the other selection pages. The existing single Sunshine Cup may use a matching selected artwork card, ordered course thumbnails and the supplied trophy in the shared coastal terrace preview, including the later fixed cup itinerary. Preserve the existing cup ID, order, scoring/defaults, state/input/launch pipeline, source assets, results behavior and demand rendering; do not invent extra cups. See the Cup collection section in docs/DESIGN_ROLLOUT.md, including pending browser visual checks.
+
 ## Preferred technology
 
 

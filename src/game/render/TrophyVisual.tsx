@@ -1,14 +1,19 @@
 import { Component, Suspense, useEffect, useMemo, useRef, type ReactNode } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { Group, Vector2 } from 'three';
+import { Group, Mesh, Vector2 } from 'three';
 import { podiumConfig } from '../config/podiumConfig';
 import { prepareTrophyModel } from './models/trophyModel';
 
-function SuppliedCup() {
+export function TrophyModel({ onReady, shadows = false }: { onReady?: () => void; shadows?: boolean }) {
   const { scene } = useGLTF(podiumConfig.trophy.url);
-  const model = useMemo(() => prepareTrophyModel(scene), [scene]);
+  const model = useMemo(() => {
+    const instance = prepareTrophyModel(scene);
+    instance.root.traverse(node => { if (node instanceof Mesh) { node.castShadow = shadows; node.receiveShadow = shadows; } });
+    return instance;
+  }, [scene, shadows]);
   useEffect(() => () => model.dispose(), [model]);
+  useEffect(() => { onReady?.(); }, [onReady]);
   return <primitive object={model.root} dispose={null} />;
 }
 /** Original emergency visual only; loading never flashes a placeholder cup. */
@@ -38,7 +43,7 @@ export function TrophyVisual({ elapsed, reduced, solo }: { elapsed: { current: n
     <mesh position={[0, standHeight / 2, 0]}><cylinderGeometry args={[layout.standRadius, layout.standRadius + 0.035, standHeight, 40]} /><meshStandardMaterial color="#20444d" roughness={0.7} /></mesh>
     <mesh position={[0, standHeight + 0.005, 0]} rotation={[-Math.PI / 2, 0, 0]}><ringGeometry args={[layout.standRadius - 0.045, layout.standRadius - 0.025, 48]} /><meshBasicMaterial color="#e8c17b" /></mesh>
     <group ref={turntable} position={[0, standHeight + 0.01, 0]} rotation={[0, yaw, 0]} scale={layout.height}>
-      <TrophyBoundary><Suspense fallback={null}><SuppliedCup /></Suspense></TrophyBoundary>
+      <TrophyBoundary><Suspense fallback={null}><TrophyModel /></Suspense></TrophyBoundary>
     </group>
   </group>;
 }

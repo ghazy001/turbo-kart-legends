@@ -1,9 +1,8 @@
-import { cupPoints } from '../../race/CupSession';
 import type { TrialRecords } from '../../timeTrial/TrialRecords';
 import { TimeTrialRecordSummary } from '../TimeTrialHUD';
 import { lapLabel } from '../../config/raceOptions';
 import { pointAtDistance } from '../../race/trackProgress';
-import { trackCatalog, trackDefinition, sunshineCup } from '../../tracks/trackCatalog';
+import { trackCatalog, trackDefinition } from '../../tracks/trackCatalog';
 import type { RaceFlowStore } from './raceFlowStore';
 import { useState, type CSSProperties, type ReactNode } from 'react';
 import { trackArtwork, trackArtworkUrl, trackGridColumns } from './trackArtwork';
@@ -32,7 +31,7 @@ export function PreviewPanel({ label, name, description, region, children }: { l
   return <section className="selection-preview course-preview" aria-label={`${name} preview`}><div className="selection-preview-top"><span><i /> COURSE SHOWCASE</span><span>{region}</span></div><div className="course-preview-image">{children}</div><div className="selection-nameplate" key={name}><div><span>{label}</span><h3>{name}</h3></div><span className="selection-name-arrow" aria-hidden="true">↗</span></div><p className="selection-description">{description}</p></section>;
 }
 /** A failed illustration leaves the actual sampled course visible and selectable. */
-function TrackArtwork({ course, thumbnail = false }: { course: Course; thumbnail?: boolean }) {
+export function TrackArtwork({ course, thumbnail = false }: { course: Course; thumbnail?: boolean }) {
   const [failed, setFailed] = useState(false);
   if (failed) return <CourseMap compact course={course} />;
   return <img src={trackArtworkUrl(course.id, thumbnail)} alt={thumbnail ? '' : trackArtwork[course.id].alt}
@@ -74,16 +73,13 @@ function TrackPreview({ course, laps }: { course: Course; laps: number }) {
   </section>;
 }
 
-export function TrackSelectScreen({ store, records, cup = false }: { store: RaceFlowStore; records?: TrialRecords; cup?: boolean }) {
-  const state = store.getSnapshot(), championship = cup || state.currentMode === 'grand-prix';
-  const track = trackDefinition(state.selectedTrack);
-  return <><section className={`track-roster${championship ? '' : ' track-art-roster'}`} aria-label={championship ? 'Championship' : 'Track collection'}>
-    <div className="selection-roster-heading"><span>{championship ? 'YOUR CHAMPIONSHIP' : 'FIND YOUR FAVORITE LINE'}</span><span>{championship ? '01 CUP' : `${String(trackCatalog.length).padStart(2, '0')} COURSES`}</span></div>
-    {championship ? <div className="cup-itinerary"><span className="cup-emblem" aria-hidden="true">♜</span><h3>{sunshineCup.name}</h3><p>{sunshineCup.description}</p><p className="cup-format">3 laps per race · 3 CPU rivals</p><p className="cup-points">{cupPoints.map((points, index) => `${index + 1}${['st', 'nd', 'rd', 'th'][index]}: ${points}`).join(' · ')} points</p></div> : <TrackSelectionGrid store={store} />}
+export function TrackSelectScreen({ store, records }: { store: RaceFlowStore; records?: TrialRecords }) {
+  const state = store.getSnapshot(), track = trackDefinition(state.selectedTrack);
+  return <><section className="track-roster track-art-roster" aria-label="Track collection">
+    <div className="selection-roster-heading"><span>FIND YOUR FAVORITE LINE</span><span>{String(trackCatalog.length).padStart(2, '0')} COURSES</span></div>
+    <TrackSelectionGrid store={store} />
     {state.currentMode === 'time-trial' && records && <TimeTrialRecordSummary records={records} track={track.track} />}
   </section>
-    {championship ? <PreviewPanel label="YOUR CHAMPIONSHIP" name={sunshineCup.name} region="COAST TO CALDERA" description="Points carry between races. The highest total takes the cup. Ties use finishing-place countback, then the final race.">
-      <div className="cup-route-preview" role="list" aria-label="Cup race order">{sunshineCup.tracks.map((id, index) => <div key={id} role="listitem"><CourseMap compact course={trackDefinition(id)} /><span>RACE {index + 1} / {trackDefinition(id).name}</span></div>)}</div>
-    </PreviewPanel> : <TrackPreview course={track} laps={state.currentMode === 'vs-race' ? state.vsOptions.laps : track.laps} />}
+    <TrackPreview course={track} laps={state.currentMode === 'vs-race' ? state.vsOptions.laps : track.laps} />
   </>;
 }
