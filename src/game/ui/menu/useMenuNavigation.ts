@@ -6,7 +6,8 @@ export function panelCommand(root: HTMLElement | null, action: SelectionCommand,
   if (action === 'back') { onBack(); return; }
   const focused = document.activeElement;
   if (action === 'confirm') { if (focused instanceof HTMLElement && root?.contains(focused)) focused.click(); return; }
-  const controls = Array.from(root?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), select:not(:disabled)') ?? []);
+  const controls = Array.from(root?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), select:not(:disabled), summary') ?? [])
+    .filter(control => control.tabIndex >= 0 && control.getClientRects().length > 0);
   const index = controls.indexOf(focused as HTMLElement);
   controls[(index + (action === 'up' || action === 'left' ? controls.length - 1 : 1)) % controls.length]?.focus();
 }

@@ -88,6 +88,8 @@ The user requested a more attractive, easier phone controller. The handheld rout
 
 The user requested step-by-step Railway deployment and accepted preparing production startup. Add a dedicated built Node static server plus the existing phone relay, exact configured HTTPS-origin validation behind Railway TLS, health checks, bounded single-replica lifecycle, Docker/manifest setup and clear user-operated GitHub/Railway steps. Preserve local Vite/HTTPS workflows, source assets/credits, normalized inputs and every gameplay system. Commit verified changes locally; the user pushes and deploys. No accounts, database, distributed state or unrequested cloud publication. See the Railway section in docs/PHONE_CONTROLLER.md.
 
+The user requested a cleaner, more attractive minimalist desktop phone-pairing panel. Make QR/status the focus, collapse tuning/manual-link/address/renew/disconnect controls under Options, preserve accurate expiry/connected/reconnecting/error states and existing pairing actions. Use one menu/focus owner, keep hidden controls out of navigation, never show an old QR while replacing it and retain configured public-origin selection. No relay, simulation, camera, input protocol or permission changes. Commit verified work locally; the user pushes to Railway. See the pairing-panel follow-up in docs/PHONE_CONTROLLER.md.
+
 ## Preferred technology
 
 

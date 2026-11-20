@@ -82,40 +82,6 @@
 @media(max-height:780px) and (min-width:761px) { .flow-header { padding-top: 18px; } .flow-heading { margin-top: 22px; } .flow-heading h2 { font-size: 38px; } .flow-home .home-menu-item { min-height: 56px; padding: 9px 15px; } .flow-home .home-menu-item strong { font-size: 16px; } .home-intro { margin-bottom: 18px; } .home-menu-left h1 { font-size: 43px; margin-top: 10px; } .home-hero-copy { padding-top: 14px; } .flow-footer { min-height: 80px; } .home-hero { min-height: 330px; } .home-hero-copy h3 { font-size: 23px; } }
 @media(max-width:760px) { .flow-header { padding-top: 18px; } .flow-header .menu-icon-button { width: 33px; height: 33px; border-radius: 10px; } .flow-header .menu-icon-button svg { width: 19px; height: 19px; } .flow-header .menu-tools { gap: 6px; } .flow-header .selection-wordmark small { max-width: 145px; font-size: 5px; letter-spacing: .9px; } .flow-heading { margin-top: 23px; grid-column: 1/-1; } .flow-heading h2 { font-size: 35px; letter-spacing: -1.5px; } .flow-header .selection-steps { grid-column: 1/-1; justify-self: start; margin: 20px 0 0; gap: 13px; font-size: 9px; } .flow-header .selection-steps li:last-child { display: flex; } .flow-home .flow-content { grid-template-columns: 1fr; gap: 28px; } .home-menu-left h1 { font-size: 46px; } .home-menu-left { padding-top: 16px; } .home-menu-list { gap: 8px; } .home-menu-item { min-height: 59px; } .home-menu-item strong { font-size: 16px; } .home-menu-left h1 br { display: none; } .home-menu-left h1 em { display: block; } .home-hero { min-height: 360px; } .home-hero-copy { padding-top: 0; } .home-hero > .selection-preview { height: 260px; } .home-hero-copy h3 { font-size: 22px; } .home-hero-copy h3 em { font-size: 12px; } .flow-footer .selection-actions { order: 1; } .flow-footer .selection-input-hints { order: 2; } .flow-footer .selection-confirm { max-width: none; } .track-roster { order: 2; } .course-preview { height: 355px; } .course-preview-image { min-height: 150px; margin: 10px 0; } .course-preview-image > svg { max-height: 230px; width: auto; } .track-select-card > svg { height: 180px; } .race-ready { order: 2; } .race-ready > h3 { font-size: 36px; } .menu-panel-scrim { padding: 12px; } .menu-settings-panel { padding: 22px; border-radius: 19px; max-height: calc(100dvh - 24px); } .menu-panel-heading h2 { font-size: 28px; } .menu-panel-footer > span { max-width: 130px; line-height: 1.7; } .menu-panel-footer .selection-confirm { gap: 20px; } .game-menu-tools { top: 82px; right: 18px; } .input-mappings { font-size: 10px; } }
 @media(prefers-reduced-motion:reduce) { .flow-backdrop,.flow-step-content > section,.home-hero-copy,.flow-heading h2 { animation: none; } .home-menu-item,.menu-icon-button { transition: none; } }
-.phone-settings-host .pair-scrim { z-index: 85; background: #102a3ce6; backdrop-filter: blur(18px); }
-.phone-settings-host .pair-panel { width: min(890px,100%); background: linear-gradient(125deg,#31545bf5,#1c3b48fa); color: #f8f3df; border: 1px solid #e4f0d53d; box-shadow: 0 30px 100px #081c2c66; }
-.phone-settings-host .pair-panel h2 { font-size: 38px; line-height: 1.1; letter-spacing: -1.6px; }
-.phone-settings-host .pair-panel .eyebrow { color: #f6cf81; }
-.phone-settings-host .pair-close { color: #eeeeda; border-color: #edf2d940; background: #e9f3d910; }
-.phone-settings-host .pair-status { background: #e4f0d80d; color: #e4eddb; border-color: #e8f0d526; }
-.phone-settings-host .pair-code { background: #e0efce08; border: 1px solid #e9f4dd26; border-radius: 17px; padding: 16px; }
-.phone-settings-host .pair-qr { border-radius: 12px; width: 200px; height: 200px; }
-.phone-settings-host .pair-code p,.phone-settings-host .pair-footnote { color: #c2d5c4; }
-.phone-settings-host .pair-code strong { color: #f5efd9; }
-.phone-settings-host .pair-link-label,.phone-settings-host .pair-code label { color: #d9e4cd; }
-.phone-settings-host .pair-panel input,.phone-settings-host .pair-panel select { background: #102f3a9c; color: #e6eddb; border: 1px solid #dee9cb40; border-radius: 8px; }
-.phone-settings-host .pair-panel .pair-secondary { background: #edf6da0b; border: 1px solid #e6f0d13d; color: #f2e9ce; }
-.phone-settings-host .pair-help { background: #112c3b55; border-color: #f6c36d33; color: #d7dfc8; }
-.phone-settings-host .pair-panel .primary { background: #f9c76b; color: #173b47; border-bottom-color: #ba863c; }
-.phone-settings-host .pair-connected { background: #c2eacb0c; color: #ebf3dd; }
-.phone-settings-host .pair-connected > span { background: #f5cd7d; color: #173b47; }
-.phone-settings-host .pair-error { background: #e7956122; color: #ffe2b6; }
-.phone-desktop-settings { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 25px 0; border-top: 1px solid #e6f0d12b; padding-top: 25px; }
-.phone-desktop-settings h3 { font-size: 25px; letter-spacing: -.6px; margin: 10px 0; }
-.phone-desktop-settings p { font-size: 11px; line-height: 1.7; color: #c4d8c9; }
-.phone-desktop-tuning { display: flex; flex-direction: column; gap: 14px; }
-.phone-desktop-tuning label { font-size: 11px; color: #f1efd8; }
-.phone-desktop-tuning input[type=range] { width: 100%; accent-color: #f4c96e; margin: 12px 0 0; padding: 0; }
-.phone-desktop-tuning output { font-size: 10px; color: #efd49d; float: right; }
-.phone-touch-toggle { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
-.phone-touch-toggle small { display: block; color: #c2d5c5; margin-top: 4px; font-size: 9px; }
-.phone-touch-toggle input { accent-color: #f7c96c; width: 20px; height: 20px; }
-.phone-desktop-tuning > button { padding: 11px 13px; background: #f4cb78; color: #163d48; border-radius: 9px; font-size: 11px; font-weight: 750; display: flex; justify-content: space-between; }
-.phone-desktop-tuning > button:disabled { opacity: .5; cursor: not-allowed; }
-.phone-desktop-tuning > small { font-size: 9px; line-height: 1.6; color: #c2d5c4; }
-.phone-settings-host :focus-visible { outline: 3px solid #ffdc8f; outline-offset: 3px; }
-@media(max-width:760px) { .phone-desktop-settings { grid-template-columns: 1fr; gap: 16px; } .phone-settings-host .pair-panel h2 { font-size: 31px; } .phone-settings-host .pair-qr { width: 160px; height: 160px; } }
-
 /* The same course registry drives both selectable maps and the championship itinerary. */
 .track-list { display: grid; gap: 14px; }
 .track-list .track-select-card { display: grid; grid-template-columns: 125px 1fr; align-items: center; border-color: #e7efdb30; transition: border-color .18s, transform .18s; }

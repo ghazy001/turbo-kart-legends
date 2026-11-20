@@ -1,4 +1,4 @@
-export type ControllerIconName = 'wheel' | 'tilt' | 'throttle' | 'brake' | 'drift' | 'item' | 'pause' | 'play' | 'settings' | 'close';
+export type ControllerIconName = 'wheel' | 'tilt' | 'throttle' | 'brake' | 'drift' | 'item' | 'pause' | 'play' | 'settings' | 'close' | 'phone' | 'check' | 'copy';
 
 /** Small original line icons, shared by the touch deck and its settings. */
 export function ControllerIcon({ name }: { name: ControllerIconName }) {
@@ -13,5 +13,8 @@ export function ControllerIcon({ name }: { name: ControllerIconName }) {
     {name === 'play' && <path d="m11 6 15 10-15 10V6Z" />}
     {name === 'settings' && <><path d="M6 9h20M6 23h20M12 5v8m8 6v8" /><circle cx="12" cy="9" r="3" fill="currentColor" stroke="none" /><circle cx="20" cy="23" r="3" fill="currentColor" stroke="none" /></>}
     {name === 'close' && <path d="m9 9 14 14M23 9 9 23" />}
+    {name === 'phone' && <><rect x="8" y="3" width="16" height="26" rx="4" /><path d="M13 7h6m-5 18h4" /></>}
+    {name === 'check' && <path d="m8 16 5 5L25 9" />}
+    {name === 'copy' && <><rect x="11" y="10" width="15" height="18" rx="3" /><path d="M20 6V4H6v18h2" /></>}
   </svg>;
 }

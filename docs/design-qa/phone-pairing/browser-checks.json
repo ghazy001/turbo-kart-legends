@@ -1,0 +1,52 @@
+{
+  "checks": [
+    "QR-first layout; secondary controls collapsed; initial focus on Done",
+    "keyboard reaches and opens Options while skipping collapsed controls",
+    "copy button receives correct current link (clipboard stubbed)",
+    "new pairing replaces QR and clears stale copy success",
+    "real phone joins new code; connected view hides consumed QR",
+    "expanded steering options still configure the real paired phone",
+    "disconnect revokes the phone and presents fresh pairing action",
+    "expiry removes QR and provides explicit renewal",
+    "desktop, short landscape and narrow layouts stay inside viewport without horizontal overflow",
+    "Tab wraps within dialog",
+    "Escape returns focus inside Settings"
+  ],
+  "layouts": [
+    {
+      "width": 1280,
+      "height": 800,
+      "panel": {
+        "x": 260,
+        "y": 121.5,
+        "width": 760,
+        "height": 557
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "panel": {
+        "x": 42,
+        "y": 14,
+        "width": 760,
+        "height": 362
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "panel": {
+        "x": 16,
+        "y": 61.890625,
+        "width": 358,
+        "height": 720.21875
+      }
+    }
+  ],
+  "browser": "157.0.8103.80",
+  "pageErrors": [],
+  "clipboard": "stubbed; no system clipboard accessed",
+  "physicalPhoneScanVerified": false,
+  "screenshotPairingSession": "local test session; revoked on browser close"
+}

@@ -29,7 +29,7 @@ For production, `npm run build` now also compiles the Node server; `npm start` s
 
 ## Wireless smartphone controller
 
-Click **Connect Phone** for pairing status, a short-lived QR code and disconnect controls. For a real phone on the same Wi-Fi:
+Open **Settings → Phone controller** for pairing status and a short-lived QR code. The panel keeps QR/status in view; **Options** contains steering tuning, the manual link/address, new-code and disconnect actions. For local development with a real phone on the same Wi-Fi:
 
 ```sh
 npm run phone:cert
