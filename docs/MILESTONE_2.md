@@ -66,3 +66,23 @@ Verification: focused synthesis/lifecycle tests cover waveform continuity/headro
 - `git diff --check`: passed.
 
 Manual limitation: the available browser service reports `Trusted RPC service is not configured: browser`; live browser playback and speaker/headphone volume/timbre were not verified. Listen on a real browser with sound enabled: accelerate with W/Up, release to coast, brake/reverse with S/Down, drift/boost, pause/resume, switch tabs, reset and return Home. Confirm a smooth motor response, no lingering sound and readable item/result cues. Physical phone/gamepad and cross-browser audio behavior still need device checks.
+
+## Gameplay music follow-up
+
+Date: 2026-11-20. The user's request for a gameplay song adds an original bright arcade instrumental, preserving every simulation, input, camera and race rule.
+
+- Sixteen bars at 132 BPM (about 29.09 seconds), with an original lead melody, chords, bass, kick, snare and hats. The melody/arrangement is code-authored, with deterministic synthesized percussion; no external recording, copied soundtrack or new dependency.
+- `raceMusicConfig.ts` owns tempo/sample rate/mix; `raceMusicScore.ts` owns the score; `renderRaceMusic.ts` renders native Web Audio instruments once into a mono 22,050 Hz buffer (about 2.45 MiB). There is no audio download, live note scheduler, timer or per-frame node allocation. Offline graph construction/preparation is one-time; target-hardware timing remains unmeasured.
+- `RaceMusic.ts` owns one cached buffer, one active source/gain and at most one short retiring fade. It starts at GO or active Free Drive, stays silent through preparation/countdown/menu/results, resumes its musical position after pause/mute, and restarts after race restart/recovery. App's existing lifecycle gates loading/focus/context interruptions. Results stingers remain separate.
+- The existing **Settings → Game sound** toggle controls music, engine and effects; the new settings description makes that explicit. The saved preference remains authoritative. No extra buttons, movement tuning or simulation hooks.
+- Asynchronous completion checks active/disposed state before playing. Unsupported offline audio or preparation failure leaves the existing engine/effects working. Sources/gains disconnect on fade completion or disposal, including rapid pause/resume and late preparation.
+
+Focused checks: 26 tests in three audio files passed. Added cases cover score bounds/determinism/rests, offline graph scheduling/envelope endpoints, unavailable API, no autoplay, async completion after pause/disposal, single-source steady playback, paused offsets/loop wrap, reset, suspended contexts, bounded retiring voices, cleanup and integration with DrivingAudio mute/results behavior. These are score/graph/lifecycle tests, not a claim of measured acoustic quality.
+
+- `npm run typecheck`: passed.
+- `npm run lint`: passed with zero warnings.
+- `npm run build`: passed, 826 modules. App chunk is 68.82 KB gzip (engine-only build: 67.51 KB); the initial entry remains 2.79 KB gzip.
+- `npm run test` (with caffeinate/local relay access): **548 tests in 48 files passed**, 157.12 seconds. Existing physics/AI/items/race/phone regressions remain passing; upstream Three.js CommonJS/Node experimental warnings remain visible and unsuppressed.
+- `git diff --check`: passed.
+
+Manual verification: a fresh browser runtime check again returned `Trusted RPC service is not configured: browser`. Live browser playback, acoustic balance, perceived loop seam and iPhone/Android/speaker/headphone behavior remain unverified. With Game sound ON, start a race, wait for GO, drive with the motor/effects, pause/resume, mute/unmute, switch tabs, recover, restart and finish; confirm music follows those transitions and leaves result cues readable. The same instrumental currently plays on all four courses; course-specific arrangements and separate music/effects volume controls are possible later refinements.

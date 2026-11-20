@@ -11,7 +11,7 @@ export function SettingsScreen({ audioEnabled, onAudio, onController, onPhone, o
   audioEnabled: boolean; onAudio: () => void; onController: () => void; onPhone: () => void; onPractice: () => void; onClose: () => void; returnFocusElement?: HTMLElement | null;
 }) {
   return <MenuPanel title="Your settings" subtitle="A few small things. A better time behind the wheel." onClose={onClose} returnFocusElement={returnFocusElement}><div className="settings-options">
-    <button data-menu-current="true" data-selection-action onClick={onAudio} aria-pressed={audioEnabled}><MenuIcon name={audioEnabled ? 'sound' : 'muted'} /><span><strong>Game sound</strong><small>Synthesized engine, drift and race cues</small></span><b>{audioEnabled ? 'ON' : 'OFF'}</b></button>
+    <button data-menu-current="true" data-selection-action onClick={onAudio} aria-pressed={audioEnabled}><MenuIcon name={audioEnabled ? 'sound' : 'muted'} /><span><strong>Game sound</strong><small>Race music, engine and effects</small></span><b>{audioEnabled ? 'ON' : 'OFF'}</b></button>
     <button data-selection-action onClick={onController}><MenuIcon name="controller" /><span><strong>Controller & input</strong><small>Keyboard mappings and standard gamepads</small></span></button>
     <button data-selection-action onClick={onPhone}><MenuIcon name="phone" /><span><strong>Phone controller</strong><small>Pair over Wi-Fi, tune touch or motion steering</small></span></button>
     <button data-selection-action onClick={onPractice}><MenuIcon name="flag" /><span><strong>Free Drive practice</strong><small>Keep exploring without a clock or opponents</small></span></button>

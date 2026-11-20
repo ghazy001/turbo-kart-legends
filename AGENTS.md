@@ -82,6 +82,8 @@ The user approved using the generated logo in the game. Integrate the preserved 
 
 The user requested audible engine acceleration. Add an original synthesized motor driven by actual kart speed and the existing normalized throttle/brake input, with bounded voice/automation costs and existing mute, pause, focus and loading lifecycle. Preserve sound preferences, controls, simulation, AI, camera and race rules. No downloaded audio or new dependency is required. Document automated audio lifecycle checks separately from real listening/device verification. See the engine audio follow-up in docs/MILESTONE_2.md.
 
+The user subsequently requested music during gameplay. Add an original instrumental through the existing gesture-unlocked sound master; render once offline into a cached loop, preserve sound preferences, pause/resume position and silence on loading/focus/results, and bound playback/fade voices with complete cleanup. Preserve all gameplay, camera and input ownership. Do not copy franchise music or claim speaker/device checks from audio mocks. See the music follow-up in docs/MILESTONE_2.md.
+
 ## Preferred technology
 
 

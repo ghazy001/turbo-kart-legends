@@ -15,7 +15,7 @@ function audioHarness() {
       const samples = new Float32Array(length);
       return { length, getChannelData: () => samples };
     }),
-    createBufferSource: vi.fn(() => ({ buffer: null, loop: false, playbackRate: parameter(), connect: vi.fn(), start: vi.fn(), stop: vi.fn(), disconnect: vi.fn() })),
+    createBufferSource: vi.fn(() => ({ buffer: null, loop: false, playbackRate: parameter(), connect: vi.fn(), start: vi.fn(), stop: vi.fn(), disconnect: vi.fn(), onended: null as (() => void) | null })),
     createBiquadFilter: vi.fn(() => ({ type: '', frequency: parameter(), Q: { value: 0 }, connect: vi.fn(), disconnect: vi.fn() })),
     createOscillator: vi.fn(() => ({ type: '', frequency: parameter(), connect: vi.fn(),
       disconnect: vi.fn(), start: vi.fn(), stop: vi.fn(), onended: null as (() => void) | null })),
@@ -28,6 +28,29 @@ function audioHarness() {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('procedural driving audio lifecycle', () => {
+  it('runs prepared background music only in active unmuted gameplay, stopping for result cues', async () => {
+    const { audio, context } = audioHarness();
+    const offline = {
+      destination: {}, createBuffer: context.createBuffer.getMockImplementation()!, createGain: context.createGain.getMockImplementation()!,
+      createBufferSource: context.createBufferSource.getMockImplementation()!, createBiquadFilter: context.createBiquadFilter.getMockImplementation()!,
+      createOscillator: context.createOscillator.getMockImplementation()!, startRendering: () => Promise.resolve({ duration: 30 }),
+    };
+    vi.stubGlobal('OfflineAudioContext', vi.fn(function OfflineAudioMock() { return offline; }));
+    audio.unlock(); const state = createKart(sunshineCircuit);
+    await Promise.resolve(); await Promise.resolve(); await Promise.resolve();
+    audio.update(state, false); expect(context.createBufferSource).toHaveBeenCalledTimes(3);
+    audio.update(state, true); expect(context.createBufferSource).toHaveBeenCalledTimes(4);
+    const music = context.createBufferSource.mock.results[3].value;
+    audio.setMuted(true); expect(music.stop).toHaveBeenCalled();
+    audio.update(state, true); expect(context.createBufferSource).toHaveBeenCalledTimes(4);
+    audio.setMuted(false); context.currentTime = 2; audio.update(state, true);
+    expect(context.createBufferSource).toHaveBeenCalledTimes(5);
+    audio.silence(); audio.celebrate('finish'); audio.update(state, false);
+    expect(context.createBufferSource.mock.results[4].value.stop).toHaveBeenCalled();
+    expect(context.createOscillator).toHaveBeenCalled();
+    audio.dispose();
+    for (const voice of context.createBufferSource.mock.results) expect(voice.value.disconnect).toHaveBeenCalledTimes(1);
+  });
   it('keeps finish cues audible after driving stops and releases every scheduled voice naturally', () => {
     const { audio, context } = audioHarness(); audio.unlock(); audio.silence();
     audio.celebrate('cup-champion'); audio.update(createKart(sunshineCircuit), false);

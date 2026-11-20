@@ -2,6 +2,7 @@ import type { ItemSystem } from '../items/ItemSystem';
 import { NEUTRAL_INPUT, type KartInput, type KartState } from '../core/types';
 import { resultCues, type ResultCue } from '../config/resultCues';
 import { KartEngineSound } from './audio/KartEngineSound';
+import { RaceMusic } from './audio/RaceMusic';
 
 /** Small original synthesized cues. Nothing downloads and no audio starts before a gesture. */
 export class DrivingAudio {
@@ -12,6 +13,7 @@ export class DrivingAudio {
   private skidSource: AudioBufferSourceNode | null = null;
   private skidFilter: BiquadFilterNode | null = null;
   private engine: KartEngineSound | null = null;
+  private music: RaceMusic | null = null;
   private seenBoost = 0;
   private seenJump = 0;
   private seenLanding = 0;
@@ -46,6 +48,7 @@ export class DrivingAudio {
       source.connect(filter); filter.connect(this.skid); this.skid.connect(this.master);
       source.start(); this.skidSource = source; this.skidFilter = filter;
       this.engine = new KartEngineSound(context, this.master);
+      this.music = new RaceMusic(context, this.master);
     }
     if (this.context.state === 'suspended') {
       void this.context.resume().catch(error => console.warn('Audio will stay silent until the browser allows playback.', error));
@@ -54,13 +57,13 @@ export class DrivingAudio {
 
   setMuted(muted: boolean): void {
     this.muted = muted;
-    if (muted) { this.engine?.silence(); this.setMaster(0); this.stopCelebration(); }
+    if (muted) { this.engine?.silence(); this.music?.setPlaying(false); this.setMaster(0); this.stopCelebration(); }
   }
 
-  reset(): void { this.lastItems = null; this.seenItem = 0; this.seenBoost = 0; this.seenJump = 0; this.seenLanding = 0; this.silence(); }
+  reset(): void { this.lastItems = null; this.seenItem = 0; this.seenBoost = 0; this.seenJump = 0; this.seenLanding = 0; this.silence(); this.music?.reset(); }
 
   silence(): void {
-    this.engine?.silence(); this.setSkid(0); this.setMaster(0); this.stopCelebration();
+    this.engine?.silence(); this.music?.setPlaying(false); this.setSkid(0); this.setMaster(0); this.stopCelebration();
   }
 
   /** Results have a separate quiet bus: stopped driving audio cannot mute the finish cue. */
@@ -80,6 +83,7 @@ export class DrivingAudio {
   update(state: KartState, playing: boolean, ground = 0, input: KartInput = NEUTRAL_INPUT): void {
     const context = this.context;
     if (!context) return;
+    this.music?.setPlaying(playing && !this.muted && context.state === 'running');
     if (playing && !this.muted && context.state === 'running') this.engine?.update(state, input);
     else this.engine?.silence();
     this.setMaster(playing && !this.muted ? 0.28 : 0);
@@ -151,6 +155,7 @@ export class DrivingAudio {
 
   dispose(): void {
     this.stopCelebration();
+    this.music?.dispose(); this.music = null;
     this.engine?.dispose(); this.engine = null;
     this.skidSource?.stop(); this.skidSource?.disconnect(); this.skidFilter?.disconnect(); this.skid?.disconnect(); this.master?.disconnect();
     this.skidSource = null; this.skidFilter = null;
