@@ -36,7 +36,7 @@ export function KartAssembly({ kart = defaultKart, driver = defaultDriver, runti
       wheel.spin.rotation[kart.axle ?? 'x'] = pose.wheelSpin * kartConfig.wheelRadius / kart.wheelRadius * (kart.spinDirection ?? 1);
     }
     if (!runtime && animator.supported.length > 0) invalidate();
-    animator.update(delta, { steering: pose?.steering ?? 0, driftDirection: pose?.driftDirection ?? 0, victory: celebrating || runtime?.mode === 'results', paused: runtime?.mode === 'paused' });
+    animator.update(delta, { steering: pose?.steering ?? 0, victory: celebrating || runtime?.mode === 'results', paused: runtime?.mode === 'paused' });
   }, -1);
   return <group name="kart-assembly">
     {showAnchors && [-1, 1].map(side => <mesh key={side} position={[side * kart.steeringGrip[0], kart.steeringGrip[1], kart.steeringGrip[2]]}>

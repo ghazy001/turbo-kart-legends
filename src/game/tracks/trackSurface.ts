@@ -1,4 +1,4 @@
-import { boostTiers } from '../config/driftConfig';
+import { boostTiers } from '../config/boostConfig';
 import type { KartInput, KartState, SampledTrack, Vec2 } from '../core/types';
 import { pointAtDistance, wrapDistance } from '../race/trackProgress';
 import { nearestRoadPoint } from './trackSampling';

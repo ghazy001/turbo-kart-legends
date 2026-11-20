@@ -1,31 +1,29 @@
 import { useEffect, useRef } from 'react';
 import type { GameRuntime } from '../render/runtime';
-import { boostTiers } from '../config/driftConfig';
+import { boostTiers } from '../config/boostConfig';
 import { ItemHUD } from './ItemHUD';
 import { RaceHUD } from './RaceHUD';
-import { chargeTier } from '../kart/driftController';
 import { GameButton } from './GameButton';
 import '../../styles/hud.css';
 
-function DriftMeter({ runtime }: { runtime: GameRuntime }) {
+function TurboMeter({ runtime }: { runtime: GameRuntime }) {
   const panel = useRef<HTMLDivElement>(null), title = useRef<HTMLOutputElement>(null), charge = useRef<HTMLProgressElement>(null);
   useEffect(() => {
     const update = () => {
       const state = runtime.simulation.current, boosting = state.boostRemaining > 0;
-      const tier = boosting ? state.boostTier : chargeTier(state.driftCharge), config = tier ? boostTiers[tier - 1] : null;
+      const tier = state.boostTier, config = tier ? boostTiers[tier - 1] : null;
       if (panel.current) {
-        panel.current.hidden = !boosting && state.driftDirection === 0;
-        panel.current.dataset.phase = boosting ? 'boost' : 'drift';
+        panel.current.hidden = !boosting;
         panel.current.style.setProperty('--ability-color', config?.color ?? '#a5ded4');
       }
-      if (title.current) title.current.value = boosting ? `${config?.name ?? 'Turbo'} · ${state.boostRemaining.toFixed(1)}s` : config ? `${config.name} ready` : 'Charging';
-      if (charge.current) charge.current.value = boosting && config ? state.boostRemaining / config.duration * boostTiers[2].charge : state.driftCharge;
+      if (title.current) title.current.value = `${config?.name ?? 'Turbo'} · ${state.boostRemaining.toFixed(1)}s`;
+      if (charge.current) charge.current.value = boosting && config ? state.boostRemaining / config.duration : 0;
     };
     update(); const timer = window.setInterval(update, 100); return () => window.clearInterval(timer);
   }, [runtime]);
-  return <div ref={panel} className="hud-drift" hidden>
-    <output ref={title} aria-label="Drift and turbo status">Charging</output>
-    <progress ref={charge} aria-label="Drift charge or remaining turbo" max={boostTiers[2].charge} value={0} />
+  return <div ref={panel} className="hud-turbo" hidden>
+    <output ref={title} aria-label="Turbo status">Turbo</output>
+    <progress ref={charge} aria-label="Remaining turbo" max={1} value={0} />
   </div>;
 }
 
@@ -69,7 +67,7 @@ export function HUD({ runtime, onPause }: { runtime: GameRuntime; onPause: () =>
     update(); const timer = window.setInterval(update, 100); return () => window.clearInterval(timer);
   }, [runtime]);
   return <div className="race-hud" aria-label="Race dashboard">
-    <CircuitMap runtime={runtime} /><RaceHUD runtime={runtime} /><ItemHUD runtime={runtime} /><DriftMeter runtime={runtime} />
+    <CircuitMap runtime={runtime} /><RaceHUD runtime={runtime} /><ItemHUD runtime={runtime} /><TurboMeter runtime={runtime} />
     <div className="hud-speed"><output ref={speed} aria-label="Speed in kilometers per hour">00</output><span ref={gear}>km/h</span></div>
     <GameButton className="hud-pause" tone="quiet" size="small" onClick={onPause} aria-label="Pause and controls" title="Pause · Escape"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /></svg></GameButton>
   </div>;

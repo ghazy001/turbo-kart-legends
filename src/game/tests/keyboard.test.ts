@@ -14,10 +14,10 @@ function setup() {
 }
 
 describe('keyboard adapter', () => {
-  it('maps Space to drift and clears it on pause, blur and key release', () => {
+  it('ignores the retired Space driving action while retaining pause and blur safety', () => {
     const { key, keyboard, host } = setup();
-    expect(key('Space').defaultPrevented).toBe(true);
-    expect(keyboard.sample().drift).toBe(true);
+    expect(key('Space').defaultPrevented).toBe(false);
+    expect(keyboard.sample().drift).toBe(false);
     key('Space', 'keyup'); expect(keyboard.sample().drift).toBe(false);
     key('Space'); key('Escape'); expect(keyboard.sample().drift).toBe(false);
     key('Space'); host.dispatchEvent(new Event('blur')); expect(keyboard.sample().drift).toBe(false);

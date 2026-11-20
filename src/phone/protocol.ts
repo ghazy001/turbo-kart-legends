@@ -53,5 +53,5 @@ export function validGameState(value: unknown): value is GameControlState {
   const v = value as Partial<GameControlState>;
   return typeof v.enabled === 'boolean' && (v.itemsEnabled === undefined || typeof v.itemsEnabled === 'boolean') && ['menu', 'playing', 'paused', 'results'].includes(v.mode ?? '');
 }
-export function isNeutral(input: KartInput) { return input.throttle < 0.05 && input.brake < 0.05 && Math.abs(input.steer) < 0.05 && !input.drift && !input.useItem; }
+export function isNeutral(input: KartInput) { return input.throttle < 0.05 && input.brake < 0.05 && Math.abs(input.steer) < 0.05 && !input.useItem; }
 export function pairingUrl(origin: string, token: string) { return `${origin}/controller#${encodeURIComponent(token)}`; }

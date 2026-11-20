@@ -23,10 +23,17 @@ describe('phone input safety and coexistence', () => {
     expect(source.sample(false)).toEqual(NEUTRAL_INPUT); source.receive(packet(9, { ...NEUTRAL_INPUT, throttle: 1 })); expect(source.sample()).toEqual(NEUTRAL_INPUT);
   });
   it('neutralizes and notifies once on timeout, disconnect or hidden phone', () => {
-    let now = 0, losses = 0; const source = new RemoteInput(() => now, () => losses++); source.connect(); source.receive(packet(0)); source.receive(packet(1, { ...NEUTRAL_INPUT, throttle: 1, drift: true }));
+    let now = 0, losses = 0; const source = new RemoteInput(() => now, () => losses++); source.connect(); source.receive(packet(0)); source.receive(packet(1, { ...NEUTRAL_INPUT, throttle: 1, drift: false }));
     now = 351; expect(source.sample()).toEqual(NEUTRAL_INPUT); source.sample(); expect(losses).toBe(1);
     source.connect(); source.receive(packet(2)); source.receive(packet(3, { ...NEUTRAL_INPUT, throttle: 1 })); source.receive(packet(4, { ...NEUTRAL_INPUT }, false)); expect(losses).toBe(2); expect(source.sample()).toEqual(NEUTRAL_INPUT);
     source.lose(); expect(losses).toBe(2);
+  });
+  it('accepts old v1 packets but never forwards their retired drift action into gameplay', () => {
+    const source = new RemoteInput(() => 0, () => undefined); source.connect();
+    source.receive(packet(0, { ...NEUTRAL_INPUT, drift: true }));
+    source.receive(packet(1, { ...NEUTRAL_INPUT, drift: true, throttle: 1, steer: 0.4 }));
+    expect(source.sample()).toMatchObject({ throttle: 1, steer: 0.4, drift: false });
+    expect(mixHumanInputs({ ...NEUTRAL_INPUT, drift: true }, { ...NEUTRAL_INPUT, drift: true }, { ...NEUTRAL_INPUT, drift: true }).drift).toBe(false);
   });
   it('drops duplicate/reordered packets and keeps keyboard/gamepad steering priority', () => {
     const source = new RemoteInput(() => 0, () => undefined); source.connect(); source.receive(packet(1)); source.receive(packet(3, { ...NEUTRAL_INPUT, steer: 1 })); source.receive(packet(2, { ...NEUTRAL_INPUT, steer: -1 })); expect(source.sample().steer).toBe(1);
@@ -34,8 +41,8 @@ describe('phone input safety and coexistence', () => {
     source.lose(); expect(mixHumanInputs({ ...NEUTRAL_INPUT, throttle: 1 }, NEUTRAL_INPUT, source.sample()).throttle).toBe(1);
   });
   it('supports simultaneous touch pedals, pointer capture cancellation and multiple fingers', () => {
-    const touch = new TouchInput(); touch.button('throttle', 1, true); touch.button('throttle', 2, true); touch.button('drift', 3, true); touch.steering(4, 0.7, true);
-    touch.button('throttle', 1, false); expect(touch.sample()).toEqual({ throttle: 1, brake: 0, drift: true, steer: 0.7, useItem: false });
+    const touch = new TouchInput(); touch.button('throttle', 1, true); touch.button('throttle', 2, true); touch.steering(4, 0.7, true);
+    touch.button('throttle', 1, false); expect(touch.sample()).toEqual({ throttle: 1, brake: 0, drift: false, steer: 0.7, useItem: false });
     touch.releaseSteering(4); touch.button('throttle', 2, false); expect(touch.sample().throttle).toBe(0); expect(touch.sample().steer).toBe(0);
     touch.clear(); touch.steering(4, 1); expect(touch.sample()).toEqual(NEUTRAL_INPUT);
   });

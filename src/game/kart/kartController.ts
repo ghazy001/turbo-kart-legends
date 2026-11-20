@@ -1,7 +1,7 @@
 import { kartConfig as config } from '../config/kartConfig';
 import type { KartInput, KartState, Vec2 } from '../core/types';
-import { boostTiers, driftConfig } from '../config/driftConfig';
-import { advanceDrift } from './driftController';
+import { boostTiers, boostConfig } from '../config/boostConfig';
+import { advanceBoost } from './boostController';
 import { advanceJump } from './jumpController';
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
@@ -10,7 +10,7 @@ export const wrapAngle = (angle: number) => Math.atan2(Math.sin(angle), Math.cos
 
 export function integrateSpeed(speed: number, input: KartInput, dt: number, boostTier: KartState['boostTier'] = 0): number {
   const boost = boostTier > 0 ? boostTiers[boostTier - 1] : null;
-  const maxSpeed = boost?.maxSpeed ?? Math.max(config.maxForwardSpeed, speed - driftConfig.overspeedDrag * dt);
+  const maxSpeed = boost?.maxSpeed ?? Math.max(config.maxForwardSpeed, speed - boostConfig.overspeedDrag * dt);
   const throttle = clamp(input.throttle, 0, 1);
   const brake = clamp(input.brake, 0, 1);
   if (brake > 0) {
@@ -28,22 +28,17 @@ export function integrateSpeed(speed: number, input: KartInput, dt: number, boos
 
 export function moveKart(state: KartState, input: KartInput, dt: number, surface?: { height: number; at: (point: Vec2) => number }): KartState {
   const ground = surface?.height ?? 0;
-  const abilities = advanceDrift(state, input, dt, ground);
+  const abilities = advanceBoost(state, input, dt);
   const forwardSpeed = integrateSpeed(state.forwardSpeed, input, dt, abilities.boostTier);
   const steering = state.steering + (clamp(input.steer, -1, 1) - state.steering) * (1 - Math.exp(-config.steeringResponse * dt));
-  const drifting = abilities.driftDirection !== 0;
-  const effectiveSteer = drifting
-    ? abilities.driftDirection * driftConfig.lockedSteer + steering * driftConfig.inputSteer : steering;
-  const steerAngle = effectiveSteer * config.maxSteerAngle
+  const steerAngle = steering * config.maxSteerAngle
     / (1 + Math.abs(forwardSpeed) / config.maxForwardSpeed * config.highSpeedSteerReduction);
   // With +Z forward, a rear chase camera sees -X on its right:
   // positive (right) input must decrease heading, including after hot reload.
-  const yawRate = -forwardSpeed / config.wheelBase * Math.tan(steerAngle) * (drifting ? driftConfig.yawMultiplier : 1);
+  const yawRate = -forwardSpeed / config.wheelBase * Math.tan(steerAngle);
   const heading = wrapAngle(state.heading + yawRate * dt);
-  const grip = drifting ? driftConfig.lateralGrip : config.lateralGrip;
-  const slip = drifting ? driftConfig.slipFactor : config.slipFactor;
-  const lateralSpeed = clamp((state.lateralSpeed - yawRate * forwardSpeed * slip * dt)
-    * Math.exp(-grip * dt), -driftConfig.maxLateralSpeed, driftConfig.maxLateralSpeed);
+  const lateralSpeed = clamp((state.lateralSpeed - yawRate * forwardSpeed * config.slipFactor * dt)
+    * Math.exp(-config.lateralGrip * dt), -boostConfig.maxLateralSpeed, boostConfig.maxLateralSpeed);
   const moved = {
     ...abilities,
     x: state.x + (Math.sin(heading) * forwardSpeed + Math.cos(heading) * lateralSpeed) * dt,

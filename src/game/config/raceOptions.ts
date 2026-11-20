@@ -3,8 +3,8 @@ import { raceConfig } from './raceConfig';
 export const lapChoices = [1, 3, 5] as const;
 export const aiDifficulties = [
   { id: 'easy', name: 'Easy', speedOffset: -2.8, description: 'Earlier braking, gentler lines and patient passes. Learn the circuit.' },
-  { id: 'normal', name: 'Medium', speedOffset: 0, description: 'Quick racing lines, committed passes and short drift turbos.' },
-  { id: 'hard', name: 'Hard', speedOffset: 0.6, description: 'Later braking, assertive battles and longer drift charges. Earn every place.' },
+  { id: 'normal', name: 'Medium', speedOffset: 0, description: 'Quick racing lines and committed passes.' },
+  { id: 'hard', name: 'Hard', speedOffset: 0.6, description: 'Later braking and assertive battles. Earn every place.' },
 ] as const;
 export type AIDifficulty = typeof aiDifficulties[number]['id'];
 export interface RaceOptions { readonly laps: typeof lapChoices[number]; readonly difficulty: AIDifficulty }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { boostTiers } from '../config/driftConfig';
+import { boostTiers } from '../config/boostConfig';
 import { itemBalance } from '../config/itemBalance';
 import { itemConfig } from '../config/itemConfig';
 import { kartConfig } from '../config/kartConfig';
@@ -54,7 +54,7 @@ describe('Turbo Charge item', () => {
     slowed.items.projectiles.push({ id: 99, owner: 'one', ...state, previousX: state.x, previousZ: state.z, y: 0.8, dx: 0, dz: 0, life: 1 });
     slowed.step(); slowed.use(); expect(slowed.items.slot('player')?.held).toBe('turbo-charge'); expect(slowed.items.stats.turbos).toBe(0);
   });
-  it('does not replace or extend an active drift boost and cancels charging without double payout', () => {
+  it('does not replace or extend an active external boost and clears retired snapshots without double payout', () => {
     const { items, racers, step, use } = setup();
     Object.assign(racers[0].simulation.current, { boostTier: 1, boostRemaining: 0.4 });
     use(); expect(items.slot('player')?.held).toBe('turbo-charge'); expect(racers[0].simulation.current.boostRemaining).toBe(0.4);

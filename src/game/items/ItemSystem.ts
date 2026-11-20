@@ -5,7 +5,7 @@ import { nextItemRoll, pickWeightedItem, racerItemSeed, type RewardContext, type
 import { itemConfig, type ItemId } from '../config/itemConfig';
 import { kartConfig } from '../config/kartConfig';
 import type { KartInput, KartState, SampledTrack } from '../core/types';
-import { cancelDrift } from '../kart/driftController';
+import { clearLegacyDrift } from '../kart/boostController';
 import { pointAtDistance } from '../race/trackProgress';
 import { offsetSample } from '../tracks/trackSampling';
 import { sweepKart, sweepRail } from './itemCollision';
@@ -84,7 +84,7 @@ export class ItemSystem {
     const state = victim.simulation.current;
     slot.hitChain = slot.hitWindow > 0 ? slot.hitChain + 1 : 1; slot.hitWindow = itemBalance.hitWindowSeconds;
     const repeat = slot.hitChain > 1, retention = repeat ? itemBalance.repeatHitRetention : itemConfig.hitRetention;
-    victim.simulation.current = { ...cancelDrift(state), forwardSpeed: state.forwardSpeed * retention, lateralSpeed: state.lateralSpeed * retention,
+    victim.simulation.current = { ...clearLegacyDrift(state), forwardSpeed: state.forwardSpeed * retention, lateralSpeed: state.lateralSpeed * retention,
       boostRemaining: 0, boostTier: 0, actionCooldown: itemConfig.fireCooldown };
     slot.slowRemaining = repeat ? itemBalance.repeatSlowSeconds : itemConfig.slowSeconds;
     slot.slowLimit = repeat ? itemBalance.repeatSlowSpeed : itemConfig.slowSpeed;

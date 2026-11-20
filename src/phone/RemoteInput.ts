@@ -18,7 +18,7 @@ export class RemoteInput {
     if (!packet.active) { this.lose(); return; }
     this.live = true;
     if (this.requireNeutral) { if (isNeutral(packet.input)) this.requireNeutral = false; this.input = { ...NEUTRAL_INPUT }; return; }
-    this.input = { ...packet.input };
+    this.input = { ...packet.input, drift: false };
   }
   sample(enabled = true): KartInput {
     if (this.live && this.now() - this.lastAt > PHONE_CONFIG.inputTimeoutMs) this.lose();

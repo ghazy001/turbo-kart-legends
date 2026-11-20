@@ -1,4 +1,7 @@
 # Turbo Kart Legends — Technical Architecture
+
+> Current gameplay update — 2026-11-20: drifting and manual hops were removed at the user’s request, including AI decisions, charge/release turbo, effects and phone/keyboard/gamepad driving controls. Pad/item boosts and Sunshine ramp jumps remain. Historical milestone descriptions below record earlier implementations; see docs/MILESTONE_2.md for the removal and compatibility policy.
+
 Version 1.0
 
 ## Architecture principles

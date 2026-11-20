@@ -92,6 +92,8 @@ The user requested a cleaner, more attractive minimalist desktop phone-pairing p
 
 The user supplied a cockpit controller reference and requested the handheld route to match it within the game theme. Large original SVG wheel artwork, shaped metallic Brake/Gas pedals and tactile Item/Drift controls are authorized. Preserve slide-to-steer, calibrated tilt, normalized input, multi-touch/pointer cancellation, focus and pause/disconnect safety. Keep compact landscape and portrait layouts, reduced motion and no automatic acceleration; do not introduce fake radio, gears or horn actions. Commit verified changes locally without pushing. See the cockpit follow-up in docs/PHONE_CONTROLLER.md.
 
+The user explicitly requested removal of drifting from gameplay and the phone controller. This supersedes earlier drift-preservation requirements: remove drift handling, charge/release turbo, manual hops, AI drift decisions, wheel sparks/skid audio, controls and instructions. Preserve ordinary steering, speed/contacts, pad/item boosts, ramp flight/landing, cameras and race rules. Keep legacy v1 wire/snapshot fields inert for compatibility and invalidate pre-removal Time Trial comparisons through the handling fingerprint. Commit verified work locally; do not push. See the drift-removal follow-up in docs/MILESTONE_2.md.
+
 ## Preferred technology
 
 

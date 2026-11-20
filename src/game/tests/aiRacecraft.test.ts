@@ -97,7 +97,7 @@ describe('fair competitive AI racecraft', () => {
   it('resets independent decision memory on restart/recovery and freezes it while paused', () => {
     const race = new RaceSession(track); race.start('quick-race');
     expect(new Set(race.opponents.map(bot => bot.ai)).size).toBe(3);
-    const bot = race.opponents[0]; bot.ai!.commitment = 1; bot.ai!.driftCooldown = 2;
+    const bot = race.opponents[0]; bot.ai!.commitment = 1;
     race.pause(); race.advance(1, NEUTRAL_INPUT, false); expect(bot.ai!.commitment).toBe(1);
     race.recover(bot); expect(bot.ai).toEqual(createAIDriverState());
     bot.ai!.commitment = 1; race.start('quick-race'); expect(bot.ai!.commitment).toBe(0);

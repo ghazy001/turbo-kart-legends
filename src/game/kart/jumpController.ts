@@ -1,7 +1,7 @@
-import { driftConfig as config } from '../config/driftConfig';
+import { jumpConfig as config } from '../config/boostConfig';
 import type { KartState } from '../core/types';
 
-/** Ballistic drift-entry hop. Planar rail constraints remain active in the air. */
+/** Ballistic ramp flight and landing. Planar rail constraints remain active in the air. */
 export function advanceJump(state: KartState, dt: number, ground = 0, grounded = state.y === 0 && state.verticalSpeed === 0): KartState {
   const next = { ...state, landingCompression: state.landingCompression * Math.exp(-config.landingDamping * dt) };
   if (grounded && state.verticalSpeed === 0) return { ...next, y: ground };

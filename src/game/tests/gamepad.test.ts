@@ -11,16 +11,16 @@ function press(source: PadSnapshot, index: number, value: number): PadSnapshot {
 }
 
 describe('standard gamepad input', () => {
-  it('maps trigger, stick, D-pad and drift buttons to the player input shape', () => {
+  it('maps driving controls and ignores the retired A/RB drift bindings', () => {
     let source: PadSnapshot = { ...pad(), axes: [0.6, 0] };
     source = press(press(press(source, 7, 0.8), 6, 0.3), 0, 1);
     const input = sampleGamepad(source);
     expect(input.throttle).toBe(0.8);
     expect(input.brake).toBe(0.3);
     expect(input.steer).toBeGreaterThan(0);
-    expect(input.drift).toBe(true);
+    expect(input.drift).toBe(false);
     expect(sampleGamepad(press(pad(), 14, 1)).steer).toBe(-1);
-    expect(sampleGamepad(press(pad(), 5, 1)).drift).toBe(true);
+    expect(sampleGamepad(press(pad(), 5, 1)).drift).toBe(false);
   });
   it('uses a deadzone and ignores disconnected or unknown mappings', () => {
     expect(sampleGamepad({ ...pad(), axes: [0.12] })).toEqual(NEUTRAL_INPUT);
@@ -52,8 +52,8 @@ describe('standard gamepad input', () => {
     source = null; controller.poll(); controller.poll();
     expect(onDisconnect).toHaveBeenCalledTimes(1);
   });
-  it('keeps keyboard steering priority while allowing analog throttle and drift', () => {
+  it('keeps keyboard steering priority while allowing analog throttle and discarding legacy drift', () => {
     expect(combineInputs({ ...NEUTRAL_INPUT, steer: -1 }, { throttle: 0.7, brake: 0, steer: 1, drift: true }))
-      .toEqual({ throttle: 0.7, brake: 0, steer: -1, drift: true, useItem: false });
+      .toEqual({ throttle: 0.7, brake: 0, steer: -1, drift: false, useItem: false });
   });
 });

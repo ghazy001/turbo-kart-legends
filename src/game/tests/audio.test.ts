@@ -38,15 +38,15 @@ describe('procedural driving audio lifecycle', () => {
     vi.stubGlobal('OfflineAudioContext', vi.fn(function OfflineAudioMock() { return offline; }));
     audio.unlock(); const state = createKart(sunshineCircuit);
     await Promise.resolve(); await Promise.resolve(); await Promise.resolve();
-    audio.update(state, false); expect(context.createBufferSource).toHaveBeenCalledTimes(3);
-    audio.update(state, true); expect(context.createBufferSource).toHaveBeenCalledTimes(4);
-    const music = context.createBufferSource.mock.results[3].value;
+    audio.update(state, false); expect(context.createBufferSource).toHaveBeenCalledTimes(2);
+    audio.update(state, true); expect(context.createBufferSource).toHaveBeenCalledTimes(3);
+    const music = context.createBufferSource.mock.results[2].value;
     audio.setMuted(true); expect(music.stop).toHaveBeenCalled();
-    audio.update(state, true); expect(context.createBufferSource).toHaveBeenCalledTimes(4);
+    audio.update(state, true); expect(context.createBufferSource).toHaveBeenCalledTimes(3);
     audio.setMuted(false); context.currentTime = 2; audio.update(state, true);
-    expect(context.createBufferSource).toHaveBeenCalledTimes(5);
+    expect(context.createBufferSource).toHaveBeenCalledTimes(4);
     audio.silence(); audio.celebrate('finish'); audio.update(state, false);
-    expect(context.createBufferSource.mock.results[4].value.stop).toHaveBeenCalled();
+    expect(context.createBufferSource.mock.results[3].value.stop).toHaveBeenCalled();
     expect(context.createOscillator).toHaveBeenCalled();
     audio.dispose();
     for (const voice of context.createBufferSource.mock.results) expect(voice.value.disconnect).toHaveBeenCalledTimes(1);
@@ -117,10 +117,8 @@ describe('procedural driving audio lifecycle', () => {
     audio.unlock();
     const state = { ...createKart(sunshineCircuit), driftDirection: 1 as const };
     audio.update(state, true); audio.update(state, true);
-    const skid = context.createGain.mock.results[1].value;
-    expect(skid.gain.setTargetAtTime).toHaveBeenCalledTimes(1);
+    expect(context.createBufferSource).toHaveBeenCalledTimes(2);
     audio.update(state, false);
-    expect(skid.gain.setTargetAtTime).toHaveBeenLastCalledWith(0, 0, 0.04);
     const master = context.createGain.mock.results[0].value;
     expect(master.gain.setTargetAtTime).toHaveBeenLastCalledWith(0, 0, 0.02);
     audio.dispose(); expect(context.close).toHaveBeenCalledTimes(1);
@@ -139,9 +137,9 @@ describe('procedural driving audio lifecycle', () => {
   it('reuses two engine loops and raises revs for actual acceleration, easing off when coasting', () => {
     const { audio, context } = audioHarness(), state = createKart(sunshineCircuit);
     audio.unlock(); audio.unlock();
-    expect(context.createBufferSource).toHaveBeenCalledTimes(3); // Skid plus two motor layers.
-    const motor = context.createBufferSource.mock.results[1].value;
-    const output = context.createBiquadFilter.mock.results[1].value.connect.mock.calls[0][0];
+    expect(context.createBufferSource).toHaveBeenCalledTimes(2); // Two motor layers; no retired drift skid loop.
+    const motor = context.createBufferSource.mock.results[0].value;
+    const output = context.createBiquadFilter.mock.results[0].value.connect.mock.calls[0][0];
     audio.update(state, true, 0, NEUTRAL_INPUT);
     const idle = motor.playbackRate.setTargetAtTime.mock.lastCall![0];
     context.currentTime = 0.1;
@@ -153,13 +151,13 @@ describe('procedural driving audio lifecycle', () => {
     expect(accelerating).toBeGreaterThan(idle);
     expect(motor.playbackRate.setTargetAtTime.mock.lastCall![0]).toBeLessThan(accelerating);
     expect(output.gain.setTargetAtTime.mock.lastCall[0]).toBeLessThan(loadedGain);
-    expect(context.createBufferSource).toHaveBeenCalledTimes(3);
+    expect(context.createBufferSource).toHaveBeenCalledTimes(2);
     audio.dispose();
   });
   it('neutralizes the motor on pause, mute, reset and focus silence; releases loops once on disposal', () => {
     const { audio, context } = audioHarness(), state = createKart(sunshineCircuit);
     audio.unlock();
-    const output = context.createBiquadFilter.mock.results[1].value.connect.mock.calls[0][0];
+    const output = context.createBiquadFilter.mock.results[0].value.connect.mock.calls[0][0];
     const silenceActions = [() => audio.update(state, false), () => audio.setMuted(true), () => audio.reset(), () => audio.silence()];
     for (const silence of silenceActions) {
       context.currentTime += 0.1; audio.setMuted(false); audio.update(state, true, 0, { ...NEUTRAL_INPUT, throttle: 1 });
@@ -176,7 +174,7 @@ describe('procedural driving audio lifecycle', () => {
   it('bounds motor automation at high render rates and keeps steady targets unscheduled', () => {
     const { audio, context } = audioHarness(), state = createKart(sunshineCircuit);
     audio.unlock();
-    const motor = context.createBufferSource.mock.results[1].value;
+    const motor = context.createBufferSource.mock.results[0].value;
     for (let frame = 0; frame < 144; frame++) {
       context.currentTime = frame / 144;
       audio.update({ ...state, forwardSpeed: frame / 8 }, true, 0, { ...NEUTRAL_INPUT, throttle: 1 });
@@ -192,7 +190,7 @@ describe('procedural driving audio lifecycle', () => {
   it('keeps the motor quiet while the browser audio context is suspended', () => {
     const { audio, context } = audioHarness(), state = createKart(sunshineCircuit);
     audio.unlock(); context.state = 'suspended';
-    const output = context.createBiquadFilter.mock.results[1].value.connect.mock.calls[0][0];
+    const output = context.createBiquadFilter.mock.results[0].value.connect.mock.calls[0][0];
     audio.update(state, true, 0, { ...NEUTRAL_INPUT, throttle: 1 });
     expect(output.gain.setTargetAtTime).not.toHaveBeenCalled();
     context.state = 'running'; audio.update(state, true);

@@ -11,17 +11,17 @@ function deck(overrides: Partial<PhoneControlDeckProps> = {}) {
     deckRef={createRef()} sliderRef={createRef()} onTouch={() => undefined} onMotion={() => undefined} onCalibrate={() => undefined} {...overrides} />);
 }
 describe('phone controller presentation and input availability', () => {
-  it('exposes four named driving controls and an accessible centered steering pad', () => {
+  it('exposes three named driving controls and an accessible centered steering pad', () => {
     const html = deck();
-    for (const action of ['throttle', 'brake', 'drift', 'useItem']) expect(html).toContain(`class="drive-button ${action}"`);
+    for (const action of ['throttle', 'brake', 'useItem']) expect(html).toContain(`class="drive-button ${action}"`);
     expect(html).toContain('role="slider"'); expect(html).toContain('aria-valuenow="0"');
     expect(html).toContain('aria-valuemin="-1"'); expect(html).toContain('aria-valuemax="1"');
     expect(html).toContain('aria-label="Touch steering"'); expect(html).not.toContain('disabled=""');
-    expect(html).toContain('Hold to reverse'); expect(html).toContain('Hold · release for turbo');
+    expect(html).toContain('Hold to reverse'); expect(html).not.toContain('Drift'); expect(html).not.toContain('release for turbo');
   });
   it('disables every driving action and keyboard steering while gameplay is unavailable', () => {
     const html = deck({ enabled: false });
-    expect(html.match(/disabled=""/g)).toHaveLength(4);
+    expect(html.match(/disabled=""/g)).toHaveLength(3);
     expect(html).toContain('tabindex="-1"'); expect(html).toContain('aria-disabled="true"');
     expect(html).toContain('aria-label="Steering mode"');
   });
@@ -33,7 +33,7 @@ describe('phone controller presentation and input availability', () => {
   it('keeps calibration actionable before tilt driving is enabled', () => {
     const html = deck({ mode: 'tilt', enabled: false });
     expect(html).not.toContain('role="slider"'); expect(html).toContain('Calibrate to drive');
-    expect(html).toContain('class="phone-calibrate"'); expect(html.match(/disabled=""/g)).toHaveLength(4);
+    expect(html).toContain('class="phone-calibrate"'); expect(html.match(/disabled=""/g)).toHaveLength(3);
     expect(deck({ mode: 'tilt', calibrated: true })).toContain('Recalibrate');
   });
   it('retains tuning, inversion, input rates and connection feedback in the settings dialog', () => {
@@ -51,8 +51,8 @@ describe('phone controller presentation and input availability', () => {
     touch.button('throttle', 1, false); touch.button('throttle', -1, false);
     expect(touch.isHeld('throttle')).toBe(true); expect(touch.sample().throttle).toBe(1);
     touch.button('throttle', 2, false); expect(touch.isHeld('throttle')).toBe(false);
-    touch.button('drift', 3, true); touch.button('useItem', 4, true); touch.clear();
-    expect(touch.isHeld('drift')).toBe(false); expect(touch.isHeld('useItem')).toBe(false);
+    touch.button('useItem', 4, true); touch.clear();
+    expect(touch.isHeld('brake')).toBe(false); expect(touch.isHeld('useItem')).toBe(false);
     expect(touch.sample().useItem).toBe(false);
   });
 });

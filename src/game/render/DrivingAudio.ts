@@ -9,9 +9,6 @@ export class DrivingAudio {
   muted = false;
   private context: AudioContext | null = null;
   private master: GainNode | null = null;
-  private skid: GainNode | null = null;
-  private skidSource: AudioBufferSourceNode | null = null;
-  private skidFilter: BiquadFilterNode | null = null;
   private engine: KartEngineSound | null = null;
   private music: RaceMusic | null = null;
   private seenBoost = 0;
@@ -20,7 +17,6 @@ export class DrivingAudio {
   private lastItems: ItemSystem | null = null;
   private seenItem = 0;
   private masterTarget = 0;
-  private skidTarget = 0;
   private celebrationGain: GainNode | null = null;
   private readonly celebrationVoices = new Set<() => void>();
 
@@ -33,20 +29,6 @@ export class DrivingAudio {
       this.master.gain.value = this.muted ? 0 : 0.28;
       this.masterTarget = this.master.gain.value;
       this.master.connect(context.destination);
-      const noise = context.createBuffer(1, Math.floor(context.sampleRate * 0.25), context.sampleRate);
-      const data = noise.getChannelData(0);
-      let seed = 713;
-      for (let i = 0; i < data.length; i++) {
-        seed = (seed * 16807) % 2147483647;
-        data[i] = (seed / 2147483647 * 2 - 1) * 0.5;
-      }
-      const source = context.createBufferSource();
-      source.buffer = noise; source.loop = true;
-      const filter = context.createBiquadFilter();
-      filter.type = 'bandpass'; filter.frequency.value = 1100; filter.Q.value = 0.7;
-      this.skid = context.createGain(); this.skid.gain.value = 0;
-      source.connect(filter); filter.connect(this.skid); this.skid.connect(this.master);
-      source.start(); this.skidSource = source; this.skidFilter = filter;
       this.engine = new KartEngineSound(context, this.master);
       this.music = new RaceMusic(context, this.master);
     }
@@ -63,7 +45,7 @@ export class DrivingAudio {
   reset(): void { this.lastItems = null; this.seenItem = 0; this.seenBoost = 0; this.seenJump = 0; this.seenLanding = 0; this.silence(); this.music?.reset(); }
 
   silence(): void {
-    this.engine?.silence(); this.music?.setPlaying(false); this.setSkid(0); this.setMaster(0); this.stopCelebration();
+    this.engine?.silence(); this.music?.setPlaying(false); this.setMaster(0); this.stopCelebration();
   }
 
   /** Results have a separate quiet bus: stopped driving audio cannot mute the finish cue. */
@@ -80,14 +62,14 @@ export class DrivingAudio {
     this.celebrationGain?.disconnect(); this.celebrationGain = null;
   }
 
-  update(state: KartState, playing: boolean, ground = 0, input: KartInput = NEUTRAL_INPUT): void {
+  update(state: KartState, playing: boolean, _ground = 0, input: KartInput = NEUTRAL_INPUT): void {
+    void _ground; // Kept for existing audio callers; no grounded skid voice remains.
     const context = this.context;
     if (!context) return;
     this.music?.setPlaying(playing && !this.muted && context.state === 'running');
     if (playing && !this.muted && context.state === 'running') this.engine?.update(state, input);
     else this.engine?.silence();
     this.setMaster(playing && !this.muted ? 0.28 : 0);
-    this.setSkid(playing && state.driftDirection !== 0 && state.y <= ground + 0.01 ? 0.12 : 0);
     if (playing && !this.muted && context.state === 'running') {
       if (state.boostSerial > this.seenBoost && state.boostRemaining > 0) {
         const base = 220 + state.boostTier * 90;
@@ -121,12 +103,6 @@ export class DrivingAudio {
     this.master.gain.setTargetAtTime(target, this.context.currentTime, 0.02);
   }
 
-  private setSkid(target: number): void {
-    if (!this.context || !this.skid || target === this.skidTarget) return;
-    this.skidTarget = target;
-    this.skid.gain.setTargetAtTime(target, this.context.currentTime, 0.04);
-  }
-
   private tone(from: number, to: number, duration: number, volume: number, type: OscillatorType, delay = 0, output = this.master, celebration = false): void {
     const context = this.context;
     if (!context || !output) return;
@@ -157,9 +133,8 @@ export class DrivingAudio {
     this.stopCelebration();
     this.music?.dispose(); this.music = null;
     this.engine?.dispose(); this.engine = null;
-    this.skidSource?.stop(); this.skidSource?.disconnect(); this.skidFilter?.disconnect(); this.skid?.disconnect(); this.master?.disconnect();
-    this.skidSource = null; this.skidFilter = null;
+    this.master?.disconnect();
     if (this.context) void this.context.close().catch(error => console.warn('Audio cleanup was interrupted.', error));
-    this.context = null; this.master = null; this.skid = null; this.masterTarget = 0; this.skidTarget = 0;
+    this.context = null; this.master = null; this.masterTarget = 0;
   }
 }

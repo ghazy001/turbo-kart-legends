@@ -15,7 +15,7 @@ function projected(state: KartState, seconds: number): KartState {
 /** Conservative item timing only: never supplies steering or changes the navigation target. */
 export function shouldUseTurbo(owner: ItemRacer, racers: readonly ItemRacer[], track: SampledTrack): boolean {
   const state = owner.simulation.current, horizon = itemBalance.aiTurboLookAhead;
-  if (state.forwardSpeed < itemConfig.turboMinSpeed || state.boostRemaining > 0 || state.driftDirection !== 0
+  if (state.forwardSpeed < itemConfig.turboMinSpeed || state.boostRemaining > 0
     || state.y > surfaceHeightAt(track, state) + 0.01 || Math.abs(state.steering) > itemBalance.aiTurboMaxSteer || Math.abs(state.yawRate) > itemBalance.aiTurboMaxYaw) return false;
   const future = projected({ ...state, forwardSpeed: turboBoost.maxSpeed }, horizon);
   if (sweepRail(track, state, future, kartConfig.collisionRadius) !== null) return false;

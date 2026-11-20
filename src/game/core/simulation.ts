@@ -1,9 +1,9 @@
 import { applyTrackFeatures, surfaceHeightAt } from '../tracks/trackSurface';
 import { kartConfig } from '../config/kartConfig';
-import { driftConfig } from '../config/driftConfig';
+import { boostConfig } from '../config/boostConfig';
 import { constrainKart } from '../kart/kartCollision';
 import { moveKart, wrapAngle } from '../kart/kartController';
-import { cancelDrift } from '../kart/driftController';
+import { clearLegacyDrift } from '../kart/boostController';
 import { nearestRoadPoint } from '../tracks/trackSampling';
 import { FixedStepClock } from './fixedStep';
 import type { KartInput, KartState, SampledTrack } from './types';
@@ -23,7 +23,7 @@ export function stepKart(state: KartState, input: KartInput, dt: number, track: 
   const moved = applyTrackFeatures(track, state, moveKart(state, input, dt, surface), input);
   const constrained = constrainKart(moved, track);
   return constrained === moved ? moved : {
-    ...cancelDrift(constrained), boostRemaining: 0, boostTier: 0, actionCooldown: driftConfig.boostRecovery,
+    ...clearLegacyDrift(constrained), boostRemaining: 0, boostTier: 0, actionCooldown: boostConfig.boostRecovery,
   };
 }
 
@@ -50,7 +50,7 @@ export class Simulation {
   }
 
   cancelCharging(): void {
-    this.current = { ...cancelDrift(this.current), driftHeld: false };
+    this.current = { ...clearLegacyDrift(this.current), driftHeld: false };
     this.previous = { ...this.current };
     Object.assign(this.pose, this.current);
   }

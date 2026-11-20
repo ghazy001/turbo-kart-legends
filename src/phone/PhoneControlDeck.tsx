@@ -43,9 +43,8 @@ export function PhoneControlDeck({ touch, mode, enabled, itemsEnabled, calibrate
       </div> : <div className="motion-pad"><div className="steering-wheel"><CockpitWheel /></div><span className="steering-caption">{calibrated ? 'Tilt into the corner' : 'Hold your neutral angle'}</span><button type="button" className="phone-calibrate" onClick={onCalibrate}>{calibrated ? 'Recalibrate' : 'Calibrate to drive'}</button></div>}
       <div className="steering-meter" aria-hidden="true"><span>L</span><div><i /></div><span>R</span></div>
     </section>
-    <section className="phone-action-row" aria-label="Item and drift controls">
+    <section className="phone-action-row" aria-label="Item control">
         <HoldButton action="useItem" touch={touch} disabled={!enabled || !itemsEnabled}><ControllerIcon name="item" /><div><strong>Item</strong><small>{itemsEnabled ? 'Tap to use' : 'No items this mode'}</small></div></HoldButton>
-        <HoldButton action="drift" touch={touch} disabled={!enabled}><ControllerIcon name="drift" /><div><strong>Drift</strong><small>Hold · release for turbo</small></div></HoldButton>
     </section>
     <section className="phone-pedals" aria-label="Driving controls"><div className="pedal-row">
         <HoldButton action="brake" touch={touch} disabled={!enabled}><PedalFace /></HoldButton>

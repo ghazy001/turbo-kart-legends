@@ -63,7 +63,7 @@ function FittingSession({ kart, racer }: { kart: KartAssetDefinition; racer: Dri
     <label><input type="checkbox" checked={raw} onChange={event => setRaw(event.currentTarget.checked)} /> Inspect original models side by side</label>
     <label><input type="checkbox" checked={anchors} onChange={event => setAnchors(event.currentTarget.checked)} /> Show seat and hand targets</label>
     <label><input type="checkbox" checked={showDriver} onChange={event => setShowDriver(event.currentTarget.checked)} /> Show fitted racer</label>
-    <label>Attachment check <select aria-label="Attachment check" value={motion} onChange={event => setMotion(event.currentTarget.value)}><option value="parked">Parked</option><option value="drift">Drift / bank</option><option value="jump">Airborne / pitch</option><option value="landing">Landing compression</option></select></label>
+    <label>Attachment check <select aria-label="Attachment check" value={motion} onChange={event => setMotion(event.currentTarget.value)}><option value="parked">Parked</option><option value="bank">Body bank</option><option value="jump">Airborne / pitch</option><option value="landing">Landing compression</option></select></label>
     <div className="preview-buttons">{['Three-quarter', 'Side', 'Front', 'Top'].map((name, index) => <button key={name} onClick={() => setView(index)}>{name}</button>)}</div>
     <label><input type="checkbox" checked={fitted} onChange={event => setFitted(event.currentTarget.checked)} /> Apply approximate static driving fit</label>
     <TransformEditor title="Seat" value={seat} onChange={setSeat} /><TransformEditor title="Driver" value={driver} onChange={setDriver} />
@@ -77,7 +77,7 @@ function FittingSession({ kart, racer }: { kart: KartAssetDefinition; racer: Dri
       <directionalLight position={[-3, 7, 5]} intensity={2.6} castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.0003} />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow><planeGeometry args={[30, 30]} /><meshStandardMaterial color="#b2c7b4" roughness={0.9} /></mesh>
       <gridHelper args={[12, 24, '#7e9c91', '#a2b7a8']} />
-      <PreviewBoundary onStatus={setStatus}><Suspense fallback={null}>{raw ? <><RawModel url={kart.sourceUrl} scale={kart.transform.scale} position={[-1.8, 0.16, 0]} /><RawModel url={racer.sourceUrl} scale={1} position={[1.5, 0, 0]} portrait /></> : <group position={[0, motion === 'jump' ? 0.65 : 0, 0]} rotation={[motion === 'jump' ? -0.12 : 0, motion === 'drift' ? 0.18 : 0, motion === 'drift' ? -0.08 : 0]} scale={[1, motion === 'landing' ? 0.9 : 1, 1]}>
+      <PreviewBoundary onStatus={setStatus}><Suspense fallback={null}>{raw ? <><RawModel url={kart.sourceUrl} scale={kart.transform.scale} position={[-1.8, 0.16, 0]} /><RawModel url={racer.sourceUrl} scale={1} position={[1.5, 0, 0]} portrait /></> : <group position={[0, motion === 'jump' ? 0.65 : 0, 0]} rotation={[motion === 'jump' ? -0.12 : 0, motion === 'bank' ? 0.18 : 0, motion === 'bank' ? -0.08 : 0]} scale={[1, motion === 'landing' ? 0.9 : 1, 1]}>
         <KartAssembly kart={{ ...kart, seat }} driver={{ ...racer, pose: fitted ? racer.pose : 'authored' }} driverMount={driver} fitting={fitted ? fit : {}} showAnchors={anchors} showDriver={showDriver} />
       </group>}<Ready onStatus={setStatus} /></Suspense></PreviewBoundary>
       <PreviewCamera position={positions[view]} /><OrbitControls makeDefault target={[0, 0.85, 0]} minDistance={1} maxDistance={15} />

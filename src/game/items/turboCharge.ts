@@ -1,7 +1,7 @@
-import { boostTiers } from '../config/driftConfig';
+import { boostTiers } from '../config/boostConfig';
 import { itemConfig } from '../config/itemConfig';
 import type { KartInput, KartState } from '../core/types';
-import { cancelDrift } from '../kart/driftController';
+import { clearLegacyDrift } from '../kart/boostController';
 
 export const turboBoost = boostTiers[itemConfig.turboTier - 1];
 
@@ -12,6 +12,6 @@ export function canActivateTurbo(state: KartState, input: KartInput, slowRemaini
 }
 
 export function activateTurbo(state: KartState): KartState {
-  return { ...cancelDrift(state), boostTier: itemConfig.turboTier,
+  return { ...clearLegacyDrift(state), boostTier: itemConfig.turboTier,
     boostRemaining: turboBoost.duration, boostSerial: state.boostSerial + 1 };
 }

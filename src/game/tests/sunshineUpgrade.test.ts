@@ -59,7 +59,7 @@ describe('Sunshine coastal track features', () => {
     const [before, after] = crossing(), boosted = { ...after, boostTier: 3 as const, boostRemaining: 1.4, boostSerial: 3 };
     expect(applyTrackFeatures(track, before, boosted, driving)).toBe(boosted);
   });
-  it('launches only grounded forward racers at the crest, retaining ordinary drift-hop ownership', () => {
+  it('launches only grounded forward racers at the crest, retaining airborne launch gating', () => {
     const [before, after] = crossing(ramp), next = applyTrackFeatures(track, before, after, driving);
     expect(next.verticalSpeed).toBe(ramp.strength); expect(next.jumpSerial).toBe(1);
     expect(applyTrackFeatures(track, { ...before, verticalSpeed: 3 }, after, driving)).toBe(after);
@@ -89,10 +89,10 @@ describe('Sunshine coastal track features', () => {
     for (let i = 0; i < 60; i++) state = stepKart(state, { ...NEUTRAL_INPUT, brake: 1 }, 1 / 60, track);
     expect(state.jumpSerial).toBe(0); expect(state.y).toBeCloseTo(surfaceHeightAt(track, state), 5);
   });
-  it('preserves drift entry and charging while grounded on elevated asphalt', () => {
+  it('ignores retired drift requests on elevated asphalt without adding manual hops', () => {
     const crest = ramp.fraction * track.length, state = at(crest - 5);
     const next = stepKart(state, { ...driving, drift: true, steer: 0.5 }, 1 / 60, track);
-    expect(next.driftDirection).toBe(1); expect(next.verticalSpeed).toBeGreaterThan(0); expect(next.jumpSerial).toBe(1);
+    expect(next.driftDirection).toBe(0); expect(next.verticalSpeed).toBe(0); expect(next.jumpSerial).toBe(0);
   });
   it('keeps ramp flight and boost activation identical across 30, 60 and 144 render FPS', () => {
     const run = (fps: number, fraction: number) => {

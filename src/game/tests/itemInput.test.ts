@@ -18,7 +18,7 @@ describe('normalized item controls', () => {
     key('ShiftRight'); host.dispatchEvent(new Event('blur')); expect(keyboard.sample().useItem).toBe(false);
     enabled = false; key('KeyE'); expect(keyboard.sample().useItem).toBe(false); keyboard.dispose();
   });
-  it('maps standard X/square without stealing A/RB drift and requires neutral after reconnect', () => {
+  it('maps standard X/square with retired A/RB actions ignored and requires neutral after reconnect', () => {
     const pad: PadSnapshot = { id: 'item-pad', index: 0, mapping: 'standard', connected: true, axes: [0], buttons: Array.from({ length: 17 }, (_, i) => ({ pressed: i === 2, value: i === 2 ? 1 : 0 })) };
     expect(sampleGamepad(pad).useItem).toBe(true); expect(sampleGamepad(pad).drift).toBe(false);
     let current = pad; const controller = new GamepadController(() => [current], { enabled: () => true, onReset: vi.fn(), onPause: vi.fn(), onDisconnect: vi.fn() });
@@ -27,9 +27,9 @@ describe('normalized item controls', () => {
     controller.clear(); expect(controller.poll().useItem).toBe(false);
   });
   it('retains phone item taps shorter than a transmit interval alongside multi-touch pedals', () => {
-    const touch = new TouchInput(); touch.button('throttle', 1, true); touch.button('drift', 2, true);
+    const touch = new TouchInput(); touch.button('throttle', 1, true);
     touch.button('useItem', 3, true); touch.button('useItem', 3, false);
-    expect(touch.sample()).toMatchObject({ throttle: 1, drift: true, useItem: true }); expect(touch.sample().useItem).toBe(false);
+    expect(touch.sample()).toMatchObject({ throttle: 1, drift: false, useItem: true }); expect(touch.sample().useItem).toBe(false);
     touch.button('useItem', 4, true); touch.clear(); expect(touch.sample()).toEqual(NEUTRAL_INPUT);
   });
   it('validates optional legacy packets and boolean actions; disarms stale/held remote fire', () => {

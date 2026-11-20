@@ -1,0 +1,11 @@
+{
+  "browser": "157.0.8103.80",
+  "checks": [
+    "Home through racer/kart/track/review starts a rendered Quick Race",
+    "W and retired Space held and released without page errors",
+    "No drift HUD; existing turbo countdown remains",
+    "Pause help has no obsolete drift controls"
+  ],
+  "pageErrors": [],
+  "physicalDeviceVerified": false
+}

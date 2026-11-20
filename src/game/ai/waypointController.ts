@@ -1,12 +1,11 @@
 import { aiConfig, aiSkills } from '../config/aiConfig';
-import { boostTiers, driftConfig } from '../config/driftConfig';
+import { boostTiers } from '../config/boostConfig';
 import { kartConfig, loopConfig } from '../config/kartConfig';
 import type { AIDifficulty } from '../config/raceOptions';
 import type { KartInput, KartState, SampledTrack } from '../core/types';
 import { wrapAngle } from '../kart/kartController';
 import { nearestRoadPoint, offsetSample } from '../tracks/trackSampling';
 import { pointAtDistance, wrapDistance } from '../race/trackProgress';
-import { roadHeight } from '../tracks/trackSurface';
 import { plannedSpeed, racingLane, roadCurvature } from './racingLine';
 import { createAIDriverState, planTraffic, type AIDriverState, type AITraffic } from './trafficPlanner';
 export { createAIDriverState, type AIDriverState, type AITraffic } from './trafficPlanner';
@@ -46,19 +45,5 @@ export function waypointInput(state: KartState, track: SampledTrack, profile: { 
   const excess = speed - targetSpeed;
   const brake = speed > 0.5 && excess > 0.65 ? clamp(excess / 5, 0, 1) : 0;
   const throttle = brake > 0 ? 0 : clamp((targetSpeed - speed) / 0.8 + 0.5, 0, 1);
-  let steer = normalSteer, drift = false;
-  const driftSafe = !!context && skill.driftCharge > 0 && !trafficPlan.crowded && brain.maneuver === 'line'
-    && !approachingFeature && Math.abs(offset) < aiConfig.driftMaxOffset && Math.abs(error) < aiConfig.driftMaxHeadingError && brake === 0;
-  if (state.driftDirection !== 0) {
-    const sameTurn = Math.sign(normalSteer) === state.driftDirection;
-    drift = driftSafe && sameTurn && Math.abs(normalSteer) < aiConfig.driftMaxSteer && Math.abs(normalSteer) > 0.14 && state.driftCharge < skill.driftCharge;
-    if (drift) {
-      const counterSteer = (normalSteer / driftConfig.yawMultiplier - state.driftDirection * driftConfig.lockedSteer) / driftConfig.inputSteer;
-      steer = clamp(Math.abs(counterSteer) < 0.18 ? state.driftDirection * 0.18 : counterSteer, -1, 1);
-    }
-  } else if (driftSafe && brain.driftCooldown === 0 && state.y <= roadHeight(track, road.progress) + 0.001 && state.actionCooldown === 0 && state.boostRemaining === 0
-    && speed >= aiConfig.driftMinSpeed && speed <= aiConfig.driftMaxSpeed && Math.abs(normalSteer) >= aiConfig.driftMinSteer && Math.abs(normalSteer) < aiConfig.driftMaxSteer) {
-    drift = true; brain.driftCooldown = aiConfig.driftRetrySeconds;
-  }
-  return { throttle, brake, steer, drift };
+  return { throttle, brake, steer: normalSteer, drift: false };
 }

@@ -1,44 +1,28 @@
-import { surfaceHeightAt } from '../tracks/trackSurface';
 import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { AdditiveBlending, Color, Object3D, type InstancedMesh } from 'three';
-import { boostTiers } from '../config/driftConfig';
+import { boostTiers } from '../config/boostConfig';
 import { abilityVisualConfig as visuals } from '../config/abilityVisualConfig';
-import { chargeTier } from '../kart/driftController';
 import { particlePhase } from './effects/abilityBursts';
 import { jetFragmentShader, jetVertexShader } from './effects/jetShader';
 import type { KartVisualRuntime } from './runtime';
 
-/** Four bounded draws per kart: fine wheel sparks, layered jets, wake ribbons and exhaust collars. */
+/** Three bounded draws per kart: layered turbo jets, wake ribbons and exhaust collars. */
 export function KartEffects({ runtime }: { runtime: KartVisualRuntime }) {
-  const sparks = useRef<InstancedMesh>(null), jets = useRef<InstancedMesh>(null), wake = useRef<InstancedMesh>(null), collars = useRef<InstancedMesh>(null);
+  const jets = useRef<InstancedMesh>(null), wake = useRef<InstancedMesh>(null), collars = useRef<InstancedMesh>(null);
   const helpers = useMemo(() => ({ dummy: new Object3D(), color: new Color(), white: new Color('#e5fcff'), motion: window.matchMedia('(prefers-reduced-motion: reduce)') }), []);
   const elapsed = useRef(0), revision = useRef(-1), boostSerial = useRef(0), boostStart = useRef(0);
   const jetUniforms = useMemo(() => ({ uTime: { value: 0 }, uMotion: { value: 1 } }), []);
   useFrame((_, delta) => {
-    if (!sparks.current || !jets.current || !wake.current || !collars.current) return;
+    if (!jets.current || !wake.current || !collars.current) return;
     const pose = runtime.simulation.pose, reduced = helpers.motion.matches;
     if (revision.current !== runtime.simulation.revision) {
       elapsed.current = 0; revision.current = runtime.simulation.revision; boostSerial.current = pose.boostSerial; boostStart.current = -1;
     }
     if (runtime.mode === 'playing') elapsed.current += Math.min(delta, 0.1);
     if (boostSerial.current !== pose.boostSerial) { boostStart.current = elapsed.current; boostSerial.current = pose.boostSerial; }
-    const tier = chargeTier(pose.driftCharge), time = elapsed.current;
+    const time = elapsed.current;
     jetUniforms.uTime.value = time; jetUniforms.uMotion.value = reduced ? 0 : 1;
-    const drifting = pose.driftDirection !== 0 && pose.y - surfaceHeightAt(runtime.simulation.track, pose) < 0.02;
-    const sparkCount = drifting ? reduced ? 8 : visuals.kart.sparks : 0;
-    for (let i = 0; i < sparkCount; i++) {
-      const phase = particlePhase(time, i, sparkCount, 3.3, reduced), side = i % 2 ? 1 : -1, spread = (i % 5) / 5;
-      helpers.dummy.position.set(side * (1.03 + phase * (0.25 + spread * 0.55)), 0.14 + Math.sin(phase * Math.PI) * (0.12 + spread * 0.2), -0.72 - phase * 2.5);
-      helpers.dummy.rotation.set(0.2, side * phase * 0.5, side * 0.45);
-      const size = (1 - phase) * (tier ? 0.045 : 0.025);
-      helpers.dummy.scale.set(size, size * 0.7, size * (5 + spread * 3)); helpers.dummy.updateMatrix();
-      sparks.current.setMatrixAt(i, helpers.dummy.matrix);
-      helpers.color.set(tier ? boostTiers[tier - 1].color : '#ffdf96');
-      if (i % 4 === 0) helpers.color.lerp(helpers.white, 0.7);
-      sparks.current.setColorAt(i, helpers.color.multiplyScalar(1 - phase * 0.6));
-    }
-    sparks.current.count = sparkCount;
     const boosting = pose.boostRemaining > 0 && pose.boostTier > 0;
     jets.current.count = boosting ? 4 : 0; wake.current.count = boosting && !reduced ? visuals.kart.wake : 0; collars.current.count = boosting ? 2 : 0;
     if (boosting) {
@@ -69,14 +53,11 @@ export function KartEffects({ runtime }: { runtime: KartVisualRuntime }) {
         collars.current.setMatrixAt(2, helpers.dummy.matrix); collars.current.setColorAt(2, helpers.color.multiplyScalar(1 - age / 0.32)); collars.current.count = 3;
       }
     }
-    for (const mesh of [sparks.current, jets.current, wake.current, collars.current]) {
+    for (const mesh of [jets.current, wake.current, collars.current]) {
       mesh.instanceMatrix.needsUpdate = true; if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
     }
   }, -1);
   return <group name="kart-ability-effects">
-    <instancedMesh ref={sparks} args={[undefined, undefined, visuals.kart.sparks]} frustumCulled={false}>
-      <boxGeometry args={[1, 1, 1]} /><meshBasicMaterial transparent opacity={0.9} blending={AdditiveBlending} depthWrite={false} toneMapped={false} />
-    </instancedMesh>
     <instancedMesh ref={jets} args={[undefined, undefined, 4]} frustumCulled={false}>
       <coneGeometry args={[1, 1, 12]} /><shaderMaterial uniforms={jetUniforms} vertexShader={jetVertexShader} fragmentShader={jetFragmentShader} transparent blending={AdditiveBlending} depthWrite={false} toneMapped={false} />
     </instancedMesh>

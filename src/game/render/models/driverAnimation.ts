@@ -1,6 +1,6 @@
 import { AnimationClip, AnimationMixer, LoopOnce, LoopRepeat, type AnimationAction as ThreeAction, type Object3D } from 'three';
 import type { AnimationAction, DriverAssetDefinition } from '../../config/visualAssets';
-export interface AnimationSignals { steering: number; driftDirection: number; victory: boolean; paused: boolean }
+export interface AnimationSignals { steering: number; victory: boolean; paused: boolean }
 /** Explicit mappings only. Never relabel a walk/T-pose clip as a seated drive. */
 export function createDriverAnimator(root: Object3D, clips: readonly AnimationClip[], mapping: DriverAssetDefinition['clips']) {
   const mixer = new AnimationMixer(root), actions = new Map<AnimationAction, ThreeAction>();
@@ -16,9 +16,7 @@ export function createDriverAnimator(root: Object3D, clips: readonly AnimationCl
     update(delta: number, signal: AnimationSignals) {
       if (signal.paused) return;
       const direction = signal.steering < -0.15 ? 'Left' : signal.steering > 0.15 ? 'Right' : null;
-      const candidates: AnimationAction[] = signal.victory ? ['victory', 'idle'] : signal.driftDirection
-        ? [signal.driftDirection < 0 ? 'driftLeft' : 'driftRight', 'idle']
-        : direction ? [`steer${direction}`, `lean${direction}`, 'idle'] : ['idle'];
+      const candidates: AnimationAction[] = signal.victory ? ['victory', 'idle'] : direction ? [`steer${direction}`, `lean${direction}`, 'idle'] : ['idle'];
       const next = candidates.map(name => actions.get(name)).find(Boolean);
       if (next && next !== active) { active?.fadeOut(0.15); next.reset().fadeIn(0.15).play(); active = next; }
       mixer.update(Math.min(delta, 0.05));

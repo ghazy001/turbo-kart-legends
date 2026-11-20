@@ -2,12 +2,12 @@ import { kartContact } from '../kart/kartFootprint';
 import { raceConfig } from '../config/raceConfig';
 import type { KartState, SampledTrack } from '../core/types';
 import { constrainKart } from '../kart/kartCollision';
-import { driftConfig } from '../config/driftConfig';
-import { cancelDrift } from '../kart/driftController';
+import { boostConfig } from '../config/boostConfig';
+import { clearLegacyDrift } from '../kart/boostController';
 
 function constrainContact(state: KartState, track: SampledTrack): KartState {
   const constrained = constrainKart(state, track);
-  return constrained === state ? state : { ...cancelDrift(constrained), boostRemaining: 0, boostTier: 0, actionCooldown: driftConfig.boostRecovery };
+  return constrained === state ? state : { ...clearLegacyDrift(constrained), boostRemaining: 0, boostTier: 0, actionCooldown: boostConfig.boostRecovery };
 }
 
 /** Equal-mass planar contacts layered on the existing movement owner. */
@@ -30,7 +30,7 @@ export function resolveRacerContacts(states: KartState[], track: SampledTrack): 
       ax -= nx * impulse; az -= nz * impulse; bx += nx * impulse; bz += nz * impulse;
       a = { ...a, forwardSpeed: ax * Math.sin(a.heading) + az * Math.cos(a.heading), lateralSpeed: ax * Math.cos(a.heading) - az * Math.sin(a.heading) };
       b = { ...b, forwardSpeed: bx * Math.sin(b.heading) + bz * Math.cos(b.heading), lateralSpeed: bx * Math.cos(b.heading) - bz * Math.sin(b.heading) };
-      if (closing > 3) { a = { ...cancelDrift(a), boostRemaining: 0, boostTier: 0 }; b = { ...cancelDrift(b), boostRemaining: 0, boostTier: 0 }; }
+      if (closing > 3) { a = { ...clearLegacyDrift(a), boostRemaining: 0, boostTier: 0 }; b = { ...clearLegacyDrift(b), boostRemaining: 0, boostTier: 0 }; }
     }
     states[i] = constrainContact(a, track); states[j] = constrainContact(b, track);
   }

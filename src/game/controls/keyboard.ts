@@ -1,6 +1,6 @@
 import type { KartInput } from '../core/types';
 
-const drivingCodes = new Set(['KeyW', 'KeyS', 'KeyA', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space', 'KeyE', 'ShiftLeft', 'ShiftRight']);
+const drivingCodes = new Set(['KeyW', 'KeyS', 'KeyA', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'KeyE', 'ShiftLeft', 'ShiftRight']);
 interface KeyboardOptions {
   enabled: () => boolean;
   onReset: () => void;
@@ -37,7 +37,7 @@ export function createKeyboard(
     sample(): KartInput {
       const useItem = itemPending || pressed.has('KeyE') || pressed.has('ShiftLeft') || pressed.has('ShiftRight'); itemPending = false;
       return { useItem, throttle: has('KeyW', 'ArrowUp'), brake: has('KeyS', 'ArrowDown'),
-        steer: has('KeyD', 'ArrowRight') - has('KeyA', 'ArrowLeft'), drift: pressed.has('Space') };
+        steer: has('KeyD', 'ArrowRight') - has('KeyA', 'ArrowLeft'), drift: false };
     },
     dispose() {
       clear();

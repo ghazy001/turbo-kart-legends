@@ -81,23 +81,11 @@ kbd { display: inline-flex; align-items: center; justify-content: center; min-wi
 .webgl-fallback button { background: #d9f56c; padding: 12px 25px; border-radius: 8px; }
 .game-shell:focus { outline: none; }
 .sound-toggle { position: absolute; z-index: 3; top: 36px; left: 225px; border: 1px solid #173c4825; border-radius: 20px; padding: 7px 11px; background: #fff9e9e8; font-size: 9px; font-weight: 800; }
-.drift-card { --ability-color: #91bba5; position: absolute; right: 38px; bottom: 100px; width: 300px; padding: 17px 19px; border-radius: 16px; background: #173c48ed; color: #fff5dc; border: 1px solid #fff5dc44; box-shadow: 0 8px 30px #173c4815; }
-.drift-card .micro-label { font-size: 7px; color: #c4d4bf; }
-.drift-card output { display: block; margin: 8px 0 10px; font-size: 14px; font-weight: 900; letter-spacing: 0.8px; color: var(--ability-color); }
-.drift-card progress { display: block; appearance: none; width: 100%; height: 7px; border: 0; border-radius: 8px; background: #ffffff20; overflow: hidden; accent-color: var(--ability-color); }
-.drift-card progress::-webkit-progress-bar { background: #ffffff20; }
-.drift-card progress::-webkit-progress-value { background: var(--ability-color); }
-.drift-card progress::-moz-progress-bar { background: var(--ability-color); }
-.tier-labels { display: flex; justify-content: space-between; margin-top: 9px; font-size: 8px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.6px; }
-.tier-labels span { opacity: 0.5; }
-.tier-labels span[data-ready="true"] { opacity: 1; }
-.tier-labels i { display: inline-block; width: 5px; height: 5px; border-radius: 50%; margin-right: 4px; }
-.drift-hint { display: block; font-size: 9px; margin-top: 11px; line-height: 1.6; color: #e0e9cc; }
-.drift-card[data-phase="boost"] { border-color: var(--ability-color); }
+
 .pause-card .gamepad-help { line-height: 1.7; font-size: 9px; color: #567064; margin-bottom: 19px; }
 .pause-card .controls > div:last-child { grid-column: span 2; }
-@media (max-width: 700px) { .sound-toggle { left: 20px; top: 75px; font-size: 8px; padding: 6px 10px; } .drift-card { left: 175px; right: 175px; bottom: 25px; width: auto; padding: 12px; } .drift-card output { font-size: 12px; } .drift-hint { font-size: 8px; } .pause-card { padding: 25px; } .pause-card .controls { gap: 12px 8px; margin: 20px 0; } .pause-card h2 { font-size: 29px; } }
-@media (max-width: 520px) { .drift-card { left: 20px; right: auto; top: 116px; bottom: auto; width: calc(100% - 182px); max-width: 210px; } .drift-card output { font-size: 10px; letter-spacing: 0.3px; } .tier-labels { font-size: 6px; letter-spacing: 0; } }
+@media (max-width: 700px) { .sound-toggle { left: 20px; top: 75px; font-size: 8px; padding: 6px 10px; }    .pause-card { padding: 25px; } .pause-card .controls { gap: 12px 8px; margin: 20px 0; } .pause-card h2 { font-size: 29px; } }
+
 @media (min-height: 900px) { .start-menu { top: 20%; } }
 @media (max-height: 760px) and (min-width: 801px) { .start-menu { top: 17%; } h1 { font-size: 77px; } .intro { margin: 6px 0 14px; font-size: 12px; } .menu-controls { margin-top: 18px; } .course-card { margin-top: 16px; padding-top: 13px; } }
 @media (max-width: 1000px) { .drive-hint { display: none; } .session-type { display: none; } .start-menu { left: 6%; width: 380px; } }
@@ -199,8 +187,6 @@ kbd { display: inline-flex; align-items: center; justify-content: center; min-wi
   .race-time > span { font-size: 6px; }
   .checkpoint-hint { font-size: 6px; }
   .race-standings { top: 346px; left: 20px; width: 155px; font-size: 9px; }
-  .game-shell:not([data-race="free-drive"]) .drift-card { top: auto; left: auto; right: 20px; bottom: 150px; width: 185px; max-width: none; }
-  .game-shell:not([data-race="free-drive"]) .drift-hint { display: none; }
   .countdown-overlay { top: 35%; left: 30%; right: 15%; }
   .countdown-overlay > span { font-size: 8px; letter-spacing: 1px; }
   .countdown-overlay p { font-size: 10px; }

@@ -51,11 +51,11 @@
 .phone-pedals { display: flex; min-width: 0; padding: 6px 0; }
 .pedal-row { display: grid; grid-template-columns: 1.06fr .94fr; gap: 14px; flex: 1; align-items: stretch; }
 .drive-button { position: relative; display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 64px; padding: 10px; border: 1px solid #fff3d717; border-radius: 23px; background: linear-gradient(145deg, #1d3e49, #0d2935); box-shadow: 0 6px 10px #061b253d, inset 0 2px 4px #061f2b66, inset 0 -1px 0 #fff3d70d; color: var(--controller-ink); touch-action: none; -webkit-touch-callout: none; transition: transform 80ms, box-shadow 80ms; }
-.drive-button.useItem, .drive-button.drift { flex-direction: column; gap: 9px; padding: 10px 6px; border-radius: 18px; border-bottom-width: 4px; background: linear-gradient(145deg, #33535b, #25434e); box-shadow: 0 3px 6px #061f2b70, inset 0 1px 0 #fff3d70c; text-align: center; }
+.drive-button.useItem { flex-direction: column; gap: 9px; padding: 10px 6px; border-radius: 18px; border-bottom-width: 4px; background: linear-gradient(145deg, #33535b, #25434e); box-shadow: 0 3px 6px #061f2b70, inset 0 1px 0 #fff3d70c; text-align: center; }
 .phone-action-row .drive-button svg { width: 28px; height: 28px; pointer-events: none; }
 .phone-action-row .drive-button strong { display: block; font-size: clamp(14px, 2.1vw, 20px); font-weight: 750; letter-spacing: -.3px; line-height: 1.1; }
 .phone-action-row .drive-button small { display: block; margin-top: 4px; font-size: 8px; line-height: 1.4; opacity: .7; }
-.drive-button.useItem { color: #ffe0a0; border-color: #d1b77933; border-bottom-color: #182d36; }.drive-button.drift { color: #c2e6d8; border-color: #a4d5c333; border-bottom-color: #182d36; }
+.drive-button.useItem { color: #ffe0a0; border-color: #d1b77933; border-bottom-color: #182d36; }
 .drive-button.brake, .drive-button.throttle { padding: 9px; border-radius: 26px; }
 .pedal-face { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 100%; min-height: 100px; overflow: hidden; border: 1px solid #e2e8d8a6; border-bottom: 4px solid #83918a; border-radius: 18px 18px 25px 25px; background: linear-gradient(115deg, #c5d4cc 0%, #eef0da 18%, #b8cbc3 50%, #e0e5ce 78%, #a5bcb3 100%); color: #27454d; box-shadow: inset 0 1px 0 #ffffeccc, 0 3px 5px #061f2b55; pointer-events: none; transition: transform 80ms, filter 80ms; }
 .throttle .pedal-face { border-color: #ffe8b2a6; border-bottom-color: #b58945; background: linear-gradient(115deg, #caaa65, #ffe8a7 22%, #e6c27c 53%, #ffe3a2 79%, #c9a35e); color: #28434b; }
@@ -121,3 +121,8 @@
   .pedal-face strong { font-size: 23px; }.phone-setting-grid { grid-template-columns: 1fr; gap: 18px; }.controller-settings { padding: 22px; }.controller-settings h2 { font-size: 26px; }
 }
 @media (prefers-reduced-motion: reduce) { .phone-controller *, .phone-controller *::before, .phone-controller *::after { transition: none !important; } }
+
+/* One item action between the wheel and pedals; no retired action leaves an empty slot. */
+.phone-action-row { grid-template-columns: 1fr; grid-template-rows: 1fr; height: 40%; max-height: 170px; }
+@media (max-width: 740px) and (orientation: landscape) { .phone-action-row { height: 100%; max-height: none; } }
+@media (orientation: portrait) { .phone-action-row { height: 100%; max-height: none; } }

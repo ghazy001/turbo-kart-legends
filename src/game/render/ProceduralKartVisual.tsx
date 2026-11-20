@@ -48,7 +48,7 @@ export function ProceduralKartVisual({ runtime, bodyColor = '#ff7051', helmetCol
     if (body.current) {
       body.current.rotation.x = surfacePitch(runtime.simulation.track, pose);
       body.current.rotation.z = -pose.yawRate * pose.forwardSpeed * 0.0016;
-      body.current.rotation.y = pose.driftDirection * 0.18;
+      body.current.rotation.y = 0;
       body.current.scale.y = 1 - pose.landingCompression;
     }
   }, -2);

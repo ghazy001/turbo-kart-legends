@@ -7,9 +7,8 @@ export interface AITraffic { id: string; state: KartState }
 export interface AIDriverState {
   lane: number; targetLane: number; decisionRemaining: number; commitment: number;
   defendCooldown: number; maneuver: 'line' | 'pass' | 'defend'; rivalId: string | null;
-  driftCooldown: number;
 }
-export const createAIDriverState = (lane = 0): AIDriverState => ({ lane, targetLane: lane, decisionRemaining: 0, commitment: 0, defendCooldown: 0, maneuver: 'line', rivalId: null, driftCooldown: 0 });
+export const createAIDriverState = (lane = 0): AIDriverState => ({ lane, targetLane: lane, decisionRemaining: 0, commitment: 0, defendCooldown: 0, maneuver: 'line', rivalId: null });
 
 /** Bounded local decisions, committed passing side and one defensive move before cooldown. */
 export function planTraffic(state: KartState, track: SampledTrack, id: string, traffic: readonly AITraffic[],
@@ -30,7 +29,6 @@ export function planTraffic(state: KartState, track: SampledTrack, id: string, t
       && Math.abs(other.lane - lane) < aiConfig.laneSeparation;
   });
   brain.decisionRemaining -= dt; brain.commitment = Math.max(0, brain.commitment - dt); brain.defendCooldown = Math.max(0, brain.defendCooldown - dt);
-  brain.driftCooldown = Math.max(0, brain.driftCooldown - dt);
   if (brain.decisionRemaining <= 0) {
     brain.decisionRemaining = skill.decisionInterval;
     const leader = nearby.filter(other => other.ahead > 0 && other.ahead < skill.passRange && Math.abs(other.lane - brain.lane) < aiConfig.laneSeparation)
@@ -57,5 +55,5 @@ export function planTraffic(state: KartState, track: SampledTrack, id: string, t
     if (other.ahead <= 0 || Math.abs(other.lane - brain.lane) >= aiConfig.laneSeparation) continue;
     following = Math.min(following, Math.max(0, other.state.forwardSpeed) + Math.sqrt(2 * skill.braking * Math.max(0, other.ahead - aiConfig.followingGap)));
   }
-  return { lane: brain.lane, following, crowded: nearby.some(other => Math.abs(other.ahead) < aiConfig.driftTrafficClearance) };
+  return { lane: brain.lane, following };
 }
