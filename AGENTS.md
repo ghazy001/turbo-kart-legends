@@ -90,6 +90,8 @@ The user requested step-by-step Railway deployment and accepted preparing produc
 
 The user requested a cleaner, more attractive minimalist desktop phone-pairing panel. Make QR/status the focus, collapse tuning/manual-link/address/renew/disconnect controls under Options, preserve accurate expiry/connected/reconnecting/error states and existing pairing actions. Use one menu/focus owner, keep hidden controls out of navigation, never show an old QR while replacing it and retain configured public-origin selection. No relay, simulation, camera, input protocol or permission changes. Commit verified work locally; the user pushes to Railway. See the pairing-panel follow-up in docs/PHONE_CONTROLLER.md.
 
+The user supplied a cockpit controller reference and requested the handheld route to match it within the game theme. Large original SVG wheel artwork, shaped metallic Brake/Gas pedals and tactile Item/Drift controls are authorized. Preserve slide-to-steer, calibrated tilt, normalized input, multi-touch/pointer cancellation, focus and pause/disconnect safety. Keep compact landscape and portrait layouts, reduced motion and no automatic acceleration; do not introduce fake radio, gears or horn actions. Commit verified changes locally without pushing. See the cockpit follow-up in docs/PHONE_CONTROLLER.md.
+
 ## Preferred technology
 
 
