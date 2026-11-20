@@ -8,7 +8,7 @@ export interface ControlPacket { version: 1; seq: number; sentAt: number; active
 export interface GameControlState { enabled: boolean; mode: GameMode; itemsEnabled?: boolean }
 export type LinkState = 'waiting' | 'connected' | 'reconnecting' | 'inactive' | 'offline';
 export interface LinkStatus { state: LinkState; reason: string }
-export interface PairOffer { id: string; token: string; expiresAt: number; origins: string[]; lan: boolean; rateHz: number }
+export interface PairOffer { id: string; token: string; expiresAt: number; origins: string[]; lan: boolean; rateHz: number; public?: boolean }
 export interface ResumeCredentials { id: string; resume: string }
 export interface PhonePreferences { touch: boolean; fullLockDegrees: number }
 export interface PhoneConfiguration extends PhonePreferences { calibrate: boolean }

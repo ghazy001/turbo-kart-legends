@@ -18,7 +18,7 @@ export function allowedPhoneOrigin(origin: string | undefined, host: string | un
   catch { return false; }
 }
 /** Ephemeral local relay only: never owns physics, race state, accounts or persistence. */
-export function attachPhoneRelay(http: HttpServer | Http2SecureServer, options: { origins: () => string[]; lan: boolean; now?: () => number }) {
+export function attachPhoneRelay(http: HttpServer | Http2SecureServer, options: { origins: () => string[]; lan: boolean; publicOrigin?: string; now?: () => number }) {
   const now = options.now ?? Date.now;
   const sessions = new Map<string, Session>(), hostSessions = new Map<string, string>();
   const io = new Server<ClientEvents, ServerEvents>(http, {
@@ -26,7 +26,8 @@ export function attachPhoneRelay(http: HttpServer | Http2SecureServer, options: 
     pingInterval: 2000, pingTimeout: 3000, perMessageDeflate: false,
     allowRequest: (request, done) => {
       const origins = options.origins();
-      done(null, io.engine.clientsCount < 64 && allowedPhoneOrigin(request.headers.origin, request.headers.host) && (!origins.length || origins.includes(request.headers.origin ?? '')));
+      const approved = options.publicOrigin ? request.headers.origin === options.publicOrigin : allowedPhoneOrigin(request.headers.origin, request.headers.host);
+      done(null, io.engine.clientsCount < 64 && approved && (!origins.length || origins.includes(request.headers.origin ?? '')));
     },
   });
   const end = (id: string, reason: string) => {
@@ -57,7 +58,7 @@ export function attachPhoneRelay(http: HttpServer | Http2SecureServer, options: 
       const session: Session = { id, host: socket.id, phone: null, tokenHash: hash(token), tokenExpires: now() + PHONE_CONFIG.pairLifetimeMs,
         resumeHash: '', disconnectedAt: null, createdAt: now(), lastSeq: -1, lastInput: 0, stale: false, game: { enabled: false, mode: 'menu' } };
       sessions.set(id, session); hostSessions.set(socket.id, id); role = 'host'; sessionId = id;
-      ack({ ok: true, id, token, expiresAt: session.tokenExpires, origins: options.origins(), lan: options.lan, rateHz: PHONE_CONFIG.rateHz });
+      ack({ ok: true, id, token, expiresAt: session.tokenExpires, origins: options.origins(), lan: options.lan, rateHz: PHONE_CONFIG.rateHz, ...(options.publicOrigin ? { public: true } : {}) });
       socket.emit('host:link', { state: 'waiting', reason: 'Scan the QR code with your phone.' });
     });
     socket.on('host:revoke', () => { if (withinRate() && live('host') && sessionId) end(sessionId, 'Disconnected by the computer.'); });

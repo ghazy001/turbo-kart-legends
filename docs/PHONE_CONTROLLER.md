@@ -1,6 +1,6 @@
 # Wireless phone controller — Milestone 3.6
 
-The phone is an input device for one local player, not a multiplayer race client. A small same-origin Socket.IO relay runs inside the existing Vite development/Node preview server. All movement, physics, drift, boost, AI, checkpoint, camera and race rules stay in the desktop game. No account, database, public service, game-state synchronization or new item system is introduced.
+The phone is an input device for one player, not a multiplayer race client. The same-origin Socket.IO relay runs inside Vite for local development/preview, or the dedicated production Node server for the subsequent Railway deployment preparation below. All movement, physics, drift, boost, AI, checkpoint, camera and race rules stay in the desktop game. No account, database, multiplayer game-state synchronization or new item system is introduced.
 
 ## Quick setup on the same Wi-Fi
 
@@ -56,7 +56,7 @@ npm run preview:phone
 # Or: npm run preview:phone -- --port 4175
 ```
 
-`npm run preview` also supports loopback pairing. A plain static file host serving `dist/` does **not** provide the relay; use the documented Node/Vite preview for this milestone. Internet hosting, reverse proxies, TURN, NAT traversal and authoritative multiplayer are outside scope.
+`npm run preview` also supports loopback pairing. A plain static file host serving `dist/` does **not** provide the relay. Use Node/Vite preview for local checks, or the later production entry and Railway setup below. TURN, peer-to-peer NAT traversal and authoritative multiplayer remain outside scope.
 
 ## Tilt steering
 
@@ -85,7 +85,7 @@ Motion APIs require an appropriate secure context and browser permission/support
 - Closing the PC pairing dialog keeps a valid controller paired. Closing the phone, PC disconnect/revoke or expired credentials cannot leave acceleration stuck. A network reconnect never resumes a paused race automatically; resume explicitly and release controls.
 - Sockets, relay maintenance timers, transmit/ping timers, pointer holds, visibility/orientation listeners and sensor listeners clean up on their lifecycle boundaries. Vite shutdown/restart disposes the relay.
 
-Transport configuration follows the primary [Socket.IO server options](https://socket.io/docs/v4/server-options/) and [client options](https://socket.io/docs/v4/client-options/). Development TLS is not a claim that this local relay is ready for public Internet deployment.
+Transport configuration follows the primary [Socket.IO server options](https://socket.io/docs/v4/server-options/) and [client options](https://socket.io/docs/v4/client-options/). Development TLS alone is not production deployment; the later Railway section adds explicit public-origin handling and a separate production server.
 
 ## Verification and remaining device work
 
@@ -133,3 +133,37 @@ Saved evidence: [browser report](design-qa/phone-controller/browser-checks.json)
 Verification: `npm run typecheck`, `npm run lint`, `npm run build` and `git diff --check` passed. Focused presentation/input tests: 14 passed. Full `npm run test`: **554 tests in 49 files passed**, 156.60 seconds, including existing gameplay, audio and relay regressions. Upstream Three.js CommonJS/Node experimental warnings remain unsuppressed. Final build: 830 modules; the phone-only presentation CSS is 3.37 KB gzip, phone page JS 6.54 KB gzip and shared PC pairing CSS 1.07 KB gzip. Six new unit tests cover accessible controls, inactive/item-free/calibration availability, retained settings and multi-finger pressed feedback. Existing simulation, collision, AI, camera, audio and server/protocol files were not modified.
 
 Remaining manual checks: actual iPhone Safari/Android Chrome comfort, simultaneous physical fingers, landscape cutouts/browser toolbars, motion permission/calibration/sign in both orientations and real Wi-Fi jitter/background recovery. Emulated touch and loopback latency do not establish physical-device performance. Separate music/audio changes are unaffected.
+
+## Railway deployment — production preparation 2026-11-20
+
+The user's step-by-step hosting request adds a production startup path. It prepares deployment; no Railway project, cloud publication or Git push was performed by the agent. Gameplay, camera, models, controls, audio, AI and race rules remain unchanged.
+
+### What is prepared
+
+- `npm run build` emits `dist/` and `dist-server/`. `npm start` runs the compiled Node entry, serving both `/` and `/controller` plus the same Socket.IO relay. `/healthz` returns 200 JSON for Railway readiness.
+- `server/productionConfig.ts` reads `PORT` (default 3000), then an explicitly validated `TKL_PUBLIC_ORIGIN` or `https://${RAILWAY_PUBLIC_DOMAIN}`. Origins must be HTTPS with no credentials/path/query/fragment. An unconfigured local startup permits only localhost/127.0.0.1 origins.
+- Public WebSocket handshakes must match the configured origin exactly; proxy backend Host names do not configure trust, and forwarded-host headers cannot select an origin. Local Vite/preview validation is unchanged. Optional public pairing metadata displays online guidance instead of local Wi-Fi/certificate instructions.
+- sirv 3.0.2 serves immutable hashed bundles and revalidated stable model/image URLs, with MIME, ETag and common byte ranges. Unsupported/malformed ranges are ignored safely. Missing files/private paths are never rewritten into HTML. HTML/controller responses are uncached and retain sensor/referrer protections.
+- `Dockerfile` builds on Node 24, then copies only built browser/server output and runtime dependencies into a non-root image. `.dockerignore` excludes local credentials, certificates, Git, generated output and development docs from the build context. Preserved public assets/credits remain in the build.
+- `railway.json` selects that Dockerfile, `npm start`, one replica, `/healthz`, a readiness timeout and bounded failure restarts. No database or volume is needed. Pairings are memory-only; restarting/deploying requires pairing again. Current relay caps (16 sessions/64 sockets) remain, so this is an initial single-instance deployment, not a distributed service.
+
+### Step by step in Railway
+
+1. Push the verified local commits to your GitHub repository yourself. Never upload `.certs/`, `.env` files or private keys.
+2. In Railway, create a project from that GitHub repository. Keep the service root at this project's root. The checked-in Dockerfile/manifest supply build/start/health settings; no database service is needed.
+3. Wait for the first deployment to become healthy. The log identifies the listening port. Under Settings → Networking → Public Networking, generate a Railway domain. Railway normally detects the single listening port; if you choose a target port manually, it must match `PORT`. An optional fixed `PORT=3000` service variable may be used with target port 3000.
+4. Copy the resulting HTTPS address, e.g. `https://your-game.up.railway.app`. Under Variables, set **TKL_PUBLIC_ORIGIN** to that exact origin and deploy the change. The Railway-provided domain is also recognized automatically; the explicit variable makes the intended canonical game address clear. For a custom domain, update this value to that domain after configuring its DNS/certificate.
+5. Open the public game and visit `/healthz` to check readiness. Test Home → setup → race, model/scenery loading, audio and pause/reset. Keep replicas at **one**; do not enable multi-region replicas with memory-only pairings.
+6. Open phone pairing on the computer and scan the generated HTTPS QR on the phone. The online link uses the public origin, not a LAN address, and requires no development certificate installation. Keep the PC game visible. Test touch/tilt calibration, drift/items and disconnect recovery; Internet latency can trigger the existing 350 ms stale-input safeguard, so choose a region near the players.
+
+Railway supplies external HTTPS/WSS and forwards traffic to the internal HTTP server. Do not set TKL_PHONE_TLS/TKL_PHONE_LAN or upload local development certificates there. No platform token is embedded in client code. A static Vercel deployment of dist alone still does not run this relay; moving the relay across instances/providers requires additional architecture work.
+
+Primary platform references: [domain/target-port setup](https://docs.railway.com/networking/domains/working-with-domains), [platform variables](https://docs.railway.com/variables/reference), [configuration schema](https://railway.com/railway.schema.json).
+
+### Local verification and remaining limits
+
+- Stable dependency installation: sirv 3.0.2, four packages added, npm audit reported zero vulnerabilities. Existing Node 23.3 host/toolchain engine warnings remain; the container targets supported Node 24.
+- Typecheck, zero-warning lint and production browser/server build passed. Full suite: **563 tests in 50 files passed**, 140.72 seconds, including nine production HTTP/config/relay tests and the existing regression suite. Upstream Three.js CommonJS warnings remain unsuppressed. `git diff --check` passed.
+- The actual compiled `npm start` entry ran on an isolated local port. Chrome loaded the built Home/3D menu and `/controller`, paired through the real relay and sent normalized throttle. Health, HTML/bundle cache behavior and missing-model responses passed; no browser page errors occurred. Source tests separately verified explicit HTTPS-origin pairing behind an internal proxy Host, rejection of other origins/forwarded-host spoofing, safe static paths/methods/ranges and idempotent connection shutdown.
+- Docker CLI is installed but its daemon is stopped; the container image could not be built/run locally. No actual Railway build/domain/TLS deployment is claimed. The first cloud build and public-device checks remain required. Local browser/loopback tests do not establish real Wi-Fi/Internet latency or physical iPhone/Android motion behavior.
+- Supplied franchise-asset permissions were recorded for the local prototype. Independently verified public-release rights are not established by this hosting setup; retain credits and confirm distribution rights before a public release.

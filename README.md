@@ -25,6 +25,8 @@ npm run preview
 
 `npm ci` reproduces the checked-in lockfile. `preview` serves the production build, normally on port 4173. Both servers bind to loopback only.
 
+For production, `npm run build` now also compiles the Node server; `npm start` serves the game and phone relay together on `PORT` (default 3000), bound to `0.0.0.0`. `Dockerfile` and `railway.json` prepare a single Railway service with `/healthz` readiness. Follow the [step-by-step Railway guide](docs/PHONE_CONTROLLER.md#railway-deployment--production-preparation-2026-11-20). Public HTTPS pairing uses the configured game origin; local certificates are unnecessary on Railway. Sessions remain memory-only and require one replica.
+
 ## Wireless smartphone controller
 
 Click **Connect Phone** for pairing status, a short-lived QR code and disconnect controls. For a real phone on the same Wi-Fi:

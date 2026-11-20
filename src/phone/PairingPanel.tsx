@@ -29,7 +29,7 @@ export function PairingPanel({ host, onClose, children }: { host: RemoteHost; on
     {state.error && <p role="alert" className="pair-error">{state.error}</p>}
     {waiting && <><div className="pair-code"><PairCode url={url} /><div><strong>{offer.lan ? 'Scan. Pair. Take the wheel.' : 'Computer-only test link'}</strong><p>One phone per player. Code expires in {Math.min(PHONE_CONFIG.pairLifetimeMs / 1000, Math.max(0, Math.ceil((offer.expiresAt - now) / 1000)))} seconds.</p>
       <label>Computer address<select value={selectedOrigin} onChange={event => setOrigin(event.currentTarget.value)}>{origins.map(value => <option key={value}>{value}</option>)}</select></label>
-      <p>Phone and computer must be on the same Wi-Fi. Keep this game tab visible.</p></div></div>
+      <p>{offer.public ? 'Open this game address on your phone. Keep the computer game tab visible.' : 'Phone and computer must be on the same Wi-Fi. Keep this game tab visible.'}</p></div></div>
       <label className="pair-link-label">Controller link<input aria-label="Controller pairing link" readOnly value={url} onFocus={event => event.currentTarget.select()} /></label>
       <GameButton tone="surface" size="small" className="pair-secondary" onClick={() => { navigator.clipboard?.writeText(url).then(() => setCopied(true)).catch(() => setCopied(false)); }}>{copied ? 'Copied' : 'Copy controller link'}</GameButton>
     </>}

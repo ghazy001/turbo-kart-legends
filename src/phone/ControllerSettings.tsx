@@ -19,6 +19,6 @@ export function ControllerSettings({ settings, rate, message, rtt, onSettings, o
       <label><span>Input rate</span><select value={rate} onChange={event => onRate(Number(event.currentTarget.value))}>{[20, 30, 45, 60].map(value => <option key={value} value={value}>{value} Hz</option>)}</select></label>
       <label className="phone-invert"><span>Invert steering</span><input type="checkbox" checked={settings.inverted} onChange={event => onSettings({ ...settings, inverted: event.currentTarget.checked })} /></label>
     </div>
-    <footer><span>Same Wi-Fi · {rtt === null ? 'Checking connection' : `${rtt} ms round trip`}<small>Connection loss releases all controls.</small></span><button type="button" className="phone-settings-done" onClick={onClose}>Done</button></footer>
+    <footer><span>Connection · {rtt === null ? 'Checking connection' : `${rtt} ms round trip`}<small>Connection loss releases all controls.</small></span><button type="button" className="phone-settings-done" onClick={onClose}>Done</button></footer>
   </div></div>;
 }

@@ -1,0 +1,15 @@
+node_modules
+dist
+dist-server
+.git
+.certs
+.codex
+.agents
+.aws
+.npmrc
+.env
+.env.*
+*.local
+.DS_Store
+coverage
+docs

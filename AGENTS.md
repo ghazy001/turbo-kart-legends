@@ -86,6 +86,8 @@ The user subsequently requested music during gameplay. Add an original instrumen
 
 The user requested a more attractive, easier phone controller. The handheld route may use a responsive coastal teal/gold deck, larger touch targets, live wheel/press feedback and a focused tuning dialog. Preserve normalized mappings, pairing/protocol/permissions, keyboard/gamepad and all gameplay rules; do not add automatic acceleration. Gate unavailable controls, neutralize on settings transitions, retain motion calibration and distinguish emulated Chrome checks from physical-device ergonomics. See the controller design follow-up in docs/PHONE_CONTROLLER.md.
 
+The user requested step-by-step Railway deployment and accepted preparing production startup. Add a dedicated built Node static server plus the existing phone relay, exact configured HTTPS-origin validation behind Railway TLS, health checks, bounded single-replica lifecycle, Docker/manifest setup and clear user-operated GitHub/Railway steps. Preserve local Vite/HTTPS workflows, source assets/credits, normalized inputs and every gameplay system. Commit verified changes locally; the user pushes and deploys. No accounts, database, distributed state or unrequested cloud publication. See the Railway section in docs/PHONE_CONTROLLER.md.
+
 ## Preferred technology
 
 
